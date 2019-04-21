@@ -24,8 +24,8 @@ function reportToAnalytics(dispatch, getState) {
 
 const history = createHistory()
 const routesMap = {
-    RTE_HOME: {
-        path: '/home',
+    RTE_DASHBOARD: {
+        path: '/dashboard',
         thunk: reportToAnalytics
     },
     [NOT_FOUND]: {
@@ -39,6 +39,10 @@ const routesMap = {
     REDIR_EMPTY: {
         path: '',
         thunk: defaultThunk
+    },
+    RTE_LOGIN: {
+    path: '/login',
+    thunk: reportToAnalytics
     }
 }
 
