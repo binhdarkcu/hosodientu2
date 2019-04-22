@@ -1,6 +1,6 @@
-import {createBrowserHistory as createHistory} from 'history'
+// import {createBrowserHistory as createHistory} from 'history'
 import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router'
-import queryString from 'query-string'
+// import queryString from 'query-string'
 //import sleep from 'sleep-promise'
 
 export const defaultThunk = (dispatch, getState) => {
@@ -20,42 +20,34 @@ function doDefaultRedirect(dispatch, loggedInUser) {
 }
 
 function reportToAnalytics(dispatch, getState) {
+  console.log(`report to Analytics`);
 }
 
-const history = createHistory()
+// const history = createHistory()
 const routesMap = {
     RTE_DASHBOARD: {
-        path: '/dashboard',
-        thunk: reportToAnalytics
+      path: '/',
+      thunk: reportToAnalytics
     },
     [NOT_FOUND]: {
-        path: '/not-found',
-        thunk: defaultThunk
-    },
-    REDIR_ROOT: {
-        path: '/',
-        thunk: defaultThunk
-    },
-    REDIR_EMPTY: {
-        path: '',
-        thunk: defaultThunk
+      path: '/not-found',
+      thunk: defaultThunk
     },
     RTE_LOGIN: {
-    path: '/login',
-    thunk: reportToAnalytics
+      path: '/login',
+      thunk: reportToAnalytics
     }
 }
 
 export function createDefaultRedirector(dispatch) {
     return type => {
         if (routesMap[type].thunk === defaultThunk) {
-            dispatch(defaultThunk)
+            dispatch(defaultThunk);
         }
     }
 }
 
-const { reducer, middleware, enhancer } = connectRoutes(history, routesMap, { querySerializer: queryString })
-
-export const routerMiddleware = middleware
-export const routerReducer = reducer
-export const routerEnhancer = enhancer
+const { reducer, middleware, enhancer } = connectRoutes(routesMap);
+export const routerMiddleware = middleware;
+export const routerReducer = reducer;
+export const routerEnhancer = enhancer;
