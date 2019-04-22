@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {createDefaultRedirector} from './router'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {createDefaultRedirector} from './router';
 
-import * as pages from './containers'
+import * as pages from './containers';
 
 const App = ({page, location}) => {
   const CurrentPage = pages[page];
@@ -14,7 +14,7 @@ App.propTypes = {
     defaultRedirector: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({page, location}) => ({page, location})
+const mapStateToProps = ({page, location}) => ({page, location});
 
 const mapDispatchToProps = (dispatch) => ({
     defaultRedirector: createDefaultRedirector(dispatch),

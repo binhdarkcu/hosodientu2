@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 class PageLogin extends Component{
 
-  componentWillMount(){
-    // document.body.className = "login";
-  }
 
   componentDidMount(){
     document.body.className = "login";
@@ -92,8 +88,6 @@ class PageLogin extends Component{
     );
   }
 }
-
-PageLogin.propTypes = {};
 
 const mapStateToProps = state => {
   return {};
