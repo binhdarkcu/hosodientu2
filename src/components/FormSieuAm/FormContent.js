@@ -14,7 +14,6 @@ function FormContent() {
       <Grid container spacing={24}>
         <Grid item xs={12} sm={6}>
           <TextField
-            fontSize="30px"
             required
             id="firstName"
             name="firstName"
