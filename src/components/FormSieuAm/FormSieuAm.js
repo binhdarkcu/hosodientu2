@@ -11,6 +11,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import FormContent from './FormContent';
+import Logo from '../Logo';
+import Grid from '@material-ui/core/Grid';
+import MaYTe from '../MaYTe';
 
 const styles = theme => ({
   appBar: {
@@ -59,14 +62,25 @@ class FormSieuAm extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline />
+
         <AppBar position="absolute" color="default" className={classes.appBar}>
             <Typography variant="h6" color="inherit" noWrap></Typography>
         </AppBar>
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
-              Siêu Âm
-            </Typography>
+            <Grid container spacing={24}>
+              <Grid item xs={4}>
+                <Logo size={150}/>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography component="h1" variant="h4" align="center">
+                  Siêu Âm
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <MaYTe soPhieu="18.205.000001" sTT="" maYTe="20000002" barCode=""/>
+              </Grid>
+            </Grid>
 
             <React.Fragment>
               <FormContent />

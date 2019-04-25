@@ -4,91 +4,47 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import FormFooter from '../FormFooter';
 
 function FormContent() {
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Shipping address
-      </Typography>
       <Grid container spacing={24}>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="firstName"
-            name="firstName"
-            label="First name"
-            fullWidth
-            autoComplete="fname"
-          />
+        <Grid item xs={12} sm={5}>
+          <div>Bệnh nhân (Fullname): </div>
+          <div>Bác sĩ chỉ định (Doctor): </div>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="lname"
-          />
+        <Grid item xs={12} sm={4}>
+          <div>Ngày sinh (Date of birth):</div>
+          <div>Ngày chỉ định (Date):</div>
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <div>Giới tính (Gender): </div>
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            required
-            id="address1"
-            name="address1"
-            label="Address line 1"
-            fullWidth
-            autoComplete="billing address-line1"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            id="address2"
-            name="address2"
-            label="Address line 2"
-            fullWidth
-            autoComplete="billing address-line2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="billing address-level2"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="zip"
-            name="zip"
-            label="Zip / Postal code"
-            fullWidth
-            autoComplete="billing postal-code"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="country"
-            name="country"
-            label="Country"
-            fullWidth
-            autoComplete="billing country"
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
+          <div>Địa chỉ (Adress): </div>
+          <div>Chẩn đoán chỉ định (Diagnosis): </div>
+          <div>Nội dung (Contents): </div>
+          <div>Mô tả hình ảnh (Desrcibe the image): </div>
+          <Typography variant="h6" color="inherit" align="center">
+              KẾT QUẢ SIÊU ÂM BỤNG TỔNG QUÁT:
+          </Typography>
+          <div>+ Gan:</div>
+          <div>+ Mật:</div>
+          <div>+ Tủy:</div>
+          <div>+ Lách:</div>
+          <div>+ Thận, bàng quang, tuyến tiền liệt:</div>
+          <div>+ Dịch ổ bụng:</div>
+          <div>+ Dịch màn phổi:</div>
+          <div>+ ĐM chủ bụng:</div>
+          <div>
+            <strong>Kết luận (Conclusion): </strong>
+          </div>
+          <div>
+            <strong>Đề nghị (Recommendation): </strong>
+          </div>
+
+          <FormFooter/>
         </Grid>
       </Grid>
     </React.Fragment>
