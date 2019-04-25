@@ -12,60 +12,67 @@ import Grid from '@material-ui/core/Grid';
 import MaYTe from '../MaYTe';
 import FormLayoutVertical from '../FormLayoutVertical';
 import FormFooter from '../FormFooter';
+import Divider from '@material-ui/core/Divider';
 
-class FormSieuAm extends React.Component {
+class FormDoLoangXuong extends React.Component {
 
   render() {
 
     return (
       <FormLayoutVertical>
+
         <Grid container spacing={24}>
+
           <Grid item xs={4}>
             <Logo size={150}/>
           </Grid>
+
           <Grid item xs={4}>
             <Typography component="h1" variant="h4" align="center">
-              Siêu Âm
+              DO LOANG XUONG
             </Typography>
           </Grid>
+
           <Grid item xs={4}>
-            <MaYTe soPhieu="18.205.000001" sTT="" maYTe="20000002" barCode=""/>
+            <MaYTe soPhieu="" sTT="" maYTe="20000002" barCode=""/>
           </Grid>
         </Grid>
+
         <Grid container spacing={24}>
-          <Grid item xs={12} sm={5}>
-            <div>Bệnh nhân (Fullname): </div>
-            <div>Bác sĩ chỉ định (Doctor): </div>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <div>Ngày sinh (Date of birth):</div>
-            <div>Ngày chỉ định (Date):</div>
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <div>Giới tính (Gender): </div>
-          </Grid>
           <Grid item xs={12}>
-            <div>Địa chỉ (Adress): </div>
-            <div>Chẩn đoán chỉ định (Diagnosis): </div>
-            <div>Nội dung (Contents): </div>
-            <div>Mô tả hình ảnh (Desrcibe the image): </div>
-            <Typography variant="h6" color="inherit" align="center">
-                KẾT QUẢ SIÊU ÂM BỤNG TỔNG QUÁT:
-            </Typography>
-            <div>+ Gan:</div>
-            <div>+ Mật:</div>
-            <div>+ Tủy:</div>
-            <div>+ Lách:</div>
-            <div>+ Thận, bàng quang, tuyến tiền liệt:</div>
-            <div>+ Dịch ổ bụng:</div>
-            <div>+ Dịch màn phổi:</div>
-            <div>+ ĐM chủ bụng:</div>
+            <Divider/>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <div>ID No. (Fullname): </div>
+            <div>Brith Date (Age): </div>
+            <div>Sex:</div>
+            <div>Height:</div>
+            <div>Comments:</div>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <div>Name:</div>
+            <div>Age:</div>
+            <div>Height:</div>
+            <div>Weight:</div>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Divider/>
+          </Grid>
+
+          <Grid item xs={12}>
+            <div>
+                main content
+            </div>
             <div>
               <strong>Kết luận (Conclusion): </strong>
             </div>
             <div>
               <strong>Đề nghị (Recommendation): </strong>
             </div>
+
             <FormFooter/>
           </Grid>
         </Grid>
@@ -74,4 +81,5 @@ class FormSieuAm extends React.Component {
   }
 }
 
-export default FormSieuAm;
+
+export default FormDoLoangXuong;
