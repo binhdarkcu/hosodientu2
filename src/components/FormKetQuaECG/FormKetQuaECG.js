@@ -28,8 +28,8 @@ class FormKetQuaECG extends React.Component {
           </Grid>
 
           <Grid item xs={3}>
-            <Typography component="h1" variant="h4" align="center">
-              KET QUA ECG
+            <Typography component="h1" variant="h4" align="center" color="error">
+              ĐIỆN TIM
             </Typography>
           </Grid>
 
@@ -67,15 +67,30 @@ class FormKetQuaECG extends React.Component {
             <div>
                 main content
             </div>
+          </Grid>
+
+          <Grid item xs={8}>
             <div>
               <strong>Kết luận (Conclusion): </strong>
             </div>
             <div>
               <strong>Đề nghị (Recommendation): </strong>
             </div>
-
-            <FormFooter/>
           </Grid>
+
+          <Grid item xs={4}>
+            <div>
+              Ngày 15 tháng 3 năm 2019
+            </div>
+            <div>
+              Bs
+            </div>
+          </Grid>
+
+          <Grid item xs={12}>
+              <FormFooter/>
+          </Grid>
+
         </Grid>
       </FormLayoutHorizontal>
     );
