@@ -66,15 +66,29 @@ class FormDoLoangXuong extends React.Component {
             <div>
                 main content
             </div>
+          </Grid>
+
+          <Grid item xs={8}>
             <div>
               <strong>Kết luận (Conclusion): </strong>
             </div>
             <div>
               <strong>Đề nghị (Recommendation): </strong>
             </div>
+          </Grid>
+          <Grid item xs={4}>
+            <div>
+              Ngày 15 tháng 3 năm 2019
+            </div>
+            <div>
+              Bác sĩ Nguyễn Văn A
+            </div>
+          </Grid>
 
+          <Grid item xs={12}>
             <FormFooter/>
           </Grid>
+
         </Grid>
       </FormLayoutVertical>
     );

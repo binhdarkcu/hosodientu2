@@ -29,7 +29,7 @@ class FormKetQuaECG extends React.Component {
 
           <Grid item xs={3}>
             <Typography component="h1" variant="h4" align="center">
-              DO LOANG XUONG
+              KET QUA ECG
             </Typography>
           </Grid>
 
