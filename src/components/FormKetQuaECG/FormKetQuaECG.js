@@ -86,12 +86,8 @@ class FormKetQuaECG extends React.Component {
               Bs
             </div>
           </Grid>
-
-          <Grid item xs={12}>
-              <FormFooter/>
-          </Grid>
-
         </Grid>
+        <FormFooter/>
       </FormLayoutHorizontal>
     );
   }

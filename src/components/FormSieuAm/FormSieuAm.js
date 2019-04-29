@@ -66,8 +66,8 @@ class FormSieuAm extends React.Component {
             <div>
               <strong>Đề nghị (Recommendation): </strong>
             </div>
-            <FormFooter/>
           </Grid>
+          <FormFooter/>
         </Grid>
       </FormLayoutVertical>
     );

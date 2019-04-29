@@ -84,12 +84,8 @@ class FormDoLoangXuong extends React.Component {
               Bác sĩ Nguyễn Văn A
             </div>
           </Grid>
-
-          <Grid item xs={12}>
-            <FormFooter/>
-          </Grid>
-
         </Grid>
+        <FormFooter/>
       </FormLayoutVertical>
     );
   }
