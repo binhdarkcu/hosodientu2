@@ -41,7 +41,7 @@ class Dashboard extends Component {
 
           <div className="right_col" role="main">
             <div className="row">
-              <FormKetQuaECG />
+              <FormSieuAm />
             </div>
           </div>
 

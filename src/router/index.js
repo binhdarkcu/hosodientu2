@@ -29,6 +29,10 @@ const routesMap = {
       path: '/',
       thunk: reportToAnalytics
     },
+    RTE_ULTRASOUND: {
+      path: '/ultrasound',
+      thunk: reportToAnalytics
+    },
     [NOT_FOUND]: {
       path: '/not-found',
       thunk: defaultThunk
