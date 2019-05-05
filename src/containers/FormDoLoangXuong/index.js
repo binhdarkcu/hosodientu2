@@ -7,36 +7,35 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Logo from '../Logo';
+import Logo from '../../components/Logo';
 import Grid from '@material-ui/core/Grid';
-import MaYTe from '../MaYTe';
-import FormLayoutHorizontal from '../FormLayoutHorizontal';
-import FormFooter from '../FormFooter';
+import MaYTe from '../../components/MaYTe';
+import FormLayoutVertical from '../../components/FormLayoutVertical';
+import FormFooter from '../../components/FormFooter';
 import Divider from '@material-ui/core/Divider';
 
-class FormKetQuaECG extends React.Component {
+class FormDoLoangXuong extends React.Component {
 
   render() {
 
     return (
-      <FormLayoutHorizontal>
+      <FormLayoutVertical>
 
         <Grid container spacing={24}>
 
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <Logo size={150}/>
           </Grid>
 
-          <Grid item xs={3}>
-            <Typography component="h1" variant="h4" align="center" color="error">
-              ĐIỆN TIM
+          <Grid item xs={4}>
+            <Typography component="h1" variant="h4" align="center">
+              DO LOANG XUONG
             </Typography>
           </Grid>
 
-          <Grid item xs={6}>
-            <MaYTe soPhieu="18.205.000001" sTT="" maYTe="20000002" barCode=""/>
+          <Grid item xs={4}>
+            <MaYTe soPhieu="" sTT="" maYTe="20000002" barCode=""/>
           </Grid>
-
         </Grid>
 
         <Grid container spacing={24}>
@@ -77,21 +76,20 @@ class FormKetQuaECG extends React.Component {
               <strong>Đề nghị (Recommendation): </strong>
             </div>
           </Grid>
-
           <Grid item xs={4}>
             <div>
               Ngày 15 tháng 3 năm 2019
             </div>
             <div>
-              Bs
+              Bác sĩ Nguyễn Văn A
             </div>
           </Grid>
         </Grid>
         <FormFooter/>
-      </FormLayoutHorizontal>
+      </FormLayoutVertical>
     );
   }
 }
 
 
-export default FormKetQuaECG;
+export default FormDoLoangXuong;

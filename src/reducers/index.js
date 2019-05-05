@@ -1,10 +1,13 @@
+
 import {combineReducers} from 'redux'
-import auth from './auth';
-import page from './page';
+import ui from './ui'
+import services from './services';
+import page from './page'
 import {routerReducer as location} from "../router"
 
 export default combineReducers({
-    auth,
+    services,
+    ui,
     page,
     location
 });

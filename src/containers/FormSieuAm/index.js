@@ -7,12 +7,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Logo from '../Logo';
+import Logo from '../../components/Logo';
 import Grid from '@material-ui/core/Grid';
-import MaYTe from '../MaYTe';
-import FormLayoutVertical from '../FormLayoutVertical';
-import FormFooter from '../FormFooter';
-
+import MaYTe from '../../components/MaYTe';
+import FormLayoutVertical from '../../components/FormLayoutVertical';
+import FormFooter from '../../components/FormFooter';
 class FormSieuAm extends React.Component {
 
   render() {

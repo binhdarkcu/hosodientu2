@@ -7,9 +7,9 @@ import SidebarFooter from '../components/SidebarFooter';
 import TopNav from '../components/TopNav';
 import Footer from '../components/Footer';
 import SiteLogo from '../components/SiteLogo';
-import FormSieuAm from '../components/FormSieuAm';
-import FormDoLoangXuong from '../components/FormDoLoangXuong';
-import FormKetQuaECG from '../components/FormKetQuaECG';
+//import FormSieuAm from './FormSieuAm';
+//import FormDoLoangXuong from './FormDoLoangXuong';
+import FormKetQuaECG from './FormKetQuaECG';
 
 const mapStateToProps = state => {
   return {}
@@ -22,7 +22,6 @@ class Dashboard extends Component {
         <div className="main_container">
           <div className="col-md-3 left_col">
             <div className="left_col scroll-view">
-
               <SiteLogo />
 
               <div className="clearfix"></div>
@@ -41,7 +40,7 @@ class Dashboard extends Component {
 
           <div className="right_col" role="main">
             <div className="row">
-              <FormSieuAm />
+              <FormKetQuaECG />
             </div>
           </div>
 

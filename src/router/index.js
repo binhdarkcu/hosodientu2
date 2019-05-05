@@ -4,18 +4,19 @@ import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router'
 //import sleep from 'sleep-promise'
 
 export const defaultThunk = (dispatch, getState) => {
-    //doDefaultRedirect(dispatch, getState().services.easUsers.loggedIn)
+    console.log(getState().services.auth.authencation.result)
+    doDefaultRedirect(dispatch, getState().services.auth.authencation)
 }
 
 function doDefaultRedirect(dispatch, loggedInUser) {
-    // const isEmployee = loggedInUser.exists === 'yes' ? loggedInUser.user.isEmployee ? 'yes' : 'no' : 'unknown'
-    // if(isEmployee === 'yes') {
-    //     console.log('Employee, redirecting to ADMIN')
-    //     dispatch(redirect({type: 'RTE_ADMIN'}))
-    // } else if (isEmployee === 'no') {
-    //     console.log('Not an employee, redirecting to flights')
-    //     dispatch(redirect({type: 'RTE_FLIGHTS', payload:{mineOrAll:'mine', timeRange:'upcoming'}}))
-    // }
+    const isLoggedin = loggedInUser.result ? 'yes': 'no';
+    if(isLoggedin === 'yes') {
+        console.log('Employee, redirecting to ADMIN')
+        dispatch(redirect({type: 'RTE_DASHBOARD'}))
+    } else if(isLoggedin === 'no') {
+        console.log('Not an employee, redirecting to login')
+        dispatch(redirect({type: 'RTE_LOGIN'}))
+    }
 
 }
 
@@ -27,11 +28,7 @@ function reportToAnalytics(dispatch, getState) {
 const routesMap = {
     RTE_DASHBOARD: {
       path: '/',
-      thunk: reportToAnalytics
-    },
-    RTE_ULTRASOUND: {
-      path: '/ultrasound',
-      thunk: reportToAnalytics
+      thunk: defaultThunk
     },
     [NOT_FOUND]: {
       path: '/not-found',
