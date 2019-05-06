@@ -3428,13 +3428,11 @@ a.hiddenanchor {
 .login_form {
     z-index: 22
 }
-#signup:target ~ .login_wrapper .registration_form,
 #signin:target ~ .login_wrapper .login_form {
     z-index: 22;
     animation-name: fadeInLeft;
     animation-delay: .1s
 }
-#signup:target ~ .login_wrapper .login_form,
 #signin:target ~ .login_wrapper .registration_form {
     animation-name: fadeOutLeft
 }

@@ -7,7 +7,7 @@ import 'whatwg-fetch';
 import _ from 'lodash';
 import baseUrl from './base-url'
 
-const authUrl = () => `${baseUrl}/login`
+const authUrl = `${baseUrl}/login`;
 
 export const authenticate = createAction(AUTH)
 
@@ -26,7 +26,7 @@ export const execAuthenticate = data => dispatch => {
 
     dispatch(authenticate());
     return new Promise(() => {
-        fetch(url, parameters).then(response => {
+        fetch(authUrl, parameters).then(response => {
 
             response.json().then(json => ({
                 status: response.status,

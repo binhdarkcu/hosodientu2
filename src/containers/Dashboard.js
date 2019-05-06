@@ -7,9 +7,10 @@ import SidebarFooter from '../components/SidebarFooter';
 import TopNav from '../components/TopNav';
 import Footer from '../components/Footer';
 import SiteLogo from '../components/SiteLogo';
-//import FormSieuAm from './FormSieuAm';
-//import FormDoLoangXuong from './FormDoLoangXuong';
+import FormSieuAm from './FormSieuAm';
+import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
+import AdminRegister from './AdminRegister';
 
 const mapStateToProps = state => {
   return {}
@@ -40,7 +41,7 @@ class Dashboard extends Component {
 
           <div className="right_col" role="main">
             <div className="row">
-              <FormKetQuaECG />
+              <AdminRegister />
             </div>
           </div>
 
