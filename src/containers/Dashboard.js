@@ -12,12 +12,26 @@ import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
 import AdminRegister from './AdminRegister';
 
-const mapStateToProps = state => {
-  return {}
-}
+const mapStateToProps = ({ location }) => ({
+  pageType: location.type,
+  itemId: location.payload.id
+});
+
+// mapping pages
+const pages = {
+  'RTE_SIEU_AM': FormSieuAm,
+  'RTE_REGISTER': AdminRegister,
+  'RTE_KET_QUA_ECG': FormKetQuaECG,
+  'RTE_DO_LOANG_XUONG': FormDoLoangXuong
+};
 
 class Dashboard extends Component {
+
   render() {
+
+    const {pageType, itemId} = this.props;
+    const CurrentView = pages[pageType];
+    
     return (
       <div className="container body">
         <div className="main_container">
@@ -41,7 +55,7 @@ class Dashboard extends Component {
 
           <div className="right_col" role="main">
             <div className="row">
-              <AdminRegister />
+              <CurrentView />
             </div>
           </div>
 
