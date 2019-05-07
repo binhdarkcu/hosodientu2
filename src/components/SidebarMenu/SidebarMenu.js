@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'redux-first-router-link'
 
 const SidebarMenu = () => {
   return(
@@ -8,6 +9,10 @@ const SidebarMenu = () => {
         <ul className="nav side-menu">
           <li><a><i className="fa fa-home"></i> Home <span className="fa fa-chevron-down"></span></a>
             <ul className="nav child_menu">
+              <li><Link to="/do-loang-xuong/09423">Test page Đo loãng xương</Link></li>
+              <li><Link to="/sieu-am/0312590">Test page Siêu âm</Link></li>
+              <li><Link to="/ket-qua-ecg/083273">Test page Kêt quả ECG</Link></li>
+              <li><Link to="/register">Test page register</Link></li>
               <li><a href="index.html">Dashboard</a></li>
               <li><a href="index2.html">Dashboard2</a></li>
               <li><a href="index3.html">Dashboard3</a></li>

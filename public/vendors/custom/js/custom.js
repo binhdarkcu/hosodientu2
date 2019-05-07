@@ -79,7 +79,8 @@ var setContentHeight = function () {
                 setContentHeight();
             });
         } else {
-            // prevent closing menu if we are on child menu
+            // prevent closing menu if we are on child menu_fixed
+            $SIDEBAR_MENU.find('li').removeClass('current-page');
             if (!$li.parent().is('.child_menu')) {
                 $SIDEBAR_MENU.find('li').removeClass('active active-sm');
                 $SIDEBAR_MENU.find('li ul').slideUp();
@@ -91,7 +92,7 @@ var setContentHeight = function () {
 					$li.parent().find( "li ul" ).slideUp();
 				}
 			}
-            $li.addClass('active');
+            $li.addClass('current-page');
 
             $('ul:first', $li).slideDown(function() {
                 setContentHeight();
