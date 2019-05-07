@@ -19,6 +19,7 @@ const mapStateToProps = ({ location }) => ({
 
 // mapping pages
 const pages = {
+  'RTE_DASHBOARD': AdminRegister,
   'RTE_SIEU_AM': FormSieuAm,
   'RTE_REGISTER': AdminRegister,
   'RTE_KET_QUA_ECG': FormKetQuaECG,
@@ -31,12 +32,13 @@ class Dashboard extends Component {
 
     const {pageType, itemId} = this.props;
     const CurrentView = pages[pageType];
-    
+
     return (
       <div className="container body">
         <div className="main_container">
           <div className="col-md-3 left_col">
             <div className="left_col scroll-view">
+
               <SiteLogo />
 
               <div className="clearfix"></div>
@@ -47,7 +49,6 @@ class Dashboard extends Component {
 
               <SidebarMenu />
               <SidebarFooter />
-
             </div>
           </div>
 
@@ -58,7 +59,6 @@ class Dashboard extends Component {
               <CurrentView />
             </div>
           </div>
-
           <Footer />
         </div>
       </div>

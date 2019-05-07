@@ -49,8 +49,6 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
 
-
-
 // Sidebar
 function init_sidebar() {
 // TODO: This is some kind of easy fix, maybe we can improve this
@@ -79,20 +77,20 @@ var setContentHeight = function () {
                 setContentHeight();
             });
         } else {
-            // prevent closing menu if we are on child menu_fixed
-            $SIDEBAR_MENU.find('li').removeClass('current-page');
+            // prevent closing menu if we are on child menu
             if (!$li.parent().is('.child_menu')) {
                 $SIDEBAR_MENU.find('li').removeClass('active active-sm');
                 $SIDEBAR_MENU.find('li ul').slideUp();
             }else
             {
-				if ( $BODY.is( ".nav-sm" ) )
-				{
-					$li.parent().find( "li" ).removeClass( "active active-sm" );
-					$li.parent().find( "li ul" ).slideUp();
-				}
-			}
-            $li.addClass('current-page');
+              $SIDEBAR_MENU.find('.child_menu').find('li').removeClass('active current-page');
+      				if ( $BODY.is( ".nav-sm" ) )
+      				{
+      					$li.parent().find( "li" ).removeClass( "active active-sm" );
+      					$li.parent().find( "li ul" ).slideUp();
+      				}
+			      }
+            $li.addClass('active current-page');
 
             $('ul:first', $li).slideDown(function() {
                 setContentHeight();
