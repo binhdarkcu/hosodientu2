@@ -16,6 +16,12 @@ import DatePicker from 'react-date-picker';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
+import { connect } from 'react-redux';
+import {execAdminRegister} from '../../actions/services/api-auth.js';
+
+const mapDispatchToProps = dispatch => ({
+  register: data => dispatch(execAdminRegister(data))
+});
 
 const styles = theme => ({
   container: {

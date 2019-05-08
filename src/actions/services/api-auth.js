@@ -1,5 +1,6 @@
 import {
-    AUTH
+    AUTH,
+    ADMIN_REGISTER
 } from '../types'
 
 import { createAction } from 'redux-actions'
@@ -7,10 +8,14 @@ import 'whatwg-fetch';
 import _ from 'lodash';
 import baseUrl from './base-url'
 
+// API URLs
 const authUrl = `${baseUrl}/login`;
+const userApiUrl = `${baseUrl}/api/Users`;
 
+// Actions
 export const authenticate = createAction(AUTH)
-
+export const adminRegister = createAction(ADMIN_REGISTER)
+// Handlers
 export const execAuthenticate = data => dispatch => {
     const obj = {
         'username': 'agent.tmtam@gmail.com',
@@ -61,3 +66,13 @@ export const execAuthenticate = data => dispatch => {
         });
     });
 };
+
+
+export const execAdminRegister = data => dispatch => {
+
+  const parameters = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+}

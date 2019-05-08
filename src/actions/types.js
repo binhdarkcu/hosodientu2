@@ -11,3 +11,6 @@ export const GET_CRR = 'GET_CRR';
 export const GET_PORTFOLIO = 'GET_PORTFOLIO';
 export const CALCULATE_EXPECTED_RETURN = 'CALCULATE_EXPECTED_RETURN';
 export const CREATE_INVESTMENT = 'CREATE_INVESTMENT';
+
+//admin actions
+export const ADMIN_REGISTER = 'ADMIN_REGISTER';
