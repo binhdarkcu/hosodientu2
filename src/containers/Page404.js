@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux'
 
 class Page404 extends Component{
+
+  handleClick = () => {
+    console.log("Going to dashboard");
+    this.props.onClick('Go');
+  }
 
   render(){
     return(
@@ -21,7 +27,7 @@ class Page404 extends Component{
                       <div className="input-group">
                         <input type="text" className="form-control" placeholder="Search for..."/>
                         <span className="input-group-btn">
-                            <button className="btn btn-default" type="button">Go!</button>
+                            <button className="btn btn-default" type="button" onClick={this.handleClick}>Go!</button>
                         </span>
                       </div>
                     </div>
@@ -37,4 +43,11 @@ class Page404 extends Component{
   }
 }
 
-export default Page404;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => ({
+  onClick: data => dispatch({ type: 'RTE_DASHBOARD', payload: { data } })
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Page404);
