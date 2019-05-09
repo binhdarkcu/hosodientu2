@@ -75,4 +75,6 @@ export const execAdminRegister = data => dispatch => {
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   };
+
+  console.log('sending...');
 }

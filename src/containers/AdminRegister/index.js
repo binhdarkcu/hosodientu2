@@ -23,6 +23,8 @@ const mapDispatchToProps = dispatch => ({
   register: data => dispatch(execAdminRegister(data))
 });
 
+const mapStateToProps = ({}) => ({})
+
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -66,7 +68,7 @@ class FormAdminRegister extends React.Component {
     console.log(this.state);
   })
 
-  handleSubmit = () => console.log('handleSubmit')
+  handleSubmit = () => this.props.register(this.state)
 
   render() {
     const { classes } = this.props;
@@ -217,4 +219,4 @@ FormAdminRegister.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(FormAdminRegister);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormAdminRegister));
