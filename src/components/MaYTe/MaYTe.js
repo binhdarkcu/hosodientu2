@@ -16,7 +16,7 @@ const MaYTe = ({direction, maYTe, soPhieu, sTT, barCode}) => {
                     <span>STT:</span>
                     <span>{sTT}</span>
               </div>}
-      {barCode && <div><img src=""/></div>}
+      {barCode && <div><img src="" alt="barCode"/></div>}
     </React.Fragment>
   )
 }

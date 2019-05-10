@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 const SidebarProfile = ({user}) => {
   return(
     <div className="profile clearfix">

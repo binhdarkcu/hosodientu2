@@ -10,13 +10,13 @@ export const defaultThunk = (dispatch, getState) => {
 
 function doDefaultRedirect(dispatch, loggedInUser) {
     const isLoggedin = loggedInUser.result ? 'yes': 'no';
-    // if(isLoggedin === 'yes') {
-    //     console.log('Employee, redirecting to ADMIN')
-    //     dispatch(redirect({type: 'RTE_DASHBOARD'}))
-    // } else if(isLoggedin === 'no') {
-    //     console.log('Not an employee, redirecting to login')
-    //     dispatch(redirect({type: 'RTE_LOGIN'}))
-    // }
+    if(isLoggedin === 'yes') {
+        console.log('Employee, redirecting to ADMIN')
+        dispatch(redirect({type: 'RTE_DASHBOARD'}))
+    } else if(isLoggedin === 'no') {
+        console.log('Not an employee, redirecting to login')
+        dispatch(redirect({type: 'RTE_LOGIN'}))
+    }
 
 }
 
