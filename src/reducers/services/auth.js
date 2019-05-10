@@ -1,4 +1,4 @@
-import { handleActions, handleAction } from 'redux-actions'
+import { handleActions } from 'redux-actions'
 import {
     AUTH
 } from '../../actions/types'

@@ -23,7 +23,9 @@ const mapDispatchToProps = dispatch => ({
   register: data => dispatch(execAdminRegister(data))
 });
 
-const mapStateToProps = ({}) => ({})
+const mapStateToProps = ({id}) => ({
+  id: id
+})
 
 const styles = theme => ({
   container: {

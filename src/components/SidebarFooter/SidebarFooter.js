@@ -18,7 +18,7 @@ class SidebarFooter extends Component{
         <a href="index.html" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Lock">
           <span className="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
         </a>
-        <a href="index.html" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+        <a href="index.html" onClick={this.handleClick} data-toggle="tooltip" data-placement="top" title="Logout">
           <span className="glyphicon glyphicon-off" aria-hidden="true"></span>
         </a>
       </div>

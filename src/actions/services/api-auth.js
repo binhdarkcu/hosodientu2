@@ -10,7 +10,7 @@ import baseUrl from './base-url'
 
 // API URLs
 const authUrl = `${baseUrl}/api/User/Login`;
-const userApiUrl = `${baseUrl}/api/Users`;
+// const userApiUrl = `${baseUrl}/api/Users`;
 
 // Actions
 export const authenticate = createAction(AUTH);

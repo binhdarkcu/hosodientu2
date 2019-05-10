@@ -1,11 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types';
-import CssBaseline from '@material-ui/core/CssBaseline';
+// import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Logo from '../../components/Logo';
 import Grid from '@material-ui/core/Grid';
