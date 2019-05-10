@@ -25,12 +25,4 @@ Spinner.propTypes = {
   loading: PropTypes.bool.isRequired
 }
 
-// default props
-Spinner.defaultProps = {
-  type: "ClipLoader",
-  color: "#FFFFFF",
-  size: 25,
-  loading: false
-};
-
 export default Spinner;

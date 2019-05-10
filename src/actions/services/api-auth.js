@@ -34,7 +34,6 @@ export const execAuthenticate = data => dispatch => {
     dispatch(authenticate());
     return new Promise((resolve, reject) => {
         fetch(authUrl, parameters).then(response => {
-            console.log(response);
             response.json().then(json => ({
                 status: response.status,
                 loading: 'loading',

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
+import { toast } from 'react-toastify';
 // custom imports
 import {execAuthenticate} from '../actions/services/api-auth.js';
 import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import {SPINNER_LIGHT_GREEN} from '../constants/Colors';
-import {USERNAME_REQUIRED, PASSWORD_REQUIRED} from '../constants/Messages'
+import {USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED} from '../constants/Messages'
 
 class PageLogin extends Component{
   username = null;
@@ -35,7 +35,12 @@ class PageLogin extends Component{
     // block screen and start call api
     this.setState({loading: true});
     const _self = this;
-    this.props.authenticate({username: username, password: password}).finally(() => {
+    this.props.authenticate({username: username, password: password}).catch(err => {
+      toast.error(LOGIN_FAILED, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+
+    }).finally(() => {
         _self.setState({loading: false});
     });
   }

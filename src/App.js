@@ -1,9 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// custom imports
+import * as pages from './containers';
 import {createDefaultRedirector} from './router';
 
-import * as pages from './containers';
+// config toast notifications
+toast.configure({
+  autoClose: 5000,
+  draggablePercent: 60,
+  pauseOnFocusLoss: true,
+  delay: 150
+});
 
 const App = ({page, location}) => {
   const CurrentPage = pages[page];
