@@ -19,7 +19,8 @@ const mapStateToProps = ({ location }) => ({
 
 // mapping pages
 const pages = {
-  'RTE_DASHBOARD': AdminRegister,
+  'RTE_DASHBOARD': 'div',
+  'RTE_REGISTER': AdminRegister,
   'RTE_SIEU_AM': FormSieuAm,
   'RTE_REGISTER': AdminRegister,
   'RTE_KET_QUA_ECG': FormKetQuaECG,

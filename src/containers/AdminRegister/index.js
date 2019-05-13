@@ -14,10 +14,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import DatePicker from 'react-date-picker';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
 import { connect } from 'react-redux';
 import {execAdminRegister} from '../../actions/services/api-auth.js';
+import Spinner from '../../components/Spinner';
+import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
 
 const mapDispatchToProps = dispatch => ({
   register: data => dispatch(execAdminRegister(data))
@@ -52,30 +55,49 @@ const styles = theme => ({
 class FormAdminRegister extends React.Component {
 
   state = {
-    ho: '',
-    ten: '',
-    benhNhanId: '',
-    phone: '',
-    email: '',
-    maYTe: '',
-    ngaySinh: null,
-    gioiTinh: 'M'
+    user: {
+      Ho: '',
+      Ten: '',
+      BenhNhanId: '',
+      Phone: '',
+      Email: '',
+      MaYTe: '',
+      NgaySinh: null,
+      GioiTinh: 'M',
+    },
+    loading: false
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    let user = {...this.state.user};
+    user[name] = event.target.value
+    this.setState({user: user});
   };
 
-  handleChangeDate = ngaySinh => this.setState({ ngaySinh }, ()=>{
-    console.log(this.state);
-  })
+  handleChangeDate = NgaySinh => {
+    let user = {...this.state.user};
+    user['NgaySinh'] = NgaySinh;
+    this.setState({user: user});
+  }
 
-  handleSubmit = () => this.props.register(this.state)
+  handleSubmit = () => {
+    const _self = this;
+    _self.setState({loading: true});
+    this.props.register(this.state.user).then((done)=>{
+      console.log('done');
+    }).catch((err)=>{
+      console.log('err', err);
+    }).finally(()=>{
+        _self.setState({loading: false});
+    });
+  }
 
   render() {
     const { classes } = this.props;
+    const { loading, user } = this.state;
     return (
       <FormLayoutVertical>
+        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
         <ValidatorForm
             ref="form"
             onSubmit={this.handleSubmit}
@@ -101,8 +123,8 @@ class FormAdminRegister extends React.Component {
                 validators={[RULE.IS_REQUIRED]}
                 errorMessages={[MSG.REQUIRED_FIELD]}
                 className={classes.textField}
-                value={this.state.benhNhanId}
-                onChange={this.handleChange('benhNhanId')}
+                value={user.BenhNhanId}
+                onChange={this.handleChange('BenhNhanId')}
                 margin="normal"
               />
             </Grid>
@@ -112,8 +134,8 @@ class FormAdminRegister extends React.Component {
                 id="ar-mayte"
                 label="Mã Y Tế"
                 className={classes.textField}
-                value={this.state.maYTe}
-                onChange={this.handleChange('maYTe')}
+                value={user.MaYTe}
+                onChange={this.handleChange('MaYTe')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED]}
                 errorMessages={[MSG.REQUIRED_FIELD]}
@@ -125,8 +147,8 @@ class FormAdminRegister extends React.Component {
                 id="ar-phone"
                 label="Phone"
                 className={classes.textField}
-                value={this.state.phone}
-                onChange={this.handleChange('phone')}
+                value={user.Phone}
+                onChange={this.handleChange('Phone')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED, RULE.IS_PHONE_NUMBER]}
                 errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_PHONE_NUMBER]}
@@ -138,8 +160,8 @@ class FormAdminRegister extends React.Component {
                 id="ar-email"
                 label="Email"
                 className={classes.textField}
-                value={this.state.email}
-                onChange={this.handleChange('email')}
+                value={user.Email}
+                onChange={this.handleChange('Email')}
                 validators={[RULE.IS_REQUIRED, RULE.IS_EMAIL]}
                 errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_EMAIL]}
                 margin="normal"
@@ -150,8 +172,8 @@ class FormAdminRegister extends React.Component {
               <TextValidator
                 label="Họ"
                 className={classes.textField}
-                value={this.state.ho}
-                onChange={this.handleChange('ho')}
+                value={user.Ho}
+                onChange={this.handleChange('Ho')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED]}
                 errorMessages={[MSG.REQUIRED_FIELD]}
@@ -162,8 +184,8 @@ class FormAdminRegister extends React.Component {
               <TextValidator
                 label="Tên"
                 className={classes.textField}
-                value={this.state.ten}
-                onChange={this.handleChange('ten')}
+                value={user.Ten}
+                onChange={this.handleChange('Ten')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED]}
                 errorMessages={[MSG.REQUIRED_FIELD]}
@@ -179,8 +201,8 @@ class FormAdminRegister extends React.Component {
                     aria-label="Giới tính"
                     name="gender1"
                     className={classes.group}
-                    value={this.state.gioiTinh}
-                    onChange={this.handleChange('gioiTinh')}>
+                    value={user.GioiTinh}
+                    onChange={this.handleChange('GioiTinh')}>
                     <FormControlLabel value="M" control={<Radio />} label="Nam" />
                     <FormControlLabel value="F" control={<Radio />} label="Nữ" />
                   </RadioGroup>
@@ -196,7 +218,7 @@ class FormAdminRegister extends React.Component {
                     name="datepicker"
                     locale="vi"
                     onChange={this.handleChangeDate}
-                    value={this.state.ngaySinh}
+                    value={user.NgaySinh}
                     required
                   />
                 </FormControl>
