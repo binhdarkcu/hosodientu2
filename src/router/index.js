@@ -1,27 +1,34 @@
 // import {createBrowserHistory as createHistory} from 'history'
+import { AUTHENTICATED } from '../actions/types';
 import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router'
 // import queryString from 'query-string'
 //import sleep from 'sleep-promise'
 
 export const defaultThunk = (dispatch, getState) => {
-    console.log(getState().services.auth.authencation.result)
+    console.log('stateeeee',getState().services.auth)
     doDefaultRedirect(dispatch, getState().services.auth.authencation)
 }
 
 function doDefaultRedirect(dispatch, loggedInUser) {
-    const isLoggedin = loggedInUser.result ? 'yes': 'no';
-    if(isLoggedin === 'yes') {
-        console.log('Employee, redirecting to ADMIN')
-        dispatch(redirect({type: 'RTE_DASHBOARD'}))
-    } else if(isLoggedin === 'no') {
+    const isLoggedin = loggedInUser.authenticated ? 'yes': 'no';
+
+    console.log('isLoggedin',isLoggedin);
+    // if(isLoggedin === 'yes') {
+    //     console.log('Employee, redirecting to ADMIN')
+    //     dispatch(redirect({type: 'RTE_DASHBOARD'}))
+    if(isLoggedin === 'no') {
         console.log('Not an employee, redirecting to login')
         dispatch(redirect({type: 'RTE_LOGIN'}))
     }
 
 }
 
-function reportToAnalytics(dispatch, getState) {
-  console.log(`report to Analytics`);
+function checkLoginStatus(dispatch, getState) {
+  const token = sessionStorage.getItem('authToken');
+  if(token){
+    dispatch({type: AUTHENTICATED});
+    dispatch(redirect({type: 'RTE_DASHBOARD'}));
+  }
 }
 
 // const history = createHistory()
@@ -48,7 +55,7 @@ const routesMap = {
     },
     RTE_LOGIN: {
       path: '/login',
-      thunk: reportToAnalytics
+      thunk: checkLoginStatus
     },
     RTE_REGISTER: {
       path: '/register',

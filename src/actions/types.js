@@ -1,6 +1,9 @@
 export const START_ASYNC_OP = 'START_ASYNC_OP';
 export const END_ASYNC_OP = 'END_ASYNC_OP';
-export const AUTH = 'AUTH';
+
+export const AUTHENTICATED = 'AUTHENTICATED';
+export const UNAUTHENTICATED = 'UNAUTHENTICATED';
+export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
 
 export const GET_GOALLIST = 'GET_GOALLIST';
 export const STORE_STEPS = 'STORE_STEPS';

@@ -1,5 +1,6 @@
 import {
-    AUTH,
+    AUTHENTICATED,
+    AUTHENTICATION_ERROR,
     ADMIN_REGISTER
 } from '../types'
 
@@ -13,25 +14,24 @@ const authUrl = `${baseUrl}/api/User/Login`;
 // const userApiUrl = `${baseUrl}/api/Users`;
 
 // Actions
-export const authenticate = createAction(AUTH);
 export const adminRegister = createAction(ADMIN_REGISTER);
 
 // Handlers
 export const execAuthenticate = data => dispatch => {
     const obj = {
-        'grant_type': 'password',
-        'username': data.username,
-        'password': data.password
+        grant_type:'password',
+        username: data.username,
+        password: data.password
     }
-    // const searchParams = Object.keys(obj).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`)
-    //     .join('&');
+    const searchParams = Object.keys(obj).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`)
+        .join('&');
     const parameters = {
         method: 'POST',
-        body: JSON.stringify(obj),
+        body: searchParams,
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     };
 
-    dispatch(authenticate());
+    // dispatch(authenticate());
     return new Promise((resolve, reject) => {
         fetch(authUrl, parameters).then(response => {
             response.json().then(json => ({
@@ -40,29 +40,21 @@ export const execAuthenticate = data => dispatch => {
                 json
             }))
                 .then(({ status, json }) => {
-                    const dataResponse = {
-                        status,
-                        loading: status === 200 ? 'done' : 'fail',
-                        data: json
-                    };
 
-                    if (status === 403 || status === 401) {
+                    if (status !== 200) {
                         sessionStorage.removeItem('isActived');
                         sessionStorage.removeItem('authToken');
+                        return reject(Error(JSON.stringify(json)));
                     } else {
                         sessionStorage.setItem('isActived', true);
-                        sessionStorage.setItem('authToken', _.get(dataResponse, 'data.data.token', ''));
+                        sessionStorage.setItem('authToken', _.get(json, 'access_token', ''));
                         // sessionStorage.setItem('password', base64.encode(data.rq_Password));
                     }
-                    dispatch(authenticate(dataResponse));
+
+                    dispatch({type: AUTHENTICATED});
                     return resolve('done');
                 }, error => {
-                    const dataResponse = {
-                        status: 0,
-                        data: { detail: error.message }
-                    };
-
-                    dispatch(authenticate(dataResponse));
+                    dispatch({type: AUTHENTICATION_ERROR});
                     return reject(error);
                 });
         }).catch(exception => {

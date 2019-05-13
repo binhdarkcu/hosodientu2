@@ -1,7 +1,6 @@
 import React from 'react';
 
 const TopNav = ({user}) => {
-  console.log(user);
   return(
     <div className="top_nav">
       <div className="nav_menu">

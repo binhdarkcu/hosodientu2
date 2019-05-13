@@ -35,7 +35,10 @@ class PageLogin extends Component{
     // block screen and start call api
     this.setState({loading: true});
     const _self = this;
-    this.props.authenticate({username: username, password: password}).catch(err => {
+    this.props.authenticate({username: username, password: password}).then(done => {
+      this.props.goToDashboard();
+    }).catch(err => {
+      console.log(err);
       toast.error(LOGIN_FAILED, {
         position: toast.POSITION.TOP_RIGHT
       });
@@ -99,6 +102,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  goToDashboard: () => dispatch({ type: 'RTE_DASHBOARD'}),
   authenticate: data => dispatch(execAuthenticate(data))
 });
 

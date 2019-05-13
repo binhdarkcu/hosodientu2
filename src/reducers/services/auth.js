@@ -1,19 +1,25 @@
 import { handleActions } from 'redux-actions'
 import {
-    AUTH
+    AUTHENTICATED, UNAUTHENTICATED, AUTHENTICATION_ERROR
 } from '../../actions/types'
 import { combineReducers } from 'redux'
 
 const authDefault = { result: null }
 
 const authencation = handleActions({
-  [AUTH]: {
+  [AUTHENTICATED]: {
     next(state, action) {
-      return (action.payload) ? action.payload : state;
-    },
-    throw(state, action) {
-        console.log(`Error fetching goal list: ${action.error}`)
-        return { loading: false, failed: true, list: state.data }
+      return {...state, authenticated: true}
+    }
+  },
+  [UNAUTHENTICATED]: {
+    next(state, action) {
+      return {...state, authenticated: true}
+    }
+  },
+  [AUTHENTICATION_ERROR]: {
+    next(state, action) {
+      return {...state, error: action.payload}
     }
   }
 }, authDefault)
