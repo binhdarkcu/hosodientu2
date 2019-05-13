@@ -31,6 +31,10 @@ function checkLoginStatus(dispatch, getState) {
   }
 }
 
+function reportToAnalytics(dispatch, getState) {
+}
+
+
 // const history = createHistory()
 const routesMap = {
     RTE_DASHBOARD: {
@@ -39,19 +43,19 @@ const routesMap = {
     },
     [NOT_FOUND]: {
       path: '/not-found',
-      thunk: defaultThunk
+      thunk: reportToAnalytics
     },
     RTE_DO_LOANG_XUONG: {
       path: '/do-loang-xuong/:id',
-      thunk: defaultThunk
+      thunk: reportToAnalytics
     },
     RTE_KET_QUA_ECG: {
       path: '/ket-qua-ecg/:id',
-      thunk: defaultThunk
+      thunk: reportToAnalytics
     },
     RTE_SIEU_AM: {
       path: '/sieu-am/:id',
-      thunk: defaultThunk
+      thunk: reportToAnalytics
     },
     RTE_LOGIN: {
       path: '/login',
@@ -59,7 +63,7 @@ const routesMap = {
     },
     RTE_REGISTER: {
       path: '/register',
-      thunk: defaultThunk
+      thunk: reportToAnalytics
     }
 }
 

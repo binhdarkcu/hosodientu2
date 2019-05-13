@@ -50,7 +50,7 @@ export const execAuthenticate = data => dispatch => {
                         sessionStorage.setItem('authToken', _.get(json, 'access_token', ''));
                         // sessionStorage.setItem('password', base64.encode(data.rq_Password));
                     }
-
+                    sessionStorage.setItem('userInformation', JSON.stringify(obj))
                     dispatch({type: AUTHENTICATED});
                     return resolve('done');
                 }, error => {
