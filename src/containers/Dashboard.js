@@ -13,9 +13,10 @@ import FormKetQuaECG from './FormKetQuaECG';
 import AdminRegister from './AdminRegister';
 import {execLogout} from '../actions/services/api-auth.js';
 
-const mapStateToProps = ({ location }) => ({
+const mapStateToProps = ({ location, services }) => ({
   pageType: location.type,
-  itemId: location.payload.id
+  itemId: location.payload.id,
+  userInfo: services.user.userInfo,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -35,7 +36,7 @@ class Dashboard extends Component {
 
   render() {
 
-    const {pageType, itemId} = this.props;
+    const {pageType, itemId, userInfo} = this.props;
     const CurrentView = pages[pageType];
 
     return (
@@ -48,7 +49,7 @@ class Dashboard extends Component {
 
               <div className="clearfix"></div>
 
-              <SidebarProfile user={{name: "John Doe"}}/>
+              <SidebarProfile user={{name: userInfo.email}}/>
 
               <br />
 
@@ -57,7 +58,7 @@ class Dashboard extends Component {
             </div>
           </div>
 
-          <TopNav user={{name: 'John Doe'}} logOut={this.props.logOut}/>
+          <TopNav user={{name: userInfo.email}} logOut={this.props.logOut}/>
 
           <div className="right_col" role="main">
             <div className="row">
