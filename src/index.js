@@ -6,7 +6,6 @@ import App from './App';
 import thunkMiddleware from 'redux-thunk';
 import reducer from './reducers';
 import { routerMiddleware, routerEnhancer } from './router';
-import {execAuthenticate} from './actions/services/api-auth.js';
 // import './../assets/sass/admin/all.scss';
 
 
@@ -20,10 +19,6 @@ const store = createStore(
         )
     )
 );
-
-if(sessionStorage.userInformation) {
-  store.dispatch(execAuthenticate(JSON.parse(sessionStorage.userInformation)))
-}
 
 render(
     <Provider store={store}>

@@ -3,10 +3,16 @@ import { connect } from 'react-redux'
 import { toast } from 'react-toastify';
 // custom imports
 import {execAuthenticate} from '../actions/services/api-auth.js';
+import {execGetUserInfo} from '../actions/services/api-user.js';
+import {SET_USER_INFO} from '../actions/types';
 import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import {SPINNER_LIGHT_GREEN} from '../constants/Colors';
-import {USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED} from '../constants/Messages'
+import {USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED} from '../constants/Messages'
+import { redirect } from 'redux-first-router';
+import { createAction } from 'redux-actions';
+
+const setUserInfo = createAction(SET_USER_INFO);
 
 class PageLogin extends Component{
   username = null;
@@ -20,6 +26,17 @@ class PageLogin extends Component{
 
   componentDidMount(){
     document.body.className = "login";
+    document.addEventListener('keydown', this.handleKeyboardEvent);
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener('keydown', this.handleKeyboardEvent);
+  }
+
+  handleKeyboardEvent = (e) => {
+    if(e.keyCode === 13 || e.key === 'Enter'){
+      this.handleLogin(e);
+    }
   }
 
   handleLogin = (e) => {
@@ -34,18 +51,22 @@ class PageLogin extends Component{
 
     // block screen and start call api
     this.setState({loading: true});
-    const _self = this;
-    this.props.authenticate({username: username, password: password}).then(done => {
-      this.props.goToDashboard();
-    }).catch(err => {
-      console.log(err);
-      toast.error(LOGIN_FAILED, {
-        position: toast.POSITION.TOP_RIGHT
+    this.props.authenticate({username: username, password: password}).then(() => {
+      this.props.getUserInfo(username).then(data => {
+        this.props.saveUserInfo(data);
+        this.props.goToDashboard();
+      }).catch(err => {
+        this.showError(GET_USER_INFO_FAILED, err)
       });
-
-    }).finally(() => {
-        _self.setState({loading: false});
+    }).catch(err => {
+      this.showError(LOGIN_FAILED, err);
     });
+  }
+
+  showError = (msg, err) => {
+    console.log(err);
+    toast.error(msg);
+    this.setState({loading: false});
   }
 
   handleForgotPassword = (e) => {
@@ -66,11 +87,11 @@ class PageLogin extends Component{
               <form>
                 <h1>Login Form</h1>
                 <div className="form-login">
-                  <input ref={(node)=>{this.username = node;}} type="text" className="form-control" placeholder="Username" required />
+                  <input ref={(node)=>{this.username = node;}} value={'admin@gmail.com'} type="text" className="form-control" placeholder="Username" required />
                   {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
                 </div>
                 <div className="form-login">
-                  <input ref={(node)=>{this.password = node;}} type="password" className="form-control" placeholder="Password" required />
+                  <input ref={(node)=>{this.password = node;}} value={'webapp'} type="password" className="form-control" placeholder="Password" required />
                   {password_error && <InputErrorDisplayer message={PASSWORD_REQUIRED}/>}
                 </div>
                 <div>
@@ -102,7 +123,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  goToDashboard: () => dispatch({ type: 'RTE_DASHBOARD'}),
+  goToDashboard: () => dispatch(redirect({type: 'RTE_DASHBOARD'})),
+  saveUserInfo: data => dispatch(setUserInfo(data)),
+  getUserInfo: username => dispatch(execGetUserInfo(username)),
   authenticate: data => dispatch(execAuthenticate(data))
 });
 

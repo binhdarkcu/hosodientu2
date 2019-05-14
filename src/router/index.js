@@ -1,39 +1,37 @@
 // import {createBrowserHistory as createHistory} from 'history'
-import { AUTHENTICATED } from '../actions/types';
+import { AUTHENTICATED, SET_USER_INFO } from '../actions/types';
 import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router'
 // import queryString from 'query-string'
 //import sleep from 'sleep-promise'
 
 export const defaultThunk = (dispatch, getState) => {
-    console.log('stateeeee',getState().services.auth)
+    console.log('--state', getState().services);
     doDefaultRedirect(dispatch, getState().services.auth.authencation)
 }
 
 function doDefaultRedirect(dispatch, loggedInUser) {
     const isLoggedin = loggedInUser.authenticated ? 'yes': 'no';
 
-    console.log('isLoggedin',isLoggedin);
-    // if(isLoggedin === 'yes') {
-    //     console.log('Employee, redirecting to ADMIN')
-    //     dispatch(redirect({type: 'RTE_DASHBOARD'}))
     if(isLoggedin === 'no') {
         console.log('Not an employee, redirecting to login')
-        dispatch(redirect({type: 'RTE_LOGIN'}))
+        dispatch(redirect({type: 'RTE_LOGIN'}));
+        return;
     }
 
 }
 
 function checkLoginStatus(dispatch, getState) {
+  const state = getState();
+  const { type, payload } = state.location.prev;
   const token = sessionStorage.getItem('authToken');
-  if(token){
+  const userInfo = sessionStorage.getItem('userInfo');
+  if(token && userInfo){
+    console.log('aaaaa', userInfo);
     dispatch({type: AUTHENTICATED});
-    dispatch(redirect({type: 'RTE_DASHBOARD'}));
+    dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
+    dispatch(redirect({type: type ? type : 'RTE_DASHBOARD', payload: {...payload}}));
   }
 }
-
-function reportToAnalytics(dispatch, getState) {
-}
-
 
 // const history = createHistory()
 const routesMap = {
@@ -43,19 +41,19 @@ const routesMap = {
     },
     [NOT_FOUND]: {
       path: '/not-found',
-      thunk: reportToAnalytics
+      thunk: defaultThunk
     },
     RTE_DO_LOANG_XUONG: {
       path: '/do-loang-xuong/:id',
-      thunk: reportToAnalytics
+      thunk: defaultThunk
     },
     RTE_KET_QUA_ECG: {
       path: '/ket-qua-ecg/:id',
-      thunk: reportToAnalytics
+      thunk: defaultThunk
     },
     RTE_SIEU_AM: {
       path: '/sieu-am/:id',
-      thunk: reportToAnalytics
+      thunk: defaultThunk
     },
     RTE_LOGIN: {
       path: '/login',
@@ -63,7 +61,7 @@ const routesMap = {
     },
     RTE_REGISTER: {
       path: '/register',
-      thunk: reportToAnalytics
+      thunk: defaultThunk
     }
 }
 

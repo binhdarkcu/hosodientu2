@@ -4,7 +4,7 @@ import {
 } from '../../actions/types'
 import { combineReducers } from 'redux'
 
-const authDefault = { result: null }
+const authDefault = { authenticated: false }
 
 const authencation = handleActions({
   [AUTHENTICATED]: {

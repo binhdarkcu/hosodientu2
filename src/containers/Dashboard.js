@@ -11,10 +11,15 @@ import FormSieuAm from './FormSieuAm';
 import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
 import AdminRegister from './AdminRegister';
+import {execLogout} from '../actions/services/api-auth.js';
 
 const mapStateToProps = ({ location }) => ({
   pageType: location.type,
   itemId: location.payload.id
+});
+
+const mapDispatchToProps = dispatch => ({
+  logOut: () => dispatch(execLogout())
 });
 
 // mapping pages
@@ -22,7 +27,6 @@ const pages = {
   'RTE_DASHBOARD': 'div',
   'RTE_REGISTER': AdminRegister,
   'RTE_SIEU_AM': FormSieuAm,
-  'RTE_REGISTER': AdminRegister,
   'RTE_KET_QUA_ECG': FormKetQuaECG,
   'RTE_DO_LOANG_XUONG': FormDoLoangXuong
 };
@@ -53,7 +57,7 @@ class Dashboard extends Component {
             </div>
           </div>
 
-          <TopNav user={{name: 'John Doe'}}/>
+          <TopNav user={{name: 'John Doe'}} logOut={this.props.logOut}/>
 
           <div className="right_col" role="main">
             <div className="row">
@@ -67,4 +71,4 @@ class Dashboard extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

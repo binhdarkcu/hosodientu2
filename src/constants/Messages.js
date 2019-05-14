@@ -8,7 +8,7 @@ export const PASSWORD_REQUIRED = 'Vui lòng nhập mật khẩu!';
 
 // actions
 export const LOGIN_FAILED = 'Đăng nhập thất bại!';
-
+export const GET_USER_INFO_FAILED = 'Không thể lấy thông tin người dùng';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi!';

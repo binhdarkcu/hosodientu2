@@ -1,17 +1,18 @@
 import {
     AUTHENTICATED,
     AUTHENTICATION_ERROR,
+    UNAUTHENTICATED,
     ADMIN_REGISTER
 } from '../types'
-
-import { createAction } from 'redux-actions'
+import { redirect } from 'redux-first-router';
+import { createAction } from 'redux-actions';
 import 'whatwg-fetch';
 import _ from 'lodash';
-import baseUrl from './base-url'
+import baseUrl from './base-url';
 
 // API URLs
 const authUrl = `${baseUrl}/api/User/Login`;
-// const userApiUrl = `${baseUrl}/api/Users`;
+const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
 
 // Actions
 export const adminRegister = createAction(ADMIN_REGISTER);
@@ -31,7 +32,6 @@ export const execAuthenticate = data => dispatch => {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     };
 
-    // dispatch(authenticate());
     return new Promise((resolve, reject) => {
         fetch(authUrl, parameters).then(response => {
             response.json().then(json => ({
@@ -44,21 +44,23 @@ export const execAuthenticate = data => dispatch => {
                     if (status !== 200) {
                         sessionStorage.removeItem('isActived');
                         sessionStorage.removeItem('authToken');
+                        sessionStorage.removeItem('expAt');
+                        dispatch({type: AUTHENTICATED});
                         return reject(Error(JSON.stringify(json)));
                     } else {
                         sessionStorage.setItem('isActived', true);
                         sessionStorage.setItem('authToken', _.get(json, 'access_token', ''));
-                        // sessionStorage.setItem('password', base64.encode(data.rq_Password));
+                        sessionStorage.setItem('expAt', Date.now());
+                        // sessionStorage.setItem('userInfo', JSON.stringify(_.omit(obj, ['password'])));
                     }
-                    sessionStorage.setItem('userInformation', JSON.stringify(obj))
                     dispatch({type: AUTHENTICATED});
                     return resolve('done');
                 }, error => {
                     dispatch({type: AUTHENTICATION_ERROR});
                     return reject(error);
                 });
-        }).catch(exception => {
-          reject(exception);
+        }).catch(jsonError => {
+          reject(jsonError);
         });
     });
 };
@@ -66,11 +68,40 @@ export const execAuthenticate = data => dispatch => {
 
 export const execAdminRegister = data => dispatch => {
 
+  console.log('data', data);
+  data.NgaySinh = '1988-05-20';// tạm hardcode để test
+  const searchParams = Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join('&');
+
+      console.log(data);
   const parameters = {
       method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      body: "",
+      headers: { 'Content-Type': 'application/json' }
   };
 
-  console.log('sending...');
+  return new Promise((resolve, reject) => {
+      fetch(userApiUrl, parameters).then(response => {
+          response.json().then(json => ({
+              status: response.status,
+              loading: 'loading',
+              json
+          }))
+              .then(({ status, json }) => {
+                  console.log('ok', json);
+                  return resolve('done');
+              }, error => {
+                  console.log('err', error);
+                  return reject(error);
+              });
+      }).catch(jsonError => {
+        reject(jsonError);
+      });
+  });
+}
+
+export const execLogout = () => dispatch => {
+  sessionStorage.clear();
+  dispatch({type: UNAUTHENTICATED});
+  dispatch(redirect({type: 'RTE_LOGIN'}));
 }

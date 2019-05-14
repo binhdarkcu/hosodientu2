@@ -83,12 +83,11 @@ class FormAdminRegister extends React.Component {
   handleSubmit = () => {
     const _self = this;
     _self.setState({loading: true});
-    this.props.register(this.state.user).then((done)=>{
+    this.props.register({...this.state.user}).then((done)=>{
       console.log('done');
     }).catch((err)=>{
       console.log('err', err);
-    }).finally(()=>{
-        _self.setState({loading: false});
+      _self.setState({loading: false});
     });
   }
 

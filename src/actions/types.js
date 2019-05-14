@@ -17,3 +17,5 @@ export const CREATE_INVESTMENT = 'CREATE_INVESTMENT';
 
 //admin actions
 export const ADMIN_REGISTER = 'ADMIN_REGISTER';
+export const LOG_OUT = 'LOG_OUT';
+export const SET_USER_INFO = 'SET_USER_INFO';

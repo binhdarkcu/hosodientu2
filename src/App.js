@@ -18,7 +18,7 @@ toast.configure({
 
 const App = ({page, location}) => {
   let CurrentPage = pages[page];
-  if(!sessionStorage.userInformation) {
+  if(!sessionStorage.authToken) {
     CurrentPage = pages['Login'];
   }
   return <CurrentPage />
