@@ -60,7 +60,7 @@ const routesMap = {
       thunk: checkLoginStatus
     },
     RTE_REGISTER: {
-      path: '/register',
+      path: '/dang-ky',
       thunk: defaultThunk
     }
 }
