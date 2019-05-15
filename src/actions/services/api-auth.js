@@ -40,23 +40,18 @@ export const execAuthenticate = data => dispatch => {
                 json
             }))
                 .then(({ status, json }) => {
-
                     if (status !== 200) {
-                        sessionStorage.removeItem('isActived');
-                        sessionStorage.removeItem('authToken');
-                        sessionStorage.removeItem('expAt');
-                        dispatch({type: AUTHENTICATED});
+                      dispatch({type: UNAUTHENTICATED});
                         return reject(Error(JSON.stringify(json)));
                     } else {
                         sessionStorage.setItem('isActived', true);
                         sessionStorage.setItem('authToken', _.get(json, 'access_token', ''));
-                        sessionStorage.setItem('expAt', Date.now());
-                        // sessionStorage.setItem('userInfo', JSON.stringify(_.omit(obj, ['password'])));
+                        sessionStorage.setItem('expAt', Date.now() + _.get(json, 'expires_in', 0)*1000);
                     }
                     dispatch({type: AUTHENTICATED});
                     return resolve('done');
                 }, error => {
-                    dispatch({type: AUTHENTICATION_ERROR});
+                    dispatch({type: AUTHENTICATION_ERROR, payload: error});
                     return reject(error);
                 });
         }).catch(jsonError => {
@@ -73,10 +68,9 @@ export const execAdminRegister = data => dispatch => {
   const searchParams = Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
       .join('&');
 
-      console.log(data);
   const parameters = {
       method: 'POST',
-      body: "",
+      body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' }
   };
 

@@ -14,7 +14,7 @@ const authencation = handleActions({
   },
   [UNAUTHENTICATED]: {
     next(state, action) {
-      return {...state, authenticated: true}
+      return {...state, authenticated: false}
     }
   },
   [AUTHENTICATION_ERROR]: {

@@ -1,5 +1,5 @@
 // import {createBrowserHistory as createHistory} from 'history'
-import { AUTHENTICATED, SET_USER_INFO } from '../actions/types';
+import { AUTHENTICATED, SET_USER_INFO, UNAUTHENTICATED } from '../actions/types';
 import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router'
 // import queryString from 'query-string'
 //import sleep from 'sleep-promise'
@@ -11,13 +11,15 @@ export const defaultThunk = (dispatch, getState) => {
 
 function doDefaultRedirect(dispatch, loggedInUser) {
     const isLoggedin = loggedInUser.authenticated ? 'yes': 'no';
-
     if(isLoggedin === 'no') {
         console.log('Not an employee, redirecting to login')
         dispatch(redirect({type: 'RTE_LOGIN'}));
         return;
+    }else if(Date.now() >= sessionStorage.getItem('expAt')*1){
+      sessionStorage.clear();
+      dispatch({type: UNAUTHENTICATED});
+      dispatch(redirect({type: 'RTE_LOGIN'}));
     }
-
 }
 
 function checkLoginStatus(dispatch, getState) {
@@ -26,7 +28,6 @@ function checkLoginStatus(dispatch, getState) {
   const token = sessionStorage.getItem('authToken');
   const userInfo = sessionStorage.getItem('userInfo');
   if(token && userInfo){
-    console.log('aaaaa', userInfo);
     dispatch({type: AUTHENTICATED});
     dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
     dispatch(redirect({type: type ? type : 'RTE_DASHBOARD', payload: {...payload}}));

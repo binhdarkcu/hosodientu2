@@ -30,9 +30,9 @@ export const execGetUserInfo = username => dispatch => {
                 json
             }))
                 .then(({ status, json }) => {
-                    const saveJson = _.omit(json, ['password']);
-                    sessionStorage.setItem('userInfo', JSON.stringify(saveJson));
-                    return resolve(saveJson);
+                    const safeJson = _.omit(json, ['password']);
+                    sessionStorage.setItem('userInfo', JSON.stringify(safeJson));
+                    return resolve(safeJson);
                 }, error => {
                     return reject(error);
                 })

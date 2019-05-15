@@ -33,6 +33,11 @@ const pages = {
 
 class Dashboard extends Component {
 
+  componentDidMount(){
+    document.body.className = "nav-md";
+    if(window.initializeDashboard) window.initializeDashboard();
+  }
+
   render() {
 
     const {pageType, itemId} = this.props;
