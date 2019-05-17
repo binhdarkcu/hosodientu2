@@ -1,0 +1,21 @@
+export const START_ASYNC_OP = 'START_ASYNC_OP';
+export const END_ASYNC_OP = 'END_ASYNC_OP';
+
+export const AUTHENTICATED = 'AUTHENTICATED';
+export const UNAUTHENTICATED = 'UNAUTHENTICATED';
+export const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+
+export const GET_GOALLIST = 'GET_GOALLIST';
+export const STORE_STEPS = 'STORE_STEPS';
+export const OPEN_MODAL = 'OPEN_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+
+export const GET_CRR = 'GET_CRR';
+export const GET_PORTFOLIO = 'GET_PORTFOLIO';
+export const CALCULATE_EXPECTED_RETURN = 'CALCULATE_EXPECTED_RETURN';
+export const CREATE_INVESTMENT = 'CREATE_INVESTMENT';
+
+//admin actions
+export const ADMIN_REGISTER = 'ADMIN_REGISTER';
+export const LOG_OUT = 'LOG_OUT';
+export const SET_USER_INFO = 'SET_USER_INFO';
