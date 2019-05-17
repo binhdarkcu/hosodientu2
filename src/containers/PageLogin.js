@@ -49,7 +49,7 @@ class PageLogin extends Component{
 
     if(!username || !password) return;
 
-    // block screen and start call api
+    // block screen and start calling api
     this.setState({loading: true});
     this.props.authenticate({username: username, password: password}).then(() => {
       this.props.getUserInfo(username).then(data => {
