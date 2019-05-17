@@ -7,7 +7,8 @@ const components = {
   RTE_KET_QUA_ECG: 'Dashboard',
   RTE_REGISTER: 'Dashboard',
   RTE_LOGIN: 'Login',
+  RTE_ACTIVATE: 'ActivateUser',
   [NOT_FOUND]: 'NotFound'
 }
 
-export default (state = 'RTE_DASHBOARD', action = {}) => components[action.type] || state
+export default (state = 'Dashboard', action = {}) => components[action.type] || state

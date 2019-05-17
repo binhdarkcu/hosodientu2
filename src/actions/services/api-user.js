@@ -1,20 +1,15 @@
-import {
-    AUTHENTICATED,
-    AUTHENTICATION_ERROR,
-    UNAUTHENTICATED,
-    ADMIN_REGISTER
-} from '../types'
-import { redirect } from 'redux-first-router';
-import { createAction } from 'redux-actions';
 import 'whatwg-fetch';
 import _ from 'lodash';
 import baseUrl from './base-url';
+import { sendHttpRequest } from './http-handler';
 
+const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
+const activateUrl = `${baseUrl}/api/User/Activate`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
 
-// Handlers
+// Get user info
 export const execGetUserInfo = username => dispatch => {
     const parameters = {
         method: 'GET',
@@ -23,21 +18,48 @@ export const execGetUserInfo = username => dispatch => {
 
     const userInfoUrl = `${baseUrl}/api/UserByEmail?email=${username}`;
     return new Promise((resolve, reject) => {
-        fetch(userInfoUrl, parameters).then(response => {
-            response.json().then(json => ({
-                status: response.status,
-                loading: 'loading',
-                json
-            }))
-                .then(({ status, json }) => {
-                    const safeJson = _.omit(json, ['password']);
-                    sessionStorage.setItem('userInfo', JSON.stringify(safeJson));
-                    return resolve(safeJson);
-                }, error => {
-                    return reject(error);
-                })
-        }).catch(jsonError => {
-          reject(jsonError);
-        });
+        sendHttpRequest(userInfoUrl, parameters)
+          .then(({status, json}) => {
+            const safeJson = _.omit(json, ['password']);
+            sessionStorage.setItem('userInfo', JSON.stringify(safeJson));
+            return resolve(safeJson);
+          })
+          .catch( err => reject(err));
     });
 };
+
+// Activate user
+export const execActivateUser = data => dispatch => {
+  const searchParams = Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&');
+  const parameters = {
+      method: 'POST',
+      body: searchParams,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(activateUrl, parameters)
+        .then(({ status, user }) => {
+          return resolve(user);
+        })
+        .catch(err => reject(err));
+  });
+}
+
+// User register
+export const execAdminRegister = data => dispatch => {
+
+  const parameters = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(userApiUrl, parameters)
+        .then(({ status, userInfo }) => {
+          return resolve(userInfo);
+        })
+        .catch( err => reject(err));
+  });
+}

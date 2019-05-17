@@ -1,22 +1,23 @@
 // import {createBrowserHistory as createHistory} from 'history'
 import { AUTHENTICATED, SET_USER_INFO, UNAUTHENTICATED } from '../actions/types';
-import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router'
+import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router';
+import { toast } from 'react-toastify';
+import * as MSG from '../constants/Messages';
 // import queryString from 'query-string'
 //import sleep from 'sleep-promise'
 
 export const defaultThunk = (dispatch, getState) => {
-    console.log('--state', getState().services);
     doDefaultRedirect(dispatch, getState().services.auth.authencation)
 }
 
 function doDefaultRedirect(dispatch, loggedInUser) {
     const isLoggedin = loggedInUser.authenticated ? 'yes': 'no';
     if(isLoggedin === 'no') {
-        console.log('Not an employee, redirecting to login')
         dispatch(redirect({type: 'RTE_LOGIN'}));
         return;
     }else if(Date.now() >= sessionStorage.getItem('expAt')*1){
       sessionStorage.clear();
+      toast.info(MSG.SESSION_EXPIRED, {autoClose: 8000});
       dispatch({type: UNAUTHENTICATED});
       dispatch(redirect({type: 'RTE_LOGIN'}));
     }
@@ -34,6 +35,9 @@ function checkLoginStatus(dispatch, getState) {
   }
 }
 
+function freePass(dispatch, getState){
+  console.log('freePass');
+}
 // const history = createHistory()
 const routesMap = {
     RTE_DASHBOARD: {
@@ -63,6 +67,10 @@ const routesMap = {
     RTE_REGISTER: {
       path: '/dang-ky',
       thunk: defaultThunk
+    },
+    RTE_ACTIVATE: {
+      path: '/kich-hoat/:code',
+      thunk: freePass
     }
 }
 

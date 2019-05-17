@@ -18,7 +18,7 @@ import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
 import { connect } from 'react-redux';
-import {execAdminRegister} from '../../actions/services/api-auth.js';
+import {execAdminRegister} from '../../actions/services/api-user.js';
 import Spinner from '../../components/Spinner';
 import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
 
@@ -83,10 +83,15 @@ class FormAdminRegister extends React.Component {
   handleSubmit = () => {
     const _self = this;
     _self.setState({loading: true});
-    this.props.register({...this.state.user}).then((done)=>{
+    let user = {...this.state.user};
+    user.NgaySinh = `${user.NgaySinh.getFullYear()}-${user.NgaySinh.getMonth() + 1}-${user.NgaySinh.getDate()}`;
+    this.props.register(user).then((done)=>{
       console.log('done');
+      toast.success(MSG.USER_CREATED);
+      _self.setState({loading: false});
     }).catch((err)=>{
       console.log('err', err);
+      toast.error(MSG.ERROR_OCCURED);
       _self.setState({loading: false});
     });
   }

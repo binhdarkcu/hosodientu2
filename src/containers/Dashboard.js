@@ -11,7 +11,7 @@ import FormSieuAm from './FormSieuAm';
 import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
 import AdminRegister from './AdminRegister';
-import {execLogout} from '../actions/services/api-auth.js';
+import {execLogout} from '../actions/services/user.js';
 
 const mapStateToProps = ({ location, services }) => ({
   pageType: location.type,
