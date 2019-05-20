@@ -71,7 +71,11 @@ const routesMap = {
     RTE_ACTIVATE: {
       path: '/kich-hoat/:code',
       thunk: freePass
-    }
+    },
+    RTE_DANH_SACH_USER: {
+      path: '/danh-sach',
+      thunk: defaultThunk
+    },
 }
 
 export function createDefaultRedirector(dispatch) {

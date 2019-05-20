@@ -5,6 +5,7 @@ import { sendHttpRequest } from './http-handler';
 
 const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
+const userListUrl = `${baseUrl}/api/Users`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -63,3 +64,18 @@ export const execAdminRegister = data => dispatch => {
         .catch( err => reject(err));
   });
 }
+
+// Get user list
+export const execGetUserList = () => dispatch => {
+  const parameters = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(userListUrl, parameters)
+        .then(({status, json}) => {
+          return resolve(json);
+        }).catch( err => reject(err));
+  });
+};
