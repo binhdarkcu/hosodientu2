@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import _ from 'lodash';
 import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
+import { SET_USER_INFO } from '../../actions/types';
 
 const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
@@ -21,6 +22,7 @@ export const execGetUserInfo = username => dispatch => {
         sendHttpRequest(userInfoUrl, parameters)
           .then(({status, json}) => {
             const safeJson = _.omit(json, ['password']);
+            dispatch({type: SET_USER_INFO, payload: {...safeJson}});
             sessionStorage.setItem('userInfo', JSON.stringify(safeJson));
             return resolve(safeJson);
           })
