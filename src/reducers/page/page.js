@@ -6,6 +6,7 @@ const components = {
   RTE_SIEU_AM: 'Dashboard',
   RTE_KET_QUA_ECG: 'Dashboard',
   RTE_REGISTER: 'Dashboard',
+  RTE_DANH_SACH_USER: 'Dashboard',
   RTE_LOGIN: 'Login',
   RTE_ACTIVATE: 'ActivateUser',
   [NOT_FOUND]: 'NotFound'

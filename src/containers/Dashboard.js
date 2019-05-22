@@ -10,6 +10,7 @@ import SiteLogo from '../components/SiteLogo';
 import FormSieuAm from './FormSieuAm';
 import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
+import FormDanhSachUser from './FormDanhSachUser';
 import AdminRegister from './AdminRegister';
 import {execLogout} from '../actions/services/user.js';
 
@@ -29,7 +30,8 @@ const pages = {
   'RTE_REGISTER': AdminRegister,
   'RTE_SIEU_AM': FormSieuAm,
   'RTE_KET_QUA_ECG': FormKetQuaECG,
-  'RTE_DO_LOANG_XUONG': FormDoLoangXuong
+  'RTE_DO_LOANG_XUONG': FormDoLoangXuong,
+  'RTE_DANH_SACH_USER': FormDanhSachUser,
 };
 
 class Dashboard extends Component {
