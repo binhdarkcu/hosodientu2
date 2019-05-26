@@ -76,6 +76,14 @@ const routesMap = {
       path: '/danh-sach',
       thunk: defaultThunk
     },
+    RTE_CHI_TIET_USER: {
+      path: '/chi-tiet/:id',
+      thunk: defaultThunk
+    },
+    RTE_DOI_MAT_KHAU: {
+      path: '/doi-mat-khau',
+      thunk: defaultThunk
+    },
 }
 
 export function createDefaultRedirector(dispatch) {

@@ -11,6 +11,7 @@ import FormSieuAm from './FormSieuAm';
 import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
 import FormDanhSachUser from './FormDanhSachUser';
+import FormUser from './FormUser';
 import AdminRegister from './AdminRegister';
 import {execLogout} from '../actions/services/user.js';
 
@@ -32,6 +33,7 @@ const pages = {
   'RTE_KET_QUA_ECG': FormKetQuaECG,
   'RTE_DO_LOANG_XUONG': FormDoLoangXuong,
   'RTE_DANH_SACH_USER': FormDanhSachUser,
+  'RTE_CHI_TIET_USER': FormUser,
 };
 
 class Dashboard extends Component {

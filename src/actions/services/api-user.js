@@ -7,6 +7,9 @@ import { SET_USER_INFO } from '../../actions/types';
 const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
 const userListUrl = `${baseUrl}/api/Users`;
+// const userDetailUrl = `${baseUrl}/api/User?id=${id}`;
+const userDetailUrl = `${baseUrl}/api/User?id=4`;
+const ChangePassword = `${baseUrl}/api/User/ChangePassword`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -81,3 +84,36 @@ export const execGetUserList = () => dispatch => {
         }).catch( err => reject(err));
   });
 };
+
+// Get user detail
+export const execGetUserDetail = (id) => dispatch => {
+  const parameters = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(userDetailUrl, parameters)
+        .then(({status, json}) => {
+          return resolve(json);
+        }).catch( err => reject(err));
+  });
+};
+
+//Change password
+export const execChangePassword = data => dispatch => {
+console.log('execChangePassword data: ', data);
+  const parameters = {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(ChangePassword, parameters)
+        .then(({ status }) => {
+          return resolve(status);
+        })
+        .catch( err => reject(err));
+  });
+}
