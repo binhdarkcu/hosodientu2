@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createElement } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -63,14 +63,14 @@ class FormDanhSachUser extends React.Component {
   handleShowInfo = (id) => {
     if (id) {
       const url = `/chi-tiet/${id}`;
-      console.log(url)
-      this.getUsersDetail(id);
+      const link = document.createElement('a');
+      link.href = url;
+      link.click();      
     }
   }
 
   render() {
-    const { classes, users, location } = this.props;
-    console.log('location: ', location)
+    const { classes, users } = this.props;
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>

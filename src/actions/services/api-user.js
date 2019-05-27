@@ -7,8 +7,7 @@ import { SET_USER_INFO } from '../../actions/types';
 const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
 const userListUrl = `${baseUrl}/api/Users`;
-// const userDetailUrl = `${baseUrl}/api/User?id=${id}`;
-const userDetailUrl = `${baseUrl}/api/User?id=4`;
+const userDetailUrl = `${baseUrl}/api/User?id=`;
 const ChangePassword = `${baseUrl}/api/User/ChangePassword`;
 
 // Actions
@@ -93,7 +92,7 @@ export const execGetUserDetail = (id) => dispatch => {
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(userDetailUrl, parameters)
+      sendHttpRequest(userDetailUrl + id, parameters)
         .then(({status, json}) => {
           return resolve(json);
         }).catch( err => reject(err));

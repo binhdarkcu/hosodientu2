@@ -18,7 +18,7 @@ import { execGetUserDetail } from '../../actions/services/api-user';
 import { createAction } from 'redux-actions';
 
 const mapDispatchToProps = dispatch => ({
-  getUserDetail: () => dispatch(execGetUserDetail()),
+  getUserDetail: (id) => dispatch(execGetUserDetail(id)),
 });
 
 const mapStateToProps = ({ id, services }) => ({
@@ -76,7 +76,8 @@ class FormUser extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getUserDetail().then((data) => {
+    const id = window.location.pathname.match(/chi-tiet\/(\d+)/)[1];
+    this.props.getUserDetail(id).then((data) => {
       const ngaySinh = this.formatYToD(data.ngaySinh);
       const ngayDangKy = this.formatYToD(data.ngayDangKy);
       this.setState({
@@ -101,7 +102,6 @@ class FormUser extends React.Component {
   render() {
     const { classes } = this.props;
     const { user, ngaySinh, ngayDangKy } = this.state;
-    const id = 4;
     return (
       <FormLayoutHorizontal>
 
