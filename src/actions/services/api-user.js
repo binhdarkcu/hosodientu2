@@ -8,7 +8,7 @@ const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
 const userListUrl = `${baseUrl}/api/Users`;
 const userDetailUrl = `${baseUrl}/api/User?id=`;
-const ChangePassword = `${baseUrl}/api/User/ChangePassword`;
+const ChangePassword = `${baseUrl}/api/User/ChangePassword?id=`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -101,7 +101,6 @@ export const execGetUserDetail = (id) => dispatch => {
 
 //Change password
 export const execChangePassword = data => dispatch => {
-console.log('execChangePassword data: ', data);
   const parameters = {
       method: 'PUT',
       body: JSON.stringify(data),
@@ -109,7 +108,7 @@ console.log('execChangePassword data: ', data);
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(ChangePassword, parameters)
+      sendHttpRequest(ChangePassword + data.id, parameters)
         .then(({ status }) => {
           return resolve(status);
         })

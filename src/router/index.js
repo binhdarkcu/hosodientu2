@@ -81,7 +81,7 @@ const routesMap = {
       thunk: defaultThunk
     },
     RTE_DOI_MAT_KHAU: {
-      path: '/doi-mat-khau',
+      path: '/doi-mat-khau/:id',
       thunk: defaultThunk
     },
 }

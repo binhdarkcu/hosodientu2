@@ -119,7 +119,7 @@ class FormUser extends React.Component {
           <Grid item xs={3}>
           </Grid>
           <Grid item xs={3}>
-          <a href={`/doi-mat-khau`} className={classes.buttonChangePass}> Đổi mật khẩu</a>
+          <a href={`/doi-mat-khau/${user.userId}`} className={classes.buttonChangePass}> Đổi mật khẩu</a>
           </Grid>
         </Grid>
 
