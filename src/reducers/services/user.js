@@ -1,10 +1,12 @@
 import { handleActions } from 'redux-actions'
 import {
-    SET_USER_INFO
+  SET_USER_INFO,
+  GET_USER_LIST
 } from '../../actions/types'
 import { combineReducers } from 'redux'
 
-const userDefault = {}
+const userDefault = {};
+const userListDefault = [];
 
 const userInfo = handleActions({
   [SET_USER_INFO]: {
@@ -14,4 +16,12 @@ const userInfo = handleActions({
   }
 }, userDefault)
 
-export default combineReducers({ userInfo })
+const userList = handleActions({
+  [GET_USER_LIST]: {
+    next(state, action) {
+      return action.payload ? action.payload : state;
+    }
+  }
+}, userListDefault)
+
+export default combineReducers({ userInfo, userList })

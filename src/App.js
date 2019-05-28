@@ -18,7 +18,7 @@ toast.configure({
 
 const App = ({page, location}) => {
   let CurrentPage = pages[page];
-  if(!sessionStorage.authToken && location.type !== 'RTE_ACTIVATE') {
+  if(!sessionStorage.authToken && location.type !== 'RTE_ACTIVATE' && location.type !== 'RTE_USER_REGISTER') {
     CurrentPage = pages['Login'];
   }
   return <CurrentPage />

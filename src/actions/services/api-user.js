@@ -2,9 +2,12 @@ import 'whatwg-fetch';
 import _ from 'lodash';
 import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
+import { SET_USER_INFO } from '../../actions/types';
 
-const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
+const adminRegisterApiUrl = `${baseUrl}/api/User/AdminRegister`;
+const userRegisterApiUrl = `${baseUrl}/api/User/UserRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
+const userListUrl = `${baseUrl}/api/Users`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -21,6 +24,7 @@ export const execGetUserInfo = username => dispatch => {
         sendHttpRequest(userInfoUrl, parameters)
           .then(({status, json}) => {
             const safeJson = _.omit(json, ['password']);
+            dispatch({type: SET_USER_INFO, payload: {...safeJson}});
             sessionStorage.setItem('userInfo', JSON.stringify(safeJson));
             return resolve(safeJson);
           })
@@ -47,19 +51,35 @@ export const execActivateUser = data => dispatch => {
 }
 
 // User register
-export const execAdminRegister = data => dispatch => {
-
+export const execRegister = (data, type) => dispatch => {
   const parameters = {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' }
   };
 
+  const url = 'user' === type ? userRegisterApiUrl : adminRegisterApiUrl;
+
   return new Promise((resolve, reject) => {
-      sendHttpRequest(userApiUrl, parameters)
+      sendHttpRequest(url, parameters)
         .then(({ status, userInfo }) => {
           return resolve(userInfo);
         })
         .catch( err => reject(err));
   });
 }
+
+// Get user list
+export const execGetUserList = () => dispatch => {
+  const parameters = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(userListUrl, parameters)
+        .then(({status, json}) => {
+          return resolve(json);
+        }).catch( err => reject(err));
+  });
+};

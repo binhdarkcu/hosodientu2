@@ -64,13 +64,25 @@ const routesMap = {
       path: '/login',
       thunk: checkLoginStatus
     },
-    RTE_REGISTER: {
-      path: '/dang-ky',
+    RTE_ADMIN_REGISTER: {
+      path: '/admin-dang-ky',
       thunk: defaultThunk
+    },
+    RTE_USER_REGISTER: {
+      path: '/nguoi-dung-dang-ky',
+      thunk: freePass
     },
     RTE_ACTIVATE: {
       path: '/kich-hoat/:code',
       thunk: freePass
+    },
+    RTE_DANH_SACH_USER: {
+      path: '/danh-sach',
+      thunk: defaultThunk
+    },
+    RTE_CHANGE_PASSWORD: {
+      path: '/doi-mat-khau',
+      thunk: defaultThunk
     }
 }
 
