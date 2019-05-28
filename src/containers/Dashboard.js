@@ -11,9 +11,9 @@ import FormSieuAm from './FormSieuAm';
 import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
 import FormDanhSachUser from './FormDanhSachUser';
-import FormUser from './FormUser';
 import AdminRegister from './AdminRegister';
 import FormChangePassword from './FormChangePassword';
+import FormUser from './FormUser';
 
 import {execLogout} from '../actions/services/user.js';
 
