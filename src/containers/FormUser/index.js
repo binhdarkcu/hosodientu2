@@ -3,27 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
 import FormFooter from '../../components/FormFooter';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import Button from '@material-ui/core/Button';
-import Link from 'redux-first-router-link'
 import mainLogo from '../../assets/images/logo.png';
 import Divider from '@material-ui/core/Divider';
 //custom import
-import { GET_USER_LIST } from '../../actions/types';
 import { execGetUserDetail } from '../../actions/services/api-user';
-import { createAction } from 'redux-actions';
 
 const mapDispatchToProps = dispatch => ({
   getUserDetail: (id) => dispatch(execGetUserDetail(id)),
 });
 
-const mapStateToProps = ({ id, services }) => ({
+const mapStateToProps = ({ id, services, location }) => ({
   id: id,
   users: services.user.userList,
+  location: location,
 });
 
 const styles = theme => ({
@@ -76,7 +71,7 @@ class FormUser extends React.Component {
   }
 
   componentDidMount() {
-    const id = window.location.pathname.match(/chi-tiet\/(\d+)/)[1];
+    const id = this.props.location.pathname.match(/chi-tiet\/(\d+)/)[1];
     this.props.getUserDetail(id).then((data) => {
       const ngaySinh = this.formatYToD(data.ngaySinh);
       const ngayDangKy = this.formatYToD(data.ngayDangKy);

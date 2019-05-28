@@ -71,9 +71,6 @@ class PageDoiMatKhau extends Component {
     this.props.changePassword(data).then((done)=>{
       toast.success(MSG.CHANGE_PASSWORD);
       _self.setState({loading: false});
-      setTimeout(() => {
-        this.props.logOut();
-      }, 3000);
     }).catch((err)=>{
       console.log('err', err);
       toast.error(MSG.ERROR_OCCURED);
