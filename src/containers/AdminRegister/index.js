@@ -18,12 +18,13 @@ import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
 import { connect } from 'react-redux';
-import {execAdminRegister} from '../../actions/services/api-user.js';
+import {execRegister} from '../../actions/services/api-user.js';
 import Spinner from '../../components/Spinner';
 import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
 
 const mapDispatchToProps = dispatch => ({
-  register: data => dispatch(execAdminRegister(data))
+  register: (data, type) => dispatch(execRegister(data, type)),
+  goToDashboard: () => dispatch({type: 'RTE_DASHBOARD'})
 });
 
 const mapStateToProps = ({id}) => ({
@@ -52,7 +53,7 @@ const styles = theme => ({
   },
 });
 
-class FormAdminRegister extends React.Component {
+class FormRegister extends React.Component {
 
   state = {
     user: {
@@ -85,7 +86,7 @@ class FormAdminRegister extends React.Component {
     _self.setState({loading: true});
     let user = {...this.state.user};
     user.NgaySinh = `${user.NgaySinh.getFullYear()}-${user.NgaySinh.getMonth() + 1}-${user.NgaySinh.getDate()}`;
-    this.props.register(user).then((done)=>{
+    this.props.register(user, this.props.type).then((done)=>{
       console.log('done');
       toast.success(MSG.USER_CREATED);
       _self.setState({loading: false});
@@ -94,6 +95,10 @@ class FormAdminRegister extends React.Component {
       toast.error(MSG.ERROR_OCCURED);
       _self.setState({loading: false});
     });
+  }
+
+  goToDashboard = () => {
+    this.props.goToDashboard();
   }
 
   render() {
@@ -109,7 +114,7 @@ class FormAdminRegister extends React.Component {
         >
           <Grid container spacing={24}>
             <Grid item xs={4}>
-              <Logo size={150}/>
+              <Logo onClick={this.goToDashboard} size={150}/>
             </Grid>
 
             <Grid item xs={4}>
@@ -243,8 +248,9 @@ class FormAdminRegister extends React.Component {
   }
 }
 
-FormAdminRegister.propTypes = {
+FormRegister.propTypes = {
   classes: PropTypes.object.isRequired,
+  type: PropTypes.oneOf(['admin', 'user'])
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormAdminRegister));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormRegister));

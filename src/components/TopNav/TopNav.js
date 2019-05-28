@@ -31,7 +31,7 @@ class TopNav extends React.Component {
                 <ul className="dropdown-menu dropdown-usermenu pull-right">
                   <li><a href="/" onClick={this.handleClick}>Profile</a></li>
                   <li><a href="/" onClick={this.handleClick}>Settings</a></li>
-                  <li><a href="/" onClick={this.handleClick}>Help</a></li>
+                  <li><a href="/doi-mat-khau" onClick={this.handleClick}>Change password</a></li>
                   <li><a href="/" onClick={this.handleLogout}><i className="fa fa-sign-out pull-right"></i> Log Out</a></li>
                 </ul>
               </li>
