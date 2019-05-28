@@ -71,6 +71,7 @@ class PageDoiMatKhau extends Component {
     this.props.changePassword(data).then((done)=>{
       toast.success(MSG.CHANGE_PASSWORD);
       _self.setState({loading: false});
+      setTimeout(() => { this.props.getUsersList() }, 2000);
     }).catch((err)=>{
       console.log('err', err);
       toast.error(MSG.ERROR_OCCURED);
@@ -158,7 +159,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   changePassword: data => dispatch(execChangePassword(data)),
-  logOut: () => dispatch(execLogout())
+  getUsersList: () => {
+    dispatch({type: 'RTE_DANH_SACH_USER'})
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PageDoiMatKhau));
