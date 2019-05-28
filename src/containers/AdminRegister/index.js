@@ -13,21 +13,21 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import DatePicker from 'react-date-picker';
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
 import { connect } from 'react-redux';
-import {execRegister} from '../../actions/services/api-user.js';
+import { execRegister } from '../../actions/services/api-user.js';
 import Spinner from '../../components/Spinner';
-import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
+import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
 
 const mapDispatchToProps = dispatch => ({
   register: (data, type) => dispatch(execRegister(data, type)),
-  goToDashboard: () => dispatch({type: 'RTE_DASHBOARD'})
+  goToDashboard: () => dispatch({ type: 'RTE_DASHBOARD' })
 });
 
-const mapStateToProps = ({id}) => ({
+const mapStateToProps = ({ id }) => ({
   id: id
 })
 
@@ -70,30 +70,30 @@ class FormRegister extends React.Component {
   };
 
   handleChange = name => event => {
-    let user = {...this.state.user};
+    let user = { ...this.state.user };
     user[name] = event.target.value
-    this.setState({user: user});
+    this.setState({ user: user });
   };
 
   handleChangeDate = NgaySinh => {
-    let user = {...this.state.user};
+    let user = { ...this.state.user };
     user['NgaySinh'] = NgaySinh;
-    this.setState({user: user});
+    this.setState({ user: user });
   }
 
   handleSubmit = () => {
     const _self = this;
-    _self.setState({loading: true});
-    let user = {...this.state.user};
+    _self.setState({ loading: true });
+    let user = { ...this.state.user };
     user.NgaySinh = `${user.NgaySinh.getFullYear()}-${user.NgaySinh.getMonth() + 1}-${user.NgaySinh.getDate()}`;
-    this.props.register(user, this.props.type).then((done)=>{
+    this.props.register(user, this.props.type).then((done) => {
       console.log('done');
       toast.success(MSG.USER_CREATED);
-      _self.setState({loading: false});
-    }).catch((err)=>{
+      _self.setState({ loading: false });
+    }).catch((err) => {
       console.log('err', err);
       toast.error(MSG.ERROR_OCCURED);
-      _self.setState({loading: false});
+      _self.setState({ loading: false });
     });
   }
 
@@ -106,15 +106,15 @@ class FormRegister extends React.Component {
     const { loading, user } = this.state;
     return (
       <FormLayoutVertical>
-        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
         <ValidatorForm
-            ref="form"
-            onSubmit={this.handleSubmit}
-            onError={errors => console.log(errors)}
+          ref="form"
+          onSubmit={this.handleSubmit}
+          onError={errors => console.log(errors)}
         >
           <Grid container spacing={24}>
             <Grid item xs={4}>
-              <Logo onClick={this.goToDashboard} size={150}/>
+              <Logo onClick={this.goToDashboard} size={150} />
             </Grid>
 
             <Grid item xs={4}>
@@ -125,19 +125,6 @@ class FormRegister extends React.Component {
           </Grid>
 
           <Grid container spacing={24}>
-            <Grid item xs={12} sm={4}>
-              <TextValidator
-                id="ar-benhnhanid"
-                label="Bệnh nhân Id"
-                validators={[RULE.IS_REQUIRED]}
-                errorMessages={[MSG.REQUIRED_FIELD]}
-                className={classes.textField}
-                value={user.BenhNhanId}
-                onChange={this.handleChange('BenhNhanId')}
-                margin="normal"
-              />
-            </Grid>
-
             <Grid item xs={12} sm={4}>
               <TextValidator
                 id="ar-mayte"
@@ -162,6 +149,10 @@ class FormRegister extends React.Component {
                 validators={[RULE.IS_REQUIRED, RULE.IS_PHONE_NUMBER]}
                 errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_PHONE_NUMBER]}
               />
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+
             </Grid>
 
             <Grid item xs={12} sm={4}>
@@ -239,7 +230,7 @@ class FormRegister extends React.Component {
                 Đăng ký
               </Button>
             </Grid>
-            <FormFooter/>
+            <FormFooter />
           </Grid>
         </ValidatorForm>
 

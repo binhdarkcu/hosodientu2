@@ -80,7 +80,7 @@ const initializeDashboard = function(){
           } else {
               // prevent closing menu if we are on child menu
               if (!$li.parent().is('.child_menu')) {
-                  $SIDEBAR_MENU.find('li').removeClass('active active-sm');
+                  $SIDEBAR_MENU.find('li').removeClass('active current-page');
                   $SIDEBAR_MENU.find('li ul').slideUp();
               }else
               {
