@@ -12,6 +12,8 @@ import FormDoLoangXuong from './FormDoLoangXuong';
 import FormKetQuaECG from './FormKetQuaECG';
 import FormDanhSachUser from './FormDanhSachUser';
 import AdminRegister from './AdminRegister';
+import FormChangePassword from './FormChangePassword';
+
 import {execLogout} from '../actions/services/user.js';
 
 const mapStateToProps = ({ location, services }) => ({
@@ -27,11 +29,12 @@ const mapDispatchToProps = dispatch => ({
 // mapping pages
 const pages = {
   'RTE_DASHBOARD': 'div',
-  'RTE_REGISTER': AdminRegister,
+  'RTE_ADMIN_REGISTER': AdminRegister,
   'RTE_SIEU_AM': FormSieuAm,
   'RTE_KET_QUA_ECG': FormKetQuaECG,
   'RTE_DO_LOANG_XUONG': FormDoLoangXuong,
   'RTE_DANH_SACH_USER': FormDanhSachUser,
+  'RTE_CHANGE_PASSWORD': FormChangePassword
 };
 
 class Dashboard extends Component {

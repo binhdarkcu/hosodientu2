@@ -4,7 +4,8 @@ import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
 import { SET_USER_INFO } from '../../actions/types';
 
-const userApiUrl = `${baseUrl}/api/User/AdminRegister`;
+const adminRegisterApiUrl = `${baseUrl}/api/User/AdminRegister`;
+const userRegisterApiUrl = `${baseUrl}/api/User/UserRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
 const userListUrl = `${baseUrl}/api/Users`;
 
@@ -50,16 +51,17 @@ export const execActivateUser = data => dispatch => {
 }
 
 // User register
-export const execAdminRegister = data => dispatch => {
-
+export const execRegister = (data, type) => dispatch => {
   const parameters = {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' }
   };
 
+  const url = 'user' === type ? userRegisterApiUrl : adminRegisterApiUrl;
+
   return new Promise((resolve, reject) => {
-      sendHttpRequest(userApiUrl, parameters)
+      sendHttpRequest(url, parameters)
         .then(({ status, userInfo }) => {
           return resolve(userInfo);
         })
