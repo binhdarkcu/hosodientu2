@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -10,16 +10,17 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 //custom import
-import { GET_USER_LIST, GET_USER_DETAIL } from '../../actions/types';
+import { GET_USER_LIST } from '../../actions/types';
 import { execGetUserList } from '../../actions/services/api-user';
 import { createAction } from 'redux-actions';
 
 const getUsers = createAction(GET_USER_LIST);
-const getUsersDetail = createAction(GET_USER_DETAIL);
 const mapDispatchToProps = dispatch => ({
   getUserList: () => dispatch(execGetUserList()),
   getUsers: data => dispatch(getUsers(data)),
-  getUsersDetail: id => dispatch(getUsersDetail(id)),
+  getUsersDetail: (id) => {
+    dispatch({type: 'RTE_CHI_TIET_USER', payload:{id}})
+  },
 });
 
 const mapStateToProps = ({ id, services, location }) => ({
@@ -62,10 +63,7 @@ class FormDanhSachUser extends React.Component {
 
   handleShowInfo = (id) => {
     if (id) {
-      const url = `/chi-tiet/${id}`;
-      const link = document.createElement('a');
-      link.href = url;
-      link.click();      
+      this.props.getUsersDetail(id);
     }
   }
 

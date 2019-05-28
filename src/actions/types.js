@@ -20,4 +20,3 @@ export const ADMIN_REGISTER = 'ADMIN_REGISTER';
 export const LOG_OUT = 'LOG_OUT';
 export const SET_USER_INFO = 'SET_USER_INFO';
 export const GET_USER_LIST = 'GET_USER_LIST';
-export const GET_USER_DETAIL = 'GET_USER_DETAIL';
