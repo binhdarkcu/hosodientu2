@@ -59,7 +59,7 @@ class FormRegister extends React.Component {
     user: {
       Ho: '',
       Ten: '',
-      BenhNhanId: '',
+      // BenhNhanId: '',
       Phone: '',
       Email: '',
       MaYTe: '',
@@ -73,6 +73,13 @@ class FormRegister extends React.Component {
     let user = { ...this.state.user };
     user[name] = event.target.value
     this.setState({ user: user });
+
+    const {type} = this.props;
+    console.log(type);
+    if('admin' === type){
+      console.log('call API');
+    }
+
   };
 
   handleChangeDate = NgaySinh => {
@@ -102,7 +109,7 @@ class FormRegister extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, type } = this.props;
     const { loading, user } = this.state;
     return (
       <FormLayoutVertical>
@@ -142,6 +149,7 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-phone"
                 label="Phone"
+                disabled={type !== 'user'}
                 className={classes.textField}
                 value={user.Phone}
                 onChange={this.handleChange('Phone')}
@@ -159,6 +167,7 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-email"
                 label="Email"
+                disabled={type !== 'user'}
                 className={classes.textField}
                 value={user.Email}
                 onChange={this.handleChange('Email')}
@@ -173,6 +182,7 @@ class FormRegister extends React.Component {
                 label="Họ"
                 className={classes.textField}
                 value={user.Ho}
+                disabled={type !== 'user'}
                 onChange={this.handleChange('Ho')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED]}
@@ -185,6 +195,7 @@ class FormRegister extends React.Component {
                 label="Tên"
                 className={classes.textField}
                 value={user.Ten}
+                disabled={type !== 'user'}
                 onChange={this.handleChange('Ten')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED]}
@@ -203,8 +214,8 @@ class FormRegister extends React.Component {
                     className={classes.group}
                     value={user.GioiTinh}
                     onChange={this.handleChange('GioiTinh')}>
-                    <FormControlLabel value="M" control={<Radio />} label="Nam" />
-                    <FormControlLabel value="F" control={<Radio />} label="Nữ" />
+                    <FormControlLabel value="M" control={<Radio disabled={type !== 'user'}/>} label="Nam" />
+                    <FormControlLabel value="F" control={<Radio disabled={type !== 'user'}/>} label="Nữ" />
                   </RadioGroup>
                 </FormControl>
               </div>
@@ -217,6 +228,7 @@ class FormRegister extends React.Component {
                   <DatePicker
                     name="datepicker"
                     locale="vi"
+                    disabled={type !== 'user'}
                     onChange={this.handleChangeDate}
                     value={user.NgaySinh}
                     required
@@ -226,7 +238,7 @@ class FormRegister extends React.Component {
             </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" className={classes.button}>
+              <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={!user.MaYTe}>
                 Đăng ký
               </Button>
             </Grid>
@@ -243,5 +255,7 @@ FormRegister.propTypes = {
   classes: PropTypes.object.isRequired,
   type: PropTypes.oneOf(['admin', 'user'])
 };
+
+FormRegister.defaultProps = {type: 'admin'}
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormRegister));
