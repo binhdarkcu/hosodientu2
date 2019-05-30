@@ -9,7 +9,8 @@ const userRegisterApiUrl = `${baseUrl}/api/User/UserRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
 const userListUrl = `${baseUrl}/api/Users`;
 const userDetailUrl = `${baseUrl}/api/User?id=`;
-const ChangePassword = `${baseUrl}/api/User/ChangePassword?id=`;
+const changePasswordUrl = `${baseUrl}/api/User/ChangePassword?id=`;
+const getUserByPatientCodeUrl = `${baseUrl}/api/PatientByCode?code=`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -110,10 +111,25 @@ export const execChangePassword = data => dispatch => {
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(ChangePassword + data.id, parameters)
+      sendHttpRequest(changePasswordUrl + data.id, parameters)
         .then(({ status }) => {
           return resolve(status);
         })
         .catch( err => reject(err));
+  });
+}
+
+// Get user by patient keyCode
+export const execGetUserInfoByPatientCode = data => dispatch => {
+  const parameters = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  }
+  return new Promise((resolve, reject) => {
+    sendHttpRequest(getUserByPatientCodeUrl + data.code, parameters)
+      .then(({status, json}) => {
+        return resolve({status, json})
+      })
+      .catch(err => reject(err));
   });
 }

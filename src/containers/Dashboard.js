@@ -17,6 +17,8 @@ import FormUser from './FormUser';
 import ListDoLoangXuong from './ListDoLoangXuong';
 import ListKetQuaECG from './ListKetQuaECG';
 import ListSieuAm from './ListSieuAm';
+import DanhSachKhamBenh from './LichSuKhamBenh';
+import ChiTietKhamBenh from './ChiTietKhamBenh';
 
 
 import {execLogout} from '../actions/services/user.js';
@@ -43,7 +45,9 @@ const pages = {
   'RTE_CHANGE_PASSWORD': FormChangePassword,
   'RTE_LIST_DO_LOANG_XUONG': ListDoLoangXuong,
   'RTE_LIST_SIEU_AM': ListSieuAm,
-  'RTE_LIST_KET_QUA_ECG': ListKetQuaECG
+  'RTE_LIST_KET_QUA_ECG': ListKetQuaECG,
+  'RTE_LIST_KHAM_BENH': DanhSachKhamBenh,
+  'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh
 };
 
 class Dashboard extends Component {

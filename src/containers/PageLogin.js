@@ -11,6 +11,7 @@ import {SPINNER_LIGHT_GREEN} from '../constants/Colors';
 import {USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED} from '../constants/Messages'
 import { redirect } from 'redux-first-router';
 import { createAction } from 'redux-actions';
+import Link from 'redux-first-router-link';
 
 const setUserInfo = createAction(SET_USER_INFO);
 
@@ -76,6 +77,7 @@ class PageLogin extends Component{
 
   render(){
 
+    const { goToRegisterPage } = this.props;
     const {password_error, username_error, loading} = this.state;
 
     return (
@@ -85,7 +87,7 @@ class PageLogin extends Component{
             <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
             <section className="login_content">
               <form>
-                <h1>Login Form</h1>
+                <h1>Đăng nhập</h1>
                 <div className="form-login">
                   <input ref={(node)=>{this.username = node;}} value={'admin@gmail.com'} type="text" className="form-control" placeholder="Username" required />
                   {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
@@ -95,13 +97,16 @@ class PageLogin extends Component{
                   {password_error && <InputErrorDisplayer message={PASSWORD_REQUIRED}/>}
                 </div>
                 <div>
-                  <a href="index.html" className="btn btn-default submit" onClick={this.handleLogin}>Log in</a>
-                  <a href="index.html" className="reset_pass" onClick={this.handleForgotPassword}>Lost your password?</a>
+                  <a href="index.html" className="btn btn-default submit" onClick={this.handleLogin}>Đăng nhập</a>
+                  <a href="index.html" className="reset_pass" onClick={this.handleForgotPassword}>Quên mật khẩu?</a>
                 </div>
 
                 <div className="clearfix"></div>
 
                 <div className="separator">
+                <p className="change_link">Chưa có tài khoản?
+                  <Link to="/nguoi-dung-dang-ky" className="to_register">Đăng ký ngay</Link>
+                </p>
                   <div className="clearfix"></div>
                   <br />
                   <div>

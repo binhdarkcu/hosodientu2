@@ -103,6 +103,14 @@ const routesMap = {
     RTE_CHANGE_PASSWORD: {
       path: '/doi-mat-khau',
       thunk: defaultThunk
+    },
+    RTE_LIST_KHAM_BENH: {
+      path: '/lich-su-kham-benh',
+      thunk: defaultThunk
+    },
+    RTE_CHI_TIET_KHAM_BENH: {
+      path: '/chi-tiet-kham-benh/:paramStr',
+      thunk: defaultThunk
     }
 }
 

@@ -13,6 +13,8 @@ const components = {
   RTE_LIST_DO_LOANG_XUONG: 'Dashboard',
   RTE_DANH_SACH_USER: 'Dashboard',
   RTE_CHI_TIET_USER: 'Dashboard',
+  RTE_LIST_KHAM_BENH: 'Dashboard',
+  RTE_CHI_TIET_KHAM_BENH: 'Dashboard',
 
   // Separate pages
   RTE_LOGIN: 'Login',

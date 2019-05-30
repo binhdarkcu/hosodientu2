@@ -17,7 +17,6 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = ({ id, services, location }) => ({
   id: id,
-  users: services.user.userList,
   location: location,
 });
 
