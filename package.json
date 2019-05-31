@@ -12,6 +12,8 @@
     "react": "^16.8.6",
     "react-date-picker": "^7.5.1",
     "react-dom": "^16.8.6",
+    "react-frame-component": "^4.1.0",
+    "react-html-parser": "^2.0.2",
     "react-i18next": "^10.8.1",
     "react-lazy-load": "^3.0.13",
     "react-material-ui-form-validator": "^2.0.8",
