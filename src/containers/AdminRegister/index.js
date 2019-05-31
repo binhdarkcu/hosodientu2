@@ -74,22 +74,22 @@ class FormRegister extends React.Component {
     loading: false
   };
 
-  getUserInfo = debounce((code)=>{
-    this.props.loadUserByPatientCode({code: code})
+  getUserInfo = debounce((code) => {
+    this.props.loadUserByPatientCode({ code: code })
       .then(data => {
-        const patient = data.status === 200 ? new ActivatePatientPostModel(data.json) : new ActivatePatientPostModel({maYte: code});
-        this.setState({user: patient});
+        const patient = data.status === 200 ? new ActivatePatientPostModel(data.json) : new ActivatePatientPostModel({ maYte: code });
+        this.setState({ user: patient });
       })
       .catch(err => toast.error(MSG.ERROR_OCCURED))
   }, 1234)
 
   handleChange = name => event => {
-    const {type} = this.props;
+    const { type } = this.props;
     let user = { ...this.state.user };
     user[name] = event.target.value;
     this.setState({ user: user });
 
-    if('admin' === type && 'maYte' === name)
+    if ('admin' === type && 'maYte' === name)
       this.getUserInfo(event.target.value);
 
   };
@@ -172,7 +172,17 @@ class FormRegister extends React.Component {
             </Grid>
 
             <Grid item xs={12} sm={4}>
-
+              <TextValidator
+                id="ar-address"
+                label="Địa chỉ"
+                disabled={type !== 'user'}
+                className={classes.textField}
+                value={user.diaChi}
+                onChange={this.handleChange('diaChi')}
+                margin="normal"
+                validators={[RULE.IS_REQUIRED]}
+                errorMessages={[MSG.REQUIRED_FIELD]}
+              />
             </Grid>
 
             <Grid item xs={12} sm={4}>
@@ -226,8 +236,8 @@ class FormRegister extends React.Component {
                     className={classes.group}
                     value={user.gioiTinh}
                     onChange={this.handleChange('gioiTinh')}>
-                    <FormControlLabel value="M" control={<Radio disabled={type !== 'user'}/>} label="Nam" />
-                    <FormControlLabel value="F" control={<Radio disabled={type !== 'user'}/>} label="Nữ" />
+                    <FormControlLabel value="M" control={<Radio disabled={type !== 'user'} />} label="Nam" />
+                    <FormControlLabel value="F" control={<Radio disabled={type !== 'user'} />} label="Nữ" />
                   </RadioGroup>
                 </FormControl>
               </div>
@@ -268,6 +278,6 @@ FormRegister.propTypes = {
   type: PropTypes.oneOf(['admin', 'user'])
 };
 
-FormRegister.defaultProps = {type: 'admin'}
+FormRegister.defaultProps = { type: 'admin' }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormRegister));
