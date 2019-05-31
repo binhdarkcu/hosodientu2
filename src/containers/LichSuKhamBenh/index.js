@@ -8,12 +8,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 //custom import
 import * as MSG from '../../constants/Messages';
 import { GET_REPORT_LIST } from '../../actions/types';
 import { execGetReportList } from '../../actions/services/api-report';
 import { createAction } from 'redux-actions';
+import Spinner from '../../components/Spinner';
+import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
+import {HASH} from '../../constants/Loaders';
 
 const getReports = createAction(GET_REPORT_LIST);
 const mapDispatchToProps = dispatch => ({
@@ -52,11 +54,17 @@ const styles = theme => ({
 
 class LichSuKhamBenh extends React.Component {
 
+  state = {
+      loading: true
+  }
+
   componentWillMount() {
     this.props.execGetReportList({medicalCode: 20000002}).then((data) => {
       this.props.getReports(data);
     }).catch(err => {
       console.log('errr:', err);
+    }).finally(() => {
+      this.setState({loading: false});
     });
   }
 
@@ -67,8 +75,10 @@ class LichSuKhamBenh extends React.Component {
 
   render() {
     const { classes, reports } = this.props;
+    const { loading } = this.state;
     return (
       <Paper className={classes.root}>
+        <Spinner type={HASH} size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -79,15 +89,15 @@ class LichSuKhamBenh extends React.Component {
           </TableHead>
           <TableBody>
             {reports.map((report, index) => (
-              <TableRow
-                key={index}
-                onClick={() => this.handleShowInfo(report.paramStr)}
-                className={`${!report.paramStr ? classes.disabled : classes.row}`}
-                title={!report.paramStr ? MSG.NO_DETAIL_AVAILABEL : MSG.SHOW_DETAIL}>
-                  <TableCell component="th" scope="row">{report.id}</TableCell>
-                  <TableCell align="left">{report.name}</TableCell>
-                  <TableCell align="left">{report.ngayThucHien}</TableCell>
-              </TableRow>
+                <TableRow
+                  key={index}
+                  onClick={() => this.handleShowInfo(report.paramStr)}
+                  className={`${!report.paramStr ? classes.disabled : classes.row}`}
+                  title={!report.paramStr ? MSG.NO_DETAIL_AVAILABLE : MSG.SHOW_DETAIL}>
+                    <TableCell component="th" scope="row">{report.id}</TableCell>
+                    <TableCell align="left">{report.name}</TableCell>
+                    <TableCell align="left">{report.ngayThucHien}</TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>

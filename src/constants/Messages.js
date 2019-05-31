@@ -19,4 +19,4 @@ export const CHANGE_PASSWORD = 'Mật khẩu đã được thay đổi thành c�
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';
 export const SERVER_ERROR = 'Kết nối đến máy chủ thất bại, vui lòng thử lại sau';
 export const SHOW_DETAIL = 'Xem chi tiết';
-export const NO_DETAIL_AVAILABEL = 'Không thể xem';
+export const NO_DETAIL_AVAILABLE = 'Không thể xem';

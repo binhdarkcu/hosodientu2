@@ -4,7 +4,7 @@ import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
 
 const getReportListUrl = `${baseUrl}/api/Reports`;
-const getReportDetailsUrl = `http://115.79.197.84:82/api/Report`;
+const getReportDetailsUrl = `http://115.79.197.84:83/api/Report`;
 
 export const execGetReportList= data => dispatch => {
   const parameters = {

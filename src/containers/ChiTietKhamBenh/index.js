@@ -34,7 +34,7 @@ class ChiTietKhamBenh extends React.Component {
 
   componentDidMount(){
     const { paramStr } = this.props.location.payload;
-    this.props.getReportDetails(paramStr).then(rs => console.log(rs)).catch(err => console.log(err));
+    this.props.getReportDetails({paramStr}).then(rs => console.log(rs)).catch(err => console.log(err));
   }
   render() {
 

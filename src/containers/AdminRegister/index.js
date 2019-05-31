@@ -21,6 +21,7 @@ import { connect } from 'react-redux';
 import { execRegister, execGetUserInfoByPatientCode } from '../../actions/services/api-user.js';
 import Spinner from '../../components/Spinner';
 import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
+import { BOUNCE } from '../../constants/Loaders';
 import { debounce } from 'lodash';
 import ActivatePatientPostModel from '../../models/activatePatientPostModel';
 
@@ -124,7 +125,7 @@ class FormRegister extends React.Component {
     const { loading, user } = this.state;
     return (
       <FormLayoutVertical>
-        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
+        <Spinner type={BOUNCE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
         <ValidatorForm
           ref="form"
           onSubmit={this.handleSubmit}

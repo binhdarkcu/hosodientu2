@@ -8,6 +8,7 @@ import {SET_USER_INFO} from '../actions/types';
 import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import {SPINNER_LIGHT_GREEN} from '../constants/Colors';
+import {PACMAN} from '../constants/Loaders';
 import {USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED} from '../constants/Messages'
 import { redirect } from 'redux-first-router';
 import { createAction } from 'redux-actions';
@@ -84,7 +85,7 @@ class PageLogin extends Component{
       <div>
         <div className="login_wrapper">
           <div className="animate form login_form">
-            <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+            <Spinner type={PACMAN} size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
             <section className="login_content">
               <form>
                 <h1>Đăng nhập</h1>
