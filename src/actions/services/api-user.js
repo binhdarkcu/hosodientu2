@@ -11,6 +11,7 @@ const userListUrl = `${baseUrl}/api/Users`;
 const userDetailUrl = `${baseUrl}/api/User?id=`;
 const changePasswordUrl = `${baseUrl}/api/User/ChangePassword?id=`;
 const getUserByPatientCodeUrl = `${baseUrl}/api/PatientByCode?code=`;
+const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -131,5 +132,22 @@ export const execGetUserInfoByPatientCode = data => dispatch => {
         return resolve({status, json})
       })
       .catch(err => reject(err));
+  });
+}
+
+// User register
+export const execUpdate = (data) => dispatch => {
+  const parameters = {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(userUpdate, parameters)
+        .then(({ status, userInfo }) => {
+          return resolve(userInfo);
+        })
+        .catch( err => reject(err));
   });
 }

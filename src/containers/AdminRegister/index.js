@@ -18,23 +18,28 @@ import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
 import { connect } from 'react-redux';
-import { execRegister, execGetUserInfoByPatientCode } from '../../actions/services/api-user.js';
+import { execRegister, execGetUserInfoByPatientCode, execUpdate } from '../../actions/services/api-user.js';
 import Spinner from '../../components/Spinner';
 import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
 import { BOUNCE } from '../../constants/Loaders';
 import { debounce } from 'lodash';
 import ActivatePatientPostModel from '../../models/activatePatientPostModel';
+//custom import
+import { execGetUserDetail } from '../../actions/services/api-user';
 
 
 const mapDispatchToProps = dispatch => ({
   register: (data, type) => dispatch(execRegister(data, type)),
   goToDashboard: () => dispatch({ type: 'RTE_DASHBOARD' }),
-  loadUserByPatientCode: (data) => dispatch(execGetUserInfoByPatientCode(data))
+  loadUserByPatientCode: (data) => dispatch(execGetUserInfoByPatientCode(data)),
+  getUserDetail: (id) => dispatch(execGetUserDetail(id)),
+  updateUser: (data) => dispatch(execUpdate(data)),
 });
 
-const mapStateToProps = ({ id }) => ({
-  id: id
-})
+const mapStateToProps = ({ id, location }) => ({
+  id: id,
+  location: location,
+});
 
 const styles = theme => ({
   container: {
@@ -69,9 +74,54 @@ class FormRegister extends React.Component {
       email: '',
       maYte: '',
       ngaySinh: null,
-      gioiTinh: 'M',
+      gioiTinh: '0',
     },
-    loading: false
+    loading: false,
+    isUpdateUser: '',
+  };
+
+  componentDidMount() {
+    const pathname = this.props.location.pathname;
+    const isUpdateUser = pathname.split('/');
+    const idUser = isUpdateUser[2];
+    if (idUser) {
+      const _self = this;
+      _self.setState({ loading: true });
+      this.setState({
+        isUpdateUser: idUser,
+      });
+      this.props.getUserDetail(idUser).then((data) => {
+        this.setState({
+          user: this.formatDataResponse(data),
+        })
+        _self.setState({ loading: false });
+      }).catch((err) => {
+        _self.setState({ loading: false });
+        console.log('err: ', err);
+      });
+    }
+  }
+
+  formatDataResponse = data => {
+    const user = {
+      ho: data.ho ? data.ho : '',
+      ten: data.ten ? data.ten : '',
+      benhNhanId: data.benhNhanId ? data.benhNhanId : '',
+      phone: data.phone ? data.phone : '',
+      email: data.email ? data.email : '',
+      maYte: data.maYte ? data.maYte : '',
+      ngaySinh: data.ngaySinh ? this.formatYToD(data.ngaySinh) : null,
+      gioiTinh: data.gioiTinh ? data.gioiTinh : '',
+    }
+    return user;
+  }
+
+  formatYToD = (strDate) => {
+    if (strDate && strDate !== '') {
+      const arr = strDate.split('-');
+      return `${arr[2].slice(0, 2)}/${arr[1]}/${arr[0]}`;
+    }
+    return null;
   };
 
   getUserInfo = debounce((code) => {
@@ -105,15 +155,27 @@ class FormRegister extends React.Component {
     _self.setState({ loading: true });
     let user = { ...this.state.user };
     user.ngaySinh = `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}`;
-    this.props.register(user, this.props.type).then((done) => {
-      console.log('done');
-      toast.success(MSG.USER_CREATED);
-      _self.setState({ loading: false });
-    }).catch((err) => {
-      console.log('err', err);
-      toast.error(MSG.ERROR_OCCURED);
-      _self.setState({ loading: false });
-    });
+    if (this.state.isUpdateUser) {
+      this.props.updateUser(user).then((done) => {
+        console.log('done');
+        toast.success(MSG.USER_CREATED);
+        _self.setState({ loading: false });
+      }).catch((err) => {
+        console.log('err', err);
+        toast.error(MSG.ERROR_OCCURED);
+        _self.setState({ loading: false });
+      });
+    } else {
+      this.props.register(user, this.props.type).then((done) => {
+        console.log('done');
+        toast.success(MSG.USER_CREATED);
+        _self.setState({ loading: false });
+      }).catch((err) => {
+        console.log('err', err);
+        toast.error(MSG.ERROR_OCCURED);
+        _self.setState({ loading: false });
+      });
+    }
   }
 
   goToDashboard = () => {
@@ -122,7 +184,7 @@ class FormRegister extends React.Component {
 
   render() {
     const { classes, type } = this.props;
-    const { loading, user } = this.state;
+    const { loading, user, isUpdateUser } = this.state;
     return (
       <FormLayoutVertical>
         <Spinner type={BOUNCE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
@@ -138,7 +200,9 @@ class FormRegister extends React.Component {
 
             <Grid item xs={4}>
               <Typography component="h1" variant="h4" align="center">
-                Đăng ký
+                {
+                  isUpdateUser ? 'Cập Nhật' : 'Đăng ký'
+                }
               </Typography>
             </Grid>
           </Grid>
@@ -161,7 +225,7 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-phone"
                 label="Phone"
-                disabled={type !== 'user'}
+                disabled={type !== 'user' && !isUpdateUser}
                 className={classes.textField}
                 value={user.phone}
                 onChange={this.handleChange('phone')}
@@ -175,7 +239,7 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-address"
                 label="Địa chỉ"
-                disabled={type !== 'user'}
+                disabled={type !== 'user' && !isUpdateUser}
                 className={classes.textField}
                 value={user.diaChi}
                 onChange={this.handleChange('diaChi')}
@@ -189,7 +253,7 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-email"
                 label="Email"
-                disabled={type !== 'user'}
+                disabled={type !== 'user' && !isUpdateUser}
                 className={classes.textField}
                 value={user.email}
                 onChange={this.handleChange('email')}
@@ -204,7 +268,7 @@ class FormRegister extends React.Component {
                 label="Họ"
                 className={classes.textField}
                 value={user.ho}
-                disabled={type !== 'user'}
+                disabled={type !== 'user' && !isUpdateUser}
                 onChange={this.handleChange('ho')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED]}
@@ -217,7 +281,7 @@ class FormRegister extends React.Component {
                 label="Tên"
                 className={classes.textField}
                 value={user.ten}
-                disabled={type !== 'user'}
+                disabled={type !== 'user' && !isUpdateUser}
                 onChange={this.handleChange('ten')}
                 margin="normal"
                 validators={[RULE.IS_REQUIRED]}
@@ -234,10 +298,11 @@ class FormRegister extends React.Component {
                     aria-label="Giới tính"
                     name="gender1"
                     className={classes.group}
+                    onChange={this.handleChange('gioiTinh')}
                     value={user.gioiTinh}
-                    onChange={this.handleChange('gioiTinh')}>
-                    <FormControlLabel value="M" control={<Radio disabled={type !== 'user'} />} label="Nam" />
-                    <FormControlLabel value="F" control={<Radio disabled={type !== 'user'} />} label="Nữ" />
+                  >
+                    <FormControlLabel value="0" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nam" />
+                    <FormControlLabel value="1" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nữ" />
                   </RadioGroup>
                 </FormControl>
               </div>
@@ -250,7 +315,7 @@ class FormRegister extends React.Component {
                   <DatePicker
                     name="datepicker"
                     locale="vi"
-                    disabled={type !== 'user'}
+                    disabled={type !== 'user' && !isUpdateUser}
                     onChange={this.handleChangeDate}
                     value={user.ngaySinh}
                     required
@@ -260,9 +325,13 @@ class FormRegister extends React.Component {
             </Grid>
 
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={!user.maYte}>
-                Đăng ký
+              {
+                isUpdateUser ? <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                  Lưu thay đổi
+              </Button> : <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={!user.maYte}>
+                    Đăng ký
               </Button>
+              }
             </Grid>
             <FormFooter />
           </Grid>

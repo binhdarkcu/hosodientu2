@@ -47,7 +47,8 @@ const pages = {
   'RTE_LIST_SIEU_AM': ListSieuAm,
   'RTE_LIST_KET_QUA_ECG': ListKetQuaECG,
   'RTE_LIST_KHAM_BENH': DanhSachKhamBenh,
-  'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh
+  'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh,
+  'RTE_USER_UPDATE': AdminRegister,
 };
 
 class Dashboard extends Component {

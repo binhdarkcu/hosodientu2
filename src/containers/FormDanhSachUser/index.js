@@ -21,6 +21,9 @@ const mapDispatchToProps = dispatch => ({
   getUsersDetail: (id) => {
     dispatch({type: 'RTE_CHI_TIET_USER', payload:{id}})
   },
+  upateUser: (id) => {
+    dispatch({type: 'RTE_USER_UPDATE', payload:{id}})
+  },
 });
 
 const mapStateToProps = ({ id, services, location }) => ({
@@ -42,7 +45,6 @@ const styles = theme => ({
     fontSize: 16,
   },
   deleteIcon: {
-    color: 'red',
     fontSize: 20,
   },
   buttonActive: {
@@ -67,6 +69,12 @@ class FormDanhSachUser extends React.Component {
     }
   }
 
+  handleUpdate = (id) => {
+    if (id) {
+      this.props.upateUser(id);
+    }
+  }
+
   render() {
     const { classes, users } = this.props;
     return (
@@ -78,24 +86,27 @@ class FormDanhSachUser extends React.Component {
               <TableCell className={classes.header} align="center">Email</TableCell>
               <TableCell className={classes.header} align="center">Số điện thoại</TableCell>
               <TableCell className={classes.header} align="center">Active User</TableCell>
-              <TableCell className={classes.header} align="center"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {users.map(user => (
-              <TableRow key={user.userId} onClick={() => this.handleShowInfo(user.userId)}>
+              <TableRow key={user.userId}>
                 <TableCell component="th" scope="row">
                   {user.ten}
                 </TableCell>
                 <TableCell align="center">{user.email}</TableCell>
                 <TableCell align="center">{user.phone}</TableCell>
                 {
-                  user.trangThai === 1 ? <TableCell align="center">Actived</TableCell> :
+                  user.trangThai === 1 ? <TableCell align="center" className={classes.deleteIcon}>
+                    <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2196f3' }} onClick={() => this.handleShowInfo(user.userId)}/>
+                    <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleUpdate(user.userId)}/>
+                    <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }}/>
+                  </TableCell> :
                     <TableCell align="center">
                       <Button variant="contained" className={classes.buttonActive}>Active</Button>
                     </TableCell>
                 }
-                <TableCell align="center" className={classes.deleteIcon}><i className="fa fa-times" /></TableCell>
+                
               </TableRow>
             ))}
           </TableBody>

@@ -83,8 +83,11 @@ class LichSuKhamBenh extends React.Component {
           <TableHead>
             <TableRow>
               <TableCell className={classes.header}>ID</TableCell>
-              <TableCell className={classes.header} align="left">Tên hồ sơ</TableCell>
+              <TableCell className={classes.header} align="left">Hình thức</TableCell>
+              <TableCell className={classes.header} align="left">Mã nhóm</TableCell>
               <TableCell className={classes.header} align="left">Ngày thực hiện</TableCell>
+              <TableCell className={classes.header} align="left">Năm</TableCell>
+              <TableCell className={classes.header} align="left">Kết quả</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -95,8 +98,12 @@ class LichSuKhamBenh extends React.Component {
                   className={`${!report.paramStr ? classes.disabled : classes.row}`}
                   title={!report.paramStr ? MSG.NO_DETAIL_AVAILABLE : MSG.SHOW_DETAIL}>
                     <TableCell component="th" scope="row">{report.id}</TableCell>
+                    <TableCell component="th" scope="row">{report.groupId}</TableCell>
                     <TableCell align="left">{report.name}</TableCell>
                     <TableCell align="left">{report.ngayThucHien}</TableCell>
+                    <TableCell align="left">{report.nam}</TableCell>
+
+                    <TableCell align="left">{report.isKetQua ? 'true' : 'false'}</TableCell>
                 </TableRow>
             ))}
           </TableBody>

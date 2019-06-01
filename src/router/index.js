@@ -111,7 +111,11 @@ const routesMap = {
     RTE_CHI_TIET_KHAM_BENH: {
       path: '/chi-tiet-kham-benh/:paramStr',
       thunk: defaultThunk
-    }
+    },
+    RTE_USER_UPDATE: {
+      path: '/cap-nhat-user/:id',
+      thunk: defaultThunk
+    },
 }
 
 export function createDefaultRedirector(dispatch) {
