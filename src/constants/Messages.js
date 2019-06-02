@@ -14,6 +14,8 @@ export const USER_CREATED = 'Tạo user mới thành công';
 export const SESSION_EXPIRED = 'Session expired, vui lòng đăng nhập lại!';
 export const LOGIN_REQUIRED = 'Vui lòng đăng nhập';
 export const CHANGE_PASSWORD = 'Mật khẩu đã được thay đổi thành công';
+export const USER_UPDATED = 'Cập nhật user thành công';
+export const USER_DELETEED ='Xóa user thành công';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';

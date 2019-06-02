@@ -12,6 +12,7 @@ const userDetailUrl = `${baseUrl}/api/User?id=`;
 const changePasswordUrl = `${baseUrl}/api/User/ChangePassword?id=`;
 const getUserByPatientCodeUrl = `${baseUrl}/api/PatientByCode?code=`;
 const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
+const deleteUserUrl = `${baseUrl}/api/User?id=`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -135,7 +136,7 @@ export const execGetUserInfoByPatientCode = data => dispatch => {
   });
 }
 
-// User register
+// User update
 export const execUpdate = (data) => dispatch => {
   const parameters = {
       method: 'PUT',
@@ -151,3 +152,19 @@ export const execUpdate = (data) => dispatch => {
         .catch( err => reject(err));
   });
 }
+
+
+// Delete user
+export const execDeleteUser = (id) => dispatch => {
+  const parameters = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(deleteUserUrl + id, parameters)
+        .then(({status, json}) => {
+          return resolve(json);
+        }).catch( err => reject(err));
+  });
+};

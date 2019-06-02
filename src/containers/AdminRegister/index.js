@@ -34,6 +34,7 @@ const mapDispatchToProps = dispatch => ({
   loadUserByPatientCode: (data) => dispatch(execGetUserInfoByPatientCode(data)),
   getUserDetail: (id) => dispatch(execGetUserDetail(id)),
   updateUser: (data) => dispatch(execUpdate(data)),
+  goToUserList: () => dispatch({ type: 'RTE_DANH_SACH_USER' }),
 });
 
 const mapStateToProps = ({ id, location }) => ({
@@ -158,8 +159,9 @@ class FormRegister extends React.Component {
     if (this.state.isUpdateUser) {
       this.props.updateUser(user).then((done) => {
         console.log('done');
-        toast.success(MSG.USER_CREATED);
+        toast.success(MSG.USER_UPDATED);
         _self.setState({ loading: false });
+        this.props.goToUserList();
       }).catch((err) => {
         console.log('err', err);
         toast.error(MSG.ERROR_OCCURED);
