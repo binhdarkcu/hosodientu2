@@ -9,7 +9,7 @@ import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import {SPINNER_LIGHT_GREEN} from '../constants/Colors';
 import {PACMAN} from '../constants/Loaders';
-import {USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED} from '../constants/Messages'
+import {USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED} from '../constants/Messages';
 import { redirect } from 'redux-first-router';
 import { createAction } from 'redux-actions';
 import Link from 'redux-first-router-link';
@@ -56,7 +56,8 @@ class PageLogin extends Component{
     this.props.authenticate({username: username, password: password}).then(() => {
       this.props.getUserInfo(username).then(data => {
         this.props.saveUserInfo(data);
-        this.props.goToDashboard();
+        const { type, payload } = this.props.location.prev;
+        this.props.goToPage({type: type ? type : 'RTE_DASHBOARD', payload: {...payload}});
       }).catch(err => {
         this.showError(GET_USER_INFO_FAILED, err)
       });
@@ -124,12 +125,12 @@ class PageLogin extends Component{
   }
 }
 
-const mapStateToProps = state => {
-  return {};
+const mapStateToProps = ({ location }) => {
+  return { location };
 };
 
 const mapDispatchToProps = dispatch => ({
-  goToDashboard: () => dispatch(redirect({type: 'RTE_DASHBOARD'})),
+  goToPage: (destination) => dispatch(redirect(destination)),
   saveUserInfo: data => dispatch(setUserInfo(data)),
   getUserInfo: username => dispatch(execGetUserInfo(username)),
   authenticate: data => dispatch(execAuthenticate(data))
