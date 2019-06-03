@@ -54,6 +54,7 @@ class ChiTietKhamBenh extends React.Component {
   render() {
     const { classes } = this.props;
     const { html } = this.state;
+    console.log('html: ', html)
     return (
       <FormLayoutVertical>
         <Grid container spacing={24}>

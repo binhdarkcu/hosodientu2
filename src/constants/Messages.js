@@ -16,6 +16,7 @@ export const LOGIN_REQUIRED = 'Vui lòng đăng nhập';
 export const CHANGE_PASSWORD = 'Mật khẩu đã được thay đổi thành công';
 export const USER_UPDATED = 'Cập nhật user thành công';
 export const USER_DELETEED ='Xóa user thành công';
+export const WRONG_INFO ='Thông tin không chính xác';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';

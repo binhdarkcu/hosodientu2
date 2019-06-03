@@ -21,7 +21,7 @@ import DanhSachKhamBenh from './LichSuKhamBenh';
 import ChiTietKhamBenh from './ChiTietKhamBenh';
 
 
-import {execLogout} from '../actions/services/user.js';
+import { execLogout } from '../actions/services/user.js';
 
 const mapStateToProps = ({ location, services }) => ({
   pageType: location.type,
@@ -53,27 +53,27 @@ const pages = {
 
 class Dashboard extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     document.body.className = "nav-md";
-    if(window.initializeDashboard) window.initializeDashboard();
+    if (window.initializeDashboard) window.initializeDashboard();
   }
 
   render() {
 
-    const {pageType, itemId, userInfo} = this.props;
+    const { pageType, itemId, userInfo } = this.props;
     const CurrentView = pages[pageType];
 
     return (
       <div className="container body">
         <div className="main_container">
-          <div className="col-md-3 left_col">
+          <div className="col-md-3 left_col" style={{ position: "fixed" }}>
             <div className="left_col scroll-view">
 
               <SiteLogo />
 
               <div className="clearfix"></div>
 
-              <SidebarProfile user={{name: userInfo.email}}/>
+              <SidebarProfile user={{ name: userInfo.email }} />
 
               <br />
 
@@ -82,7 +82,7 @@ class Dashboard extends Component {
             </div>
           </div>
 
-          <TopNav user={{name: userInfo.email}} logOut={this.props.logOut}/>
+          <TopNav user={{ name: userInfo.email }} logOut={this.props.logOut} />
 
           <div className="right_col" role="main">
             <div className="row">
