@@ -19,7 +19,7 @@ import ListKetQuaECG from './ListKetQuaECG';
 import ListSieuAm from './ListSieuAm';
 import DanhSachKhamBenh from './LichSuKhamBenh';
 import ChiTietKhamBenh from './ChiTietKhamBenh';
-
+import AvatarSelector from '../components/AvatarSelector';
 
 import {execLogout} from '../actions/services/user.js';
 
@@ -53,14 +53,25 @@ const pages = {
 
 class Dashboard extends Component {
 
+  state = {
+    showChangeAvatarPopup: true
+  }
+
   componentDidMount(){
     document.body.className = "nav-md";
     if(window.initializeDashboard) window.initializeDashboard();
   }
 
+  handleChangeAvatar = () =>{
+    this.setState((prevState) => {
+      return {showChangeAvatarPopup: !prevState.showChangeAvatarPopup};
+    });
+  }
+
   render() {
 
-    const {pageType, itemId, userInfo} = this.props;
+    const { pageType, itemId, userInfo } = this.props;
+    const { showChangeAvatarPopup } = this.state;
     const CurrentView = pages[pageType];
 
     return (
@@ -82,7 +93,8 @@ class Dashboard extends Component {
             </div>
           </div>
 
-          <TopNav user={{name: userInfo.email}} logOut={this.props.logOut}/>
+          <TopNav user={{name: userInfo.email}} logOut={this.props.logOut} changeAvatar={this.handleChangeAvatar}/>
+          {showChangeAvatarPopup && <AvatarSelector handleClose={this.handleChangeAvatar}/>}
 
           <div className="right_col" role="main">
             <div className="row">

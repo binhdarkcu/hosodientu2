@@ -6,6 +6,12 @@ class TopNav extends React.Component {
     e.preventDefault();
   }
 
+  handleChangeAvatar = e => {
+    e.preventDefault();
+    if(this.props.changeAvatar)
+        this.props.changeAvatar();
+  }
+
   handleLogout = (e) => {
     e.preventDefault();
     this.props.logOut();
@@ -29,10 +35,10 @@ class TopNav extends React.Component {
                   <span className=" fa fa-angle-down"></span>
                 </a>
                 <ul className="dropdown-menu dropdown-usermenu pull-right">
-                  <li><a href="/" onClick={this.handleClick}>Profile</a></li>
-                  <li><a href="/" onClick={this.handleClick}>Settings</a></li>
-                  <li><a href="/doi-mat-khau" onClick={this.handleClick}>Change password</a></li>
-                  <li><a href="/" onClick={this.handleLogout}><i className="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  <li><a href="/" onClick={this.handleClick}>Trang cá nhân</a></li>
+                  <li><a href="/" onClick={this.handleChangeAvatar}>Đổi ảnh đại diện</a></li>
+                  <li><a href="/doi-mat-khau" onClick={this.handleClick}>Đổi mật khẩu</a></li>
+                  <li><a href="/" onClick={this.handleLogout}><i className="fa fa-sign-out pull-right"></i> Thoát</a></li>
                 </ul>
               </li>
             </ul>
