@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { createAction } from 'redux-actions';
+// import { createAction } from 'redux-actions';
+import { redirect } from 'redux-first-router';
 
 // Custom imports
 import SidebarProfile from '../components/SidebarProfile';
@@ -28,11 +29,9 @@ import Spinner from '../components/Spinner';
 import { PULSE } from '../constants/Loaders';
 import { SPINNER_LIGHT_GREEN } from '../constants/Colors';
 import * as MSG from '../constants/Messages';
-import { SET_USER_INFO } from '../actions/types';
-import { execLogout } from '../actions/services/user.js';
-import { execUpdateAvatar } from '../actions/services/api-user';
-import { saveUserInfo } from '../actions/services/user';
-
+// import { SET_USER_INFO } from '../actions/types';
+import { execLogout, saveUserInfo } from '../actions/services/user.js';
+import { execUpdateAvatar, execChangePassword } from '../actions/services/api-user';
 
 const mapStateToProps = ({ location, services }) => ({
   pageType: location.type,
@@ -43,7 +42,9 @@ const mapStateToProps = ({ location, services }) => ({
 const mapDispatchToProps = dispatch => ({
   logOut: () => dispatch(execLogout()),
   updateAvatar: (data) => dispatch(execUpdateAvatar(data)),
-  saveUserInfo: (user) => dispatch(saveUserInfo(user))
+  saveUserInfo: (user) => dispatch(saveUserInfo(user)),
+  goToChangePasswordPage: () => dispatch(redirect({type: 'RTE_CHANGE_PASSWORD'})),
+  changePassword: data => dispatch(execChangePassword(data))
 });
 
 // mapping pages
@@ -101,7 +102,7 @@ class Dashboard extends Component {
 
   render() {
 
-    const { pageType, itemId, userInfo } = this.props;
+    const { pageType, userInfo } = this.props;
     const { showChangeAvatarPopup, loading } = this.state;
     const CurrentView = pages[pageType];
 
@@ -125,7 +126,7 @@ class Dashboard extends Component {
             </div>
           </div>
 
-          <TopNav user={userInfo} logOut={this.props.logOut} changeAvatar={this.handleShowAvatarSelector}/>
+          <TopNav user={userInfo} logOut={this.props.logOut} changeAvatar={this.handleShowAvatarSelector} redirectToChangePaswordPage={this.props.goToChangePasswordPage}/>
           {showChangeAvatarPopup && <AvatarSelector handleClose={this.handleShowAvatarSelector} updateAvatar={this.handleUpdateAvatar}/>}
 
           <div className="right_col" role="main">

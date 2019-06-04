@@ -13,7 +13,7 @@ import FormLayoutVertical from '../components/FormLayoutVertical';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {execChangePassword} from '../actions/services/api-user.js';
-import {execLogout} from '../actions/services/user.js';
+// import {execLogout} from '../actions/services/user.js';
 
 const styles = theme => ({
   textField: {
@@ -78,7 +78,7 @@ class PageDoiMatKhau extends Component {
       _self.setState({loading: false});
     });
   }
-  
+
 
   showError = (msg, err) => {
     console.log(err);

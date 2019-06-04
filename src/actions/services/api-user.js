@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import _ from 'lodash';
 import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
-import { SET_USER_INFO } from '../../actions/types';
+// import { SET_USER_INFO } from '../../actions/types';
 
 // URLs
 const adminRegisterApiUrl = `${baseUrl}/api/User/AdminRegister`;
@@ -113,8 +113,8 @@ export const execChangePassword = data => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(changePasswordUrl + data.id, parameters)
-      .then(({ status }) => {
-        return resolve(status);
+      .then(({ status, json }) => {
+        return resolve({status, json});
       })
       .catch(err => reject(err));
   });

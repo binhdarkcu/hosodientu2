@@ -1,19 +1,14 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
-import Logo from '../../components/Logo';
 import Grid from '@material-ui/core/Grid';
-import MaYTe from '../../components/MaYTe';
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
-import FormFooter from '../../components/FormFooter';
 import Spinner from '../../components/Spinner';
-import Divider from '@material-ui/core/Divider';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Frame from 'react-frame-component';
 import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
 import { PULSE } from '../../constants/Loaders';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 
 import { execGetReportDetails } from '../../actions/services/api-report';
 

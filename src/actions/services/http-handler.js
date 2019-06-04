@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 
 export const sendHttpRequest = (url, params) => {
 
-  const dispatchAction = action => dispatch => {
-    dispatch(action);
-  }
+  // const dispatchAction = action => dispatch => {
+  //   dispatch(action);
+  // }
 
   return new Promise((resolve, reject) => {
       fetch(url, params)

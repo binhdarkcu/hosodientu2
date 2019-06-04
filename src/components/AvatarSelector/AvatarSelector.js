@@ -74,7 +74,6 @@ class AvatarSelector extends Component{
 
   handleFlipHorizontal = () => {
     const { cropper } = this;
-    const { scaleX } = this.state;
     cropper  && this.setState((prevState) => {
       let newScaleX = -prevState.scaleX;
       cropper.scaleX(newScaleX);
@@ -84,7 +83,6 @@ class AvatarSelector extends Component{
 
   handleFlipVertical = () => {
     const { cropper } = this;
-    const { scaleY } = this.state;
     cropper  && this.setState((prevState) => {
       let newScaleY = -prevState.scaleY;
       cropper.scaleY(newScaleY);
@@ -107,10 +105,21 @@ class AvatarSelector extends Component{
     if(this.props.handleClose) this.props.handleClose();
   }
 
+  handleDragOver = e => {
+    e.preventDefault();
+  }
+
   handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log('drop');
+
+    const selectedFile = e.dataTransfer.files.item(0);
+    const ext = selectedFile.name.split('.').pop() || 'undefined';
+    const allowedExtensions = ['png', 'jpg', 'jpeg', 'bmp'];
+    allowedExtensions.indexOf(ext.toLowerCase()) > -1 ?
+      this.setState({tempFile: e.dataTransfer.files.item(0)}, () => { this.getObjectUrl(); })
+      :
+      toast.error(INVALID_FILE_TYPE);
   }
 
   handleSelectFile = (e) => {
@@ -208,7 +217,7 @@ class AvatarSelector extends Component{
 
           </div>
           :
-          <div className="DragDrop" onDrop={this.handleDrop} onClick={this.handleSelectFile}>
+          <div className="DragDrop" onDragOver={this.handleDragOver} onDrop={this.handleDrop} onClick={this.handleSelectFile}>
               <span className="fa fa-plus"></span>
               <i>Kéo thả ảnh vào đây hoặc chọn 1 ảnh từ máy tính...</i>
           </div>
@@ -234,7 +243,7 @@ class AvatarSelector extends Component{
           <Typography component="span" align="center"><i>*Nếu khung cắt vượt ngoài ảnh đã chọn sẽ biến thành khoảng trắng/đen</i></Typography>
         </div>
         <div className="Cropper">
-            <img ref={(ref) => {this.image = ref}} className="Image" src={imgURL} onLoad={this.handleLoad}></img>
+            <img ref={(ref) => {this.image = ref}} className="Image" src={imgURL} onLoad={this.handleLoad} alt="Crop avatar"></img>
         </div>
         <div className="Controls">
           <div className="btn-group">
@@ -370,6 +379,11 @@ class AvatarSelector extends Component{
       </Modal>
     )
   }
+}
+
+AvatarSelector.propTypes = {
+  handleClose: PropTypes.func.isRequired,
+  updateAvatar: PropTypes.func.isRequired
 }
 
 export default AvatarSelector;

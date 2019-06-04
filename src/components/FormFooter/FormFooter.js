@@ -7,7 +7,7 @@ const FormFooter = () => {
   return(
     <Grid container spacing={8}>
       <Grid item xs={1}>
-        <img src={QRCode} width={50} />
+        <img src={QRCode} width={50} alt="QR code"/>
       </Grid>
       <Grid item xs={11}>
         <Divider/>

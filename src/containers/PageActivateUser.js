@@ -10,7 +10,7 @@ import FormFooter from '../components/FormFooter';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import * as MSG from '../constants/Messages.js';
 import * as RULE from '../constants/Rules.js';
 import { connect } from 'react-redux';

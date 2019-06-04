@@ -78,7 +78,6 @@ class PageLogin extends Component{
 
   render(){
 
-    const { goToRegisterPage } = this.props;
     const { password_error, username_error, loading } = this.state;
 
     return (
