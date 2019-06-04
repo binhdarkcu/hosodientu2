@@ -41,83 +41,82 @@ export const execGetUserInfo = username => dispatch => {
 export const execActivateUser = data => dispatch => {
   const searchParams = Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&');
   const parameters = {
-      method: 'POST',
-      body: searchParams,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    method: 'POST',
+    body: searchParams,
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(activateUrl, parameters)
-        .then(({ status, user }) => {
-          return resolve(user);
-        })
-        .catch(err => reject(err));
+    sendHttpRequest(activateUrl, parameters)
+      .then(({ status, user }) => {
+        return resolve(user);
+      })
+      .catch(err => reject(err));
   });
 }
 
 // User register
 export const execRegister = (data, type) => dispatch => {
   const parameters = {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
   };
 
   const url = 'user' === type ? userRegisterApiUrl : adminRegisterApiUrl;
-
   return new Promise((resolve, reject) => {
-      sendHttpRequest(url, parameters)
-        .then(({ status, userInfo }) => {
-          return resolve(userInfo);
-        })
-        .catch( err => reject(err));
+    sendHttpRequest(url, parameters)
+      .then((data) => {
+        return resolve(data);
+      })
+      .catch(err => reject(err));
   });
 }
 
 // Get user list
 export const execGetUserList = () => dispatch => {
   const parameters = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    method: 'GET',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(userListUrl, parameters)
-        .then(({status, json}) => {
-          return resolve(json);
-        }).catch( err => reject(err));
+    sendHttpRequest(userListUrl, parameters)
+      .then(({ status, json }) => {
+        return resolve(json);
+      }).catch(err => reject(err));
   });
 };
 
 // Get user detail
 export const execGetUserDetail = (id) => dispatch => {
   const parameters = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    method: 'GET',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(userDetailUrl + id, parameters)
-        .then(({status, json}) => {
-          return resolve(json);
-        }).catch( err => reject(err));
+    sendHttpRequest(userDetailUrl + id, parameters)
+      .then(({ status, json }) => {
+        return resolve(json);
+      }).catch(err => reject(err));
   });
 };
 
 //Change password
 export const execChangePassword = data => dispatch => {
   const parameters = {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(changePasswordUrl + data.id, parameters)
-        .then(({ status }) => {
-          return resolve(status);
-        })
-        .catch( err => reject(err));
+    sendHttpRequest(changePasswordUrl + data.id, parameters)
+      .then(({ status }) => {
+        return resolve(status);
+      })
+      .catch(err => reject(err));
   });
 }
 
@@ -129,27 +128,30 @@ export const execGetUserInfoByPatientCode = data => dispatch => {
   }
   return new Promise((resolve, reject) => {
     sendHttpRequest(getUserByPatientCodeUrl + data.code, parameters)
-      .then(({status, json}) => {
-        return resolve({status, json})
+      .then(({ status, json }) => {
+        return resolve({ status, json })
       })
       .catch(err => reject(err));
   });
 }
 
 // User update
+
 export const execUpdate = (data) => dispatch => {
   const parameters = {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(userUpdate, parameters)
-        .then(({ status, userInfo }) => {
-          return resolve(userInfo);
-        })
-        .catch( err => reject(err));
+    sendHttpRequest(userUpdate, parameters)
+      .then(({ status, userInfo }) => {
+        return resolve(userInfo);
+      })
+      .catch(err => reject(err));
   });
 }
 
@@ -157,15 +159,15 @@ export const execUpdate = (data) => dispatch => {
 // Delete user
 export const execDeleteUser = (id) => dispatch => {
   const parameters = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   };
 
   return new Promise((resolve, reject) => {
-      sendHttpRequest(deleteUserUrl + id, parameters)
-        .then(({status, json}) => {
-          return resolve(json);
-        }).catch( err => reject(err));
+    sendHttpRequest(deleteUserUrl + id, parameters)
+      .then(({ status, json }) => {
+        return resolve(json);
+      }).catch(err => reject(err));
   });
 };
 

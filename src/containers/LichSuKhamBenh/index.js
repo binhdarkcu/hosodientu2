@@ -103,7 +103,7 @@ class LichSuKhamBenh extends React.Component {
                     <TableCell align="left">{report.ngayThucHien}</TableCell>
                     <TableCell align="left">{report.nam}</TableCell>
 
-                    <TableCell align="left">{report.isKetQua ? 'true' : 'false'}</TableCell>
+                    <TableCell align="left">{report.isKetQua ? 'Đã khám' : 'Đang đợi'}</TableCell>
                 </TableRow>
             ))}
           </TableBody>

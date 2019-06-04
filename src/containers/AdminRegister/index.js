@@ -158,7 +158,6 @@ class FormRegister extends React.Component {
     user.ngaySinh = `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}`;
     if (this.state.isUpdateUser) {
       this.props.updateUser(user).then((done) => {
-        console.log('done');
         toast.success(MSG.USER_UPDATED);
         _self.setState({ loading: false });
         this.props.goToUserList();
@@ -168,9 +167,12 @@ class FormRegister extends React.Component {
         _self.setState({ loading: false });
       });
     } else {
-      this.props.register(user, this.props.type).then((done) => {
-        console.log('done');
-        toast.success(MSG.USER_CREATED);
+      this.props.register(user, this.props.type).then((result) => {
+        if(!result.json.isSuccess) {
+          toast.error(MSG.WRONG_INFO);
+        }else {
+          toast.success(MSG.USER_CREATED);
+        }
         _self.setState({ loading: false });
       }).catch((err) => {
         console.log('err', err);

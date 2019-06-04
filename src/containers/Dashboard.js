@@ -69,7 +69,7 @@ class Dashboard extends Component {
 
   componentDidMount(){
     document.body.className = "nav-md";
-    if(window.initializeDashboard) window.initializeDashboard();
+    if (window.initializeDashboard) window.initializeDashboard();
   }
 
   handleShowAvatarSelector = () =>{
@@ -103,7 +103,7 @@ class Dashboard extends Component {
     return (
       <div className="container body">
         <div className="main_container">
-          <div className="col-md-3 left_col">
+          <div className="col-md-3 left_col" style={{ position: "fixed" }}>
             <div className="left_col scroll-view">
 
               <SiteLogo />
