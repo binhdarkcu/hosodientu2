@@ -102,7 +102,6 @@ class Dashboard extends Component {
   render() {
 
     const { pageType, itemId, userInfo } = this.props;
-    userInfo.avatar=null;
     const { showChangeAvatarPopup, loading } = this.state;
     const CurrentView = pages[pageType];
 
