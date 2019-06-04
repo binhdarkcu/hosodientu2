@@ -10,7 +10,7 @@ const userRegisterApiUrl = `${baseUrl}/api/User/UserRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
 const userListUrl = `${baseUrl}/api/Users`;
 const userDetailUrl = `${baseUrl}/api/User?id=`;
-const changePasswordUrl = `${baseUrl}/api/User/ChangePassword?id=`;
+const changePasswordUrl = `${baseUrl}/api/User/ChangePassword`;
 const getUserByPatientCodeUrl = `${baseUrl}/api/PatientByCode?code=`;
 const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 const deleteUserUrl = `${baseUrl}/api/User?id=`;
@@ -112,7 +112,7 @@ export const execChangePassword = data => dispatch => {
   };
 
   return new Promise((resolve, reject) => {
-    sendHttpRequest(changePasswordUrl + data.id, parameters)
+    sendHttpRequest(changePasswordUrl, parameters)
       .then(({ status, json }) => {
         return resolve({status, json});
       })
