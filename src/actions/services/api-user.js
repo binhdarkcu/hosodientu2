@@ -4,6 +4,7 @@ import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
 import { SET_USER_INFO } from '../../actions/types';
 
+// URLs
 const adminRegisterApiUrl = `${baseUrl}/api/User/AdminRegister`;
 const userRegisterApiUrl = `${baseUrl}/api/User/UserRegister`;
 const activateUrl = `${baseUrl}/api/User/Activate`;
@@ -13,28 +14,27 @@ const changePasswordUrl = `${baseUrl}/api/User/ChangePassword?id=`;
 const getUserByPatientCodeUrl = `${baseUrl}/api/PatientByCode?code=`;
 const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 const deleteUserUrl = `${baseUrl}/api/User?id=`;
+const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
 
 // Get user info
 export const execGetUserInfo = username => dispatch => {
-  const parameters = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  };
+    const parameters = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    };
 
-  const userInfoUrl = `${baseUrl}/api/UserByEmail?email=${username}`;
-  return new Promise((resolve, reject) => {
-    sendHttpRequest(userInfoUrl, parameters)
-      .then(({ status, json }) => {
-        const safeJson = _.omit(json, ['password']);
-        dispatch({ type: SET_USER_INFO, payload: { ...safeJson } });
-        sessionStorage.setItem('userInfo', JSON.stringify(safeJson));
-        return resolve(safeJson);
-      })
-      .catch(err => reject(err));
-  });
+    const userInfoUrl = `${baseUrl}/api/UserByEmail?email=${username}`;
+    return new Promise((resolve, reject) => {
+        sendHttpRequest(userInfoUrl, parameters)
+          .then(({status, json}) => {
+            const safeJson = _.omit(json, ['password']);
+            return resolve(safeJson);
+          })
+          .catch( err => reject(err));
+    });
 };
 
 // Activate user
@@ -170,3 +170,19 @@ export const execDeleteUser = (id) => dispatch => {
       }).catch(err => reject(err));
   });
 };
+
+// Update users avatar
+export const execUpdateAvatar = (data) => dispatch => {
+  const parameters = {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
+  }
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(updateAvatarUrl, parameters)
+        .then(({status, json}) => {
+          return resolve(json);
+        }).catch( err => reject(err));
+  });
+}
