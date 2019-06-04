@@ -23,7 +23,10 @@ import ListSieuAm from './ListSieuAm';
 import DanhSachKhamBenh from './LichSuKhamBenh';
 import ChiTietKhamBenh from './ChiTietKhamBenh';
 import AvatarSelector from '../components/AvatarSelector';
+import Spinner from '../components/Spinner';
 
+import { PULSE } from '../constants/Loaders';
+import { SPINNER_LIGHT_GREEN } from '../constants/Colors';
 import * as MSG from '../constants/Messages';
 import { SET_USER_INFO } from '../actions/types';
 import { execLogout } from '../actions/services/user.js';
@@ -64,7 +67,8 @@ const pages = {
 class Dashboard extends Component {
 
   state = {
-    showChangeAvatarPopup: false
+    showChangeAvatarPopup: false,
+    loading: false
   }
 
   componentDidMount(){
@@ -79,6 +83,7 @@ class Dashboard extends Component {
   }
 
   handleUpdateAvatar = (avatar) => {
+    this.setState({loading: true});
     const { userInfo } = this.props;
     const data = {
       UserId: userInfo.userId,
@@ -88,7 +93,7 @@ class Dashboard extends Component {
     this.props.updateAvatar(data).then((userInfo) => {
       this.props.saveUserInfo(userInfo);
       toast.success(MSG.UPDATE_AVATAR_SUCCESS);
-      this.setState({showChangeAvatarPopup: false});
+      this.setState({showChangeAvatarPopup: false, loading: false});
     }).catch(err => {
       toast.error(MSG.UPDATE_AVATAR_FAILED);
     })
@@ -97,11 +102,13 @@ class Dashboard extends Component {
   render() {
 
     const { pageType, itemId, userInfo } = this.props;
-    const { showChangeAvatarPopup } = this.state;
+    userInfo.avatar=null;
+    const { showChangeAvatarPopup, loading } = this.state;
     const CurrentView = pages[pageType];
 
     return (
       <div className="container body">
+        <Spinner type={PULSE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
         <div className="main_container">
           <div className="col-md-3 left_col" style={{ position: "fixed" }}>
             <div className="left_col scroll-view">

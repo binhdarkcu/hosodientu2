@@ -77,7 +77,7 @@ class ChiTietKhamBenh extends React.Component {
         <Spinner type={PULSE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
         <Grid container spacing={24}>
           <Grid item xs={12} className={classes.row}>
-            <Frame ref={(ref) => {this.iframe = ref}} className={classes.iframe} frameborder="0" scrolling="no" onLoad={this.resizeIframe}>
+            <Frame ref={(ref) => {this.iframe = ref}} className={classes.iframe} frameBorder="0" scrolling="no" onLoad={this.resizeIframe}>
               {ReactHtmlParser(html)}
             </Frame>
           </Grid>

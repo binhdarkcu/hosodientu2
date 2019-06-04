@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { toast } from 'react-toastify';
 import Base64Binary from 'base64-arraybuffer';
-import { INVALID_FILE_TYPE } from '../../constants/Messages';
+import LazyLoad from 'react-lazy-load';
+
 
 // custom import
+import { INVALID_FILE_TYPE } from '../../constants/Messages';
 import 'cropperjs/dist/cropper.min.css';
 import './style.scss';
 import Modal from '../PortalModal';
 import FormLayoutVertical from '../FormLayoutVertical';
 import Grid from '@material-ui/core/Grid';
+import LoadingImage from '../../assets/images/loading.gif';
 
 class AvatarSelector extends Component{
 
@@ -199,7 +202,10 @@ class AvatarSelector extends Component{
         {
           tempFile ?
           <div className="Previewer">
-            <img ref={(ref) => {this.previewImg = ref}} src="" alt="Previewer"/>
+            <LazyLoad height={250}>
+              <img ref={(ref) => {this.previewImg = ref}} src={LoadingImage} alt="Previewer"/>
+            </LazyLoad>
+
           </div>
           :
           <div className="DragDrop" onDrop={this.handleDrop} onClick={this.handleSelectFile}>
