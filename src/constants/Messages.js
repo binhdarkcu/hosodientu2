@@ -16,6 +16,8 @@ export const LOGIN_REQUIRED = 'Vui lòng đăng nhập';
 export const CHANGE_PASSWORD = 'Mật khẩu đã được thay đổi thành công';
 export const USER_UPDATED = 'Cập nhật user thành công';
 export const USER_DELETEED ='Xóa user thành công';
+export const UPDATE_AVATAR_FAILED = 'Không thể cập nhật ảnh đại diện';
+export const UPDATE_AVATAR_SUCCESS = 'Cập nhật ảnh đại diện thành công';
 export const WRONG_INFO ='Thông tin không chính xác';
 
 // general
@@ -23,3 +25,4 @@ export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';
 export const SERVER_ERROR = 'Kết nối đến máy chủ thất bại, vui lòng thử lại sau';
 export const SHOW_DETAIL = 'Xem chi tiết';
 export const NO_DETAIL_AVAILABLE = 'Không thể xem';
+export const INVALID_FILE_TYPE = 'File không hợp lệ';

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
+import { createAction } from 'redux-actions';
 
+// Custom imports
 import SidebarProfile from '../components/SidebarProfile';
 import SidebarMenu from '../components/SidebarMenu';
 import SidebarFooter from '../components/SidebarFooter';
@@ -19,18 +22,25 @@ import ListKetQuaECG from './ListKetQuaECG';
 import ListSieuAm from './ListSieuAm';
 import DanhSachKhamBenh from './LichSuKhamBenh';
 import ChiTietKhamBenh from './ChiTietKhamBenh';
+import AvatarSelector from '../components/AvatarSelector';
 
-
+import * as MSG from '../constants/Messages';
+import { SET_USER_INFO } from '../actions/types';
 import { execLogout } from '../actions/services/user.js';
+import { execUpdateAvatar } from '../actions/services/api-user';
+import { saveUserInfo } from '../actions/services/user';
+
 
 const mapStateToProps = ({ location, services }) => ({
   pageType: location.type,
   itemId: location.payload.id,
-  userInfo: services.user.userInfo,
+  userInfo: services.user.userInfo
 });
 
 const mapDispatchToProps = dispatch => ({
-  logOut: () => dispatch(execLogout())
+  logOut: () => dispatch(execLogout()),
+  updateAvatar: (data) => dispatch(execUpdateAvatar(data)),
+  saveUserInfo: (user) => dispatch(saveUserInfo(user))
 });
 
 // mapping pages
@@ -53,14 +63,41 @@ const pages = {
 
 class Dashboard extends Component {
 
-  componentDidMount() {
+  state = {
+    showChangeAvatarPopup: false
+  }
+
+  componentDidMount(){
     document.body.className = "nav-md";
     if (window.initializeDashboard) window.initializeDashboard();
+  }
+
+  handleShowAvatarSelector = () =>{
+    this.setState((prevState) => {
+      return {showChangeAvatarPopup: !prevState.showChangeAvatarPopup};
+    });
+  }
+
+  handleUpdateAvatar = (avatar) => {
+    const { userInfo } = this.props;
+    const data = {
+      UserId: userInfo.userId,
+      Avatar: avatar
+    };
+
+    this.props.updateAvatar(data).then((userInfo) => {
+      this.props.saveUserInfo(userInfo);
+      toast.success(MSG.UPDATE_AVATAR_SUCCESS);
+      this.setState({showChangeAvatarPopup: false});
+    }).catch(err => {
+      toast.error(MSG.UPDATE_AVATAR_FAILED);
+    })
   }
 
   render() {
 
     const { pageType, itemId, userInfo } = this.props;
+    const { showChangeAvatarPopup } = this.state;
     const CurrentView = pages[pageType];
 
     return (
@@ -73,7 +110,7 @@ class Dashboard extends Component {
 
               <div className="clearfix"></div>
 
-              <SidebarProfile user={{ name: userInfo.email }} />
+              <SidebarProfile user={userInfo}/>
 
               <br />
 
@@ -82,7 +119,8 @@ class Dashboard extends Component {
             </div>
           </div>
 
-          <TopNav user={{ name: userInfo.email }} logOut={this.props.logOut} />
+          <TopNav user={userInfo} logOut={this.props.logOut} changeAvatar={this.handleShowAvatarSelector}/>
+          {showChangeAvatarPopup && <AvatarSelector handleClose={this.handleShowAvatarSelector} updateAvatar={this.handleUpdateAvatar}/>}
 
           <div className="right_col" role="main">
             <div className="row">
@@ -94,6 +132,10 @@ class Dashboard extends Component {
       </div>
     );
   }
+}
+
+Dashboard.defaultProps = {
+  userInfo: {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

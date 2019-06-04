@@ -12,10 +12,11 @@ const styles = theme => ({
   },
   layout: {
     width: 'auto',
+    position: 'relative',
     marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit * 2,
-    [theme.breakpoints.up(1200 + theme.spacing.unit * 2 * 2)]: {
-      width: 1200,
+    [theme.breakpoints.up(800 + theme.spacing.unit * 2 * 2)]: {
+      width: 800,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
