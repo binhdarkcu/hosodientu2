@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Cropper from 'cropperjs';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-
+import { toast } from 'react-toastify';
+import Base64Binary from 'base64-arraybuffer';
+import { INVALID_FILE_TYPE } from '../../constants/Messages';
 
 // custom import
 import 'cropperjs/dist/cropper.min.css';
@@ -10,7 +12,6 @@ import './style.scss';
 import Modal from '../PortalModal';
 import FormLayoutVertical from '../FormLayoutVertical';
 import Grid from '@material-ui/core/Grid';
-
 
 class AvatarSelector extends Component{
 
@@ -22,73 +23,53 @@ class AvatarSelector extends Component{
   state = {
     scaleX: 1,
     scaleY: 1,
-    imageFile: null,
-    tempFile: null
-  }
-
-  componentDidMount(){
-    if(this.image){
-      this.cropper = new Cropper(this.image, {
-        aspectRatio: 1 / 1,
-        autoCrop: true,
-        zoomable:true,
-        ready: () => {
-          this.cropper.setCropBoxData({left: 0, top: 0, width: 250, height: 250});
-        }
-      });
-    }
+    imgURL: null,
+    tempFile: null,
+    avatar: '',
+    showBackBtn: false
   }
 
   handleZoomIn = () => {
-    console.log('handleZoomIn');
     const { cropper } = this;
     cropper && cropper.zoom(0.1);
   }
 
   handleZoomOut = () => {
-    console.log('handleZoomOut');
     const { cropper } = this;
     cropper && cropper.zoom(-0.1);
   }
 
   handleMoveLeft = () => {
-    console.log('handleMoveLeft');
     const { cropper } = this;
     cropper && cropper.move(-10, 0);
   }
 
   handleMoveRight = () => {
-    console.log('handleMoveRight');
     const { cropper } = this;
     cropper && cropper.move(10, 0);
   }
 
   handleMoveUp = () => {
-    console.log('handleMoveUp');
     const { cropper } = this;
     cropper && cropper.move(0, -10);
   }
 
   handleMoveDown = () => {
-    console.log('handleMoveDown');
     const { cropper } = this;
     cropper && cropper.move(0, 10);
   }
 
   handleRotateLeft = () => {
-    console.log('handleRotateLeft');
     const { cropper } = this;
     cropper && cropper.rotate(-45);
   }
 
   handleRotateRight = () => {
-    console.log('handleRotateRight');
     const { cropper } = this;
     cropper && cropper.rotate(45);
   }
 
   handleFlipHorizontal = () => {
-    console.log('handleFlipHorizontal');
     const { cropper } = this;
     const { scaleX } = this.state;
     cropper  && this.setState((prevState) => {
@@ -99,7 +80,6 @@ class AvatarSelector extends Component{
   }
 
   handleFlipVertical = () => {
-    console.log('handleFlipVertical');
     const { cropper } = this;
     const { scaleY } = this.state;
     cropper  && this.setState((prevState) => {
@@ -110,14 +90,12 @@ class AvatarSelector extends Component{
   }
 
   handleCrop = () => {
-    console.log('handleCrop');
     const { cropper } = this;
-    const croppedImg = cropper && cropper.getCroppedCanvas({width: 100, height: 100}).toDataURL('image/jpeg');
-    console.log(croppedImg);
+    const rawBase64Img = cropper && cropper.getCroppedCanvas({width: 100, height: 100}).toDataURL('image/jpeg');
+    this.setState({avatar: rawBase64Img});
   }
 
   handleClear = () => {
-    console.log('handleClear');
     const { cropper } = this;
     cropper && cropper.clear();
   }
@@ -137,17 +115,23 @@ class AvatarSelector extends Component{
     let fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.multiple = false;
+    fileInput.accept = ".png, .jpg, .jpeg, .bmp";
     fileInput.click();
     fileInput.onchange = e => {
-      this.setState({tempFile: e.path[0].files.item(0)}, () => {
-        this.getObjectUrl();
-      });
+      const selectedFile = e.path[0].files.item(0);
+      const ext = selectedFile.name.split('.').pop() || 'undefined';
+      const allowedExtensions = ['png', 'jpg', 'jpeg', 'bmp'];
+      allowedExtensions.indexOf(ext.toLowerCase()) > -1 ?
+        this.setState({tempFile: e.path[0].files.item(0)}, () => { this.getObjectUrl(); })
+        :
+        toast.error(INVALID_FILE_TYPE);
     };
   }
 
   goToCrop = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    const { tempFile } = this.state;
+    if(tempFile) this.setState({imgURL: this.previewImg.src, tempFile: null, showBackBtn: true})
   }
 
   clearCurrentFile = (e) => {
@@ -159,10 +143,46 @@ class AvatarSelector extends Component{
     const { tempFile } = this.state;
     const reader = new FileReader();
     reader.onload = (e) => {
-      console.log(this.previewImg);
       this.previewImg.src =  e.target.result;
     }
     reader.readAsDataURL(tempFile);
+  }
+
+  handleLoad = () => {
+    if(this.image){
+      this.cropper = new Cropper(this.image, {
+        aspectRatio: 1 / 1,
+        autoCrop: true,
+        zoomable:true,
+        ready: () => {
+          // this.cropper.setCropBoxData({left: 0, top: 0, width: 250, height: 250});
+        }
+      });
+    }
+  }
+
+  handleBack = () => {
+
+    const { imgURL, avatar } = this.state;
+
+    if(avatar){
+      this.setState({avatar: ''});
+      return;
+    }
+
+    if(imgURL){
+      this.setState({imgURL: '', showBackBtn: false});
+      this.cropper.destroy();
+    }
+  }
+
+  updateAvatar = () => {
+    const { avatar } = this.state;
+    const strippedBase64Str = avatar.replace(/^data:image\/[a-z]+;base64,/, "");
+    const arrayBuffer = Base64Binary.decode(strippedBase64Str);
+    const uint8Array = new Uint8Array(arrayBuffer);
+    const bytesArray = Array.from(uint8Array);
+    if(this.props.updateAvatar) this.props.updateAvatar(bytesArray);
   }
 
   renderFileChooser = () => {
@@ -173,6 +193,7 @@ class AvatarSelector extends Component{
       <div className="FileChooser">
         <div className="Header">
           <Typography component="h3" variant="h4" align="center">Chọn file ảnh</Typography>
+          <Typography component="span" align="center"><i>*Chỉ chấp nhận các file ảnh có định dạng *.jpg, *.jpeg, *.png, *.bmp, *.gif</i></Typography>
         </div>
 
         {
@@ -188,7 +209,7 @@ class AvatarSelector extends Component{
         }
 
         <div className="ButtonControls">
-          <button type="button" className="btn btn-success" onClick={this.goToCrop}>Ok, chọn hình này</button>
+          <button type="button" className="btn btn-success" disabled={!tempFile} onClick={this.goToCrop}>Ok, chọn hình này</button>
           <button type="button" className="btn btn-primary" onClick={this.clearCurrentFile}>Không, chọn lại</button>
         </div>
       </div>
@@ -196,81 +217,90 @@ class AvatarSelector extends Component{
   }
 
   renderImageCropper = () => {
+
+    const { imgURL } = this.state;
+
     return(
       <div className="ImageContent">
-        <Typography component="h3" variant="h4" align="center">Ảnh đại diện</Typography>
-        <img ref={(ref) => {this.image = ref}} className="Image" src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/tnc_48980557.jpg?crop=961,0,1928,2571&wid=600&hei=800&scl=3.21375"></img>
+        <div className="Header">
+          <Typography component="h3" variant="h4" align="center">Ảnh đại diện</Typography>
+          <Typography component="span" align="center"><i>*Tip: Rê chuột vào từng icon để hiển thị chức năng của từng nút bấm</i></Typography>
+          <Typography component="span" align="center"><i>*Nếu khung cắt vượt ngoài ảnh đã chọn sẽ biến thành khoảng trắng/đen</i></Typography>
+        </div>
+        <div className="Cropper">
+            <img ref={(ref) => {this.image = ref}} className="Image" src={imgURL} onLoad={this.handleLoad}></img>
+        </div>
         <div className="Controls">
           <div className="btn-group">
-            <button type="button" className="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In" onClick={this.handleZoomIn}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;zoom&quot;, 0.1)">
+            <button type="button" className="btn btn-primary" title="Phóng to" onClick={this.handleZoomIn}>
+              <span title="Phóng to">
                 <span className="fa fa-search-plus"></span>
               </span>
             </button>
-            <button type="button" className="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out" onClick={this.handleZoomOut}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;zoom&quot;, -0.1)">
+            <button type="button" className="btn btn-primary" title="Thu nhỏ" onClick={this.handleZoomOut}>
+              <span title="Thu nhỏ">
                 <span className="fa fa-search-minus"></span>
               </span>
             </button>
           </div>
 
           <div className="btn-group">
-            <button type="button" className="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left" onClick={this.handleMoveLeft}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, -10, 0)">
+            <button type="button" className="btn btn-primary" title="Di chuyển ảnh sang trái" onClick={this.handleMoveLeft}>
+              <span title="Di chuyển ảnh sang trái">
                 <span className="fa fa-arrow-left"></span>
               </span>
             </button>
-            <button type="button" className="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right" onClick={this.handleMoveRight}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, 10, 0)">
+            <button type="button" className="btn btn-primary" title="Di chuyển ảnh sang phải" onClick={this.handleMoveRight}>
+              <span title="Di chuyển ảnh sang phải">
                 <span className="fa fa-arrow-right"></span>
               </span>
             </button>
-            <button type="button" className="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up" onClick={this.handleMoveUp}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, 0, -10)">
+            <button type="button" className="btn btn-primary" title="Di chuyển ảnh lên" onClick={this.handleMoveUp}>
+              <span title="Di chuyển ảnh lên">
                 <span className="fa fa-arrow-up"></span>
               </span>
             </button>
-            <button type="button" className="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down" onClick={this.handleMoveDown}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;move&quot;, 0, 10)">
+            <button type="button" className="btn btn-primary" title="Di chuyển ảnh xuống" onClick={this.handleMoveDown}>
+              <span title="Di chuyển ảnh xuống">
                 <span className="fa fa-arrow-down"></span>
               </span>
             </button>
           </div>
 
           <div className="btn-group">
-            <button type="button" className="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left" onClick={this.handleRotateLeft}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;rotate&quot;, -45)">
+            <button type="button" className="btn btn-primary" title="Xoay ảnh (sang trái 45 độ)" onClick={this.handleRotateLeft}>
+              <span title="Xoay ảnh (sang trái)">
                 <span className="fa fa-rotate-left"></span>
               </span>
             </button>
-            <button type="button" className="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right" onClick={this.handleRotateRight}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;rotate&quot;, 45)">
+            <button type="button" className="btn btn-primary" title="Xoay ảnh (sang trái 45 độ)" onClick={this.handleRotateRight}>
+              <span title="Xoay ảnh (sang trái)">
                 <span className="fa fa-rotate-right"></span>
               </span>
             </button>
           </div>
 
           <div className="btn-group">
-            <button type="button" className="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal" onClick={this.handleFlipHorizontal}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;scaleX&quot;, -1)">
+            <button type="button" className="btn btn-primary"  title="Lật ảnh (chiều ngang)" onClick={this.handleFlipHorizontal}>
+              <span title="Lật ảnh (chiều ngang)">
                 <span className="fa fa-arrows-h"></span>
               </span>
             </button>
-            <button type="button" className="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical" onClick={this.handleFlipVertical}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;scaleY&quot;, -1)">
+            <button type="button" className="btn btn-primary" title="Lật ảnh (chiều dọc)" onClick={this.handleFlipVertical}>
+              <span title="Lật ảnh (chiều dọc)">
                 <span className="fa fa-arrows-v"></span>
               </span>
             </button>
           </div>
 
           <div className="btn-group">
-            <button type="button" className="btn btn-primary" data-method="crop" title="Crop" onClick={this.handleCrop}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;crop&quot;)">
+            <button type="button" className="btn btn-primary" title="Cắt" onClick={this.handleCrop}>
+              <span title="Cắt">
                 <span className="fa fa-check"></span>
               </span>
             </button>
-            <button type="button" className="btn btn-primary" data-method="clear" title="Clear" onClick={this.handleClear}>
-              <span className="docs-tooltip" data-toggle="tooltip" data-animation="false" title="$().cropper(&quot;clear&quot;)">
+            <button type="button" className="btn btn-primary" title="Chọn lại" onClick={this.handleClear}>
+              <span title="Chọn lại">
                 <span className="fa fa-remove"></span>
               </span>
             </button>
@@ -280,9 +310,30 @@ class AvatarSelector extends Component{
     )
   }
 
+  renderAvatarPreview = () => {
+
+    const { avatar } = this.state;
+
+    return(
+
+      <div className="AvatarPreview">
+        <div className="Header">
+          <Typography component="h3" variant="h4" align="center">Xem trước ảnh đại diện</Typography>
+        </div>
+        <div className="AvatarPreviewBox">
+          <img src={avatar} alt="Avatar Preview"/>
+        </div>
+        <div className="ButtonControls">
+          <button type="button" className="btn btn-success" onClick={this.updateAvatar}>Lưu avatar</button>
+          <button type="button" className="btn btn-primary" onClick={this.handleBack}>Không, chọn lại</button>
+        </div>
+      </div>
+    )
+  }
+
   render(){
 
-    const { imageFile } = this.state;
+    const { imgURL, avatar, showBackBtn } = this.state;
 
     return(
       <Modal className="CropAvatar">
@@ -293,9 +344,18 @@ class AvatarSelector extends Component{
                 <span className="fa fa-remove"></span>
               </span>
             </button>
+            {
+              showBackBtn &&
+              <button type="button" className="btn btn-primary previous-step" title="Quay lại" onClick={this.handleBack}>
+                <span className="docs-tooltip" title="Quay lại">
+                  <span className="fa fa-arrow-left"></span>
+                </span>
+              </button>
+            }
             <Grid container spacing={24}>
               <Grid item xs={12}>
-                { imageFile ? this.renderImageCropper() : this.renderFileChooser() }
+                { imgURL ? avatar ? null: this.renderImageCropper() : this.renderFileChooser() }
+                { avatar && this.renderAvatarPreview()}
               </Grid>
             </Grid>
           </FormLayoutVertical>

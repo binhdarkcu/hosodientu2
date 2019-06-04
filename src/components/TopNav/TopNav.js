@@ -16,6 +16,12 @@ class TopNav extends React.Component {
     e.preventDefault();
     this.props.logOut();
   }
+
+  getAvatarUrl = (user) => {
+    if(user.avatar) return 'data:image/jpeg;base64,' + user.avatar
+    return '';
+  }
+
   render(){
 
     const { user } = this.props;
@@ -31,7 +37,7 @@ class TopNav extends React.Component {
             <ul className="nav navbar-nav navbar-right">
               <li className="">
                 <a href="javascript:;" className="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <img src="images/img.jpg" alt=""/> {user.name}
+                  <img src={this.getAvatarUrl(user)} alt=""/> {user.email}
                   <span className=" fa fa-angle-down"></span>
                 </a>
                 <ul className="dropdown-menu dropdown-usermenu pull-right">
