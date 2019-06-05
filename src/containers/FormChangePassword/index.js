@@ -19,9 +19,12 @@ import Spinner from '../../components/Spinner';
 import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
 
 import { execChangePassword } from '../../actions/services/api-user.js';
+import { execLogout } from '../../actions/services/user.js';
+
 
 const mapDispatchToProps = dispatch => ({
   goToDashboard: () => dispatch({type: 'RTE_DASHBOARD'}),
+  logOut: () => dispatch(execLogout()),
   changePassword: data => dispatch(execChangePassword(data)),
 });
 
@@ -63,7 +66,6 @@ class FormChangePassword extends React.Component {
   };
 
   handleSubmit = () => {
-
     const { userInfo } = this.props;
     const { oldPassword, newPassword } = this.state;
 
@@ -77,6 +79,7 @@ class FormChangePassword extends React.Component {
     _self.setState({loading: true});
     this.props.changePassword(data).then(({status, json})=>{
       json.isSuccess ? toast.success(MSG.CHANGE_PASSWORD) : toast.error(json.errorMessage);
+      this.props.logOut();
     }).catch((err)=>{
       toast.error(MSG.ERROR_OCCURED);
     }).finally(() => {

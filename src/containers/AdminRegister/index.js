@@ -68,6 +68,7 @@ class FormRegister extends React.Component {
 
   state = {
     user: {
+      userId: '',
       ho: '',
       ten: '',
       benhNhanId: '',
@@ -106,26 +107,19 @@ class FormRegister extends React.Component {
 
   formatDataResponse = data => {
     const user = {
+      userId: data.userId ? data.userId : '',
       ho: data.ho ? data.ho : '',
       ten: data.ten ? data.ten : '',
       benhNhanId: data.benhNhanId ? data.benhNhanId : '',
       phone: data.phone ? data.phone : '',
       email: data.email ? data.email : '',
       maYte: data.maYte ? data.maYte : '',
-      ngaySinh: data.ngaySinh ? this.formatYToD(data.ngaySinh) : null,
+      ngaySinh: data.ngaySinh ? data.ngaySinh : null,
       gioiTinh: data.gioiTinh ? data.gioiTinh : '',
       diaChi: data.diaChi ? data.diaChi : '',
     }
     return user;
   }
-
-  formatYToD = (strDate) => {
-    if (strDate && strDate !== '') {
-      const arr = strDate.split('-');
-      return `${arr[2].slice(0, 2)}/${arr[1]}/${arr[0]}`;
-    }
-    return null;
-  };
 
   getUserInfo = debounce((code) => {
     this.props.loadUserByPatientCode({ code: code })
@@ -157,7 +151,7 @@ class FormRegister extends React.Component {
     const _self = this;
     _self.setState({ loading: true });
     let user = { ...this.state.user };
-    user.ngaySinh = `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}`;
+    // user.ngaySinh = `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}`;
     if (this.state.isUpdateUser) {
       this.props.updateUser(user).then((done) => {
         toast.success(MSG.USER_UPDATED);
