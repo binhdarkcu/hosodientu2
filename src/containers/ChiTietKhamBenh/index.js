@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-
+import Typography from '@material-ui/core/Typography';
 // import { debounce } from 'lodash'
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
@@ -10,7 +10,6 @@ import ReactHtmlParser from 'react-html-parser';
 
 import { execGetReportDetails } from '../../actions/services/api-report';
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
-import * as MSG from '../../constants/Messages';
 
 const mapDispatchToProps = dispatch => ({
   getReportDetails: (paramStr) => dispatch(execGetReportDetails(paramStr)),
@@ -21,12 +20,6 @@ const mapStateToProps = ({services, location }) => ({
 });
 
 const styles = theme => ({
-  paper: {
-    margin: 'auto',
-    maxWidth: 500,
-    backgroundColor: '#f5f5f5',
-    padding: 12,
-  },
   iframe: {
     width: '100%',
     border: 'none',
@@ -44,7 +37,8 @@ class ChiTietKhamBenh extends React.Component {
 
   state = {
     html: null,
-    loaded: false
+    loaded: false,
+    hasError: false
   }
 
   resizeIframe = () => {
@@ -99,16 +93,30 @@ class ChiTietKhamBenh extends React.Component {
   componentDidMount(){
     const { paramStr } = this.props.location.payload;
     this.props.getReportDetails({paramStr: decodeURIComponent(paramStr)})
-    .then(rs => this.setState({html: rs, loaded: true}))
+    .then(({status, json}) => {
+      status === 200 ? this.setState({html: json, loaded: true}) : this.setState({hasError: true, loaded: true});
+    })
     .catch(err => {
-      this.setState({html: MSG.SERVER_ERROR, loaded: true});
+      this.setState({hasError: true, loaded: true});
       console.error(err);
     });
   }
 
+  renderErrorNotice = () => {
+
+    return(
+      <div style={{height: 500, textAlign: 'center'}}>
+        <Typography component="h2" variant="h4" align="center">Không thể lấy dữ liệu từ máy chủ</Typography>
+        <Typography component="span"  variant="h4" align="center">
+          <i>*Thông tin bạn đang truy vấn có thể không đúng hoặc máy chủ gặp sự cố khi trả dữ liệu.</i>
+        </Typography>
+      </div>
+    )
+  }
+
   render() {
     const { classes } = this.props;
-    const { html } = this.state;
+    const { html, hasError } = this.state;
     return (
       <FormLayoutHorizontal>
         <Grid container spacing={24}>
@@ -124,7 +132,7 @@ class ChiTietKhamBenh extends React.Component {
                     frameBorder="0"
                     scrolling="no"
                     onLoad={this.resizeIframe}>
-                  {ReactHtmlParser(html)}
+                  { hasError ? this.renderErrorNotice() : ReactHtmlParser(html) }
             </Frame>
           </Grid>
         </Grid>

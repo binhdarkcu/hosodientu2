@@ -33,7 +33,7 @@ export const execGetReportDetails = data => dispatch => {
   return new Promise((resolve, reject) => {
       sendHttpRequest(getReportDetailsUrl, parameters)
         .then(({status, json}) => {
-          return resolve(json);
+          return resolve({status, json});
         })
         .catch( err => reject(err));
   });
