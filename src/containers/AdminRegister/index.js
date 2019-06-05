@@ -77,16 +77,14 @@ class FormRegister extends React.Component {
       maYte: '',
       ngaySinh: null,
       diaChi: '',
-      gioiTinh: '0',
+      gioiTinh: 'T',
     },
     loading: false,
     isUpdateUser: '',
   };
 
   componentDidMount() {
-    const pathname = this.props.location.pathname;
-    const isUpdateUser = pathname.split('/');
-    const idUser = isUpdateUser[2];
+    const idUser = this.props.location.payload.id;
     if (idUser) {
       const _self = this;
       _self.setState({ loading: true });
@@ -151,7 +149,7 @@ class FormRegister extends React.Component {
     const _self = this;
     _self.setState({ loading: true });
     let user = { ...this.state.user };
-    // user.ngaySinh = `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}`;
+    user.ngaySinh = `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}`;
     if (this.state.isUpdateUser) {
       this.props.updateUser(user).then((done) => {
         toast.success(MSG.USER_UPDATED);
@@ -301,8 +299,8 @@ class FormRegister extends React.Component {
                     onChange={this.handleChange('gioiTinh')}
                     value={user.gioiTinh}
                   >
-                    <FormControlLabel value="0" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nam" />
-                    <FormControlLabel value="1" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nữ" />
+                    <FormControlLabel value="T" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nam" />
+                    <FormControlLabel value="G" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nữ" />
                   </RadioGroup>
                 </FormControl>
               </div>
