@@ -7,11 +7,22 @@ import * as MSG from '../constants/Messages';
 //import sleep from 'sleep-promise'
 
 export const defaultThunk = (dispatch, getState) => {
-    doDefaultRedirect(dispatch, getState().services.auth.authencation)
+    const state = getState();
+    doDefaultRedirect(dispatch, state.services.auth.authencation, state.location);
 }
 
-function doDefaultRedirect(dispatch, loggedInUser) {
+function doDefaultRedirect(dispatch, loggedInUser, location) {
     const isLoggedin = loggedInUser.authenticated ? 'yes': 'no';
+
+    const token = sessionStorage.getItem('authToken');
+    const userInfo = sessionStorage.getItem('userInfo');
+
+    if(token && userInfo && isLoggedin === 'no'){
+      dispatch({type: AUTHENTICATED});
+      dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
+      return;
+    }
+
     if(isLoggedin === 'no') {
         dispatch(redirect({type: 'RTE_LOGIN'}));
         return;
@@ -31,7 +42,7 @@ function checkLoginStatus(dispatch, getState) {
   if(token && userInfo){
     dispatch({type: AUTHENTICATED});
     dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
-    dispatch(redirect({type: type ? type : 'RTE_DASHBOARD', payload: {...payload}}));
+    dispatch(redirect({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}}));
   }
 }
 

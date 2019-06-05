@@ -56,7 +56,7 @@ class PageLogin extends Component{
       this.props.getUserInfo(username).then(data => {
         this.props.saveUserInfo(data);
         const { type, payload } = this.props.location.prev;
-        this.props.goToPage({type: type ? type : 'RTE_DASHBOARD', payload: {...payload}});
+        this.props.goToPage({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}});
       }).catch(err => {
         this.showError(GET_USER_INFO_FAILED, err)
       });
@@ -66,7 +66,6 @@ class PageLogin extends Component{
   }
 
   showError = (msg, err) => {
-    console.error(err);
     toast.error(msg);
     this.setState({loading: false});
   }
