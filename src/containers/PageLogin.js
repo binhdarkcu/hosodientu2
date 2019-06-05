@@ -66,6 +66,7 @@ class PageLogin extends Component{
   }
 
   showError = (msg, err) => {
+    console.error(err);
     toast.error(msg);
     this.setState({loading: false});
   }

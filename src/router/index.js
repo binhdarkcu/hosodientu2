@@ -48,30 +48,6 @@ const routesMap = {
       path: '/not-found',
       thunk: defaultThunk
     },
-    RTE_LIST_DO_LOANG_XUONG: {
-      path: '/do-loang-xuong',
-      thunk: defaultThunk
-    },
-    RTE_DO_LOANG_XUONG: {
-      path: '/do-loang-xuong/:id',
-      thunk: defaultThunk
-    },
-    RTE_LIST_KET_QUA_ECG: {
-      path: '/ket-qua-ecg',
-      thunk: defaultThunk
-    },
-    RTE_KET_QUA_ECG: {
-      path: '/ket-qua-ecg/:id',
-      thunk: defaultThunk
-    },
-    RTE_LIST_SIEU_AM: {
-      path: '/sieu-am',
-      thunk: defaultThunk
-    },
-    RTE_SIEU_AM: {
-      path: '/sieu-am/:id',
-      thunk: defaultThunk
-    },
     RTE_LOGIN: {
       path: '/login',
       thunk: checkLoginStatus

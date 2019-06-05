@@ -11,16 +11,10 @@ import SidebarFooter from '../components/SidebarFooter';
 import TopNav from '../components/TopNav';
 import Footer from '../components/Footer';
 import SiteLogo from '../components/SiteLogo';
-import FormSieuAm from './FormSieuAm';
-import FormDoLoangXuong from './FormDoLoangXuong';
-import FormKetQuaECG from './FormKetQuaECG';
 import FormDanhSachUser from './FormDanhSachUser';
 import AdminRegister from './AdminRegister';
 import FormChangePassword from './FormChangePassword';
 import FormUser from './FormUser';
-import ListDoLoangXuong from './ListDoLoangXuong';
-import ListKetQuaECG from './ListKetQuaECG';
-import ListSieuAm from './ListSieuAm';
 import DanhSachKhamBenh from './LichSuKhamBenh';
 import ChiTietKhamBenh from './ChiTietKhamBenh';
 import AvatarSelector from '../components/AvatarSelector';
@@ -49,17 +43,11 @@ const mapDispatchToProps = dispatch => ({
 
 // mapping pages
 const pages = {
-  'RTE_DASHBOARD': 'div',
+  'RTE_DASHBOARD': DanhSachKhamBenh,
   'RTE_ADMIN_REGISTER': AdminRegister,
-  'RTE_SIEU_AM': FormSieuAm,
-  'RTE_KET_QUA_ECG': FormKetQuaECG,
-  'RTE_DO_LOANG_XUONG': FormDoLoangXuong,
   'RTE_DANH_SACH_USER': FormDanhSachUser,
   'RTE_CHI_TIET_USER': FormUser,
   'RTE_CHANGE_PASSWORD': FormChangePassword,
-  'RTE_LIST_DO_LOANG_XUONG': ListDoLoangXuong,
-  'RTE_LIST_SIEU_AM': ListSieuAm,
-  'RTE_LIST_KET_QUA_ECG': ListKetQuaECG,
   'RTE_LIST_KHAM_BENH': DanhSachKhamBenh,
   'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh,
   'RTE_USER_UPDATE': AdminRegister,
