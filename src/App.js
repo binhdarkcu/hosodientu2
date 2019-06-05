@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import './assets/styles/all.scss';
 // custom imports
 import * as pages from './containers';
 import {createDefaultRedirector} from './router';

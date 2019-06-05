@@ -3,6 +3,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
 import Spinner from '../../components/Spinner';
+import { debounce } from 'lodash'
+
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Frame from 'react-frame-component';
@@ -46,18 +48,19 @@ class ChiTietKhamBenh extends React.Component {
     loading: true
   }
 
-  resizeIframe = () => {
-    let obj = this.iframe.node;
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-    obj.contentWindow.document.body.style.display = 'flex';
-    obj.contentWindow.document.body.style.flexDirection = 'column';
-    obj.contentWindow.document.body.style.alignItems = 'center';
-    obj.contentWindow.document.body.style.justifyContent = 'center';
-    let _self = this;
-    setTimeout(()=>{
-      _self.setState({loading: false});
-    }, 1000);
-  }
+  resizeIframe =  debounce(
+    () => {
+      if(this.iframe) {
+        let obj = this.iframe.node;
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+        obj.contentWindow.document.body.style.display = 'flex';
+        obj.contentWindow.document.body.style.flexDirection = 'column';
+        obj.contentWindow.document.body.style.alignItems = 'center';
+        obj.contentWindow.document.body.style.justifyContent = 'center';
+      }
+    },
+    2000);
+
 
   componentDidMount(){
     const { paramStr } = this.props.location.payload;
@@ -69,9 +72,8 @@ class ChiTietKhamBenh extends React.Component {
     const { html, loading } = this.state;
     return (
       <FormLayoutHorizontal>
-        <Spinner type={PULSE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
         <Grid container spacing={24}>
-          <Grid item xs={12} className={classes.row}>
+          <Grid item xs={12} className={classes.row + ' hasLoader'}>
             <Frame ref={(ref) => {this.iframe = ref}} className={classes.iframe} frameBorder="0" scrolling="no" onLoad={this.resizeIframe}>
               {ReactHtmlParser(html)}
             </Frame>
