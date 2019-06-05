@@ -9,6 +9,7 @@ class ActivatePatientPostModel {
     this.ten = data.ten || "";
     this.gioiTinh = data.gioiTinh || "";
     this.ngaySinh = data.ngaySinh || "";
+    this.namSinh = data.namSinh || "";
   }
 }
 

@@ -76,6 +76,7 @@ class FormRegister extends React.Component {
       email: '',
       maYte: '',
       ngaySinh: null,
+      namSinh: null,
       diaChi: '',
       gioiTinh: 'T',
     },
@@ -104,15 +105,17 @@ class FormRegister extends React.Component {
   }
 
   formatDataResponse = data => {
+
     const user = {
       userId: data.userId ? data.userId : '',
       ho: data.ho ? data.ho : '',
       ten: data.ten ? data.ten : '',
       benhNhanId: data.benhNhanId ? data.benhNhanId : '',
-      phone: data.phone ? data.phone : '',
+      phone: data.soDienThoai ? data.soDienThoai : '',
       email: data.email ? data.email : '',
       maYte: data.maYte ? data.maYte : '',
       ngaySinh: data.ngaySinh ? data.ngaySinh : null,
+      namSinh: data.namSinh ? data.namSinh : null,
       gioiTinh: data.gioiTinh ? data.gioiTinh : '',
       diaChi: data.diaChi ? data.diaChi : '',
     }
@@ -149,7 +152,7 @@ class FormRegister extends React.Component {
     const _self = this;
     _self.setState({ loading: true });
     let user = { ...this.state.user };
-    user.ngaySinh = `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}`;
+    user.ngaySinh = user.ngaySinh ? `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}` : null;
     if (this.state.isUpdateUser) {
       this.props.updateUser(user).then((done) => {
         toast.success(MSG.USER_UPDATED);
@@ -183,6 +186,7 @@ class FormRegister extends React.Component {
   render() {
     const { classes, type } = this.props;
     const { loading, user, isUpdateUser } = this.state;
+    console.log(user)
     return (
       <FormLayoutVertical>
         <Spinner type={BOUNCE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
@@ -223,13 +227,10 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-phone"
                 label="Phone"
-                disabled={type !== 'user' && !isUpdateUser}
                 className={classes.textField}
                 value={user.phone}
                 onChange={this.handleChange('phone')}
                 margin="normal"
-                validators={[RULE.IS_REQUIRED, RULE.IS_PHONE_NUMBER]}
-                errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_PHONE_NUMBER]}
               />
             </Grid>
 
@@ -237,13 +238,10 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-address"
                 label="Địa chỉ"
-                disabled={type !== 'user' && !isUpdateUser}
                 className={classes.textField}
                 value={user.diaChi}
                 onChange={this.handleChange('diaChi')}
                 margin="normal"
-                validators={[RULE.IS_REQUIRED]}
-                errorMessages={[MSG.REQUIRED_FIELD]}
               />
             </Grid>
 
@@ -251,12 +249,9 @@ class FormRegister extends React.Component {
               <TextValidator
                 id="ar-email"
                 label="Email"
-                disabled={type !== 'user' && !isUpdateUser}
                 className={classes.textField}
                 value={user.email}
                 onChange={this.handleChange('email')}
-                validators={[RULE.IS_REQUIRED, RULE.IS_EMAIL]}
-                errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_EMAIL]}
                 margin="normal"
               />
             </Grid>
@@ -266,11 +261,8 @@ class FormRegister extends React.Component {
                 label="Họ"
                 className={classes.textField}
                 value={user.ho}
-                disabled={type !== 'user' && !isUpdateUser}
                 onChange={this.handleChange('ho')}
                 margin="normal"
-                validators={[RULE.IS_REQUIRED]}
-                errorMessages={[MSG.REQUIRED_FIELD]}
               />
             </Grid>
 
@@ -279,11 +271,8 @@ class FormRegister extends React.Component {
                 label="Tên"
                 className={classes.textField}
                 value={user.ten}
-                disabled={type !== 'user' && !isUpdateUser}
                 onChange={this.handleChange('ten')}
                 margin="normal"
-                validators={[RULE.IS_REQUIRED]}
-                errorMessages={[MSG.REQUIRED_FIELD]}
               />
             </Grid>
 
@@ -299,8 +288,8 @@ class FormRegister extends React.Component {
                     onChange={this.handleChange('gioiTinh')}
                     value={user.gioiTinh}
                   >
-                    <FormControlLabel value="T" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nam" />
-                    <FormControlLabel value="G" control={<Radio disabled={type !== 'user' && !isUpdateUser} />} label="Nữ" />
+                    <FormControlLabel value="T" control={<Radio />} label="Nam" />
+                    <FormControlLabel value="G" control={<Radio />} label="Nữ" />
                   </RadioGroup>
                 </FormControl>
               </div>
@@ -314,12 +303,21 @@ class FormRegister extends React.Component {
                     name="datepicker"
                     locale="vi"
                     disabled={type !== 'user' && !isUpdateUser}
-                    onChange={this.handleChangeDate}
                     value={user.ngaySinh}
-                    required
                   />
                 </FormControl>
               </div>
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <TextValidator
+                id="ar-namsinh"
+                label="Năm sinh"
+                className={classes.textField}
+                value={user.namSinh}
+                onChange={this.handleChange('namSinh')}
+                margin="normal"
+              />
             </Grid>
 
             <Grid item xs={12}>
