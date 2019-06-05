@@ -6,7 +6,7 @@ export const INVALID_PATIENT_ID = 'ID bệnh nhân không hợp lệ!';
 export const USERNAME_REQUIRED = 'Vui lòng nhập tài khoản!';
 export const PASSWORD_REQUIRED = 'Vui lòng nhập mật khẩu!';
 export const PASSWORD_MISMATCH = 'Nhập lại mật khẩu không trùng khớp!';
-
+export const INVALID_LOGIN = 'Tài khoản hoặc mật khẩu không đúng!';
 // actions
 export const LOGIN_FAILED = 'Đăng nhập thất bại!';
 export const GET_USER_INFO_FAILED = 'Không thể truy vấn thông tin user';

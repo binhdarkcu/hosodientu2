@@ -11,7 +11,7 @@ import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import { SPINNER_LIGHT_GREEN } from '../constants/Colors';
 import { PACMAN } from '../constants/Loaders';
-import { USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED } from '../constants/Messages';
+import { USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED, INVALID_LOGIN } from '../constants/Messages';
 import { redirect } from 'redux-first-router';
 import Link from 'redux-first-router-link';
 
@@ -61,12 +61,11 @@ class PageLogin extends Component{
         this.showError(GET_USER_INFO_FAILED, err)
       });
     }).catch(err => {
-      this.showError(LOGIN_FAILED, err);
+      err.status === 404 ? this.showError(INVALID_LOGIN, err) : this.showError(LOGIN_FAILED, err);
     });
   }
 
   showError = (msg, err) => {
-    console.log(err);
     toast.error(msg);
     this.setState({loading: false});
   }

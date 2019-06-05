@@ -27,7 +27,7 @@ export const execAuthenticate = data => dispatch => {
     return new Promise((resolve, reject) => {
         sendHttpRequest(authUrl, parameters)
           .then(({status, json}) => {
-            if (status !== 200) return reject(Error(JSON.stringify(json)));
+            if (status !== 200) return reject(json);
             sessionStorage.setItem('isActived', true);
             sessionStorage.setItem('authToken', _.get(json, 'access_token', ''));
             sessionStorage.setItem('expAt', Date.now() + _.get(json, 'expires_in', 0)*1000);
