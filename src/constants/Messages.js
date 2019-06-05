@@ -11,7 +11,7 @@ export const INVALID_LOGIN = 'Tài khoản hoặc mật khẩu không đúng!';
 export const LOGIN_FAILED = 'Đăng nhập thất bại!';
 export const GET_USER_INFO_FAILED = 'Không thể truy vấn thông tin user';
 export const USER_CREATED = 'Tạo user mới thành công';
-export const SESSION_EXPIRED = 'Session expired, vui lòng đăng nhập lại!';
+export const SESSION_EXPIRED = 'Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!';
 export const LOGIN_REQUIRED = 'Vui lòng đăng nhập';
 export const CHANGE_PASSWORD = 'Mật khẩu đã được thay đổi thành công';
 export const USER_UPDATED = 'Cập nhật user thành công';
@@ -22,7 +22,7 @@ export const WRONG_INFO ='Thông tin không chính xác';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';
-export const SERVER_ERROR = 'Kết nối đến máy chủ thất bại, vui lòng thử lại sau';
+export const SERVER_ERROR = 'Kết nối đến máy chủ thất bại, vui lòng thử lại sau!';
 export const SHOW_DETAIL = 'Xem chi tiết';
 export const NO_DETAIL_AVAILABLE = 'Không thể xem';
 export const INVALID_FILE_TYPE = 'File không hợp lệ';
