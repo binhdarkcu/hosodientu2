@@ -15,7 +15,7 @@ import Spinner from '../../components/Spinner';
 import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
 //custom import
 import { GET_USER_LIST } from '../../actions/types';
-import { execGetUserList, execDeleteUser } from '../../actions/services/api-user';
+import { execGetUserList, execDeleteUser, execAdminApprove } from '../../actions/services/api-user';
 import { createAction } from 'redux-actions';
 import * as MSG from '../../constants/Messages.js';
 
@@ -30,6 +30,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'RTE_USER_UPDATE', payload: { id } })
   },
   deleteUser: (id) => dispatch(execDeleteUser(id)),
+  adminApprove: (id) => dispatch(execAdminApprove(id)),
 });
 
 const mapStateToProps = ({ id, services, location }) => ({
@@ -89,6 +90,15 @@ class FormDanhSachUser extends React.Component {
         this.props.getUsersDetail(id);
       } else if (type === 'edit') {
         this.props.upateUser(id);
+      } else if (type === 'active') {
+        this.props.adminApprove({ 'userId': id }).then((data) => {
+          data.json.errorMessage ? toast.error(data.json.errorMessage) : toast.success(MSG.USER_APPROVE);
+          _self.setState({ loading: false });
+          this.getUserDataTable(_self);
+        }).catch((err) => {
+          toast.error(MSG.ERROR_OCCURED);
+          _self.setState({ loading: false });
+        });
       } else {
         this.props.deleteUser(id).then(() => {
           toast.success(MSG.USER_DELETEED);
@@ -131,10 +141,9 @@ class FormDanhSachUser extends React.Component {
                   user.trangThai === 1 ? <TableCell align="center" className={classes.deleteIcon}>
                     <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2196f3' }} onClick={() => this.handleAction(user.userId, 'detail')} />
                     <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user.userId, 'edit')} />
-
                   </TableCell> :
                     <TableCell align="center">
-                      <Button variant="contained" className={classes.buttonActive}>Active</Button>
+                      <Button variant="contained" className={classes.buttonActive} onClick={() => this.handleAction(user.userId, 'active')}>Active</Button>
                     </TableCell>
                 }
                 <TableCell align="left">

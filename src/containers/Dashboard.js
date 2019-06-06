@@ -119,7 +119,7 @@ class Dashboard extends Component {
 
           <div className="right_col" role="main">
             <div className="row">
-              <CurrentView />
+              <CurrentView key={pageType}/>
             </div>
           </div>
           <Footer />

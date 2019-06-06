@@ -19,6 +19,7 @@ export const USER_DELETEED ='Xóa user thành công';
 export const UPDATE_AVATAR_FAILED = 'Không thể cập nhật ảnh đại diện';
 export const UPDATE_AVATAR_SUCCESS = 'Cập nhật ảnh đại diện thành công';
 export const WRONG_INFO ='Thông tin không chính xác';
+export const USER_APPROVE = 'User đã được active';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';

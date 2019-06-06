@@ -15,6 +15,7 @@ const getUserByPatientCodeUrl = `${baseUrl}/api/PatientByCode?code=`;
 const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 const deleteUserUrl = `${baseUrl}/api/User?id=`;
 const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
+const adminApprove = `${baseUrl}/api/User/AdminApprove`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -184,5 +185,25 @@ export const execUpdateAvatar = (data) => dispatch => {
         .then(({status, json}) => {
           return resolve(json);
         }).catch( err => reject(err));
+  });
+}
+
+// Update users avatar
+export const execAdminApprove = (id) => dispatch => {
+  const parameters = {
+    method: 'PUT',
+    body: JSON.stringify(id),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  return new Promise((resolve, reject) => {
+    sendHttpRequest(adminApprove, parameters)
+      .then((data) => {
+        console.log('data: ', data);
+        return resolve(data);
+      })
+      .catch(err => reject(err));
   });
 }
