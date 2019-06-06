@@ -165,9 +165,9 @@ class FormRegister extends React.Component {
       });
     } else {
       this.props.register(user, this.props.type).then((result) => {
-        if(!result.json.isSuccess) {
+        if (!result.json.isSuccess) {
           toast.error(MSG.WRONG_INFO);
-        }else {
+        } else {
           toast.success(MSG.USER_CREATED);
         }
         _self.setState({ loading: false });

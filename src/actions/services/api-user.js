@@ -201,7 +201,6 @@ export const execAdminApprove = (id) => dispatch => {
   return new Promise((resolve, reject) => {
     sendHttpRequest(adminApprove, parameters)
       .then((data) => {
-        console.log('data: ', data);
         return resolve(data);
       })
       .catch(err => reject(err));

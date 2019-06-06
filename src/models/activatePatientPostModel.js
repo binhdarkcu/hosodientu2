@@ -1,8 +1,8 @@
 class ActivatePatientPostModel {
   constructor(data = {}) {
     this.benhNhanId = data.benhNhanId || "";
-    this.maYte = data.maYte || "";
-    this.phone = data.phone || "";
+    this.maYte = data.soVaoVien || "";
+    this.phone = data.soDienThoai || "";
     this.diaChi = data.diaChi || "";
     this.email = data.email || "";
     this.ho = data.ho || "";
