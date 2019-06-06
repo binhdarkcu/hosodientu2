@@ -76,7 +76,7 @@ class FormRegister extends React.Component {
       email: '',
       maYte: '',
       ngaySinh: null,
-      namSinh: null,
+      namSinh: '',
       diaChi: '',
       gioiTinh: 'T',
     },
@@ -115,7 +115,7 @@ class FormRegister extends React.Component {
       email: data.email ? data.email : '',
       maYte: data.maYte ? data.maYte : '',
       ngaySinh: data.ngaySinh ? data.ngaySinh : null,
-      namSinh: data.namSinh ? data.namSinh : null,
+      namSinh: data.namSinh ? data.namSinh : '',
       gioiTinh: data.gioiTinh ? data.gioiTinh : '',
       diaChi: data.diaChi ? data.diaChi : '',
     }
