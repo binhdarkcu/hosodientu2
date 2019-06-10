@@ -103,11 +103,11 @@ class FormChangePassword extends React.Component {
             onError={errors => console.log(errors)}
         >
           <Grid container spacing={24}>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <Logo onClick={this.goToDashboard} size={150}/>
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <Typography component="h1" variant="h4" align="center">
                 Đổi mật khẩu
               </Typography>

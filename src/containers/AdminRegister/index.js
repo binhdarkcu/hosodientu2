@@ -183,6 +183,11 @@ class FormRegister extends React.Component {
     this.props.goToDashboard();
   }
 
+  handleScanQRCode = (e) => {
+    e.preventDefault();
+    alert('No camera access!');  
+  }
+
   render() {
     const { classes, type } = this.props;
     const { loading, user, isUpdateUser } = this.state;
@@ -196,11 +201,11 @@ class FormRegister extends React.Component {
           onError={errors => console.log(errors)}
         >
           <Grid container spacing={24}>
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <Logo onClick={this.goToDashboard} size={150} />
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item  xs={12} sm={4}>
               <Typography component="h1" variant="h4" align="center">
                 {
                   isUpdateUser ? 'Cập Nhật' : 'Đăng ký'
@@ -328,6 +333,11 @@ class FormRegister extends React.Component {
                     Đăng ký
               </Button>
               }
+            </Grid>
+            <Grid item xs={12}>
+              <Button type="button" variant="contained" color="primary" className={classes.button} onClick={this.handleScanQRCode}>
+                Quét mã QR
+              </Button>
             </Grid>
             <FormFooter />
           </Grid>

@@ -3,7 +3,11 @@
 
 }
 @media screen and (min-width: 0) and (max-width: 768px) {
-
+  .nav-md .container.body .right_col {
+    main {
+      width: auto!important;
+    }
+  }
 }
 
 @media screen and (max-width: 320px) {

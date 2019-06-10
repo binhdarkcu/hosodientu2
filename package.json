@@ -19,6 +19,7 @@
     "react-i18next": "^10.8.1",
     "react-lazy-load": "^3.0.13",
     "react-material-ui-form-validator": "^2.0.8",
+    "react-qr-reader": "^2.2.1",
     "react-redux": "^7.0.2",
     "react-scripts": "2.1.8",
     "react-spinners": "^0.5.4",
