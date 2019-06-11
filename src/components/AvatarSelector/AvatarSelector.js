@@ -214,7 +214,6 @@ class AvatarSelector extends Component{
             <LazyLoad height={250}>
               <img ref={(ref) => {this.previewImg = ref}} src={LoadingImage} alt="Previewer"/>
             </LazyLoad>
-
           </div>
           :
           <div className="DragDrop" onDragOver={this.handleDragOver} onDrop={this.handleDrop} onClick={this.handleSelectFile}>

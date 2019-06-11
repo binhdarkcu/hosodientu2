@@ -1,0 +1,21 @@
+.QRScanner{
+  .Wrapper{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+  }
+  .OverLay{
+    &:after{
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      position: fixed;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}

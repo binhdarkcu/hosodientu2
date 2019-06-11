@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Logo from '../../components/Logo';
-import Grid from '@material-ui/core/Grid';
-import FormLayoutVertical from '../../components/FormLayoutVertical';
-import FormFooter from '../../components/FormFooter';
 import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
@@ -14,17 +10,23 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import DatePicker from 'react-date-picker';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import Grid from '@material-ui/core/Grid';
+import { debounce } from 'lodash';
+import { connect } from 'react-redux';
+
+//custom import
+import QRScanner from '../../components/QRScanner';
+import FormLayoutVertical from '../../components/FormLayoutVertical';
+import FormFooter from '../../components/FormFooter';
+import Logo from '../../components/Logo';
 import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
-import { connect } from 'react-redux';
 import { execRegister, execGetUserInfoByPatientCode, execUpdate } from '../../actions/services/api-user.js';
 import Spinner from '../../components/Spinner';
 import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
 import { BOUNCE } from '../../constants/Loaders';
-import { debounce } from 'lodash';
 import ActivatePatientPostModel from '../../models/activatePatientPostModel';
-//custom import
 import { execGetUserDetail } from '../../actions/services/api-user';
 
 
@@ -82,6 +84,7 @@ class FormRegister extends React.Component {
     },
     loading: false,
     isUpdateUser: '',
+    showQRScanner: false
   };
 
   componentDidMount() {
@@ -183,15 +186,19 @@ class FormRegister extends React.Component {
     this.props.goToDashboard();
   }
 
-  handleScanQRCode = (e) => {
-    e.preventDefault();
-    alert('No camera access!');  
+  openQRScanner = () => {
+    this.setState((prevState) => {
+      return {showQRScanner: !prevState.showQRScanner}
+    })
+  }
+
+  handleQRCode = (data) => {
+    console.log(data);
   }
 
   render() {
     const { classes, type } = this.props;
-    const { loading, user, isUpdateUser } = this.state;
-    console.log(user)
+    const { loading, user, isUpdateUser, showQRScanner } = this.state;
     return (
       <FormLayoutVertical>
         <Spinner type={BOUNCE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
@@ -335,10 +342,11 @@ class FormRegister extends React.Component {
               }
             </Grid>
             <Grid item xs={12}>
-              <Button type="button" variant="contained" color="primary" className={classes.button} onClick={this.handleScanQRCode}>
+              <Button type="button" variant="contained" color="primary" className={classes.button} onClick={this.openQRScanner}>
                 Quét mã QR
               </Button>
             </Grid>
+            {showQRScanner && <QRScanner onClose={this.openQRScanner}/>}
             <FormFooter />
           </Grid>
         </ValidatorForm>
