@@ -5,7 +5,33 @@
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
+
+    .close-popup{
+      position: absolute;
+      top: 5px;
+      right: 0;
+    }
+
+    .Container{
+      padding-top: 15px;
+    }
+
+    .Scanner{
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      .Tip{
+        padding-top: 10px;
+        margin-bottom: 5px;
+      }
+    }
+
+    .Heading{
+      text-align: center;
+      margin: 5px;
+    }
   }
+
   .OverLay{
     &:after{
       content: "";

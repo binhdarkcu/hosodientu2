@@ -16,6 +16,7 @@ const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 const deleteUserUrl = `${baseUrl}/api/User?id=`;
 const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
 const adminApprove = `${baseUrl}/api/User/AdminApprove`;
+const patientByQrCodeUrl = `${baseUrl}/api/PatientByQRCode`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -200,6 +201,23 @@ export const execAdminApprove = (id) => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(adminApprove, parameters)
+      .then((data) => {
+        return resolve(data);
+      })
+      .catch(err => reject(err));
+  });
+}
+
+// Get patient info by QR code
+export const execGetPatientByQrCode = data => dispatch => {
+  const parameters = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  return new Promise((resolve, reject) => {
+    sendHttpRequest(patientByQrCodeUrl, parameters)
       .then((data) => {
         return resolve(data);
       })

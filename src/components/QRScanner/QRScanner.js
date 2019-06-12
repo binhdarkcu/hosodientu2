@@ -1,7 +1,5 @@
 import QrReader from 'react-qr-reader';
 import React, { Component } from 'react';
-import Typography from '@material-ui/core/Typography';
-import { toast } from 'react-toastify';
 import Grid from '@material-ui/core/Grid';
 import PortalModal from '../PortalModal';
 import FormLayoutVertical from '../FormLayoutVertical';
@@ -14,31 +12,38 @@ class QRScanner extends Component {
     this.state = {
       loading: true,
       legacyMode: false,
-      result: 'No result',
-      error: false,
+      result: '',
       facingMode: 'user',
     };
 
     this.handleScan = this.handleScan.bind(this);
     this.handleError = this.handleError.bind(this);
     this.handleLoad = this.handleLoad.bind(this);
-    this.handleFacingModeChange = this.handleFacingModeChange.bind(this);
     this.handleImgSubmit = this.handleImgSubmit.bind(this);
   }
+
+  componentDidMount(){
+    document.body.style.position = "fixed";
+  }
+
+  componentWillUnmount(){
+    document.body.style.position = "";
+  }
+
   handleScan(result) {
-    if(result){
+    if(result && !this.state.result && typeof this.props.onScan == "function"){
       this.setState({ result });
+      this.props.onScan(result);
     }
   }
+
   handleError(err) {
     console.error(err)
     this.setState({ legacyMode: true })
   }
+
   handleLoad() {
     this.setState({ loading: false });
-  }
-  handleFacingModeChange(e) {
-    this.setState({ facingMode: e.target.value });
   }
 
   handleImgSubmit(){
@@ -57,12 +62,6 @@ class QRScanner extends Component {
       alignItems: 'center',
       minHeight: 100,
     }
-    const hozContainerStyle = {
-      margin: "10px",
-      display: "flex",
-      justifyContent: "space-between",
-    };
-
       return (
         <PortalModal className="QRScanner">
           <div className="Wrapper">
@@ -76,27 +75,20 @@ class QRScanner extends Component {
                 <Grid item xs={12}>
                   {this.state.loading && (
                     <div style={centerContainerStyle}>
-                      <img src={LoadingImage} alt="Loading Image"/>
+                      <img src={LoadingImage} alt="Loading components"/>
                     </div>
                   )}
-                  <div style={{display: this.state.loading ? 'none' : 'block'}}>
-                    {!this.state.legacyMode ? (
-                      <div style={hozContainerStyle}>
-                        <select
-                          value={this.state.facingMode}
-                          onChange={this.handleFacingModeChange}
-                          >
-                          <option value="user">User Camera</option>
-                          <option value="environment">Environment Camera</option>
-                        </select>
+                  <div className="Container" style={{display: this.state.loading ? 'none' : 'block'}}>
+                    {this.state.legacyMode &&
+                      <div className="Heading">
+                        <h3>Webcam không hỗ trợ</h3>
+                        <button type="button" className="btn btn-primary" onClick={this.handleImgSubmit}>Chọn ảnh QR code có sẵn</button>
                       </div>
-                    ) : (
-                      <div style={hozContainerStyle}>
-                        <h3>Webcam not supported</h3>
-                        <button type="button" className="btn btn-primary" onClick={this.handleImgSubmit}>Submit an Image</button>
+                    }
+                    <div className="Scanner">
+                      <div className="Tip">
+                        <i>*Tip: Giữ camera vuông góc với bề mặt chứa QR code, điều chỉnh khoảng cách để có chất lượng hình ảnh tốt nhất</i>
                       </div>
-                    )}
-                    <div style={{ width: '100%', maxWidth: '500px' }}>
                       <QrReader
                         onScan={this.handleScan}
                         onError={this.handleError}
@@ -107,9 +99,8 @@ class QRScanner extends Component {
                         ref="reader"
                       />
                     </div>
-                    <h3>Decoded QR-Code: {this.state.result}</h3>
                   </div>
-                  </Grid>
+                </Grid>
               </Grid>
             </FormLayoutVertical>
           </div>

@@ -22,13 +22,11 @@ import Logo from '../../components/Logo';
 import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
-import { execRegister, execGetUserInfoByPatientCode, execUpdate } from '../../actions/services/api-user.js';
+import { execRegister, execGetUserInfoByPatientCode, execUpdate, execGetPatientByQrCode, execGetUserDetail } from '../../actions/services/api-user';
 import Spinner from '../../components/Spinner';
 import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
 import { BOUNCE } from '../../constants/Loaders';
 import ActivatePatientPostModel from '../../models/activatePatientPostModel';
-import { execGetUserDetail } from '../../actions/services/api-user';
-
 
 const mapDispatchToProps = dispatch => ({
   register: (data, type) => dispatch(execRegister(data, type)),
@@ -37,6 +35,7 @@ const mapDispatchToProps = dispatch => ({
   getUserDetail: (id) => dispatch(execGetUserDetail(id)),
   updateUser: (data) => dispatch(execUpdate(data)),
   goToUserList: () => dispatch({ type: 'RTE_DANH_SACH_USER' }),
+  getUserByQrCode: (code) => dispatch(execGetPatientByQrCode({code}))
 });
 
 const mapStateToProps = ({ id, location }) => ({
@@ -192,8 +191,23 @@ class FormRegister extends React.Component {
     })
   }
 
-  handleQRCode = (data) => {
-    console.log(data);
+  handleScan = (code) => {
+    this.setState({showQRScanner: false, loading: true}, () => {
+      alert(code);
+      this.props.getUserByQrCode(code).then((data) => {
+        if(data.status === 200){
+          const patient = new ActivatePatientPostModel(data.json)
+          this.setState({ user: patient });
+          return;
+        }
+        toast.error(MSG.INVALID_QR_CODE);
+
+      }).catch((err) => {
+        toast.error(MSG.INVALID_QR_CODE);
+      }).finally(()=>{
+        this.setState({loading: false});
+      })
+    });
   }
 
   render() {
@@ -346,7 +360,7 @@ class FormRegister extends React.Component {
                 Quét mã QR
               </Button>
             </Grid>
-            {showQRScanner && <QRScanner onClose={this.openQRScanner}/>}
+            {showQRScanner && <QRScanner onScan={this.handleScan} onClose={this.openQRScanner}/>}
             <FormFooter />
           </Grid>
         </ValidatorForm>

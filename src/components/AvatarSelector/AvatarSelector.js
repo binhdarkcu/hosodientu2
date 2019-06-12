@@ -332,7 +332,7 @@ class AvatarSelector extends Component{
 
       <div className="AvatarPreview">
         <div className="Header">
-          <Typography component="h3" variant="h4" align="center">Xem trước ảnh đại diện</Typography>
+          <Typography component="h3" variant="h4" align="center">Ảnh đại diện</Typography>
         </div>
         <div className="AvatarPreviewBox">
           <img src={avatar} alt="Avatar Preview"/>
