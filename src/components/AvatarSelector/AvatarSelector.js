@@ -32,6 +32,14 @@ class AvatarSelector extends Component{
     showBackBtn: false
   }
 
+  componentDidMount(){
+    document.body.style.position = "fixed";
+  }
+
+  componentWillUnmount(){
+    document.body.style.position = "";
+  }
+
   handleZoomIn = () => {
     const { cropper } = this;
     cropper && cropper.zoom(0.1);
