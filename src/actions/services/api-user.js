@@ -16,7 +16,7 @@ const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 const deleteUserUrl = `${baseUrl}/api/User?id=`;
 const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
 const adminApprove = `${baseUrl}/api/User/AdminApprove`;
-const patientByQrCodeUrl = `${baseUrl}/api/PatientByQRCode`;
+const patientByQrCodeUrl = `${'http://115.79.197.84:83'}/api/PatientByQRCode`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
