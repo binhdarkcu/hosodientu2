@@ -55,7 +55,7 @@ const styles = theme => ({
     fontSize: 20,
   },
   buttonActive: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#2698D6',
     color: '#fff',
   }
 });
@@ -151,7 +151,7 @@ class FormDanhSachUser extends React.Component {
                 <TableCell align="center">{user.phone}</TableCell>
                 {
                   user.trangThai === 1 ? <TableCell align="center" className={classes.deleteIcon}>
-                    <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2196f3' }} onClick={() => this.handleAction(user.userId, 'detail')} />
+                    <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user.userId, 'detail')} />
                     <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user.userId, 'edit')} />
                   </TableCell> :
                     <TableCell align="center">

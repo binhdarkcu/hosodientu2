@@ -35,7 +35,7 @@ const mapDispatchToProps = dispatch => ({
   getUserDetail: (id) => dispatch(execGetUserDetail(id)),
   updateUser: (data) => dispatch(execUpdate(data)),
   goToUserList: () => dispatch({ type: 'RTE_DANH_SACH_USER' }),
-  getUserByQrCode: (code) => dispatch(execGetPatientByQrCode({code}))
+  getUserByQrCode: (code) => dispatch(execGetPatientByQrCode({ code }))
 });
 
 const mapStateToProps = ({ id, location }) => ({
@@ -62,6 +62,8 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+    backgroundColor: '#2698D6',
+    color: '#fff',
   },
 });
 
@@ -103,6 +105,11 @@ class FormRegister extends React.Component {
         _self.setState({ loading: false });
         console.log('err: ', err);
       });
+    } else {
+      const patientUser = new ActivatePatientPostModel();
+      this.setState({
+        user: patientUser,
+      })
     }
   }
 
@@ -138,7 +145,6 @@ class FormRegister extends React.Component {
     let user = { ...this.state.user };
     user[name] = event.target.value;
     this.setState({ user: user });
-
     if ('admin' === type && 'maYte' === name)
       this.getUserInfo(event.target.value);
 
@@ -187,14 +193,14 @@ class FormRegister extends React.Component {
 
   openQRScanner = () => {
     this.setState((prevState) => {
-      return {showQRScanner: !prevState.showQRScanner}
+      return { showQRScanner: !prevState.showQRScanner }
     })
   }
 
   handleScan = (code) => {
-    this.setState({showQRScanner: false, loading: true}, () => {
+    this.setState({ showQRScanner: false, loading: true }, () => {
       this.props.getUserByQrCode(code).then((data) => {
-        if(data.status === 200){
+        if (data.status === 200) {
           const patient = new ActivatePatientPostModel(data.json)
           this.setState({ user: patient });
           return;
@@ -203,8 +209,8 @@ class FormRegister extends React.Component {
 
       }).catch((err) => {
         toast.error(MSG.INVALID_QR_CODE);
-      }).finally(()=>{
-        this.setState({loading: false});
+      }).finally(() => {
+        this.setState({ loading: false });
       })
     });
   }
@@ -225,7 +231,7 @@ class FormRegister extends React.Component {
               <Logo onClick={this.goToDashboard} size={150} />
             </Grid>
 
-            <Grid item  xs={12} sm={4}>
+            <Grid item xs={12} sm={4}>
               <Typography component="h1" variant="h4" align="center">
                 {
                   isUpdateUser ? 'Cập Nhật' : 'Đăng ký'
@@ -347,19 +353,19 @@ class FormRegister extends React.Component {
 
             <Grid item xs={12}>
               {
-                isUpdateUser ? <Button type="submit" variant="contained" color="primary" className={classes.button}>
+                isUpdateUser ? <Button type="submit" variant="contained" className={classes.button}>
                   Lưu thay đổi
-              </Button> : <Button type="submit" variant="contained" color="primary" className={classes.button} disabled={!user.maYte}>
+              </Button> : <Button type="submit" variant="contained" className={classes.button} disabled={!user.maYte}>
                     Đăng ký
               </Button>
               }
             </Grid>
             <Grid item xs={12}>
-              <Button type="button" variant="contained" color="primary" className={classes.button} onClick={this.openQRScanner}>
+              <Button type="button" variant="contained" className={classes.button} onClick={this.openQRScanner}>
                 Quét mã QR
               </Button>
             </Grid>
-            {showQRScanner && <QRScanner onScan={this.handleScan} onClose={this.openQRScanner}/>}
+            {showQRScanner && <QRScanner onScan={this.handleScan} onClose={this.openQRScanner} />}
             <FormFooter />
           </Grid>
         </ValidatorForm>

@@ -48,7 +48,7 @@ const styles = theme => ({
     width: 130,
     height: 35,
     display: 'inline-block',
-    backgroundColor: '#2196f3',
+    backgroundColor: '#2698D6',
     border: '1px solid #5A738E',
     borderRadius: 4,
     color: '#fff',
