@@ -15,7 +15,7 @@ const SidebarProfile = ({user}) => {
         <img src={getAvatarUrl(user)} alt="..." className="img-circle profile_img"/>
       </div>
       <div className="profile_info">
-        <span>Welcome,</span>
+        <span>Xin chào,</span>
         <h2>{user.email}</h2>
       </div>
     </div>

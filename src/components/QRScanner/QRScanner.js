@@ -47,7 +47,7 @@ class QRScanner extends Component {
   }
 
   handleImgSubmit(){
-    this.refs.reader.openImageDialog()
+    this.scanner.openImageDialog();
   }
 
   handleClose = e => {
@@ -96,7 +96,7 @@ class QRScanner extends Component {
                         facingMode={"environment"}
                         delay={500}
                         legacyMode={this.state.legacyMode}
-                        ref="reader"
+                        ref={(ref) => {this.scanner = ref}}
                       />
                     </div>
                   </div>

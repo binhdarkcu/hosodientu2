@@ -82,6 +82,7 @@ class FormDanhSachUser extends React.Component {
       console.log('errr:', err);
     });
   }
+
   handleAction = (id, type) => {
     if (id) {
       const _self = this;
@@ -112,6 +113,15 @@ class FormDanhSachUser extends React.Component {
     }
   }
 
+  convertToDate = (data) => {
+    if(!data) return null;
+    const date = new Date(data);
+    const d = date.getDate();
+    const m = date.getMonth() + 1;
+    const y = date.getFullYear();
+    return `${d > 9 ? d : "0"+d}/${m > 9 ? m : "0"+m}/${y}`;
+  }
+
   render() {
     const { classes, users } = this.props;
     const { loading } = this.state;
@@ -122,6 +132,8 @@ class FormDanhSachUser extends React.Component {
           <TableHead>
             <TableRow>
               <TableCell className={classes.header}>Tên user</TableCell>
+              <TableCell className={classes.header}align="center">Mã y tế</TableCell>
+              <TableCell className={classes.header} align="center">Ngày sinh</TableCell>
               <TableCell className={classes.header} align="center">Email</TableCell>
               <TableCell className={classes.header} align="center">Số điện thoại</TableCell>
               <TableCell className={classes.header} align="center">Active User</TableCell>
@@ -132,9 +144,9 @@ class FormDanhSachUser extends React.Component {
           <TableBody>
             {users.map(user => (
               <TableRow key={user.userId}>
-                <TableCell component="th" scope="row">
-                  {user.ten}
-                </TableCell>
+                <TableCell component="th" scope="row">{user.ten}</TableCell>
+                <TableCell align="center">{user.maYte}</TableCell>
+                <TableCell align="center">{this.convertToDate(user.ngaySinh)}</TableCell>
                 <TableCell align="center">{user.email}</TableCell>
                 <TableCell align="center">{user.phone}</TableCell>
                 {

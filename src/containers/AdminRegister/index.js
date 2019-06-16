@@ -193,7 +193,6 @@ class FormRegister extends React.Component {
 
   handleScan = (code) => {
     this.setState({showQRScanner: false, loading: true}, () => {
-      alert(code);
       this.props.getUserByQrCode(code).then((data) => {
         if(data.status === 200){
           const patient = new ActivatePatientPostModel(data.json)
