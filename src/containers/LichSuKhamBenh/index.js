@@ -107,7 +107,6 @@ class LichSuKhamBenh extends React.Component {
 
   toggleList = (index) => {
     this.setState((prevState)=>{
-      console.log(prevState);
       let visibility = [...prevState.visibility];
       visibility[index] = !visibility[index];
       return {visibility}
