@@ -144,7 +144,7 @@ class FormDanhSachUser extends React.Component {
           <TableBody>
             {users.map(user => (
               <TableRow key={user.userId}>
-                <TableCell component="th" scope="row">{user.ten}</TableCell>
+                <TableCell component="th" scope="row">{user.ho} {user.ten}</TableCell>
                 <TableCell align="center">{user.maYte}</TableCell>
                 <TableCell align="center">{this.convertToDate(user.ngaySinh)}</TableCell>
                 <TableCell align="center">{user.email}</TableCell>
