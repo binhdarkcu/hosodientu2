@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import { toast } from 'react-toastify';
 import { BOUNCE } from '../../constants/Loaders';
 import Spinner from '../../components/Spinner';
-import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
+import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
 //custom import
 import { GET_USER_LIST } from '../../actions/types';
 import { execGetUserList, execDeleteUser, execAdminApprove } from '../../actions/services/api-user';
@@ -117,7 +117,7 @@ class FormDanhSachUser extends React.Component {
     const { loading } = this.state;
     return (
       <Paper className={classes.root}>
-        <Spinner type={BOUNCE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
+        <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
         <Table className={classes.table}>
           <TableHead>
             <TableRow>

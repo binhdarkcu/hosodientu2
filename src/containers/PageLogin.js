@@ -9,7 +9,8 @@ import { saveUserInfo } from '../actions/services/user';
 
 import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
-import { SPINNER_LIGHT_GREEN } from '../constants/Colors';
+import Logo from '../components/Logo';
+import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
 import { PACMAN } from '../constants/Loaders';
 import { USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED, INVALID_LOGIN } from '../constants/Messages';
 import { redirect } from 'redux-first-router';
@@ -83,7 +84,10 @@ class PageLogin extends Component{
       <div>
         <div className="login_wrapper">
           <div className="animate form login_form">
-            <Spinner type={PACMAN} size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+            <Spinner type={PACMAN} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
+            <div>
+              <Logo size={150} align="center"/>
+            </div>
             <section className="login_content">
               <form>
                 <h1>Đăng nhập</h1>
@@ -108,10 +112,6 @@ class PageLogin extends Component{
                 </p>
                   <div className="clearfix"></div>
                   <br />
-                  <div>
-                    <h1><i className="fa fa-paw"></i> Gentelella Alela!</h1>
-                    <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                  </div>
                 </div>
               </form>
             </section>

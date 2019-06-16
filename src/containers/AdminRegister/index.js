@@ -24,7 +24,7 @@ import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
 import { execRegister, execGetUserInfoByPatientCode, execUpdate, execGetPatientByQrCode, execGetUserDetail } from '../../actions/services/api-user';
 import Spinner from '../../components/Spinner';
-import { SPINNER_LIGHT_GREEN } from '../../constants/Colors';
+import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
 import { BOUNCE } from '../../constants/Loaders';
 import ActivatePatientPostModel from '../../models/activatePatientPostModel';
 
@@ -215,7 +215,7 @@ class FormRegister extends React.Component {
     const { loading, user, isUpdateUser, showQRScanner } = this.state;
     return (
       <FormLayoutVertical>
-        <Spinner type={BOUNCE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
+        <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
         <ValidatorForm
           ref="form"
           onSubmit={this.handleSubmit}

@@ -21,7 +21,7 @@ import AvatarSelector from '../components/AvatarSelector';
 import Spinner from '../components/Spinner';
 
 import { PULSE } from '../constants/Loaders';
-import { SPINNER_LIGHT_GREEN } from '../constants/Colors';
+import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
 import * as MSG from '../constants/Messages';
 // import { SET_USER_INFO } from '../actions/types';
 import { execLogout, saveUserInfo } from '../actions/services/user.js';
@@ -88,6 +88,10 @@ class Dashboard extends Component {
     })
   }
 
+  handleLogoClick = () => {
+
+  }
+
   render() {
 
     const { pageType, userInfo } = this.props;
@@ -96,12 +100,12 @@ class Dashboard extends Component {
 
     return (
       <div className="container body">
-        <Spinner type={PULSE} size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+        <Spinner type={PULSE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
         <div className="main_container">
           <div className="col-md-3 left_col" style={{ position: "fixed" }}>
             <div className="left_col scroll-view">
 
-              <SiteLogo />
+              <SiteLogo onClick={this.handleLogoClick}/>
 
               <div className="clearfix"></div>
 

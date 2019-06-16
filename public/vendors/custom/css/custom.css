@@ -16,7 +16,7 @@ html , body{
  }
 
 .left_col {
-    background: #2A3F54
+    background: #f7931d
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;
@@ -150,11 +150,11 @@ html , body{
 .profile_info span {
     font-size: 13px;
     line-height: 30px;
-    color: #BAB8B8
+    color: #FFFFFF;
 }
 .profile_info h2 {
     font-size: 14px;
-    color: #ECF0F1;
+    color: #FFFFFF;
     margin: 0;
     font-weight: 300
 }
@@ -232,9 +232,9 @@ body .container.body .right_col {
 .nav_title {
     width: 230px;
     float: left;
-    background: #2A3F54;
+    background: #f7931d;
     border-radius: 0;
-    height: 57px
+    height: 80px
 }
 @media (max-width: 991px) {
     .nav-md .container.body .right_col,
@@ -672,7 +672,7 @@ a:focus {
 .nav li li.current-page a {
     color: #fff
 }
-.nav.side-menu>li.active>a {
+.nav.side-menu>li.active>a, .nav.side-menu>li.active-sm>a {
     text-shadow: rgba(0, 0, 0, 0.25) 0 -1px 0;
     background: linear-gradient(#334556, #2C4257), #2A3F54;
     box-shadow: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0
@@ -690,7 +690,7 @@ a:focus {
     font-weight: 400;
     font-size: 22px;
     width: 100%;
-    color: #ECF0F1 !important;
+    color: #FFFFFF !important;
     margin-left: 0 !important;
     line-height: 59px;
     display: block;
@@ -1544,7 +1544,7 @@ span.right {
     padding: 5px 0 0 0;
     position: fixed;
     width: 230px;
-    background: #2A3F54;
+    background: #f7931d;
 	z-index:999;
 }
 .sidebar-footer a {
@@ -3365,7 +3365,7 @@ form:after {
 }
 .login_content form div a {
     font-size: 12px;
-    margin: 10px 15px 0 0
+    margin: 10px 15px 0 5px;
 }
 .reset_pass {
     margin-top: 10px !important

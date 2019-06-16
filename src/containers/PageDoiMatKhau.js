@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 // custom imports
 import PropTypes from 'prop-types';
 import Spinner from '../components/Spinner';
-import { SPINNER_LIGHT_GREEN } from '../constants/Colors';
+import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
 import * as MSG from '../constants/Messages.js';
 import * as RULE from '../constants/Rules.js';
 import Grid from '@material-ui/core/Grid';
@@ -59,6 +59,7 @@ class PageDoiMatKhau extends Component {
       this.handleSubmit(e);
     }
   }
+
   handleSubmit = () => {
     console.log(this.state);
     const data = {
@@ -92,7 +93,7 @@ class PageDoiMatKhau extends Component {
     const { classes } = this.props;
     return (
       <FormLayoutVertical>
-        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading} />
+        <Spinner type="PacmanLoader" size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
         <ValidatorForm
           ref="form"
           onSubmit={this.handleSubmit}

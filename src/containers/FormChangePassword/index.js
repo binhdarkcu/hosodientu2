@@ -16,7 +16,7 @@ import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
 import FormFooter from '../../components/FormFooter';
 import Spinner from '../../components/Spinner';
-import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
+import {GOLDEN_HEALTH_ORANGE} from '../../constants/Colors';
 
 import { execChangePassword } from '../../actions/services/api-user.js';
 import { execLogout } from '../../actions/services/user.js';
@@ -96,7 +96,7 @@ class FormChangePassword extends React.Component {
     const { loading, oldPassword, newPassword, repeatPassword } = this.state;
     return (
       <FormLayoutVertical>
-        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+        <Spinner type="PacmanLoader" size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
         <ValidatorForm
             ref="form"
             onSubmit={this.handleSubmit}

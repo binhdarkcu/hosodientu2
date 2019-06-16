@@ -16,7 +16,7 @@ import * as RULE from '../constants/Rules.js';
 import { connect } from 'react-redux';
 import {execActivateUser} from '../actions/services/api-user.js';
 import Spinner from '../components/Spinner';
-import {SPINNER_LIGHT_GREEN} from '../constants/Colors';
+import {GOLDEN_HEALTH_ORANGE} from '../constants/Colors';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const mapDispatchToProps = dispatch => ({
@@ -93,7 +93,7 @@ class PageActivateUser extends React.Component {
     const { loading, password, repeatPassword, isChecked, isRead } = this.state;
     return (
       <FormLayoutVertical>
-        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+        <Spinner type="PacmanLoader" size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
         <ValidatorForm
             ref="form"
             onSubmit={this.handleSubmit}
