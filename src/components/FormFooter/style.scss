@@ -1,0 +1,26 @@
+.FormFooter{
+  .FormGroup{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    .ImageContainer{
+      position: relative;
+      flex-basis: 60px;
+      height: 50px;
+      img{
+        border: 1px solid #F7931D;
+      }
+
+      .BigImage{
+        position: absolute;
+        left: 52px;
+        bottom: 0;
+      }
+    }
+
+    .Address{
+      flex: 1;
+    }
+  }
+}
