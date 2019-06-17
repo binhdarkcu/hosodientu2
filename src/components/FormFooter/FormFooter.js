@@ -21,7 +21,6 @@ class FormFooter extends React.Component{
 
   render(){
     const { showBigImage } = this.state;
-    console.log(showBigImage);
     return(
       <Grid className="FormFooter" container spacing={8}>
 
