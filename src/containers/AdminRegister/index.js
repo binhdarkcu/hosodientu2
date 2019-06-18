@@ -160,7 +160,7 @@ class FormRegister extends React.Component {
     const _self = this;
     _self.setState({ loading: true });
     let user = { ...this.state.user };
-    user.ngaySinh = user.ngaySinh ? `${user.ngaySinh.getFullYear()}-${user.ngaySinh.getMonth() + 1}-${user.ngaySinh.getDate()}` : null;
+    user.ngaySinh = user.ngaySinh ? user.ngaySinh : null;
     if (this.state.isUpdateUser) {
       this.props.updateUser(user).then((done) => {
         toast.success(MSG.USER_UPDATED);
