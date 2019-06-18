@@ -8,8 +8,10 @@ const SidebarMenu = () => {
         <h3>General</h3>
         <ul className="nav side-menu">
           <li><Link to="/lich-su-kham-benh"><i className="fa fa-table"></i>Danh sách khám bệnh</Link></li>
-          <li><Link to="/admin-dang-ky"><i className="fa fa-bar-chart-o"></i>Đăng ký</Link></li>
-          <li><Link to="/danh-sach"><i className="fa fa-list-alt"></i>Danh sách user</Link></li>
+          <li><Link to="/danh-sach-nguoi-dung"><i className="fa fa-list-alt"></i>Danh sách người dùng</Link></li>
+          <li><Link to="/danh-sach-cong-ty"><i className="fa fa-list-alt"></i>Danh sách công ty</Link></li>
+          <li><Link to="/admin-dang-ky"><i className="fa fa-bar-chart-o"></i>Đăng ký người dùng</Link></li>
+          <li><Link to="/dang-ky-cong-ty"><i className="fa fa-bar-chart-o"></i>Đăng ký công ty</Link></li>
         </ul>
       </div>
 

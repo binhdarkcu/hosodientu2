@@ -46,53 +46,19 @@ function checkLoginStatus(dispatch, getState) {
   }
 }
 
-function freePass(dispatch, getState){
-  console.log('freePass');
+function noAuthentication(dispatch, getState){
+  console.log('Free to go!');
 }
+
 // const history = createHistory()
 const routesMap = {
+    // separate pages
     RTE_DASHBOARD: {
       path: '/',
       thunk: defaultThunk
     },
     [NOT_FOUND]: {
       path: '/not-found',
-      thunk: defaultThunk
-    },
-    RTE_LOGIN: {
-      path: '/login',
-      thunk: checkLoginStatus
-    },
-    RTE_ADMIN_REGISTER: {
-      path: '/admin-dang-ky',
-      thunk: defaultThunk
-    },
-    RTE_USER_REGISTER: {
-      path: '/nguoi-dung-dang-ky',
-      thunk: freePass
-    },
-    RTE_ACTIVATE: {
-      path: '/kich-hoat/:code',
-      thunk: freePass
-    },
-    RTE_DANH_SACH_USER: {
-      path: '/danh-sach',
-      thunk: defaultThunk
-    },
-    RTE_CHI_TIET_USER: {
-      path: '/chi-tiet/:id',
-      thunk: defaultThunk
-    },
-    RTE_DOI_MAT_KHAU: {
-      path: '/doi-mat-khau/:id',
-      thunk: defaultThunk
-    },
-    RTE_CHANGE_PASSWORD: {
-      path: '/doi-mat-khau',
-      thunk: defaultThunk
-    },
-    RTE_LIST_KHAM_BENH: {
-      path: '/lich-su-kham-benh',
       thunk: defaultThunk
     },
     RTE_CHI_TIET_KHAM_BENH: {
@@ -103,6 +69,60 @@ const routesMap = {
       path: '/cap-nhat-user/:id',
       thunk: defaultThunk
     },
+    RTE_LOGIN: {
+      path: '/login',
+      thunk: checkLoginStatus
+    },
+    RTE_ADMIN_REGISTER: {
+      path: '/admin-dang-ky',
+      thunk: defaultThunk
+    },
+
+    // NO AUTHENTICATION
+    RTE_DANG_KY_CONG_TY: {
+      path: '/dang-ky-cong-ty',
+      thunk: defaultThunk
+    },
+    RTE_USER_REGISTER: {
+      path: '/nguoi-dung-dang-ky',
+      thunk: noAuthentication
+    },
+    RTE_ACTIVATE: {
+      path: '/kich-hoat/:code',
+      thunk: noAuthentication
+    },
+    //LIST
+    RTE_DANH_SACH_USER: {
+      path: '/danh-sach-nguoi-dung',
+      thunk: defaultThunk
+    },
+    RTE_DANH_SACH_CONG_TY: {
+      path: '/danh-sach-cong-ty',
+      thunk: defaultThunk
+    },
+    RTE_DANH_SACH_KHAM_BENH: {
+      path: '/lich-su-kham-benh',
+      thunk: defaultThunk
+    },
+
+    // DETAIL
+    RTE_CHI_TIET_USER: {
+      path: '/chi-tiet/:id',
+      thunk: defaultThunk
+    },
+    RTE_CHI_TIET_CONG_TY: {
+      path: '/cong-ty/:id',
+      thunk: defaultThunk
+    },
+    RTE_DOI_MAT_KHAU: {
+      path: '/doi-mat-khau/:id',
+      thunk: defaultThunk
+    },
+    RTE_CHANGE_PASSWORD: {
+      path: '/doi-mat-khau',
+      thunk: defaultThunk
+    },
+
 }
 
 export function createDefaultRedirector(dispatch) {

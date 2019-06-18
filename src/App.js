@@ -7,7 +7,31 @@ import 'react-toastify/dist/ReactToastify.css';
 import './assets/styles/all.scss';
 // custom imports
 import * as pages from './containers';
-import {createDefaultRedirector} from './router';
+import { createDefaultRedirector } from './router';
+
+// OVERWRITE CONSOLE
+let console = function(oldCons){
+
+  const DEVELOP_MODE = process.env.NODE_ENV === 'development';
+
+  return {
+    log: function(){
+      DEVELOP_MODE && oldCons.log.apply(console, arguments);
+    },
+    info: function(){
+      DEVELOP_MODE && oldCons.info.apply(console, arguments);
+    },
+    warn: function(){
+      DEVELOP_MODE && oldCons.warn.apply(console, arguments);
+    },
+    error: function(){
+      DEVELOP_MODE && oldCons.error.apply(console, arguments);
+    }
+  }
+}(window.console);
+
+//Then redefine the old console
+window.console = console;
 
 // config toast notifications
 toast.configure({

@@ -5,9 +5,13 @@ const components = {
   RTE_DASHBOARD: 'Dashboard',
   RTE_CHANGE_PASSWORD: 'Dashboard',
   RTE_ADMIN_REGISTER: 'Dashboard',
+  RTE_DANG_KY_CONG_TY: 'Dashboard',
   RTE_DANH_SACH_USER: 'Dashboard',
+  RTE_DANH_SACH_CONG_TY: 'Dashboard',
+  RTE_DANH_SACH_KHAM_BENH: 'Dashboard',
+
   RTE_CHI_TIET_USER: 'Dashboard',
-  RTE_LIST_KHAM_BENH: 'Dashboard',
+  RTE_CHI_TIET_CONG_TY: 'Dashboard',
   RTE_CHI_TIET_KHAM_BENH: 'Dashboard',
 
   // Separate pages

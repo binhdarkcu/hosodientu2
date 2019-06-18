@@ -61,7 +61,7 @@ const styles = theme => ({
   },
 });
 
-class FormUser extends React.Component {
+class ChiTietUser extends React.Component {
 
   state = {
     user: {},
@@ -96,6 +96,7 @@ class FormUser extends React.Component {
   render() {
     const { classes } = this.props;
     const { user, ngaySinh, ngayDangKy } = this.state;
+    console.log(user);
     return (
       <FormLayoutHorizontal>
 
@@ -145,8 +146,8 @@ class FormUser extends React.Component {
   }
 }
 
-FormUser.propTypes = {
+ChiTietUser.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(FormUser));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ChiTietUser));

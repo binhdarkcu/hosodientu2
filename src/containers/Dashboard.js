@@ -4,21 +4,26 @@ import { toast } from 'react-toastify';
 // import { createAction } from 'redux-actions';
 import { redirect } from 'redux-first-router';
 
-// Custom imports
+// components
 import SidebarProfile from '../components/SidebarProfile';
 import SidebarMenu from '../components/SidebarMenu';
 import SidebarFooter from '../components/SidebarFooter';
 import TopNav from '../components/TopNav';
 import Footer from '../components/Footer';
 import SiteLogo from '../components/SiteLogo';
-import FormDanhSachUser from './FormDanhSachUser';
-import AdminRegister from './AdminRegister';
-import FormChangePassword from './FormChangePassword';
-import FormUser from './FormUser';
-import DanhSachKhamBenh from './LichSuKhamBenh';
-import ChiTietKhamBenh from './ChiTietKhamBenh';
 import AvatarSelector from '../components/AvatarSelector';
 import Spinner from '../components/Spinner';
+
+// containers
+import AdminRegister from './AdminRegister';
+import FormChangePassword from './FormChangePassword';
+import ChiTietUser from './ChiTietUser';
+import ChiTietCongTy from './ChiTietCongTy';
+import ChiTietKhamBenh from './ChiTietKhamBenh';
+import DsUser from './DsUser';
+import DsKhamBenh from './DsKhamBenh';
+import DsCongTy from './DsCongTy';
+import DangKyCongTy from './DangKyCongTy';
 
 import { PULSE } from '../constants/Loaders';
 import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
@@ -43,14 +48,23 @@ const mapDispatchToProps = dispatch => ({
 
 // mapping pages
 const pages = {
-  'RTE_DASHBOARD': DanhSachKhamBenh,
+  //pages
+  'RTE_DASHBOARD': DsKhamBenh,
   'RTE_ADMIN_REGISTER': AdminRegister,
-  'RTE_DANH_SACH_USER': FormDanhSachUser,
-  'RTE_CHI_TIET_USER': FormUser,
   'RTE_CHANGE_PASSWORD': FormChangePassword,
-  'RTE_LIST_KHAM_BENH': DanhSachKhamBenh,
-  'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh,
   'RTE_USER_UPDATE': AdminRegister,
+  'RTE_DANG_KY_CONG_TY': DangKyCongTy,
+  
+  // list
+  'RTE_DANH_SACH_USER': DsUser,
+  'RTE_DANH_SACH_KHAM_BENH': DsKhamBenh,
+  'RTE_DANH_SACH_CONG_TY': DsCongTy,
+
+  //details
+  'RTE_CHI_TIET_USER': ChiTietUser,
+  'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh,
+  'RTE_CHI_TIET_CONG_TY': ChiTietCongTy
+
 };
 
 class Dashboard extends Component {

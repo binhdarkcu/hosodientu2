@@ -17,7 +17,7 @@ const deleteUserUrl = `${baseUrl}/api/User?id=`;
 const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
 const adminApprove = `${baseUrl}/api/User/AdminApprove`;
 const patientByQrCodeUrl = `${'http://115.79.197.84:83'}/api/PatientByQRCode`;
-
+const userInfoByEmailUrl = `${baseUrl}/api/UserByEmail?email=`;
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
 
@@ -28,7 +28,7 @@ export const execGetUserInfo = username => dispatch => {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     };
 
-    const userInfoUrl = `${baseUrl}/api/UserByEmail?email=${username}`;
+    const userInfoUrl = userInfoByEmailUrl + username;
     return new Promise((resolve, reject) => {
         sendHttpRequest(userInfoUrl, parameters)
           .then(({status, json}) => {

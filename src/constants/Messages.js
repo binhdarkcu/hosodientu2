@@ -20,7 +20,9 @@ export const UPDATE_AVATAR_FAILED = 'Không thể cập nhật ảnh đại di�
 export const UPDATE_AVATAR_SUCCESS = 'Cập nhật ảnh đại diện thành công';
 export const WRONG_INFO ='Thông tin không chính xác';
 export const USER_APPROVE = 'User đã được active';
-export const INVALID_QR_CODE = 'QR code không hợp lệ'
+export const INVALID_QR_CODE = 'QR code không hợp lệ';
+export const GET_COMPANY_LIST_FAILED = 'Không thể lấy danh sách công ty';
+export const GET_COMPANY_DETAILS_FAILED = 'Không thể lấy thông tin công ty';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';
