@@ -119,7 +119,7 @@ class ChiTietCongTy extends React.Component {
             <div className={classes.item}><b>Ghi chú lịch khám:</b> <i>{company.ghiChuLichKham}</i></div>
             <div className={classes.item}><b>Ngày tạo:</b> <i>{this.convertToDate(company.ngayTao)}</i></div>
             <div className={classes.item}><b>Ngày cập nhật:</b> <i>{this.convertToDate(company.ngayUpdate)}</i></div>
-            <div className={classes.item}><b>Trạng thái kích hoạt:</b> <i><b className={classes.activated}>Đã kích hoạt</b></i></div>
+            <div className={classes.item}><b>Trạng thái kích hoạt:</b> <i><b className={classes.activated}>Không xác định</b></i></div>
           </Grid>
           <Divider />
         </Grid>

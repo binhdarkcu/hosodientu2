@@ -12,26 +12,20 @@ import { createDefaultRedirector } from './router';
 // OVERWRITE CONSOLE
 let console = function(oldCons){
 
-  const DEVELOP_MODE = process.env.NODE_ENV === 'development';
+  process.env.NODE_ENV !== 'development' && oldCons.log('console sẽ bị vô hiệu hóa trong môi trường production!');
 
   return {
-    log: function(){
-      DEVELOP_MODE && oldCons.log.apply(console, arguments);
-    },
-    info: function(){
-      DEVELOP_MODE && oldCons.info.apply(console, arguments);
-    },
-    warn: function(){
-      DEVELOP_MODE && oldCons.warn.apply(console, arguments);
-    },
-    error: function(){
-      DEVELOP_MODE && oldCons.error.apply(console, arguments);
-    }
+    log: () => {},
+    info: () => {},
+    warn: () => {},
+    error: () => {}
   }
 }(window.console);
 
 //Then redefine the old console
-window.console = console;
+if(process.env.NODE_ENV !== 'development'){
+  window.console = console;
+}
 
 // config toast notifications
 toast.configure({
