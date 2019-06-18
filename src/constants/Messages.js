@@ -23,6 +23,8 @@ export const USER_APPROVE = 'User đã được active';
 export const INVALID_QR_CODE = 'QR code không hợp lệ';
 export const GET_COMPANY_LIST_FAILED = 'Không thể lấy danh sách công ty';
 export const GET_COMPANY_DETAILS_FAILED = 'Không thể lấy thông tin công ty';
+export const ACTIVATE_COMPANY_FAILED = 'Không thể đăng ký công ty';
+export const ACTIVATE_COMPANY_SUCCESS = 'Đăng ký công ty thành công';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';

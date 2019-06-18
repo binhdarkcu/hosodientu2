@@ -1,5 +1,4 @@
 import 'whatwg-fetch';
-import _ from 'lodash';
 import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
 

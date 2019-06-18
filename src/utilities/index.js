@@ -1,4 +1,4 @@
-export const formatBirthDay = (date) => {
+export const formatBirthDay = (data) => {
   if(!data) return null;
   const date = new Date(data);
   const d = date.getDate();
