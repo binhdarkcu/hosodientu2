@@ -1,4 +1,4 @@
-import { formatBirthDay } from '../utilities';
+import moment from 'moment';
 
 class ActivateCompanyPostModel {
   constructor(data = {}) {
@@ -10,7 +10,7 @@ class ActivateCompanyPostModel {
     this.ho = data.ho || "";
     this.ten = data.ten || "";
     this.gioiTinh = data.gioiTinh || "";
-    this.ngaySinh = formatBirthDay(data.ngaySinh) || "";
+    this.ngaySinh = ActivateCompanyPostModel.formatNgaySinh(data.ngaySinh);
   }
 
   save(){
@@ -22,4 +22,11 @@ class ActivateCompanyPostModel {
   }
 }
 
+ActivateCompanyPostModel.formatNgaySinh = (data) => {
+  const date = moment(data);
+  if(date.isValid && (new moment()).diff(date, 'days') > 0)
+    return date.format('YYYY-MM-DD');
+  return '';
+
+};
 export default ActivateCompanyPostModel;

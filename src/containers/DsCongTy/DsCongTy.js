@@ -57,13 +57,24 @@ const styles = theme => ({
 class DsCongTy extends React.Component {
 
   state = {
-    loading: false,
+    loading: true,
   };
 
   componentWillMount() {
     this.props.getCompanyList().then(data => {
-      data.status === 200 ? this.props.saveToStore(data.json) : toast.error(MSG.GET_COMPANY_LIST_FAILED);
-    }).catch(err => toast.error(MSG.GET_COMPANY_LIST_FAILED));
+      data.status === 200 ? this.handleSuccess(data.json) : this.handleError(data);
+    }).catch(err => this.handleError(err));
+  }
+
+  handleSuccess = (companyList) => {
+    this.props.saveToStore(companyList);
+    this.setState({loading: false})
+  }
+
+  handleError = (err) => {
+    console.error(err);
+    this.setState({loading: false});
+    toast.error(MSG.GET_COMPANY_LIST_FAILED);
   }
 
   gotoDetails(id){

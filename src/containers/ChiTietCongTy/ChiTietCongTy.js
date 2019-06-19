@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import moment from 'moment';
 
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
 import Logo from '../../components/Logo';
@@ -63,15 +64,6 @@ class ChiTietCongTy extends React.Component {
     toast.error(MSG.GET_COMPANY_DETAILS_FAILED);
   }
 
-  convertToDate = (data) => {
-    if(!data) return null;
-    const date = new Date(data);
-    const d = date.getDate();
-    const m = date.getMonth() + 1;
-    const y = date.getFullYear();
-    return `${d > 9 ? d : "0"+d}/${m > 9 ? m : "0"+m}/${y} ${date.toLocaleTimeString()}`;
-  }
-
   render() {
 
     const { classes } = this.props;
@@ -117,8 +109,8 @@ class ChiTietCongTy extends React.Component {
             <div className={classes.item}><b>Mã đơn vị công tác:</b> <i>{company.maDonViCongTac}</i></div>
             <div className={classes.item}><b>Ghi chú hợp đồng:</b> <i>{company.ghiChuHopDong}</i></div>
             <div className={classes.item}><b>Ghi chú lịch khám:</b> <i>{company.ghiChuLichKham}</i></div>
-            <div className={classes.item}><b>Ngày tạo:</b> <i>{this.convertToDate(company.ngayTao)}</i></div>
-            <div className={classes.item}><b>Ngày cập nhật:</b> <i>{this.convertToDate(company.ngayUpdate)}</i></div>
+            <div className={classes.item}><b>Ngày tạo:</b> <i>{company.ngayTao && moment(company.ngayTao).format('DD/MM/YYYY h:mm:ss')}</i></div>
+            <div className={classes.item}><b>Ngày cập nhật:</b> <i>{company.ngayUpdate && moment(company.ngayUpdate).format('DD/MM/YYYY h:mm:ss')}</i></div>
             <div className={classes.item}><b>Trạng thái kích hoạt:</b> <i><b className={classes.activated}>Không xác định</b></i></div>
           </Grid>
           <Divider />

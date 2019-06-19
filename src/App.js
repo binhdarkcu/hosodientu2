@@ -3,14 +3,22 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment'
 
 import './assets/styles/all.scss';
 // custom imports
 import * as pages from './containers';
 import { createDefaultRedirector } from './router';
 
-// OVERWRITE CONSOLE
-let console = function(oldCons){
+//***************************************************************************
+//                        APPLICATION CONFIGURATIONS                        *
+//***************************************************************************
+
+// Config momentJs
+moment.updateLocale(moment.locale(), { invalidDate: "Ngày không hợp lệ!" });
+
+// config console
+const console = function(oldCons){
 
   process.env.NODE_ENV !== 'development' && oldCons.log('console sẽ bị vô hiệu hóa trong môi trường production!');
 

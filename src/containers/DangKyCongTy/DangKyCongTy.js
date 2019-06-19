@@ -12,7 +12,7 @@ import DatePicker from 'react-date-picker';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
-
+import _ from 'lodash';
 //custom import
 import FormLayoutVertical from '../../components/FormLayoutVertical';
 import FormFooter from '../../components/FormFooter';
@@ -20,13 +20,15 @@ import Logo from '../../components/Logo';
 import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
-import { execActivateCompany } from '../../actions/services/api-company';
+import { execActivateCompany, execGetCompanyList } from '../../actions/services/api-company';
 import Spinner from '../../components/Spinner';
 import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
 import { BOUNCE } from '../../constants/Loaders';
 import ActivateCompanyPostModel from '../../models/activateCompanyPostModel';
+import Dropdown from '../../components/DropdownList';
 
 const mapDispatchToProps = dispatch => ({
+  getCompanies: () => dispatch(execGetCompanyList()),
   register: (data) => dispatch(execActivateCompany(data)),
   goToDashboard: () => dispatch({ type: 'RTE_DASHBOARD' }),
 });
@@ -41,19 +43,19 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 200,
   },
 
   group: {
-    margin: `${theme.spacing.unit}px 0`,
+    margin: `${theme.spacing(1)}px 0`,
   },
   customControl: {
     margin: 8
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     backgroundColor: '#2698D6',
     color: '#fff',
   },
@@ -62,11 +64,28 @@ const styles = theme => ({
 class DangKyCongTy extends React.Component {
 
   state = {
+    companies: [],
     data: new ActivateCompanyPostModel(),
     loading: false,
+    maxDay: new Date()
   };
 
   componentDidMount() {
+    this.props.getCompanies().then(result => {
+      if(result.status === 200){
+        const options = this.createOptions(result.json);
+        this.setState({companies: options});
+      }
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  createOptions = (companies) => {
+    return _.map(companies, (company) => ({
+      label: company.tenDonViCongTac,
+      value: company.donViCongTacId,
+    }));
 
   }
 
@@ -97,6 +116,14 @@ class DangKyCongTy extends React.Component {
     });
   }
 
+  handleSuccess = (data) => {
+    console.log(data);
+  }
+
+  handleError = (err) => {
+    console.log(err);
+  }
+
   goToDashboard = () => {
     this.props.goToDashboard();
   }
@@ -104,7 +131,7 @@ class DangKyCongTy extends React.Component {
   render() {
 
     const { classes } = this.props;
-    const { loading, data } = this.state;
+    const { loading, data, maxDay, companies } = this.state;
 
     return (
       <FormLayoutVertical>
@@ -114,7 +141,7 @@ class DangKyCongTy extends React.Component {
           onSubmit={this.handleSubmit}
           onError={errors => console.log(errors)}
         >
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <Logo onClick={this.goToDashboard} size={150} />
             </Grid>
@@ -126,7 +153,7 @@ class DangKyCongTy extends React.Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
 
             <Grid item xs={12} sm={3}>
               <TextValidator
@@ -153,13 +180,7 @@ class DangKyCongTy extends React.Component {
             </Grid>
 
             <Grid item xs={12} sm={3}>
-              <TextValidator
-                label="ID đơn vị cộng tác"
-                className={classes.textField}
-                value={data.donViCongTacId}
-                onChange={this.handleChange('donViCongTacId')}
-                margin="normal"
-              />
+                <Dropdown options={companies} label='Công ty' placeholder='Chọn công ty'/>
             </Grid>
 
             <Grid item xs={12} sm={3}>
@@ -230,6 +251,7 @@ class DangKyCongTy extends React.Component {
                     locale="vi"
                     disabled={false}
                     value={data.ngaySinh}
+                    maxDate={maxDay}
                     onChange={this.handleChangeDate}
                   />
                 </FormControl>
