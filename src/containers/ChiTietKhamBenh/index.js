@@ -119,7 +119,7 @@ class ChiTietKhamBenh extends React.Component {
     const { html, hasError } = this.state;
     return (
       <FormLayoutHorizontal>
-        <Grid container spacing={24}>
+        <Grid container spacing={2}>
           <Grid item xs={12} className={classes.row + ' hasLoader'}>
             <Frame  ref={(ref) => {this.iframe = ref}}
                     initialContent='<!DOCTYPE html><html><head></head><body class="iframe-body"><div></div></body></html>'

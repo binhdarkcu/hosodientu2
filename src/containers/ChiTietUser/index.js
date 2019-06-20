@@ -100,7 +100,7 @@ class ChiTietUser extends React.Component {
     return (
       <FormLayoutHorizontal>
 
-        <Grid container spacing={24}>
+        <Grid container spacing={2}>
 
           <Grid item xs={3}>
             <img className={classes.img} alt="complex" src={mainLogo} />
@@ -118,7 +118,7 @@ class ChiTietUser extends React.Component {
           </Grid>
         </Grid>
 
-        <Grid container spacing={24}>
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <Divider />
           </Grid>

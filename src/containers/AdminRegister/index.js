@@ -38,8 +38,7 @@ const mapDispatchToProps = dispatch => ({
   getUserByQrCode: (code) => dispatch(execGetPatientByQrCode({ code }))
 });
 
-const mapStateToProps = ({ id, location }) => ({
-  id: id,
+const mapStateToProps = ({ location }) => ({
   location: location,
 });
 
@@ -49,19 +48,19 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: `calc(100% - ${theme.spacing(1)}px)`,
   },
 
   group: {
-    margin: `${theme.spacing.unit}px 0`,
+    margin: `${theme.spacing(1)}px 0`,
   },
   customControl: {
     margin: 8
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
     backgroundColor: '#2698D6',
     color: '#fff',
   },
@@ -226,7 +225,7 @@ class FormRegister extends React.Component {
           onSubmit={this.handleSubmit}
           onError={errors => console.log(errors)}
         >
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <Logo onClick={this.goToDashboard} size={150} />
             </Grid>
@@ -240,7 +239,7 @@ class FormRegister extends React.Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <TextValidator
                 id="ar-mayte"

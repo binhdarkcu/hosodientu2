@@ -9,6 +9,7 @@ import FormLayoutVertical from '../components/FormLayoutVertical';
 import FormFooter from '../components/FormFooter';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
+import { redirect } from 'redux-first-router';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 // import { toast } from 'react-toastify';
 import * as MSG from '../constants/Messages.js';
@@ -20,7 +21,8 @@ import {GOLDEN_HEALTH_ORANGE} from '../constants/Colors';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const mapDispatchToProps = dispatch => ({
-  activate: data => dispatch(execActivateUser(data))
+  activate: data => dispatch(execActivateUser(data)),
+  gotoHomepage: () => dispatch(redirect({type: 'RTE_DASHBOARD'}))
 });
 
 const mapStateToProps = ({location}) => ({
@@ -29,8 +31,8 @@ const mapStateToProps = ({location}) => ({
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 200,
   },
   paper: {
@@ -89,7 +91,7 @@ class PageActivateUser extends React.Component {
 
   render() {
 
-    const { classes } = this.props;
+    const { classes, gotoHomepage } = this.props;
     const { loading, password, repeatPassword, isChecked, isRead } = this.state;
     return (
       <FormLayoutVertical>
@@ -99,9 +101,9 @@ class PageActivateUser extends React.Component {
             onSubmit={this.handleSubmit}
             onError={errors => console.log(errors)}
         >
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={3}>
-              <Logo size={150}/>
+              <Logo size={150} onClick={gotoHomepage}/>
             </Grid>
 
             <Grid item xs={6}>
@@ -111,7 +113,7 @@ class PageActivateUser extends React.Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
 
             <Grid item xs={12} sm={6}>
               <TextValidator

@@ -14,7 +14,8 @@ import PropTypes from 'prop-types';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    height: 'auto'
+    height: 'auto',
+    marginTop: 10
   },
   input: {
     display: 'flex',
@@ -230,7 +231,7 @@ const components = {
   ValueContainer,
 };
 
-export default function IntegrationReactSelect({options, isMulti, label, placeholder}) {
+export default function IntegrationReactSelect({options, isMulti, label, placeholder, onChange}) {
   const classes = useStyles();
   const theme = useTheme();
   const [single, setSingle] = React.useState(null);
@@ -238,10 +239,12 @@ export default function IntegrationReactSelect({options, isMulti, label, placeho
 
   function handleChangeSingle(value) {
     setSingle(value);
+    onChange(value);
   }
 
   function handleChangeMulti(value) {
     setMulti(value);
+    onChange(value);
   }
 
   const selectStyles = {
@@ -305,5 +308,6 @@ IntegrationReactSelect.defaultProps = {
   options: [],
   isMulti: false,
   label: '',
-  placeholder: ''
+  placeholder: '',
+  onChange: () => {}
 }

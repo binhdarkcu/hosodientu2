@@ -17,8 +17,8 @@ import {execChangePassword} from '../actions/services/api-user.js';
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 430,
   },
   paper: {
@@ -99,7 +99,7 @@ class PageDoiMatKhau extends Component {
           onSubmit={this.handleSubmit}
           onError={errors => console.log(errors)}
         >
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextValidator
                 label="Nhập mật khẩu cũ"
@@ -111,7 +111,7 @@ class PageDoiMatKhau extends Component {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextValidator
                 label="Mật khẩu mới"
@@ -127,7 +127,7 @@ class PageDoiMatKhau extends Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextValidator
                 label="Nhập lại mật khẩu"

@@ -34,12 +34,12 @@ const mapStateToProps = ({services}) => {
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 200,
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
   },
 });
 
@@ -75,16 +75,23 @@ class FormChangePassword extends React.Component {
       newPassword,
     }
 
-    const _self = this;
-    _self.setState({loading: true});
+    this.setState({loading: true});
     this.props.changePassword(data).then(({status, json})=>{
-      json.isSuccess ? toast.success(MSG.CHANGE_PASSWORD) : toast.error(json.errorMessage);
-      this.props.logOut();
+      json.isSuccess ? this.handleSuccess() : this.handleError({detail: json, message: json.errorMessage});
     }).catch((err)=>{
-      toast.error(MSG.ERROR_OCCURED);
-    }).finally(() => {
-      _self.setState({loading: false});
+      this.handleError({detail: err, message: MSG.ERROR_OCCURED});
     });
+  }
+
+  handleSuccess = () => {
+    toast.success(MSG.CHANGE_PASSWORD);
+    this.props.logOut();
+  }
+
+  handleError = (err) => {
+    toast.error(err.message);
+    this.setState({loading: false});
+    console.error(err.detail);
   }
 
   goToDashboard = () => {
@@ -102,7 +109,7 @@ class FormChangePassword extends React.Component {
             onSubmit={this.handleSubmit}
             onError={errors => console.log(errors)}
         >
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <Logo onClick={this.goToDashboard} size={150}/>
             </Grid>
@@ -114,7 +121,7 @@ class FormChangePassword extends React.Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <TextValidator
                 label="Mật khẩu cũ"

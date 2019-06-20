@@ -45,9 +45,8 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 200,
+    width: 'calc(100% - 10px)'
   },
-
   group: {
     margin: `${theme.spacing(1)}px 0`,
   },
@@ -116,6 +115,10 @@ class DangKyCongTy extends React.Component {
     });
   }
 
+  handleDropdownChange = (value) => {
+    console.log(value);
+  }
+
   handleSuccess = (data) => {
     console.log(data);
   }
@@ -155,55 +158,7 @@ class DangKyCongTy extends React.Component {
 
           <Grid container spacing={2}>
 
-            <Grid item xs={12} sm={3}>
-              <TextValidator
-                label="Bệnh nhân ID"
-                className={classes.textField}
-                value={data.benhNhanId}
-                onChange={this.handleChange('benhNhanId')}
-                margin="normal"
-                validators={[RULE.IS_REQUIRED]}
-                errorMessages={[MSG.REQUIRED_FIELD]}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-              <TextValidator
-                label="Mã Y Tế"
-                className={classes.textField}
-                value={data.maYte}
-                onChange={this.handleChange('maYte')}
-                margin="normal"
-                validators={[RULE.IS_REQUIRED]}
-                errorMessages={[MSG.REQUIRED_FIELD]}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-                <Dropdown options={companies} label='Công ty' placeholder='Chọn công ty'/>
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-              <TextValidator
-                label="Phone"
-                className={classes.textField}
-                value={data.phone}
-                onChange={this.handleChange('phone')}
-                margin="normal"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-              <TextValidator
-                label="Email"
-                className={classes.textField}
-                value={data.email}
-                onChange={this.handleChange('email')}
-                margin="normal"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={6}>
               <TextValidator
                 label="Họ"
                 className={classes.textField}
@@ -223,7 +178,69 @@ class DangKyCongTy extends React.Component {
               />
             </Grid>
 
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                label="Mã bệnh nhân"
+                className={classes.textField}
+                value={data.benhNhanId}
+                onChange={this.handleChange('benhNhanId')}
+                margin="normal"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                label="Mã Y Tế"
+                className={classes.textField}
+                value={data.maYte}
+                onChange={this.handleChange('maYte')}
+                margin="normal"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                label="Số điện thoại"
+                className={classes.textField}
+                value={data.phone}
+                onChange={this.handleChange('phone')}
+                margin="normal"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                label="Email"
+                className={classes.textField}
+                value={data.email}
+                onChange={this.handleChange('email')}
+                margin="normal"
+              />
+            </Grid>
+
+
+
+            <Grid item xs={12} sm={6}>
+                <Dropdown options={companies} label='Công ty' placeholder='Đơn vị công tác' onChange={this.handleDropdownChange}/>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <div className={classes.customControl}>
+                <FormControl component="fieldset" className={classes.formControl}>
+                  <FormLabel>Ngày sinh</FormLabel>
+                  <DatePicker
+                    name="datepicker"
+                    locale="vi"
+                    disabled={false}
+                    value={data.ngaySinh}
+                    maxDate={maxDay}
+                    onChange={this.handleChangeDate}
+                  />
+                </FormControl>
+              </div>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
               <div className={classes.customControl}>
                 <FormControl component="fieldset" className={classes.formControl}>
                   <FormLabel>Giới tính</FormLabel>
@@ -242,21 +259,7 @@ class DangKyCongTy extends React.Component {
               </div>
             </Grid>
 
-            <Grid item xs={12} sm={3}>
-              <div className={classes.customControl}>
-                <FormControl component="fieldset" className={classes.formControl}>
-                  <FormLabel>Ngày sinh</FormLabel>
-                  <DatePicker
-                    name="datepicker"
-                    locale="vi"
-                    disabled={false}
-                    value={data.ngaySinh}
-                    maxDate={maxDay}
-                    onChange={this.handleChangeDate}
-                  />
-                </FormControl>
-              </div>
-            </Grid>
+
 
             <Grid item xs={12}>
               <Button type="submit" variant="contained" className={classes.button}>

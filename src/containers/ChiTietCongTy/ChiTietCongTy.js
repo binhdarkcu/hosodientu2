@@ -29,7 +29,8 @@ const mapStateToProps = ({ location }) => ({
 const styles = theme => ({
   item: {
     marginTop: 5,
-    marginBottom: 5
+    marginBottom: 5,
+    fontSize: '14px'
   },
   inActive: {
     color: 'red'
@@ -74,7 +75,7 @@ class ChiTietCongTy extends React.Component {
 
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
 
-        <Grid container spacing={24}>
+        <Grid container spacing={2}>
 
           <Grid item xs={12} sm={3}>
             <Logo size={150} />
@@ -87,7 +88,7 @@ class ChiTietCongTy extends React.Component {
           </Grid>
         </Grid>
 
-        <Grid container spacing={24}>
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <Divider />
           </Grid>
