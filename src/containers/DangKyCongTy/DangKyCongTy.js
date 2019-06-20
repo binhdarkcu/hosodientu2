@@ -96,18 +96,20 @@ class DangKyCongTy extends React.Component {
   handleChangeDate = ngaySinh => {
     const { data } = this.state;
     ngaySinh = ActivateCompanyPostModel.formatNgaySinh(ngaySinh);
-    console.log(ngaySinh);
     this.setState({ data: {...data, ngaySinh} });
   }
 
-  handleSubmit = () => {
-    const { data } = this.state;
-    this.setState({loading: true});
-    this.props.register(data).then(result => {
-      result.status === 200 ? (result.json.isSuccess ? this.handleSuccess() : this.handleError({detail: result, message: result.json.errorMessage}))
-                              :
-                              this.handleError({detail: result, message: MSG.ACTIVATE_COMPANY_FAILED});
-    }).catch(err => this.handleError({detail: err, message: MSG.ACTIVATE_COMPANY_FAILED}));
+  handleSubmit = async () => {
+    try{
+      const { data } = this.state;
+      this.setState({loading: true});
+      let result = await this.props.register(data);
+      if(result.status === 200)
+        return result.json.isSuccess ? this.handleSuccess() : this.handleError({detail: result, message: result.json.errorMessage});
+      throw(result);
+    }catch(err){
+      this.handleError({detail: err, message: MSG.ACTIVATE_COMPANY_FAILED})
+    }
   }
 
   handleDropdownChange = (company) => {
@@ -127,13 +129,9 @@ class DangKyCongTy extends React.Component {
     console.error(err.detail);
   }
 
-  goToDashboard = () => {
-    this.props.goToDashboard();
-  }
-
   render() {
 
-    const { classes } = this.props;
+    const { classes, goToDashboard } = this.props;
     const { loading, data, maxDay, companies } = this.state;
 
     return (
@@ -146,7 +144,7 @@ class DangKyCongTy extends React.Component {
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
-              <Logo onClick={this.goToDashboard} size={150} />
+              <Logo onClick={goToDashboard} size={150} />
             </Grid>
 
             <Grid item xs={12} sm={4}>
