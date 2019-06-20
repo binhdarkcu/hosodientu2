@@ -76,7 +76,7 @@ class DangKyCongTy extends React.Component {
         this.setState({companies: options});
       }
     }).catch(err => {
-      console.log(err);
+      console.error(err);
     });
   }
 
@@ -85,46 +85,46 @@ class DangKyCongTy extends React.Component {
       label: company.tenDonViCongTac,
       value: company.donViCongTacId,
     }));
-
   }
-
 
   handleChange = name => event => {
     let data = { ...this.state.data };
     data[name] = event.target.value;
     this.setState({ data: data });
-
   };
 
   handleChangeDate = ngaySinh => {
-    let data = { ...this.state.data };
-    data['ngaySinh'] = ngaySinh;
-    this.setState({ data: data });
+    const { data } = this.state;
+    ngaySinh = ActivateCompanyPostModel.formatNgaySinh(ngaySinh);
+    console.log(ngaySinh);
+    this.setState({ data: {...data, ngaySinh} });
   }
 
   handleSubmit = () => {
     const { data } = this.state;
-    this.props.register(data).then(rs => {
-      if(rs.status === 200){
-        rs.json.isSuccess ? toast.success(MSG.ACTIVATE_COMPANY_SUCCESS) : toast.error(rs.json.errorMessage);
-      }else{
-        toast.error(MSG.ACTIVATE_COMPANY_FAILED);
-      }
-    }).catch(err => {
-      toast.error(MSG.ACTIVATE_COMPANY_FAILED);
-    });
+    this.setState({loading: true});
+    this.props.register(data).then(result => {
+      result.status === 200 ? (result.json.isSuccess ? this.handleSuccess() : this.handleError({detail: result, message: result.json.errorMessage}))
+                              :
+                              this.handleError({detail: result, message: MSG.ACTIVATE_COMPANY_FAILED});
+    }).catch(err => this.handleError({detail: err, message: MSG.ACTIVATE_COMPANY_FAILED}));
   }
 
-  handleDropdownChange = (value) => {
-    console.log(value);
+  handleDropdownChange = (company) => {
+    const { data } = this.state;
+    const donViCongTacId = company.value
+    this.setState({data: {...data, donViCongTacId}});
   }
 
-  handleSuccess = (data) => {
-    console.log(data);
+  handleSuccess = () => {
+    toast.success(MSG.ACTIVATE_COMPANY_SUCCESS);
+    this.setState({loading: false});
   }
 
   handleError = (err) => {
-    console.log(err);
+    toast.error(err.message);
+    this.setState({loading: false});
+    console.error(err.detail);
   }
 
   goToDashboard = () => {
@@ -218,8 +218,6 @@ class DangKyCongTy extends React.Component {
               />
             </Grid>
 
-
-
             <Grid item xs={12} sm={6}>
                 <Dropdown options={companies} label='Công ty' placeholder='Đơn vị công tác' onChange={this.handleDropdownChange}/>
             </Grid>
@@ -232,7 +230,7 @@ class DangKyCongTy extends React.Component {
                     name="datepicker"
                     locale="vi"
                     disabled={false}
-                    value={data.ngaySinh}
+                    value={data.ngaySinh && new Date(data.ngaySinh)}
                     maxDate={maxDay}
                     onChange={this.handleChangeDate}
                   />
@@ -258,8 +256,6 @@ class DangKyCongTy extends React.Component {
                 </FormControl>
               </div>
             </Grid>
-
-
 
             <Grid item xs={12}>
               <Button type="submit" variant="contained" className={classes.button}>

@@ -33,8 +33,7 @@ const mapDispatchToProps = dispatch => ({
   adminApprove: (id) => dispatch(execAdminApprove(id)),
 });
 
-const mapStateToProps = ({ id, services, location }) => ({
-  id: id,
+const mapStateToProps = ({ services, location }) => ({
   users: services.user.userList,
   location: location,
 });
