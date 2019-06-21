@@ -3,23 +3,17 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import DatePicker from 'react-date-picker';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import uuidv1 from 'uuid/v1';
 //custom import
 import FormLayoutVertical from '../../components/FormLayoutVertical';
 import FormFooter from '../../components/FormFooter';
 import Logo from '../../components/Logo';
 import { toast } from 'react-toastify';
 import * as MSG from '../../constants/Messages.js';
-import * as RULE from '../../constants/Rules.js';
 import { execActivateCompany, execGetCompanyList } from '../../actions/services/api-company';
 import Spinner from '../../components/Spinner';
 import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
@@ -60,14 +54,17 @@ const styles = theme => ({
   },
 });
 
+
+const  initialState = () => ({
+  companies: [],
+  data: new ActivateCompanyPostModel(),
+  loading: false,
+  dropdownKey: uuidv1()
+});
+
 class DangKyCongTy extends React.Component {
 
-  state = {
-    companies: [],
-    data: new ActivateCompanyPostModel(),
-    loading: false,
-    maxDay: new Date()
-  };
+  state = initialState();
 
   componentDidMount() {
     this.props.getCompanies().then(result => {
@@ -93,18 +90,12 @@ class DangKyCongTy extends React.Component {
     this.setState({ data: data });
   };
 
-  handleChangeDate = ngaySinh => {
-    const { data } = this.state;
-    ngaySinh = ActivateCompanyPostModel.formatNgaySinh(ngaySinh);
-    this.setState({ data: {...data, ngaySinh} });
-  }
-
   handleSubmit = async () => {
     try{
       const { data } = this.state;
       this.setState({loading: true});
       let result = await this.props.register(data);
-      if(result.status === 200)
+      if(result.status === 200 || result.status === 201)
         return result.json.isSuccess ? this.handleSuccess() : this.handleError({detail: result, message: result.json.errorMessage});
       throw(result);
     }catch(err){
@@ -120,7 +111,11 @@ class DangKyCongTy extends React.Component {
 
   handleSuccess = () => {
     toast.success(MSG.ACTIVATE_COMPANY_SUCCESS);
-    this.setState({loading: false});
+    const { state } = this;
+    const newState = initialState();
+    newState.companies = [...state.companies];
+    newState.dropdownKey = uuidv1();
+    this.setState({...newState});
   }
 
   handleError = (err) => {
@@ -132,7 +127,7 @@ class DangKyCongTy extends React.Component {
   render() {
 
     const { classes, goToDashboard } = this.props;
-    const { loading, data, maxDay, companies } = this.state;
+    const { loading, data, companies, dropdownKey } = this.state;
 
     return (
       <FormLayoutVertical>
@@ -158,17 +153,7 @@ class DangKyCongTy extends React.Component {
 
             <Grid item xs={12} sm={6}>
               <TextValidator
-                label="Họ"
-                className={classes.textField}
-                value={data.ho}
-                onChange={this.handleChange('ho')}
-                margin="normal"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <TextValidator
-                label="Tên"
+                label="Tên công ty"
                 className={classes.textField}
                 value={data.ten}
                 onChange={this.handleChange('ten')}
@@ -178,17 +163,7 @@ class DangKyCongTy extends React.Component {
 
             <Grid item xs={12} sm={6}>
               <TextValidator
-                label="Mã bệnh nhân"
-                className={classes.textField}
-                value={data.benhNhanId}
-                onChange={this.handleChange('benhNhanId')}
-                margin="normal"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <TextValidator
-                label="Mã Y Tế"
+                label="Mã công ty"
                 className={classes.textField}
                 value={data.maYte}
                 onChange={this.handleChange('maYte')}
@@ -217,42 +192,17 @@ class DangKyCongTy extends React.Component {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-                <Dropdown options={companies} label='Công ty' placeholder='Đơn vị công tác' onChange={this.handleDropdownChange}/>
+              <TextValidator
+                label="Địa chỉ"
+                className={classes.textField}
+                value={data.diaChi}
+                onChange={this.handleChange('diaChi')}
+                margin="normal"
+              />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <div className={classes.customControl}>
-                <FormControl component="fieldset" className={classes.formControl}>
-                  <FormLabel>Ngày sinh</FormLabel>
-                  <DatePicker
-                    name="datepicker"
-                    locale="vi"
-                    disabled={false}
-                    value={data.ngaySinh && new Date(data.ngaySinh)}
-                    maxDate={maxDay}
-                    onChange={this.handleChangeDate}
-                  />
-                </FormControl>
-              </div>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <div className={classes.customControl}>
-                <FormControl component="fieldset" className={classes.formControl}>
-                  <FormLabel>Giới tính</FormLabel>
-                  <RadioGroup
-                    row
-                    aria-label="Giới tính"
-                    name="gender1"
-                    className={classes.group}
-                    onChange={this.handleChange('gioiTinh')}
-                    value={data.gioiTinh}
-                  >
-                    <FormControlLabel value="T" control={<Radio />} label="Nam" />
-                    <FormControlLabel value="G" control={<Radio />} label="Nữ" />
-                  </RadioGroup>
-                </FormControl>
-              </div>
+                <Dropdown key={dropdownKey} options={companies} label='Công ty' placeholder='Đơn vị công tác' onChange={this.handleDropdownChange}/>
             </Grid>
 
             <Grid item xs={12}>
@@ -272,6 +222,5 @@ class DangKyCongTy extends React.Component {
 DangKyCongTy.propTypes = {
   classes: PropTypes.object.isRequired
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(DangKyCongTy));

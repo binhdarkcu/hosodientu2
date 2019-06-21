@@ -20,6 +20,7 @@ import FormChangePassword from './FormChangePassword';
 import ChiTietUser from './ChiTietUser';
 import ChiTietCongTy from './ChiTietCongTy';
 import ChiTietKhamBenh from './ChiTietKhamBenh';
+import KiemTraUser from './KiemTraUser';
 import DsUser from './DsUser';
 import DsKhamBenh from './DsKhamBenh';
 import DsCongTy from './DsCongTy';
@@ -54,7 +55,7 @@ const pages = {
   'RTE_CHANGE_PASSWORD': FormChangePassword,
   'RTE_USER_UPDATE': AdminRegister,
   'RTE_DANG_KY_CONG_TY': DangKyCongTy,
-  
+
   // list
   'RTE_DANH_SACH_USER': DsUser,
   'RTE_DANH_SACH_KHAM_BENH': DsKhamBenh,
@@ -63,7 +64,8 @@ const pages = {
   //details
   'RTE_CHI_TIET_USER': ChiTietUser,
   'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh,
-  'RTE_CHI_TIET_CONG_TY': ChiTietCongTy
+  'RTE_CHI_TIET_CONG_TY': ChiTietCongTy,
+  'RTE_KIEM_TRA_USER': KiemTraUser
 
 };
 
@@ -127,7 +129,7 @@ class Dashboard extends Component {
 
               <br />
 
-              <SidebarMenu />
+              <SidebarMenu user={userInfo} />
               <SidebarFooter />
             </div>
           </div>

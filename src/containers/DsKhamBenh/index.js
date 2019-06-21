@@ -9,11 +9,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Collapse from '@material-ui/core/Collapse';
+import { toast } from 'react-toastify';
 import _ from 'lodash';
 //custom import
 import * as MSG from '../../constants/Messages';
 import { GET_REPORT_LIST } from '../../actions/types';
 import { execGetReportList } from '../../actions/services/api-report';
+import { execGetCompanyReportList } from '../../actions/services/api-company';
 import { createAction } from 'redux-actions';
 import Spinner from '../../components/Spinner';
 import {GOLDEN_HEALTH_ORANGE} from '../../constants/Colors';
@@ -23,14 +25,15 @@ import './style.scss';
 const getReports = createAction(GET_REPORT_LIST);
 const mapDispatchToProps = dispatch => ({
   execGetReportList: (data) => dispatch(execGetReportList(data)),
+  execGetCompanyReportList: (companyId) => dispatch(execGetCompanyReportList(companyId)),
   getReports: data => dispatch(getReports(data)),
   getReportDetails: (paramStr) => {
     dispatch({type: 'RTE_CHI_TIET_KHAM_BENH', payload:{ paramStr }})
   },
 });
 
-const mapStateToProps = ({ id, services, location }) => ({
-  id: id,
+const mapStateToProps = ({ services, location }) => ({
+  user: services.user.userInfo,
   reports: services.report.reportList,
   location: location,
 });
@@ -64,16 +67,39 @@ class LichSuKhamBenh extends React.Component {
       visibility: [true]
   };
 
-  componentWillMount() {
-    this.props.execGetReportList({medicalCode: 20000002}).then((data) => {
-      this.props.getReports(data);
-      const list = this.groupDataList(data);
-      this.setState({reports: [...list]});
-    }).catch(err => {
-      console.log('err:', err);
-    }).finally(() => {
-      this.setState({loading: false});
-    });
+  componentDidMount() {
+    this.initializeScreen().finally(() => this.setState({loading: false}));
+  }
+
+  initializeScreen = async () => {
+    try{
+      const { user } = this.props;
+      let result = user.phanQuyen === 3 ? await this.getCompanyReports(user) : await this.getPersonalReports(user);
+      if(result && result.status === 200){
+        this.props.getReports(result.json);
+        const list = this.groupDataList(result.json);
+        this.setState({reports: [...list]});
+      }
+
+    }catch(err){
+      this.handleError({detail: err, message: MSG.ERROR_OCCURED});
+    };
+  }
+
+  getPersonalReports = async (user) => {
+    if(!user.maYte) return this.handleError({detail: null, message: MSG.USER_NO_MEDICAL_CODE});
+    return this.props.execGetReportList(user.maYte);
+  }
+
+  getCompanyReports = async (user) => {
+    if(!user.donViCongTacId) return this.handleError({detail: null, message: MSG.USER_NO_COMPANY_ID});
+    return this.props.execGetCompanyReportList(user.donViCongTacId);
+  }
+
+
+  handleError = err => {
+    toast.error(err.message);
+    console.error(err.detail);
   }
 
   groupDataList = (data) => {
@@ -114,13 +140,19 @@ class LichSuKhamBenh extends React.Component {
   };
 
   render() {
+    
     const { classes } = this.props;
     const { loading, reports, visibility } = this.state;
+
     return (
       <Paper className={`LichSuKhamBenh ${classes.root}`}>
         <Spinner type={HASH} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
         <Table className={classes.table}>
           <TableBody>
+            {reports.length === 0 && <TableRow className={`${classes.row}`}>
+                                        <TableCell className={classes.header} align="center">Không có dữ liệu!</TableCell>
+                                      </TableRow>}
+
             {reports.map((parent, index) => {
               const { children } = parent;
               return(

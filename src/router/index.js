@@ -122,6 +122,10 @@ const routesMap = {
       path: '/doi-mat-khau',
       thunk: defaultThunk
     },
+    RTE_KIEM_TRA_USER: {
+      path: '/kiem-tra-user/:id',
+      thunk: defaultThunk
+    }
 
 }
 

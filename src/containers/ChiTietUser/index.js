@@ -15,8 +15,7 @@ const mapDispatchToProps = dispatch => ({
   getUserDetail: (id) => dispatch(execGetUserDetail(id)),
 });
 
-const mapStateToProps = ({ id, services, location }) => ({
-  id: id,
+const mapStateToProps = ({ services, location }) => ({
   location: location,
 });
 
@@ -96,7 +95,6 @@ class ChiTietUser extends React.Component {
   render() {
     const { classes } = this.props;
     const { user, ngaySinh, ngayDangKy } = this.state;
-    console.log(user);
     return (
       <FormLayoutHorizontal>
 

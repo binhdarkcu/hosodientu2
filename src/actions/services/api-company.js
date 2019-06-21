@@ -50,3 +50,16 @@ export const execActivateCompany = (data) => dispatch => {
           .catch( err => reject(err));
     });
 };
+
+export const execGetCompanyReportList = companyId => dispatch => {
+  const parameters = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+
+  return new Promise((resolve, reject) => {
+      sendHttpRequest(companyReportsUrl + `?companyId=${companyId}`, parameters)
+        .then(data => resolve(data))
+        .catch( err => reject(err));
+  });
+};

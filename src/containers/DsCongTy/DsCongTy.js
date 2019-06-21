@@ -97,8 +97,6 @@ class DsCongTy extends React.Component {
               <TableCell className={classes.header} align="center">Email</TableCell>
               <TableCell className={classes.header} align="center">Địa chỉ</TableCell>
               <TableCell className={classes.header} align="center">Chi tiết</TableCell>
-              <TableCell className={classes.header} align="center">Kích hoạt</TableCell>
-
             </TableRow>
           </TableHead>
           <TableBody>
@@ -111,15 +109,6 @@ class DsCongTy extends React.Component {
                 <TableCell align="center">
                   <Button variant="contained" className={classes.buttonActive} onClick={this.gotoDetails.bind(this, company.donViCongTacId)}>Xem chi tiết</Button>
                 </TableCell>
-                {
-                  company.trangThai === 1 ? <TableCell align="center" className={classes.deleteIcon}>
-                    <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }}  />
-                    <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} />
-                  </TableCell> :
-                    <TableCell align="center">
-                      <Button variant="contained" className={classes.buttonActive}>Active</Button>
-                    </TableCell>
-                }
               </TableRow>
             ))}
           </TableBody>

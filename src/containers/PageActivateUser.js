@@ -11,7 +11,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import { redirect } from 'redux-first-router';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import * as MSG from '../constants/Messages.js';
 import * as RULE from '../constants/Rules.js';
 import { connect } from 'react-redux';
@@ -69,15 +69,28 @@ class PageActivateUser extends React.Component {
     if(reachedBottom) this.setState({isRead: true});
   }
 
-  handleSubmit = () => {
-    // const _self = this;
-    // _self.setState({loading: true});
-    // this.props.activate({...this.state.user}).then((done)=>{
-    //   console.log('done');
-    // }).catch((err)=>{
-    //   console.log('err', err);
-    //   _self.setState({loading: false});
-    // });
+  handleSubmit = async () => {
+    try{
+      const { password } = this.state;
+      const { activateCode } = this.props;
+      const result = await this.props.activate({code: activateCode, password});
+      if(result.status !== 200) throw(result);
+      this.handleSuccess(MSG.USER_ACTIVATED);
+    }catch(err){
+      this.handleError({detail: err, message: MSG.ERROR_OCCURED});
+    }
+  }
+
+  handleSuccess = (message) => {
+    this.setState({loading: false});
+    toast.success(message);
+    this.props.gotoHomepage();
+  }
+
+  handleError = (error) => {
+    this.setState({loading: false});
+    toast.error(error.message);
+    console.error(error.detail);
   }
 
   componentDidMount(){

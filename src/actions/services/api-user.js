@@ -50,9 +50,7 @@ export const execActivateUser = data => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(activateUrl, parameters)
-      .then(({ status, user }) => {
-        return resolve(user);
-      })
+      .then(data => resolve(data))
       .catch(err => reject(err));
   });
 }
@@ -100,7 +98,7 @@ export const execGetUserDetail = (id) => dispatch => {
   return new Promise((resolve, reject) => {
     sendHttpRequest(userDetailUrl + id, parameters)
       .then(({ status, json }) => {
-        return resolve(json);
+        return resolve({ status, json });
       }).catch(err => reject(err));
   });
 };
@@ -150,9 +148,7 @@ export const execUpdate = (data) => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(userUpdate, parameters)
-      .then(({ status, userInfo }) => {
-        return resolve(userInfo);
-      })
+      .then(data => resolve(data))
       .catch(err => reject(err));
   });
 }

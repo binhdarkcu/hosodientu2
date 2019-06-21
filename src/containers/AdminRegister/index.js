@@ -97,7 +97,7 @@ class FormRegister extends React.Component {
       });
       this.props.getUserDetail(idUser).then((data) => {
         this.setState({
-          user: this.formatDataResponse(data),
+          user: this.formatDataResponse(data.json),
         })
         _self.setState({ loading: false });
       }).catch((err) => {
@@ -141,9 +141,13 @@ class FormRegister extends React.Component {
 
   handleChange = name => event => {
     const { type } = this.props;
+    const { isUpdateUser } = this.state;
     let user = { ...this.state.user };
     user[name] = event.target.value;
     this.setState({ user: user });
+
+    if(isUpdateUser) return;
+
     if ('admin' === type && 'maYte' === name)
       this.getUserInfo(event.target.value);
 
@@ -333,6 +337,7 @@ class FormRegister extends React.Component {
                     name="datepicker"
                     locale="vi"
                     disabled={type !== 'user' && !isUpdateUser}
+                    onChange={this.handleChangeDate}
                     value={user.ngaySinh}
                   />
                 </FormControl>

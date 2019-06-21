@@ -29,6 +29,9 @@ const mapDispatchToProps = dispatch => ({
   upateUser: (id) => {
     dispatch({ type: 'RTE_USER_UPDATE', payload: { id } })
   },
+  gotoReviewUserPage: (id) => {
+    dispatch({ type: 'RTE_KIEM_TRA_USER', payload: { id } })
+  },
   deleteUser: (id) => dispatch(execDeleteUser(id)),
   adminApprove: (id) => dispatch(execAdminApprove(id)),
 });
@@ -91,14 +94,16 @@ class FormDanhSachUser extends React.Component {
       } else if (type === 'edit') {
         this.props.upateUser(id);
       } else if (type === 'active') {
-        this.props.adminApprove({ 'userId': id }).then((data) => {
-          data.json.errorMessage ? toast.error(data.json.errorMessage) : toast.success(MSG.USER_APPROVE);
-          _self.setState({ loading: false });
-          this.getUserDataTable(_self);
-        }).catch((err) => {
-          toast.error(MSG.ERROR_OCCURED);
-          _self.setState({ loading: false });
-        });
+        this.props.gotoReviewUserPage(id);
+        // this.props.adminApprove({ 'userId': id }).then((data) => {
+        //   data.json.errorMessage ? toast.error(data.json.errorMessage) : toast.success(MSG.USER_APPROVE);
+        //   _self.setState({ loading: false });
+        //   this.getUserDataTable(_self);
+        // }).catch((err) => {
+        //   toast.error(MSG.ERROR_OCCURED);
+        //   _self.setState({ loading: false });
+        // });
+
       } else {
         this.props.deleteUser(id).then(() => {
           toast.success(MSG.USER_DELETEED);
@@ -121,8 +126,49 @@ class FormDanhSachUser extends React.Component {
     return `${d > 9 ? d : "0"+d}/${m > 9 ? m : "0"+m}/${y}`;
   }
 
+  getQuyen = (idQuyen) => {
+    let quyen = 'Chưa phân quyền';
+    switch (idQuyen) {
+      case 1:
+        quyen = 'Quản trị viên';
+        break;
+      case 2:
+        quyen = 'Bệnh nhân';
+        break;
+      case 3:
+        quyen = 'Công ty';
+        break;
+      default:
+        quyen = 'Chưa phân quyền';
+    }
+
+    return quyen;
+  }
+
+  getTrangThai = tt => {
+    let status = 'UNDEFINED';
+    switch (tt) {
+      case 1:
+        status = 'ACTIVE';
+        break;
+      case 2:
+        status = 'PENDING_USER';
+        break;
+      case 3:
+        status = 'PENDING_ADMIN';
+        break;
+      case 4:
+        status = 'INACTIVE';
+        break;
+      default:
+        break;
+    }
+
+    return status;
+  }
   render() {
     const { classes, users } = this.props;
+    console.log(users);
     const { loading } = this.state;
     return (
       <Paper className={classes.root}>
@@ -135,6 +181,8 @@ class FormDanhSachUser extends React.Component {
               <TableCell className={classes.header} align="center">Ngày sinh</TableCell>
               <TableCell className={classes.header} align="center">Email</TableCell>
               <TableCell className={classes.header} align="center">Số điện thoại</TableCell>
+              <TableCell className={classes.header} align="center">Trạng thái</TableCell>
+              <TableCell className={classes.header} align="center">Quyền</TableCell>
               <TableCell className={classes.header} align="center">Active User</TableCell>
               <TableCell className={classes.header} align="center"></TableCell>
 
@@ -148,13 +196,15 @@ class FormDanhSachUser extends React.Component {
                 <TableCell align="center">{this.convertToDate(user.ngaySinh)}</TableCell>
                 <TableCell align="center">{user.email}</TableCell>
                 <TableCell align="center">{user.phone}</TableCell>
+                <TableCell align="center">{this.getTrangThai(user.trangThai)}</TableCell>
+                <TableCell align="center">{this.getQuyen(user.phanQuyen)}</TableCell>
                 {
                   user.trangThai === 1 ? <TableCell align="center" className={classes.deleteIcon}>
                     <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user.userId, 'detail')} />
                     <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user.userId, 'edit')} />
                   </TableCell> :
                     <TableCell align="center">
-                      <Button variant="contained" className={classes.buttonActive} onClick={() => this.handleAction(user.userId, 'active')}>Active</Button>
+                      <Button variant="contained" className={classes.buttonActive} onClick={() => this.handleAction(user.userId, 'active')}>Duyệt</Button>
                     </TableCell>
                 }
                 <TableCell align="left">

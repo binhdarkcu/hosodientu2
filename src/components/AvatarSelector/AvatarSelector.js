@@ -374,7 +374,7 @@ class AvatarSelector extends Component{
                 </span>
               </button>
             }
-            <Grid container spacing={24}>
+            <Grid container spacing={2}>
               <Grid item xs={12}>
                 { imgURL ? avatar ? null: this.renderImageCropper() : this.renderFileChooser() }
                 { avatar && this.renderAvatarPreview()}
