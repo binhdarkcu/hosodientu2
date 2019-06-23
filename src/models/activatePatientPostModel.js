@@ -35,7 +35,7 @@ class ActivatePatientPostModel {
   }
 
   getStatusName(){
-    switch (this.phanQuyen) {
+    switch (this.trangThai) {
       case USER.STATUS.ACTIVE.CODE:
         return USER.STATUS.ACTIVE.LABEL;
       case USER.STATUS.INACTIVE.CODE:
