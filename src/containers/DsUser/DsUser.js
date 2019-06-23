@@ -162,14 +162,14 @@ class FormDanhSachUser extends React.Component {
                 <TableCell align="center">{user.getStatusName()}</TableCell>
                 <TableCell align="center">{user.getRoleName()}</TableCell>
                 {
-                  user.trangThai === USER.STATUS.ACTIVE ? <TableCell align="center" className={classes.deleteIcon}>
+                  user.trangThai === USER.STATUS.ACTIVE.CODE ? <TableCell align="center" className={classes.deleteIcon}>
                     <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL)} />
                     <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE)} />
                   </TableCell> :
                     <TableCell align="center">
                       {
                         currentUser.userId === user.userId ?
-                          null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE)}>Duyệt</Button>
+                          null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE)}>Duyệt</Button>
                       }
                     </TableCell>
                 }
