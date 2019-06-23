@@ -97,7 +97,7 @@ class KiemTraUser extends React.Component {
       }catch(err){
         this.handleError({detail: err, message: MSG.USER_RETRIEVE_DATA_FAILED});
       }
-  }
+  };
 
   handleUpdateUser = async () => {
     try{
@@ -110,17 +110,17 @@ class KiemTraUser extends React.Component {
     }catch(err){
       this.handleError({detail: err, message: MSG.USER_UPDATE_FAILED});
     }
-  }
+  };
 
   handleSuccess = (message) => {
     toast.success(message);
-  }
+  };
 
   handleError = (err) => {
     toast.error(err.message);
     this.setState({loading: false});
     console.error(err.detail);
-  }
+  };
 
   handleChange = name => event => {
     let userFromId = { ...this.state.userFromId };
@@ -133,22 +133,23 @@ class KiemTraUser extends React.Component {
     let userFromId = { ...this.state.userFromId };
     userFromId['ngaySinh'] = ngaySinh;
     this.setState({ userFromId: userFromId });
-  }
+  };
 
   handleSubmit = async () => {
     try{
       const { id } = this.props.location.payload;
       const result = await this.props.adminApprove({ 'userId': id });
       if(result.status !== 200) throw(result);
-      this.handleSuccess(MSG.ADMIN_APPROVE_USER_PENDING);
+      result.isSuccess ? this.handleSuccess(MSG.ADMIN_APPROVE_USER_PENDING) : this.handleError({detail: result, message: result.json.errorMessage});
+
     }catch(err){
       this.handleError({detail: err, message: MSG.ERROR_OCCURED});
     }
-  }
+  };
 
   goToDashboard = () => {
     this.props.goToDashboard();
-  }
+  };
 
   render() {
     const { classes } = this.props;

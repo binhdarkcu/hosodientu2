@@ -65,7 +65,8 @@ const pages = {
   'RTE_CHI_TIET_USER': ChiTietUser,
   'RTE_CHI_TIET_KHAM_BENH': ChiTietKhamBenh,
   'RTE_CHI_TIET_CONG_TY': ChiTietCongTy,
-  'RTE_KIEM_TRA_USER': KiemTraUser
+  'RTE_KIEM_TRA_USER': KiemTraUser,
+  'RTE_CAP_NHAT_USER_COMPANY': DangKyCongTy
 
 };
 

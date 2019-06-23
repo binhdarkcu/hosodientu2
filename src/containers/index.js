@@ -4,6 +4,7 @@ import PageLogin from './PageLogin';
 import PageActivateUser from './PageActivateUser';
 import PageUserRegister from './UserRegister';
 import PageDoiMatKhau from './PageDoiMatKhau';
+import Test from './Test';
 
 export {
   Dashboard,
@@ -11,5 +12,6 @@ export {
   PageLogin as Login,
   PageActivateUser as ActivateUser,
   PageDoiMatKhau as DoiMatKhau,
-  PageUserRegister as UserRegister
+  PageUserRegister as UserRegister,
+  Test
 };

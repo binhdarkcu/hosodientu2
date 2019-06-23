@@ -58,7 +58,7 @@ class PageDoiMatKhau extends Component {
     if (e.keyCode === 13 || e.key === 'Enter') {
       this.handleSubmit(e);
     }
-  }
+  };
 
   handleSubmit = () => {
     console.log(this.state);
@@ -66,7 +66,7 @@ class PageDoiMatKhau extends Component {
       id: 4,
       oldPassword: this.state.oldPassword,
       newPassword: this.state.password,
-    }
+    };
     const _self = this;
     _self.setState({loading: true});
     this.props.changePassword(data).then((done)=>{
@@ -78,14 +78,14 @@ class PageDoiMatKhau extends Component {
       toast.error(MSG.ERROR_OCCURED);
       _self.setState({loading: false});
     });
-  }
+  };
 
 
   showError = (msg, err) => {
     console.log(err);
     toast.error(msg);
     this.setState({ loading: false });
-  }
+  };
 
   render() {
 

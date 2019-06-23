@@ -42,11 +42,20 @@ export const INVALID_FILE_TYPE = 'File không hợp lệ';
 //TODO: Migrate to tree structure
 export const USER = {
   UPDATE: {
-    FAILED: 'Cập nhật user thất bại!',
-    SUCCESS: 'Cập nhật user thành công'
+    FAILED: "Cập nhật thông tin user thất bại",
+    SUCCESS: "Cập nhật thông tin user thành công"
   },
   GET_DATA:{
-    FAILED: 'bla bla ',
-    SUCCESS: 'bla bla'
+    FAILED: "Không thể lấy thông tin user",
+    SUCCESS: "Lấy thông tin user thành công"
+  },
+  DELETE: {
+    FAILED: "Xóa user thất bại",
+    SUCCESS: "Đã xóa user thành công"
+  },
+  ACTIVATE: {
+    FAILED: "Kích hoạt user thành công",
+    SUCCESS: "Không thể kích hoạt user"
   }
-}
+};
+

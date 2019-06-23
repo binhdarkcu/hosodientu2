@@ -80,7 +80,7 @@ const routesMap = {
 
     // NO AUTHENTICATION
     RTE_DANG_KY_CONG_TY: {
-      path: '/dang-ky-cong-ty',
+      path: '/dang-ky-user-cong-ty',
       thunk: defaultThunk
     },
     RTE_USER_REGISTER: {
@@ -125,16 +125,24 @@ const routesMap = {
     RTE_KIEM_TRA_USER: {
       path: '/kiem-tra-user/:id',
       thunk: defaultThunk
+    },
+    RTE_CAP_NHAT_USER_COMPANY: {
+      path: '/nguoi-dung-cong-ty/:id',
+      thunk: defaultThunk
+    },
+    RTE_TEST: {
+      path: '/test',
+      thunk: noAuthentication
     }
 
-}
+};
 
 export function createDefaultRedirector(dispatch) {
     return type => {
         if (routesMap[type].thunk === defaultThunk) {
             dispatch(defaultThunk);
         }
-    }
+    };
 }
 
 const { reducer, middleware, enhancer } = connectRoutes(routesMap);

@@ -231,11 +231,11 @@ const components = {
   ValueContainer,
 };
 
-export default function IntegrationReactSelect({options, isMulti, label, placeholder, onChange}) {
+export default function IntegrationReactSelect({options, isMulti, label, placeholder, onChange, selectedItems, disabled }) {
   const classes = useStyles();
   const theme = useTheme();
-  const [single, setSingle] = React.useState(null);
-  const [multi, setMulti] = React.useState(null);
+  const [single, setSingle] = React.useState(selectedItems);
+  const [multi, setMulti] = React.useState(selectedItems);
 
   function handleChangeSingle(value) {
     setSingle(value);
@@ -273,6 +273,7 @@ export default function IntegrationReactSelect({options, isMulti, label, placeho
               shrink: true,
             }
           }}
+          isDisabled ={disabled}
           placeholder={placeholder}
           options={options}
           components={components}
@@ -291,6 +292,7 @@ export default function IntegrationReactSelect({options, isMulti, label, placeho
               shrink: true,
             }
           }}
+          isDisabled ={disabled}
           placeholder={placeholder}
           options={options}
           components={components}
@@ -309,5 +311,7 @@ IntegrationReactSelect.defaultProps = {
   isMulti: false,
   label: '',
   placeholder: '',
+  selectedItems: null,
+  disabled: false,
   onChange: () => {}
 }

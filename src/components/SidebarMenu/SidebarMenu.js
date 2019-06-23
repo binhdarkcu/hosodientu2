@@ -1,5 +1,6 @@
 import React from 'react';
-import Link from 'redux-first-router-link'
+import Link from 'redux-first-router-link';
+import { USER } from '../../constants/User';
 
 const SidebarMenu = ({user}) => {
 
@@ -10,10 +11,10 @@ const SidebarMenu = ({user}) => {
   let accessPages = [];
 
   switch (user.phanQuyen) {
-    case 1:
+    case USER.ROLE.ADMIN.CODE:
       accessPages = admin;
       break;
-    case 3:
+    case USER.ROLE.COMPANY.CODE:
       accessPages = company;
       break;
     default:
@@ -27,7 +28,7 @@ const SidebarMenu = ({user}) => {
     {id: 2,path: '/danh-sach-nguoi-dung', className: 'fa fa-list-alt', label: 'Danh sách người dùng'},
     {id: 3,path: '/danh-sach-cong-ty', className: 'fa fa-list-alt', label: 'Danh sách công ty'},
     {id: 4,path: '/admin-dang-ky', className: 'fa fa-bar-chart-o', label: 'Đăng ký người dùng'},
-    {id: 5,path: '/dang-ky-cong-ty', className: 'fa fa-bar-chart-o', label: 'Đăng ký công ty'},
+    {id: 5,path: '/dang-ky-user-cong-ty', className: 'fa fa-bar-chart-o', label: 'Tạo user công ty'},
   ];
 
   return (

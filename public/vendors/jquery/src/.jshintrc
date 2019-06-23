@@ -22,7 +22,6 @@
 	"globals": {
 		"window": true,
 		"JSON": false,
-
 		"jQuery": true,
 		"define": true,
 		"module": true,

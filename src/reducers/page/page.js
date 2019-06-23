@@ -1,4 +1,4 @@
-import { NOT_FOUND } from 'redux-first-router'
+import { NOT_FOUND } from 'redux-first-router';
 
 const components = {
   //Sub-pages in dashboard
@@ -19,7 +19,8 @@ const components = {
   RTE_USER_REGISTER: 'UserRegister',
   RTE_DOI_MAT_KHAU: 'DoiMatKhau',
   RTE_ACTIVATE: 'ActivateUser',
-  [NOT_FOUND]: 'NotFound'
+  [NOT_FOUND]: 'NotFound',
+  RTE_TEST: 'Test'
 }
 
 export default (state = 'Dashboard', action = {}) => components[action.type] || state

@@ -6,15 +6,10 @@ class ActivateCompanyPostModel {
     this.phone = data.phone || "";
     this.email = data.email || "";
     this.ten = data.ten || "";
+    this.trangThai = data.trangThai || "";
+    this.phanQuyen = data.phanQuyen || "";
   }
 
-  save(){
-    console.log('save');
-  }
-
-  delete(){
-    console.log('delete');
-  }
 }
 
 export default ActivateCompanyPostModel;

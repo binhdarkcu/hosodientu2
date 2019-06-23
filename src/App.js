@@ -18,21 +18,21 @@ import { createDefaultRedirector } from './router';
 moment.updateLocale(moment.locale(), { invalidDate: "Ngày không hợp lệ!" });
 
 // config console
-const console = function(oldCons){
-
-  process.env.NODE_ENV !== 'development' && oldCons.log('console sẽ bị vô hiệu hóa trong môi trường production!');
-
-  return {
-    log: () => {},
-    info: () => {},
-    warn: () => {},
-    error: () => {}
-  }
-}(window.console);
+// const console = function(oldCons){
+//
+//   process.env.NODE_ENV !== 'development' && oldCons.log('console sẽ bị vô hiệu hóa trong môi trường production!');
+//
+//   return {
+//     log: () => {},
+//     info: () => {},
+//     warn: () => {},
+//     error: () => {}
+//   }
+// }(window.console);
 
 //Then redefine the old console
 if(process.env.NODE_ENV !== 'development'){
-  window.console = console;
+  // window.console = console;
 }
 
 // config toast notifications

@@ -7,7 +7,7 @@ import { sendHttpRequest } from './http-handler';
 // URLs
 const adminRegisterApiUrl = `${baseUrl}/api/User/AdminRegister`;
 const userRegisterApiUrl = `${baseUrl}/api/User/UserRegister`;
-const activateUrl = `${baseUrl}/api/User/Activate`;
+const activateUrl = `${baseUrl}/api/User/Active`;
 const userListUrl = `${baseUrl}/api/Users`;
 const userDetailUrl = `${baseUrl}/api/User?id=`;
 const changePasswordUrl = `${baseUrl}/api/User/ChangePassword`;
@@ -16,7 +16,7 @@ const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 const deleteUserUrl = `${baseUrl}/api/User?id=`;
 const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
 const adminApprove = `${baseUrl}/api/User/AdminApprove`;
-const patientByQrCodeUrl = `${'http://115.79.197.84:83'}/api/PatientByQRCode`;
+const patientByQrCodeUrl = `${'https://115.79.197.84:444'}/api/PatientByQRCode`;
 const userInfoByEmailUrl = `${baseUrl}/api/UserByEmail?email=`;
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
@@ -53,25 +53,23 @@ export const execActivateUser = data => dispatch => {
       .then(data => resolve(data))
       .catch(err => reject(err));
   });
-}
+};
 
 // User register
-export const execRegister = (data, type) => dispatch => {
+export const execRegister = (data, type, isForce) => dispatch => {
   const parameters = {
     method: 'POST',
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' }
   };
 
-  const url = 'user' === type ? userRegisterApiUrl : adminRegisterApiUrl;
+  const url = 'user' === type ? `${userRegisterApiUrl}?isForce=${!!isForce}` : adminRegisterApiUrl;
   return new Promise((resolve, reject) => {
     sendHttpRequest(url, parameters)
-      .then((data) => {
-        return resolve(data);
-      })
+      .then(data => resolve(data))
       .catch(err => reject(err));
   });
-}
+};
 
 // Get user list
 export const execGetUserList = () => dispatch => {
@@ -82,9 +80,8 @@ export const execGetUserList = () => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(userListUrl, parameters)
-      .then(({ status, json }) => {
-        return resolve(json);
-      }).catch(err => reject(err));
+      .then(data => resolve(data))
+      .catch(err => reject(err));
   });
 };
 
@@ -118,14 +115,14 @@ export const execChangePassword = data => dispatch => {
       })
       .catch(err => reject(err));
   });
-}
+};
 
 // Get user by patient keyCode
 export const execGetUserInfoByPatientCode = data => dispatch => {
   const parameters = {
     method: 'GET',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-  }
+  };
   return new Promise((resolve, reject) => {
     sendHttpRequest(getUserByPatientCodeUrl + data.code, parameters)
       .then(({ status, json }) => {
@@ -133,7 +130,7 @@ export const execGetUserInfoByPatientCode = data => dispatch => {
       })
       .catch(err => reject(err));
   });
-}
+};
 
 // User update
 
@@ -163,9 +160,8 @@ export const execDeleteUser = (id) => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(deleteUserUrl + id, parameters)
-      .then(({ status, json }) => {
-        return resolve(json);
-      }).catch(err => reject(err));
+      .then(data => resolve(data))
+      .catch(err => reject(err));
   });
 };
 
@@ -175,13 +171,12 @@ export const execUpdateAvatar = (data) => dispatch => {
     method: 'PUT',
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' }
-  }
+  };
 
   return new Promise((resolve, reject) => {
       sendHttpRequest(updateAvatarUrl, parameters)
-        .then(({status, json}) => {
-          return resolve(json);
-        }).catch( err => reject(err));
+        .then(data => resolve(data))
+        .catch( err => reject(err));
   });
 }
 
@@ -202,7 +197,7 @@ export const execAdminApprove = (id) => dispatch => {
       })
       .catch(err => reject(err));
   });
-}
+};
 
 // Get patient info by QR code
 export const execGetPatientByQrCode = data => dispatch => {
@@ -219,4 +214,4 @@ export const execGetPatientByQrCode = data => dispatch => {
       })
       .catch(err => reject(err));
   });
-}
+};

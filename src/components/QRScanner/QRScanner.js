@@ -38,8 +38,8 @@ class QRScanner extends Component {
   }
 
   handleError(err) {
-    console.error(err)
-    this.setState({ legacyMode: true })
+    console.error(err);
+    this.setState({ legacyMode: true });
   }
 
   handleLoad() {
@@ -71,7 +71,7 @@ class QRScanner extends Component {
                   <span className="fa fa-remove"></span>
                 </span>
               </button>
-              <Grid container spacing={24}>
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   {this.state.loading && (
                     <div style={centerContainerStyle}>
