@@ -13,7 +13,7 @@ export const execGetReportList = code => dispatch => {
   };
   //medicalCode=20000002
   return new Promise((resolve, reject) => {
-      sendHttpRequest(getReportListUrl + `?medicalCode=${code}`, parameters)
+      sendHttpRequest(getReportListUrl + `?patientId=${code}`, parameters)
         .then(data =>  resolve(data))
         .catch( err => reject(err));
   });

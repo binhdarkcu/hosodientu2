@@ -43,6 +43,10 @@ class TestPage extends React.Component{
     loading: false
   };
 
+  componentDidMount(){
+    console.clear();  
+  }
+
   handleChange = name => event => {
     let request = {...this.state};
     request[name] = _.trim(event.target.value);

@@ -85,15 +85,14 @@ class LichSuKhamBenh extends React.Component {
   }
 
   getPersonalReports = async (user) => {
-    if(!user.maYte) return this.handleError({detail: null, message: MSG.USER_NO_MEDICAL_CODE});
-    return this.props.execGetReportList(user.maYte);
+    if(!user.benhNhanId) return this.handleError({detail: null, message: MSG.USER_NO_PATIENT_ID});
+    return this.props.execGetReportList(user.benhNhanId);
   }
 
   getCompanyReports = async (user) => {
     if(!user.donViCongTacId) return this.handleError({detail: null, message: MSG.USER_NO_COMPANY_ID});
     return this.props.execGetCompanyReportList(user.donViCongTacId);
   }
-
 
   handleError = err => {
     toast.error(err.message);
