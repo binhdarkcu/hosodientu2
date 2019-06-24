@@ -9,6 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import _ from 'lodash';
+import moment from 'moment';
 
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
 import { sendHttpRequest } from "../../actions/services/http-handler";
@@ -49,6 +50,7 @@ class TestPage extends React.Component{
   };
 
   sendRequest = async () => {
+    const x = new moment();
     try{
       this.setState({loading: true});
       const { state } = this;
@@ -68,14 +70,14 @@ class TestPage extends React.Component{
       }
       const result = await sendHttpRequest(state.url, parameters);
       console.log('Dữ liệu trả về ==>', result);
-      this.setState({loading: false});
-      console.log('<--------------------------------------------------------------------->');
     }catch (e) {
       console.error('Đã xảy ra lỗi ==>', e);
-      this.setState({loading: false});
-      console.log('<--------------------------------------------------------------------->');
     }
-
+    const y = new moment();
+    const duration = moment.duration(y.diff(x));
+    console.log(`Thời gian phản hồi: ${duration.as('seconds')} giây`);
+    console.log('<--------------------------------------------------------------------->');
+    this.setState({loading: false});
   };
 
   render() {
