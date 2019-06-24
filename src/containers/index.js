@@ -13,5 +13,5 @@ export {
   PageActivateUser as ActivateUser,
   PageDoiMatKhau as DoiMatKhau,
   PageUserRegister as UserRegister,
-  Test
+  Test as TestPage
 };

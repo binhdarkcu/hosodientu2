@@ -20,7 +20,7 @@ const components = {
   RTE_DOI_MAT_KHAU: 'DoiMatKhau',
   RTE_ACTIVATE: 'ActivateUser',
   [NOT_FOUND]: 'NotFound',
-  RTE_TEST: 'Test'
+  RTE_TEST: 'TestPage'
 }
 
 export default (state = 'Dashboard', action = {}) => components[action.type] || state

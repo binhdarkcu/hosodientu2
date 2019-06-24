@@ -24,12 +24,10 @@ import './style.scss';
 
 const getReports = createAction(GET_REPORT_LIST);
 const mapDispatchToProps = dispatch => ({
-  execGetReportList: (data) => dispatch(execGetReportList(data)),
-  execGetCompanyReportList: (companyId) => dispatch(execGetCompanyReportList(companyId)),
+  execGetReportList: data => dispatch(execGetReportList(data)),
+  execGetCompanyReportList: companyId => dispatch(execGetCompanyReportList(companyId)),
   getReports: data => dispatch(getReports(data)),
-  getReportDetails: (paramStr) => {
-    dispatch({type: 'RTE_CHI_TIET_KHAM_BENH', payload:{ paramStr }})
-  },
+  getReportDetails: paramStr => dispatch({type: 'RTE_CHI_TIET_KHAM_BENH', payload:{ paramStr }}),
 });
 
 const mapStateToProps = ({ services, location }) => ({
@@ -140,7 +138,7 @@ class LichSuKhamBenh extends React.Component {
   };
 
   render() {
-    
+
     const { classes } = this.props;
     const { loading, reports, visibility } = this.state;
 

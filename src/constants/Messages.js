@@ -5,7 +5,7 @@ export const INVALID_PHONE_NUMBER = 'Số điện thoại không hợp lệ!';
 export const INVALID_PATIENT_ID = 'ID bệnh nhân không hợp lệ!';
 export const USERNAME_REQUIRED = 'Vui lòng nhập tài khoản!';
 export const PASSWORD_REQUIRED = 'Vui lòng nhập mật khẩu!';
-export const PASSWORD_MISMATCH = 'Nhập lại mật khẩu không trùng khớp!';
+export const PASSWORD_MISMATCH = 'Mật khẩu và nhập lại mật khẩu không trùng nhau!';
 export const INVALID_LOGIN = 'Tài khoản hoặc mật khẩu không đúng!';
 // actions
 export const LOGIN_FAILED = 'Đăng nhập thất bại!';
@@ -58,4 +58,3 @@ export const USER = {
     SUCCESS: "Không thể kích hoạt user"
   }
 };
-

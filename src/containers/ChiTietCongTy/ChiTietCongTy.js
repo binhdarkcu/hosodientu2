@@ -50,7 +50,7 @@ class ChiTietCongTy extends React.Component {
   componentWillMount() {
     const { id } = this.props.location.payload;
     this.props.execGetCompanyDetails(id)
-      .then(({status, json}) => status === 200 ? this.handleSuccess(json) : this.handleError())
+      .then(({status, json}) => status === 200 ? this.handleSuccess(json) : this.handleError(json))
       .catch(err => this.handleError(err))
   }
 

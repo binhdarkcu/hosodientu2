@@ -104,6 +104,8 @@ class TestPage extends React.Component{
           >
             <FormControlLabel value="POST" control={<Radio />} label="POST" />
             <FormControlLabel value="GET" control={<Radio />} label="GET" />
+            <FormControlLabel value="PUT" control={<Radio />} label="PUT" />
+            <FormControlLabel value="DELETE" control={<Radio />} label="DELETE" />
           </RadioGroup>
         </FormControl>
         <br/>
@@ -112,7 +114,7 @@ class TestPage extends React.Component{
           <FormLabel>CONTENT TYPE</FormLabel>
           <RadioGroup
             row
-            aria-label="METHOD"
+            aria-label="CONTENT TYPE"
             className={classes.group}
             onChange={this.handleChange('contentType')}
             value={contentType}
