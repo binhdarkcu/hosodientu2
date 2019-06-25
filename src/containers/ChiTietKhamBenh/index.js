@@ -79,16 +79,6 @@ class ChiTietKhamBenh extends React.Component {
 
     }
   }
-  // resizeIframe =  debounce(
-  //   () => {
-  //     if(this.iframe) {
-  //       let obj = this.iframe.node;
-  //       obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-  //       obj.contentWindow.document.body.style.visibility = 'visible';
-  //       console.log(obj.contentWindow);
-  //     }
-  //   },
-  //   2000);
 
   componentDidMount(){
     const { paramStr } = this.props.location.payload;

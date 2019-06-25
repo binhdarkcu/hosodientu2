@@ -41,11 +41,10 @@ export const execGetUserInfo = username => dispatch => {
 
 // Activate user
 export const execActivateUser = data => dispatch => {
-  const searchParams = Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&');
   const parameters = {
-    method: 'POST',
-    body: searchParams,
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
   };
 
   return new Promise((resolve, reject) => {
@@ -94,9 +93,8 @@ export const execGetUserDetail = (id) => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(userDetailUrl + id, parameters)
-      .then(({ status, json }) => {
-        return resolve({ status, json });
-      }).catch(err => reject(err));
+      .then(data => resolve(data))
+      .catch(err => reject(err));
   });
 };
 
@@ -110,9 +108,7 @@ export const execChangePassword = data => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(changePasswordUrl, parameters)
-      .then(({ status, json }) => {
-        return resolve({status, json});
-      })
+      .then(data => resolve(data))
       .catch(err => reject(err));
   });
 };
@@ -125,9 +121,7 @@ export const execGetUserInfoByPatientCode = data => dispatch => {
   };
   return new Promise((resolve, reject) => {
     sendHttpRequest(getUserByPatientCodeUrl + data.code, parameters)
-      .then(({ status, json }) => {
-        return resolve({ status, json })
-      })
+      .then(data =>  resolve(data))
       .catch(err => reject(err));
   });
 };
@@ -192,9 +186,7 @@ export const execAdminApprove = (id) => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(adminApprove, parameters)
-      .then((data) => {
-        return resolve(data);
-      })
+      .then(data => resolve(data))
       .catch(err => reject(err));
   });
 };
@@ -209,9 +201,7 @@ export const execGetPatientByQrCode = data => dispatch => {
 
   return new Promise((resolve, reject) => {
     sendHttpRequest(patientByQrCodeUrl, parameters)
-      .then((data) => {
-        return resolve(data);
-      })
+      .then(data => resolve(data))
       .catch(err => reject(err));
   });
 };
