@@ -105,7 +105,7 @@ class PageActivateUser extends React.Component {
   render() {
 
     const { classes, gotoHomepage } = this.props;
-    const { loading, password, repeatPassword, isChecked, isRead } = this.state;
+    const { loading, password, repeatPassword, isChecked } = this.state;
     return (
       <FormLayoutVertical>
         <Spinner type="PacmanLoader" size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
@@ -255,7 +255,6 @@ class PageActivateUser extends React.Component {
               <FormControlLabel
                 control={
                   <Checkbox
-                    disabled={!isRead}
                     checked={this.state.isChecked}
                     onChange={this.handleCheck('isChecked')}
                     value="Agree"

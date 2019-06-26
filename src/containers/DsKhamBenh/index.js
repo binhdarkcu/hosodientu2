@@ -66,7 +66,7 @@ class LichSuKhamBenh extends React.Component {
   };
 
   componentDidMount() {
-    this.initializeScreen().finally(() => this.setState({loading: false}));
+    this.initializeScreen();
   }
 
   initializeScreen = async () => {
@@ -76,7 +76,7 @@ class LichSuKhamBenh extends React.Component {
       if(result && result.status === 200){
         this.props.getReports(result.json);
         const list = this.groupDataList(result.json);
-        this.setState({reports: [...list]});
+        this.setState({reports: [...list], loading: false});
       }
 
     }catch(err){

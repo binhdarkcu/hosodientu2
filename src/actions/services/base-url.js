@@ -1,3 +1,3 @@
 
-let backendAPI = 'https://115.79.197.84:446';
+let backendAPI = 'https://apidientu.goldenhealthcarevn.com:446';
 export default backendAPI;
