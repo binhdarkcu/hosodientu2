@@ -115,7 +115,7 @@ class ChiTietKhamBenh extends React.Component {
                     initialContent='<!DOCTYPE html><html><head></head><body class="iframe-body"><div></div></body></html>'
                     head={
                       <style type="text/css">
-                      {`.iframe-body{visibility:hidden; display: flex; flex-direction: column; justify-content: center; align-items: center;}`}
+                      {`.iframe-body{visibility:hidden;} .frame-content body{overflow: auto;} .frame-content body > div{margin: 0 auto;}`}
                       </style>
                     }
                     className={classes.iframe}
