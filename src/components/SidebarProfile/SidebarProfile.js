@@ -1,24 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NoUserImage from '../../assets/images/user.png';
 
 const SidebarProfile = ({user}) => {
+
+  const getAvatarUrl = (user) => {
+    if(user.avatar) return 'data:image/jpeg;base64,' + user.avatar;
+    return NoUserImage;
+  }
+
   return(
     <div className="profile clearfix">
       <div className="profile_pic">
-        <img src="images/img.jpg" alt="..." className="img-circle profile_img"/>
+        <img src={getAvatarUrl(user)} alt="..." className="img-circle profile_img"/>
       </div>
       <div className="profile_info">
-        <span>Welcome,</span>
-        <h2>{user.name}</h2>
+        <span>Xin chào,</span>
+        <h2>{user.email}</h2>
       </div>
     </div>
   );
 }
 
 SidebarProfile.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string.isRequired
-  })
-}
+  user: PropTypes.object.isRequired
+};
 
 export default SidebarProfile;

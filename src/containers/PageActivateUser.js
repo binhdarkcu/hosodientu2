@@ -9,6 +9,7 @@ import FormLayoutVertical from '../components/FormLayoutVertical';
 import FormFooter from '../components/FormFooter';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
+import { redirect } from 'redux-first-router';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { toast } from 'react-toastify';
 import * as MSG from '../constants/Messages.js';
@@ -16,11 +17,12 @@ import * as RULE from '../constants/Rules.js';
 import { connect } from 'react-redux';
 import {execActivateUser} from '../actions/services/api-user.js';
 import Spinner from '../components/Spinner';
-import {SPINNER_LIGHT_GREEN} from '../constants/Colors';
+import {GOLDEN_HEALTH_ORANGE} from '../constants/Colors';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const mapDispatchToProps = dispatch => ({
-  activate: data => dispatch(execActivateUser(data))
+  activate: data => dispatch(execActivateUser(data)),
+  gotoHomepage: () => dispatch(redirect({type: 'RTE_DASHBOARD'}))
 });
 
 const mapStateToProps = ({location}) => ({
@@ -29,8 +31,8 @@ const mapStateToProps = ({location}) => ({
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 200,
   },
   paper: {
@@ -67,15 +69,28 @@ class PageActivateUser extends React.Component {
     if(reachedBottom) this.setState({isRead: true});
   }
 
-  handleSubmit = () => {
-    // const _self = this;
-    // _self.setState({loading: true});
-    // this.props.activate({...this.state.user}).then((done)=>{
-    //   console.log('done');
-    // }).catch((err)=>{
-    //   console.log('err', err);
-    //   _self.setState({loading: false});
-    // });
+  handleSubmit = async () => {
+    try{
+      const { password } = this.state;
+      const { activateCode } = this.props;
+      const result = await this.props.activate({code: activateCode, password});
+      if(result.status !== 200) throw(result);
+      this.handleSuccess(MSG.USER_ACTIVATED);
+    }catch(err){
+      this.handleError({detail: err, message: MSG.ERROR_OCCURED});
+    }
+  }
+
+  handleSuccess = (message) => {
+    this.setState({loading: false});
+    toast.success(message);
+    this.props.gotoHomepage();
+  }
+
+  handleError = (error) => {
+    this.setState({loading: false});
+    toast.error(error.message);
+    console.error(error.detail);
   }
 
   componentDidMount(){
@@ -89,19 +104,19 @@ class PageActivateUser extends React.Component {
 
   render() {
 
-    const { classes } = this.props;
-    const { loading, password, repeatPassword, isChecked, isRead } = this.state;
+    const { classes, gotoHomepage } = this.props;
+    const { loading, password, repeatPassword, isChecked } = this.state;
     return (
       <FormLayoutVertical>
-        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+        <Spinner type="PacmanLoader" size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
         <ValidatorForm
             ref="form"
             onSubmit={this.handleSubmit}
             onError={errors => console.log(errors)}
         >
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={3}>
-              <Logo size={150}/>
+              <Logo size={150} onClick={gotoHomepage}/>
             </Grid>
 
             <Grid item xs={6}>
@@ -111,7 +126,7 @@ class PageActivateUser extends React.Component {
             </Grid>
           </Grid>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
 
             <Grid item xs={12} sm={6}>
               <TextValidator
@@ -240,7 +255,6 @@ class PageActivateUser extends React.Component {
               <FormControlLabel
                 control={
                   <Checkbox
-                    disabled={!isRead}
                     checked={this.state.isChecked}
                     onChange={this.handleCheck('isChecked')}
                     value="Agree"

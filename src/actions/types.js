@@ -20,3 +20,7 @@ export const ADMIN_REGISTER = 'ADMIN_REGISTER';
 export const LOG_OUT = 'LOG_OUT';
 export const SET_USER_INFO = 'SET_USER_INFO';
 export const GET_USER_LIST = 'GET_USER_LIST';
+export const SET_COMPANY_LIST = 'SET_COMPANY_LIST';
+
+// report
+export const GET_REPORT_LIST = 'GET_REPORT_LIST';

@@ -1,12 +1,41 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import moment from 'moment'
 
+import './assets/styles/all.scss';
 // custom imports
 import * as pages from './containers';
-import {createDefaultRedirector} from './router';
+import { createDefaultRedirector } from './router';
+
+//***************************************************************************
+//                        APPLICATION CONFIGURATIONS                        *
+//***************************************************************************
+
+// Config momentJs
+moment.updateLocale(moment.locale(), { invalidDate: "Ngày không hợp lệ!" });
+
+// config console
+// const console = function(oldCons){
+//
+//   process.env.NODE_ENV !== 'development' && oldCons.log('console sẽ bị vô hiệu hóa trong môi trường production!');
+//
+//   return {
+//     log: () => {},
+//     info: () => {},
+//     warn: () => {},
+//     error: () => {}
+//   }
+// }(window.console);
+
+//Then redefine the old console
+if(process.env.NODE_ENV !== 'development'){
+  // window.console = console;
+}
 
 // config toast notifications
 toast.configure({
@@ -18,7 +47,7 @@ toast.configure({
 
 const App = ({page, location}) => {
   let CurrentPage = pages[page];
-  if(!sessionStorage.authToken && location.type !== 'RTE_ACTIVATE' && location.type !== 'RTE_USER_REGISTER') {
+  if(!sessionStorage.authToken && location.type !== 'RTE_ACTIVATE' && location.type !== 'RTE_USER_REGISTER' && location.type !== 'RTE_TEST') {
     CurrentPage = pages['Login'];
   }
   return <CurrentPage />

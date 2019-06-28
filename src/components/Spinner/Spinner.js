@@ -25,4 +25,8 @@ Spinner.propTypes = {
   loading: PropTypes.bool.isRequired
 }
 
+Spinner.defaultProps = {
+  loading: false
+}
+
 export default Spinner;

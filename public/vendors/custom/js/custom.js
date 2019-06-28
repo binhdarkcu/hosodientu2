@@ -73,23 +73,20 @@ const initializeDashboard = function(){
           var $li = $(this).parent();
 
           if ($li.is('.active')) {
-              $li.removeClass('active active-sm');
-              $('ul:first', $li).slideUp(function() {
-                  setContentHeight();
-              });
+
           } else {
               // prevent closing menu if we are on child menu
               if (!$li.parent().is('.child_menu')) {
-                  $SIDEBAR_MENU.find('li').removeClass('active active-sm');
+                  $SIDEBAR_MENU.find('li').removeClass('active current-page active-sm');
                   $SIDEBAR_MENU.find('li ul').slideUp();
               }else
               {
                 $SIDEBAR_MENU.find('.child_menu').find('li').removeClass('active current-page');
-        				if ( $BODY.is( ".nav-sm" ) )
-        				{
-        					$li.parent().find( "li" ).removeClass( "active active-sm" );
-        					$li.parent().find( "li ul" ).slideUp();
-        				}
+                    if ( $BODY.is( ".nav-sm" ) )
+                    {
+                        $li.parent().find( "li" ).removeClass( "active active-sm" );
+                        $li.parent().find( "li ul" ).slideUp();
+                    }
   			      }
               $li.addClass('active current-page');
 
@@ -120,7 +117,7 @@ const initializeDashboard = function(){
 
   	$SIDEBAR_MENU.find('a').filter(function () {
   		return this.href == CURRENT_URL;
-  	}).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+  	}).parent('li').addClass('current-page active').parents('ul').slideDown(function() {
   		setContentHeight();
   	}).parent().addClass('active');
 

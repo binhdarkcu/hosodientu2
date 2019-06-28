@@ -3,41 +3,43 @@ import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Logo from '../../components/Logo';
 import Grid from '@material-ui/core/Grid';
-import FormLayoutVertical from '../../components/FormLayoutVertical';
-import FormFooter from '../../components/FormFooter';
-import FormLabel from '@material-ui/core/FormLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import DatePicker from 'react-date-picker';
+import Divider from '@material-ui/core/Divider';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { toast } from 'react-toastify';
+import { connect } from 'react-redux';
+
+// custom imports
+import Logo from '../../components/Logo';
+import FormLayoutVertical from '../../components/FormLayoutVertical';
 import * as MSG from '../../constants/Messages.js';
 import * as RULE from '../../constants/Rules.js';
-import { connect } from 'react-redux';
+import FormFooter from '../../components/FormFooter';
 import Spinner from '../../components/Spinner';
-import {SPINNER_LIGHT_GREEN} from '../../constants/Colors';
-import Divider from '@material-ui/core/Divider';
+import {GOLDEN_HEALTH_ORANGE} from '../../constants/Colors';
+
+import { execChangePassword } from '../../actions/services/api-user.js';
+import { execLogout } from '../../actions/services/user.js';
+
 
 const mapDispatchToProps = dispatch => ({
-  goToDashboard: () => dispatch({type: 'RTE_DASHBOARD'})
+  goToDashboard: () => dispatch({type: 'RTE_DASHBOARD'}),
+  logOut: () => dispatch(execLogout()),
+  changePassword: data => dispatch(execChangePassword(data)),
 });
 
-const mapStateToProps = ({id}) => ({
-  id: id
-})
+const mapStateToProps = ({services}) => {
+  return { userInfo: services.user.userInfo };
+}
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     width: 200,
   },
   button: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
   },
 });
 
@@ -63,21 +65,33 @@ class FormChangePassword extends React.Component {
     this.setState({[name]: event.target.value});
   };
 
-
   handleSubmit = () => {
-    // const _self = this;
-    // _self.setState({loading: true});
-    // let user = {...this.state.user};
-    // user.NgaySinh = `${user.NgaySinh.getFullYear()}-${user.NgaySinh.getMonth() + 1}-${user.NgaySinh.getDate()}`;
-    // this.props.register(user, this.props.type).then((done)=>{
-    //   console.log('done');
-    //   toast.success(MSG.USER_CREATED);
-    //   _self.setState({loading: false});
-    // }).catch((err)=>{
-    //   console.log('err', err);
-    //   toast.error(MSG.ERROR_OCCURED);
-    //   _self.setState({loading: false});
-    // });
+    const { userInfo } = this.props;
+    const { oldPassword, newPassword } = this.state;
+
+    const data = {
+      id: userInfo.userId,
+      oldPassword,
+      newPassword,
+    }
+
+    this.setState({loading: true});
+    this.props.changePassword(data).then(({status, json})=>{
+      json.isSuccess ? this.handleSuccess() : this.handleError({detail: json, message: json.errorMessage});
+    }).catch((err)=>{
+      this.handleError({detail: err, message: MSG.ERROR_OCCURED});
+    });
+  }
+
+  handleSuccess = () => {
+    toast.success(MSG.CHANGE_PASSWORD);
+    this.props.logOut();
+  }
+
+  handleError = (err) => {
+    toast.error(err.message);
+    this.setState({loading: false});
+    console.error(err.detail);
   }
 
   goToDashboard = () => {
@@ -89,25 +103,25 @@ class FormChangePassword extends React.Component {
     const { loading, oldPassword, newPassword, repeatPassword } = this.state;
     return (
       <FormLayoutVertical>
-        <Spinner type="PacmanLoader" size={50} color={SPINNER_LIGHT_GREEN} loading={loading}/>
+        <Spinner type="PacmanLoader" size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
         <ValidatorForm
             ref="form"
             onSubmit={this.handleSubmit}
             onError={errors => console.log(errors)}
         >
-          <Grid container spacing={24}>
-            <Grid item xs={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4}>
               <Logo onClick={this.goToDashboard} size={150}/>
             </Grid>
 
-            <Grid item xs={4}>
+            <Grid item xs={12} sm={4}>
               <Typography component="h1" variant="h4" align="center">
                 Đổi mật khẩu
               </Typography>
             </Grid>
           </Grid>
 
-          <Grid container spacing={24}>
+          <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
               <TextValidator
                 label="Mật khẩu cũ"

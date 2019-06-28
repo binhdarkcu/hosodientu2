@@ -1,0 +1,99 @@
+.Image{
+  max-width: 100%;
+}
+
+.CropAvatar{
+  .Wrapper{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+
+    .close-popup{
+      position: absolute;
+      top: 5px;
+      right: 0;
+    }
+    .previous-step{
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
+
+    .Header{
+      margin-bottom: 10px;
+    }
+
+    .DragDrop{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-align: center;
+      border: 2px dotted #00bfff;
+      height: 250px;
+
+      .fa-plus{
+        font-size: 60px;
+      }
+    }
+
+    .ButtonControls{
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .Previewer{
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img{
+        height: 100%;
+        border: 1px solid black;
+      }
+    }
+
+    .AvatarPreviewBox{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        border: 1px solid black;
+      }
+    }
+
+  }
+  .OverLay{
+    &:after{
+      content: "";
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999;
+      position: fixed;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+.CropAvatar{
+
+  .ImageContent{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .Cropper{
+      max-height: 500px;
+    }
+
+    .Controls{
+      margin-top: 10px;
+    }
+  }
+}

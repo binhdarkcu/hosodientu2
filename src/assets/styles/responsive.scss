@@ -1,0 +1,54 @@
+/*==================Responsive===================*/
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+
+}
+@media screen and (min-width: 0) and (max-width: 768px) {
+  .nav-md .container.body .right_col {
+    main {
+      width: auto!important;
+    }
+  }
+
+  .QRScanner{
+    .Wrapper{
+      .Container{
+        min-width: 300px;
+        max-width: 300px;
+      }
+    }
+  }
+
+  .CropAvatar{
+    .ImageContent, .FileChooser, .AvatarPreview{
+      min-width: 300px;
+      max-width: 300px;
+      overflow: hidden;
+    }
+
+    .Controls{
+      text-align: center;
+      > .btn-group{
+        margin: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+
+  .QRScanner{
+    .Wrapper{
+      .Container{
+        min-width: 275px;
+        max-width: 275px;
+      }
+    }
+  }
+
+  .CropAvatar{
+    .ImageContent, .FileChooser, .AvatarPreview{
+      min-width: 275px;
+      max-width: 275px;
+    }
+  }
+}

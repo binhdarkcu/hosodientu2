@@ -14,11 +14,9 @@ class UserRegister extends Component{
     return(
       <div className="container body">
         <div className="main_container">
-
           <div className="col-md-12">
             <RegisterForm type={'user'} />
           </div>
-
         </div>
       </div>
     );
