@@ -23,8 +23,10 @@ class PageLogin extends Component{
   state = {
     username_error: false,
     password_error: false,
-    loading: false
-  }
+    loading: false,
+    username: process.env.NODE_ENV === 'development' ? 'admin@gmail.com' : '',
+    password: process.env.NODE_ENV === 'development' ? 'webapp' : ''
+  };
 
   componentDidMount(){
     document.body.className = "login";
@@ -39,13 +41,12 @@ class PageLogin extends Component{
     if(e.keyCode === 13 || e.key === 'Enter'){
       this.handleLogin(e);
     }
-  }
+  };
 
   handleLogin = (e) => {
     e.preventDefault();
 
-    const username = this.username.value;
-    const password = this.password.value;
+    const {username, password } = this.state;
 
     this.setState({username_error: !!!username, password_error: !!!password});
 
@@ -64,21 +65,27 @@ class PageLogin extends Component{
     }).catch(err => {
       err.status === 404 ? this.showError(INVALID_LOGIN, err) : this.showError(LOGIN_FAILED, err);
     });
-  }
+  };
 
   showError = (msg, err) => {
     toast.error(msg);
     this.setState({loading: false});
-  }
+  };
 
   handleForgotPassword = (e) => {
     e.preventDefault();
-    console.log('handle forgot password');
-  }
+    alert('Chức năng đang trong giai đoạn thực hiện, vui lòng liên hệ quản trị viên để giải quyết sự cố!');
+  };
+
+  handleChange = name => e => {
+    let state = {...this.state};
+    state[name] = e.target.value;
+    this.setState(state);
+  };
 
   render(){
 
-    const { password_error, username_error, loading } = this.state;
+    const { password_error, username_error, loading, username, password } = this.state;
 
     return (
       <div>
@@ -92,11 +99,11 @@ class PageLogin extends Component{
               <form>
                 <h1>Đăng nhập</h1>
                 <div className="form-login">
-                  <input ref={(node)=>{this.username = node;}} value={'admin@gmail.com'} type="text" className="form-control" placeholder="Username" required />
+                  <input value={ username} type="text" className="form-control" placeholder="Tài khoản" onChange={this.handleChange('username')} required />
                   {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
                 </div>
                 <div className="form-login">
-                  <input ref={(node)=>{this.password = node;}} value={'webapp'} type="password" className="form-control" placeholder="Password" required />
+                  <input value={password} type="password" className="form-control" placeholder="Mật khẩu" onChange={this.handleChange('password')} required />
                   {password_error && <InputErrorDisplayer message={PASSWORD_REQUIRED}/>}
                 </div>
                 <div>
@@ -104,15 +111,16 @@ class PageLogin extends Component{
                   <a href="index.html" className="reset_pass" onClick={this.handleForgotPassword}>Quên mật khẩu?</a>
                 </div>
 
-                <div className="clearfix"></div>
+                <div className="clearfix"/>
 
                 <div className="separator">
                 <p className="change_link">Chưa có tài khoản?
                   <Link to="/nguoi-dung-dang-ky" className="to_register">Đăng ký ngay</Link>
                 </p>
-                  <div className="clearfix"></div>
-                  <br />
+                <div className="clearfix"/>
+                <br />
                 </div>
+                <div className="Browser"><i>Trải nghiệm tốt nhất trên trình duyệt<a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Google Chrome</a>!</i></div>
               </form>
             </section>
           </div>

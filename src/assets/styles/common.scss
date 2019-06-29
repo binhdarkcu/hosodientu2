@@ -13,7 +13,7 @@ body,html {
 }
 body {
     height: auto;
-    min-height: 500px;
+    min-height: 550px;
     overflow: hidden;
     margin: 0;
 }
@@ -29,9 +29,6 @@ a:link, a:visited {
 	color: #F7931D;
 }
 
-iframe {
-
-}
 
 .hasLoader {
   min-height: 600px;
@@ -40,9 +37,6 @@ iframe {
   background-image: url("../images/loading.gif");
   background-repeat: no-repeat;
   background-position: center;
-  &:after{
-
-  }
 }
 
 .nav-md .container.body .right_col {

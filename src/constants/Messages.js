@@ -29,9 +29,10 @@ export const ACTIVATE_COMPANY_FAILED = 'Không thể đăng ký công ty';
 export const ACTIVATE_COMPANY_SUCCESS = 'Đăng ký công ty thành công';
 export const ADMIN_APPROVE_USER_PENDING = 'Quản trị viên đã duyệt, chờ người dùng kích hoạt!';
 export const USER_NO_MEDICAL_CODE = 'Không có mã y tế';
-export const USER_NO_PATIENT_ID = 'Không có mã bệnh nhân'
+export const USER_NO_PATIENT_ID = 'Không có mã bệnh nhân';
 export const USER_NO_COMPANY_ID = 'Không có mã công ty';
 export const USER_ACTIVATED = 'Đã kích hoạt thành công!';
+export const ACTIVATE_CODE_NOT_FOUND = 'Mã kích hoạt không tồn tại';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';

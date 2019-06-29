@@ -24,12 +24,18 @@ const styles = theme => ({
     width: '100%',
     border: 'none',
     height: '100%',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    [theme.breakpoints.down(480 + theme.spacing(2) * 2)]: {
+      position: 'absolute',
+      transform: 'scale(0.4)',
+      width: '250%'
+    },
   },
   row: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden'
   }
 });
 
@@ -39,52 +45,25 @@ class ChiTietKhamBenh extends React.Component {
     html: null,
     loaded: false,
     hasError: false
-  }
-
-  resizeIframe = () => {
-
-    const { loaded } = this.state;
-
-    // Only register mutation event once!
-    if(this.iframe && !loaded){
-
-      let iframe = this.iframe.node;
-
-      const observeDOM = (() => {
-        let MutationObserver = iframe.contentWindow.MutationObserver || iframe.contentWindow.WebKitMutationObserver;
-
-        return ( obj, callback ) => {
-          if( !obj || !obj.nodeType === 1 ) return; // validation
-
-          if( MutationObserver ){
-            // define a new observer
-            let obs = new MutationObserver((mutations, observer) => {
-                callback(mutations);
-            })
-            // have the observer observe foo for changes in children
-            obs.observe( obj, { childList:true, subtree:true });
-          }
-
-          else if( iframe.contentWindow.addEventListener ){
-            obj.addEventListener('DOMNodeInserted', callback, false);
-            obj.addEventListener('DOMNodeRemoved', callback, false);
-          }
-        }
-      })();
-
-      observeDOM( iframe.contentWindow.document, (m) => {
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-        iframe.contentWindow.document.body.style.visibility = 'visible';
-      });
-
-    }
-  }
+  };
 
   componentDidMount(){
     const { paramStr } = this.props.location.payload;
     this.props.getReportDetails({paramStr: decodeURIComponent(paramStr)})
     .then(({status, json}) => {
-      status === 200 ? this.setState({html: json, loaded: true}) : this.setState({hasError: true, loaded: true});
+      status === 200 ? this.setState({html: json, loaded: true}, () => {
+        if(this.iframe) {
+          let iframe = this.iframe.node;
+          const iframeHeight = iframe.contentWindow.document.body.scrollHeight + 20;
+          iframe.style.height = iframeHeight + 'px';
+          iframe.contentWindow.document.body.style.visibility = 'visible';
+
+          //Handle mobile issue!
+          if(window.innerWidth < 512 && iframeHeight > 3000){
+            this.container.style.height = iframeHeight*0.4 + 'px';
+          }
+        }
+      }) : this.setState({hasError: true, loaded: true});
     })
     .catch(err => {
       this.setState({hasError: true, loaded: true});
@@ -102,7 +81,7 @@ class ChiTietKhamBenh extends React.Component {
         </Typography>
       </div>
     )
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -110,8 +89,8 @@ class ChiTietKhamBenh extends React.Component {
     return (
       <FormLayoutHorizontal>
         <Grid container spacing={2}>
-          <Grid item xs={12} className={classes.row + ' hasLoader'}>
-            <Frame  ref={(ref) => {this.iframe = ref}}
+          <Grid ref={(ref) => this.container = ref} item xs={12} className={classes.row + ' hasLoader'}>
+            <Frame  ref={(ref) => this.iframe = ref}
                     initialContent='<!DOCTYPE html><html><head></head><body class="iframe-body"><div></div></body></html>'
                     head={
                       <style type="text/css">
@@ -120,8 +99,7 @@ class ChiTietKhamBenh extends React.Component {
                     }
                     className={classes.iframe}
                     frameBorder="0"
-                    scrolling="no"
-                    onLoad={this.resizeIframe}>
+                    scrolling="no">
                   { hasError ? this.renderErrorNotice() : ReactHtmlParser(html) }
             </Frame>
           </Grid>
