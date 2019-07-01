@@ -75,7 +75,7 @@ class Dashboard extends Component {
   state = {
     showChangeAvatarPopup: false,
     loading: false
-  }
+  };
 
   componentDidMount(){
     document.body.className = "nav-md";
@@ -86,7 +86,7 @@ class Dashboard extends Component {
     this.setState((prevState) => {
       return {showChangeAvatarPopup: !prevState.showChangeAvatarPopup};
     });
-  }
+  };
 
   handleUpdateAvatar = (avatar) => {
     this.setState({loading: true});
@@ -103,11 +103,11 @@ class Dashboard extends Component {
     }).catch(err => {
       toast.error(MSG.UPDATE_AVATAR_FAILED);
     })
-  }
+  };
 
   handleLogoClick = () => {
 
-  }
+  };
 
   render() {
 
@@ -131,7 +131,7 @@ class Dashboard extends Component {
               <br />
 
               <SidebarMenu user={userInfo} />
-              <SidebarFooter />
+              {/*<SidebarFooter />*/}
             </div>
           </div>
 
@@ -152,6 +152,6 @@ class Dashboard extends Component {
 
 Dashboard.defaultProps = {
   userInfo: {}
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

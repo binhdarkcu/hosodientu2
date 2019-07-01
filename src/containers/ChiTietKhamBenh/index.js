@@ -59,7 +59,7 @@ class ChiTietKhamBenh extends React.Component {
           iframe.contentWindow.document.body.style.visibility = 'visible';
 
           //Handle mobile issue!
-          if(window.innerWidth < 512 && iframeHeight > 3000){
+          if(window.innerWidth < 512 && iframeHeight > 2000){
             this.container.style.height = iframeHeight*0.4 + 'px';
           }
         }
