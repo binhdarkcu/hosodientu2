@@ -4,7 +4,7 @@ import moment from 'moment';
 class ActivatePatientPostModel {
   constructor(data = {}) {
     this.benhNhanId = data.benhNhanId || "";
-    this.maYte = data.maYte || data.soVaoVien || "";
+    this.maYte = data.soVaoVien || data.maYte || "";
     this.phone = data.phone || data.soDienThoai || "";
     this.diaChi = data.diaChi || "";
     this.email = data.email || "";
