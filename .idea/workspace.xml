@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7f228f2e-56f3-4893-b785-9837e380e54f" name="Default Changelist" comment="" />
+    <list default="true" id="7f228f2e-56f3-4893-b785-9837e380e54f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/services/api-report.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/services/api-report.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/services/api-user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/services/api-user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/services/base-url.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/services/base-url.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/DsKhamBenh/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/DsKhamBenh/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/PageLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/PageLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/activateCompanyPostModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/activateCompanyPostModel.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -15,28 +27,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/ChiTietKhamBenh/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
-              <folding>
-                <element signature="e#66#108#0" expanded="true" />
-                <element signature="e#201#239#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/activateCompanyPostModel.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/activatePatientPostModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8">
-              <caret line="12" column="40" lean-forward="true" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+            <state relative-caret-position="382">
+              <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -45,10 +39,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
+        <entry file="file://$PROJECT_DIR$/src/models/activateCompanyPostModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-128">
-              <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
+            <state relative-caret-position="136">
+              <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -56,8 +50,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1887">
-              <caret line="111" column="139" selection-start-line="111" selection-start-column="139" selection-end-line="111" selection-end-column="139" />
+            <state relative-caret-position="433">
+              <caret line="111" column="90" selection-start-line="111" selection-start-column="90" selection-end-line="111" selection-end-column="90" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
                 <element signature="e#138#205#0" expanded="true" />
@@ -67,9 +61,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/SidebarProfile/SidebarProfile.js">
+        <entry file="file://$PROJECT_DIR$/src/actions/services/base-url.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="535">
+              <caret line="248" column="31" selection-start-line="248" selection-start-column="31" selection-end-line="248" selection-end-column="31" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -78,15 +82,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/TopNav/package.json">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/TopNav/TopNav.js">
+        <entry file="file://$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="722">
-              <caret line="70" column="2" selection-start-line="70" selection-start-column="2" selection-end-line="70" selection-end-column="2" />
+            <state relative-caret-position="85">
+              <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -95,22 +94,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/Dashboard.js">
+        <entry file="file://$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="612">
+              <caret line="107" column="40" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/ChiTietUser/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/PageDoiMatKhau.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="106" column="31" lean-forward="true" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="31" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/assets/styles/common.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -134,9 +148,18 @@
         <option value="$PROJECT_DIR$/src/assets/styles/common.scss" />
         <option value="$PROJECT_DIR$/src/containers/ChiTietKhamBenh/index.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/src/containers/PageLogin.js" />
         <option value="$PROJECT_DIR$/src/containers/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/components/TopNav/TopNav.js" />
+        <option value="$PROJECT_DIR$/src/containers/PageLogin.js" />
+        <option value="$PROJECT_DIR$/src/actions/services/base-url.js" />
+        <option value="$PROJECT_DIR$/src/actions/services/api-user.js" />
+        <option value="$PROJECT_DIR$/src/actions/services/api-report.js" />
+        <option value="$PROJECT_DIR$/src/containers/DsKhamBenh/index.js" />
+        <option value="$PROJECT_DIR$/src/models/activateCompanyPostModel.js" />
+        <option value="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" />
+        <option value="$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js" />
+        <option value="$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js" />
+        <option value="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" />
       </list>
     </option>
   </component>
@@ -173,6 +196,12 @@
               <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
               <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -180,6 +209,41 @@
               <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="containers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="ChiTietCongTy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="ChiTietUser" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="DangKyCongTy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="DsCongTy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="DsKhamBenh" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -219,14 +283,16 @@
       <workItem from="1561738731596" duration="3105000" />
       <workItem from="1561791254863" duration="8456000" />
       <workItem from="1561939283418" duration="1661000" />
+      <workItem from="1562026049411" duration="1030000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13222000" />
+    <option name="totallyTimeSpent" value="14252000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18914647" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -299,16 +365,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/assets/styles/common.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/ChiTietKhamBenh/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
+        <state relative-caret-position="918">
           <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
           <folding>
             <element signature="e#66#108#0" expanded="true" />
@@ -317,12 +376,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/activateCompanyPostModel.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-128">
+        <state relative-caret-position="68">
           <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
         </state>
       </provider>
@@ -339,20 +395,9 @@
     <entry file="file://$PROJECT_DIR$/src/components/TopNav/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1887">
-          <caret line="111" column="139" selection-start-line="111" selection-start-column="139" selection-end-line="111" selection-end-column="139" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#138#205#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/TopNav/TopNav.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="722">
+        <state relative-caret-position="1173">
           <caret line="70" column="2" selection-start-line="70" selection-start-column="2" selection-end-line="70" selection-end-column="2" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -362,7 +407,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/Dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
+        <state relative-caret-position="187">
           <caret line="34" selection-start-line="34" selection-end-line="34" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -370,12 +415,154 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/assets/styles/common.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/activatePatientPostModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8">
-          <caret line="12" column="40" lean-forward="true" selection-start-line="12" selection-start-column="40" selection-end-line="12" selection-end-column="40" />
+        <state relative-caret-position="382">
+          <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="111" column="90" selection-start-line="111" selection-start-column="90" selection-end-line="111" selection-end-column="90" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#138#205#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/services/http-handler.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/services/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/services/api-auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/services/api-company.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/services/api-report.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="74" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/services/base-url.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/services/api-user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/DsKhamBenh/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-85">
+          <caret line="129" column="4" selection-start-line="129" selection-start-column="4" selection-end-line="129" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/activateCompanyPostModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/PageDoiMatKhau.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="106" column="31" lean-forward="true" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="248" column="31" selection-start-line="248" selection-start-column="31" selection-end-line="248" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="107" column="40" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/ChiTietUser/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

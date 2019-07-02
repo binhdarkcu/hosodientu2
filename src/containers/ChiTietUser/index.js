@@ -66,15 +66,16 @@ class ChiTietUser extends React.Component {
     user: {},
     ngaySinh: '',
     ngayDangKy: '',
-  }
+  };
 
   componentDidMount() {
     const id = this.props.location.pathname.match(/chi-tiet\/(\d+)/)[1];
     this.props.getUserDetail(id).then((data) => {
-      const ngaySinh = this.formatYToD(data.ngaySinh);
-      const ngayDangKy = this.formatYToD(data.ngayDangKy);
+      const user = data.json;
+      const ngaySinh = this.formatYToD(user.ngaySinh);
+      const ngayDangKy = this.formatYToD(user.ngayDangKy);
       this.setState({
-        user: data,
+        user: user,
         ngaySinh,
         ngayDangKy,
       })

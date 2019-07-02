@@ -6,6 +6,7 @@ class ActivateCompanyPostModel {
     this.phone = data.phone || "";
     this.email = data.email || "";
     this.ten = data.ten || "";
+    this.password = data.password || "";
     this.trangThai = data.trangThai || "";
     this.phanQuyen = data.phanQuyen || "";
   }

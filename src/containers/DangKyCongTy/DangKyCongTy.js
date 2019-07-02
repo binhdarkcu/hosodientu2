@@ -243,6 +243,17 @@ class DangKyCongTy extends React.Component {
                           onChange={this.handleDropdownChange}/>
             </Grid>
 
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                label="Mật khẩu"
+                type="password"
+                className={classes.textField}
+                value={data.password}
+                onChange={this.handleChange('password')}
+                margin="normal"
+              />
+            </Grid>
+
             <Grid item xs={12}>
               <Button type="submit" variant="contained" className={classes.button}>
                 {isUpdateUser ? 'Cập nhật' : 'Đăng ký'}

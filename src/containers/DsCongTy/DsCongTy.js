@@ -69,13 +69,13 @@ class DsCongTy extends React.Component {
   handleSuccess = (companyList) => {
     this.props.saveToStore(companyList);
     this.setState({loading: false})
-  }
+  };
 
   handleError = (err) => {
     console.error(err);
     this.setState({loading: false});
     toast.error(MSG.GET_COMPANY_LIST_FAILED);
-  }
+  };
 
   gotoDetails(id){
     this.props.gotoCompanyDetails(id);

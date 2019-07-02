@@ -109,7 +109,7 @@ class PageLogin extends Component{
                 <div>
                   <a href="index.html" className="btn btn-default submit" onClick={this.handleLogin}>Đăng nhập</a>
                   {/*<a href="index.html" className="reset_pass" onClick={this.handleForgotPassword}>Quên mật khẩu?</a>*/}
-                  <a href="https://goldenhealthcarevn.com/thu-vien-y-hoc/" className="reset_pass" target="_blank" rel="noopener noreferrer">Hướng dẫn</a>
+                  <a href="https://goldenhealthcarevn.com/huong-dan-dang-ky-ho-so-dien-tu/" className="reset_pass" target="_blank" rel="noopener noreferrer">Hướng dẫn</a>
                 </div>
 
                 <div className="clearfix"/>

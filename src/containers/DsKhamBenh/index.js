@@ -82,22 +82,23 @@ class LichSuKhamBenh extends React.Component {
     }catch(err){
       this.handleError({detail: err, message: MSG.ERROR_OCCURED});
     };
-  }
+  };
 
   getPersonalReports = async (user) => {
     if(!user.benhNhanId) return this.handleError({detail: null, message: MSG.USER_NO_PATIENT_ID});
     return this.props.execGetReportList(user.benhNhanId);
-  }
+  };
 
   getCompanyReports = async (user) => {
     if(!user.donViCongTacId) return this.handleError({detail: null, message: MSG.USER_NO_COMPANY_ID});
     return this.props.execGetCompanyReportList(user.donViCongTacId);
-  }
+  };
 
   handleError = err => {
     toast.error(err.message);
     console.error(err.detail);
-  }
+    this.setState({loading: false});
+  };
 
   groupDataList = (data) => {
 
@@ -126,7 +127,7 @@ class LichSuKhamBenh extends React.Component {
   handleShowInfo = (paramStr) => {
     if (paramStr)
       this.props.getReportDetails(encodeURIComponent(paramStr));
-  }
+  };
 
   toggleList = (index) => {
     this.setState((prevState)=>{
