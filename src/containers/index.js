@@ -4,6 +4,7 @@ import PageLogin from './PageLogin';
 import PageActivateUser from './PageActivateUser';
 import PageUserRegister from './UserRegister';
 import PageDoiMatKhau from './PageDoiMatKhau';
+import PageResetPassword from './PageResetPassword';
 import Test from './Test';
 
 export {
@@ -12,6 +13,7 @@ export {
   PageLogin as Login,
   PageActivateUser as ActivateUser,
   PageDoiMatKhau as DoiMatKhau,
+  PageResetPassword as ResetPassword,
   PageUserRegister as UserRegister,
   Test as TestPage
 };

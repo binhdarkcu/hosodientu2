@@ -130,6 +130,10 @@ const routesMap = {
       path: '/nguoi-dung-cong-ty/:id',
       thunk: defaultThunk
     },
+    RTE_RESET_PASSWORD: {
+      path: '/reset-password',
+      thunk: noAuthentication
+    },
     RTE_TEST: {
       path: '/test',
       thunk: noAuthentication

@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import TablePagination from '@material-ui/core/TablePagination';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
 import { BOUNCE } from '../../constants/Loaders';
@@ -168,6 +169,10 @@ class FormDanhSachUser extends React.Component {
           title="Danh sách người dùng"
           columns={columns}
           data={users}
+          rowCount={10}
+          options= {{
+            count: 10
+          }}
         />
       </Paper>
     );

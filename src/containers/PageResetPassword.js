@@ -16,7 +16,7 @@ import { USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILE
 import { redirect } from 'redux-first-router';
 import Link from 'redux-first-router-link';
 
-class PageLogin extends Component{
+class PageResetPassword extends Component{
   username = null;
   password = null;
 
@@ -85,7 +85,7 @@ class PageLogin extends Component{
 
   render(){
 
-    const { password_error, username_error, loading, username, password } = this.state;
+    const { userEmail, loading } = this.state;
 
     return (
       <div>
@@ -97,34 +97,16 @@ class PageLogin extends Component{
             </div>
             <section className="login_content">
               <form>
-                <h1>Đăng nhập</h1>
+                <h1>Reset Password</h1>
                 <div className="form-login">
-                  <input value={ username} type="text" className="form-control" placeholder="Email" onChange={this.handleChange('username')} required />
-                  {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
-                </div>
-                <div className="form-login">
-                  <input value={password} type="password" className="form-control" placeholder="Mật khẩu" onChange={this.handleChange('password')} required />
-                  {password_error && <InputErrorDisplayer message={PASSWORD_REQUIRED}/>}
+                  <input value={ userEmail} type="text" className="form-control" placeholder="Email" onChange={this.handleChange('userEmail')} required />
                 </div>
                 <div>
-                  <a href="index.html" className="btn btn-default submit" onClick={this.handleLogin}>Đăng nhập</a>
-                  {/*<a href="index.html" className="reset_pass" onClick={this.handleForgotPassword}>Quên mật khẩu?</a>*/}
-                  <a href="https://goldenhealthcarevn.com/huong-dan-dang-ky-ho-so-dien-tu/" className="reset_pass" target="_blank" rel="noopener noreferrer">Hướng dẫn</a>
+                  <a href="index.html" className="btn btn-default submit" onClick={this.handleLogin}>Reset Mật khẩu</a>
                 </div>
 
                 <div className="clearfix"/>
 
-                <div className="separator">
-                <p className="change_link">Chưa có tài khoản?
-                  <Link to="/nguoi-dung-dang-ky" className="to_register">Đăng ký ngay</Link>
-                </p>
-                <p className="change_link">
-                  <Link to="/reset-password" className="to_register">Reset Password</Link>
-                </p>
-                <div className="clearfix"/>
-                <br />
-                </div>
-                <div className="Browser"><i>Trải nghiệm tốt nhất trên trình duyệt<a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Google Chrome</a>!</i></div>
               </form>
             </section>
           </div>
@@ -145,4 +127,4 @@ const mapDispatchToProps = dispatch => ({
   authenticate: data => dispatch(execAuthenticate(data))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageLogin);
+export default connect(mapStateToProps, mapDispatchToProps)(PageResetPassword);

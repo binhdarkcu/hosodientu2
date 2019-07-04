@@ -18,6 +18,7 @@ const components = {
   RTE_LOGIN: 'Login',
   RTE_USER_REGISTER: 'UserRegister',
   RTE_DOI_MAT_KHAU: 'DoiMatKhau',
+  RTE_RESET_PASSWORD: 'ResetPassword',
   RTE_ACTIVATE: 'ActivateUser',
   [NOT_FOUND]: 'NotFound',
   RTE_TEST: 'TestPage'
