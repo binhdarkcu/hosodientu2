@@ -21,6 +21,7 @@ import { BOUNCE } from "../../constants/Loaders";
 import ActivateCompanyPostModel from "../../models/activateCompanyPostModel";
 import Dropdown from "../../components/DropdownList";
 import {execGetUserDetail, execUpdate} from "../../actions/services/api-user";
+import * as RULE from "../../constants/Rules";
 
 const mapDispatchToProps = dispatch => ({
   getCompanies: () => dispatch(execGetCompanyList()),
@@ -208,6 +209,8 @@ class DangKyCongTy extends React.Component {
                 label="Số điện thoại"
                 className={classes.textField}
                 value={data.phone}
+                validators={[RULE.IS_REQUIRED]}
+                errorMessages={[MSG.REQUIRED_FIELD]}
                 onChange={this.handleChange('phone')}
                 margin="normal"
               />

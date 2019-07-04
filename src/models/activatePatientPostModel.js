@@ -52,6 +52,10 @@ class ActivatePatientPostModel {
   getFormattedBirthday(){
     return this.ngaySinh ? moment(this.ngaySinh).format('DD/MM/YYYY') : '';
   }
+
+  getFullName(){
+    return this.ho.trim() + ' ' + this.ten.trim();
+  }
 }
 
 export default ActivatePatientPostModel;

@@ -80,10 +80,12 @@ class KiemTraUser extends React.Component {
   initializeScreen = async () => {
       try{
 
+        this.setState({loading: true});
         const { id } = this.props.location.payload;
 
         const userFromIdResponse = await this.props.getUserDetail(id);
 
+        console.log(userFromIdResponse);
         if(userFromIdResponse.status !== 200) throw(userFromIdResponse);
 
         const userFromPatientCodeResponse =  await this.props.loadUserByPatientCode({code: userFromIdResponse.json.maYte});
@@ -92,6 +94,10 @@ class KiemTraUser extends React.Component {
 
         const userFromPatientCode = userFromPatientCodeResponse.status === 200 ? new ActivatePatientPostModel(userFromPatientCodeResponse.json) : new ActivatePatientPostModel();
 
+        // Asign benhNhanId for user when user registers
+        if(!userFromId.benhNhanId && userFromPatientCode.benhNhanId){
+          userFromId.benhNhanId = userFromPatientCode.benhNhanId;
+        }
         this.setState({userFromId, userFromPatientCode, loading: false});
 
       }catch(err){
@@ -107,6 +113,8 @@ class KiemTraUser extends React.Component {
       const result = await this.props.updateUser({...userFromId, userId: id});
       if(result.status !== 200) throw(result);
       this.handleSuccess(MSG.USER_UPDATED);
+      // Reload data
+      this.initializeScreen();
     }catch(err){
       this.handleError({detail: err, message: MSG.USER_UPDATE_FAILED});
     }
@@ -154,6 +162,8 @@ class KiemTraUser extends React.Component {
   render() {
     const { classes } = this.props;
     const { loading, userFromId, userFromPatientCode } = this.state;
+
+    console.log(userFromId);
     return (
       <FormLayoutVertical>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
@@ -200,6 +210,8 @@ class KiemTraUser extends React.Component {
                 label="Phone"
                 className={classes.textField}
                 value={userFromId.phone}
+                validators={[RULE.IS_REQUIRED]}
+                errorMessages={[MSG.REQUIRED_FIELD]}
                 onChange={this.handleChange('phone')}
                 margin="normal"
               />
@@ -227,17 +239,7 @@ class KiemTraUser extends React.Component {
 
             <Grid item xs={12} sm={4}>
               <TextValidator
-                label="Họ"
-                className={classes.textField}
-                value={userFromId.ho}
-                onChange={this.handleChange('ho')}
-                margin="normal"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <TextValidator
-                label="Tên"
+                label="Họ tên"
                 className={classes.textField}
                 value={userFromId.ten}
                 onChange={this.handleChange('ten')}
@@ -299,7 +301,7 @@ class KiemTraUser extends React.Component {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Typography component="h4" variant="body1" align="center" color="error">
-                  Thông tin user lấy từ mã y tế của người dùng
+                  Thông tin lấy từ Mã Y Tế đã khai báo
               </Typography>
             </Grid>
           </Grid>
@@ -347,17 +349,7 @@ class KiemTraUser extends React.Component {
 
             <Grid item xs={12} sm={4}>
               <TextValidator
-                label="Họ"
-                className={classes.textField}
-                value={userFromPatientCode.ho}
-                margin="normal"
-                disabled
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <TextValidator
-                label="Tên"
+                label="Họ tên"
                 className={classes.textField}
                 value={userFromPatientCode.ten}
                 margin="normal"

@@ -97,6 +97,7 @@ class FormRegister extends React.Component {
   };
 
   handleSuccess = message => {
+    //TODO: reset state
     this.setState({loading: false});
     toast.success(message);
   };
@@ -248,6 +249,8 @@ class FormRegister extends React.Component {
                 className={classes.textField}
                 value={user.phone}
                 onChange={this.handleChange('phone')}
+                validators={[RULE.IS_REQUIRED]}
+                errorMessages={[MSG.REQUIRED_FIELD]}
                 margin="normal"
               />
             </Grid>
@@ -274,20 +277,21 @@ class FormRegister extends React.Component {
 
             <Grid item xs={12} sm={4}>
               <TextValidator
-                label="Họ"
+                label="Họ Tên"
                 className={classes.textField}
-                value={user.ho}
-                onChange={this.handleChange('ho')}
+                value={user.ten}
+                onChange={this.handleChange('ten')}
                 margin="normal"
               />
             </Grid>
 
             <Grid item xs={12} sm={4}>
               <TextValidator
-                label="Tên"
+                id="ar-namsinh"
+                label="Năm sinh"
                 className={classes.textField}
-                value={user.ten}
-                onChange={this.handleChange('ten')}
+                value={user.namSinh}
+                onChange={this.handleChange('namSinh')}
                 margin="normal"
               />
             </Grid>
@@ -326,16 +330,7 @@ class FormRegister extends React.Component {
               </div>
             </Grid>
 
-            <Grid item xs={12} sm={4}>
-              <TextValidator
-                id="ar-namsinh"
-                label="Năm sinh"
-                className={classes.textField}
-                value={user.namSinh}
-                onChange={this.handleChange('namSinh')}
-                margin="normal"
-              />
-            </Grid>
+
 
             <Grid item xs={12}>
               {

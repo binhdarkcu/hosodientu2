@@ -99,7 +99,7 @@ class PageLogin extends Component{
               <form>
                 <h1>Đăng nhập</h1>
                 <div className="form-login">
-                  <input value={ username} type="text" className="form-control" placeholder="Tài khoản" onChange={this.handleChange('username')} required />
+                  <input value={ username} type="text" className="form-control" placeholder="Email" onChange={this.handleChange('username')} required />
                   {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
                 </div>
                 <div className="form-login">

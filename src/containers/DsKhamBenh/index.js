@@ -167,8 +167,6 @@ class LichSuKhamBenh extends React.Component {
                         <Table className={classes.table}>
                           <TableHead>
                             <TableRow>
-                              <TableCell className={classes.header}>ID</TableCell>
-                              <TableCell className={classes.header} align="left">Hình thức</TableCell>
                               <TableCell className={classes.header} align="left">Mã nhóm</TableCell>
                               <TableCell className={classes.header} align="left">Ngày thực hiện</TableCell>
                               <TableCell className={classes.header} align="left">Năm</TableCell>
@@ -184,8 +182,6 @@ class LichSuKhamBenh extends React.Component {
                                     onClick={() => this.handleShowInfo(report.paramStr)}
                                     className={`${!report.paramStr ? classes.disabled : classes.row}`}
                                     title={!report.paramStr ? MSG.NO_DETAIL_AVAILABLE : MSG.SHOW_DETAIL}>
-                                    <TableCell component="th" scope="row">{report.id}</TableCell>
-                                    <TableCell component="th" scope="row">{report.groupId}</TableCell>
                                     <TableCell align="left">{report.name}</TableCell>
                                     <TableCell align="left">{report.ngayThucHien}</TableCell>
                                     <TableCell align="left">{report.nam}</TableCell>

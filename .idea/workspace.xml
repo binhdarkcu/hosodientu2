@@ -3,16 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="7f228f2e-56f3-4893-b785-9837e380e54f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/services/api-report.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/services/api-report.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/services/api-user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/services/api-user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/services/base-url.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/services/base-url.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/DsKhamBenh/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/DsKhamBenh/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/PageLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/PageLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/activateCompanyPostModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/activateCompanyPostModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/activatePatientPostModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/activatePatientPostModel.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
@@ -29,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/activatePatientPostModel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
+            <state relative-caret-position="170">
+              <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="25" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -39,32 +35,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/models/activateCompanyPostModel.js">
+        <entry file="file://$PROJECT_DIR$/src/containers/DsKhamBenh/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="40" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="111" column="90" selection-start-line="111" selection-start-column="90" selection-end-line="111" selection-end-column="90" />
+            <state relative-caret-position="416">
+              <caret line="177" column="40" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
-                <element signature="e#138#205#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/actions/services/base-url.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -72,8 +49,33 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="248" column="31" selection-start-line="248" selection-start-column="31" selection-end-line="248" selection-end-column="31" />
+            <state relative-caret-position="34">
+              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#460#529#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="243" column="37" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2159">
+              <caret line="138" column="37" lean-forward="true" selection-start-line="138" selection-start-column="37" selection-end-line="138" selection-end-column="37" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -84,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
+            <state relative-caret-position="833">
               <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -96,7 +98,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="1496">
               <caret line="107" column="40" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="40" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -105,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/ChiTietUser/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+            <state relative-caret-position="1071">
+              <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -120,8 +122,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/PageDoiMatKhau.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="106" column="31" lean-forward="true" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="31" />
+            <state relative-caret-position="1598">
+              <caret line="106" column="31" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="31" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -134,6 +136,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>Gentelella - Bootstrap Admin Template by</find>
+      <find>cập nh</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,16 +153,19 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/src/containers/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/components/TopNav/TopNav.js" />
-        <option value="$PROJECT_DIR$/src/containers/PageLogin.js" />
         <option value="$PROJECT_DIR$/src/actions/services/base-url.js" />
         <option value="$PROJECT_DIR$/src/actions/services/api-user.js" />
         <option value="$PROJECT_DIR$/src/actions/services/api-report.js" />
-        <option value="$PROJECT_DIR$/src/containers/DsKhamBenh/index.js" />
         <option value="$PROJECT_DIR$/src/models/activateCompanyPostModel.js" />
-        <option value="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" />
         <option value="$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js" />
         <option value="$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js" />
         <option value="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/PageLogin.js" />
+        <option value="$PROJECT_DIR$/src/containers/DsKhamBenh/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" />
+        <option value="$PROJECT_DIR$/src/models/activatePatientPostModel.js" />
+        <option value="$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js" />
+        <option value="$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js" />
       </list>
     </option>
   </component>
@@ -215,6 +221,13 @@
               <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="AdminRegister" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
               <item name="ChiTietCongTy" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -244,6 +257,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="containers" type="462c0819:PsiDirectoryNode" />
               <item name="DsKhamBenh" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="KiemTraUser" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -283,16 +303,17 @@
       <workItem from="1561738731596" duration="3105000" />
       <workItem from="1561791254863" duration="8456000" />
       <workItem from="1561939283418" duration="1661000" />
-      <workItem from="1562026049411" duration="1030000" />
+      <workItem from="1562026049411" duration="1513000" />
+      <workItem from="1562171263246" duration="2663000" />
+      <workItem from="1562198153345" duration="1908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14252000" />
+    <option name="totallyTimeSpent" value="19306000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18914647" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -422,27 +443,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/activatePatientPostModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="111" column="90" selection-start-line="111" selection-start-column="90" selection-end-line="111" selection-end-column="90" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#138#205#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/services/http-handler.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -486,27 +486,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/services/base-url.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/services/api-user.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/DsKhamBenh/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="129" column="4" selection-start-line="129" selection-start-column="4" selection-end-line="129" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -517,29 +500,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/PageDoiMatKhau.js">
+    <entry file="file://$PROJECT_DIR$/src/actions/services/base-url.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="106" column="31" lean-forward="true" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="248" column="31" selection-start-line="248" selection-start-column="31" selection-end-line="248" selection-end-column="31" />
+        <state relative-caret-position="34">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#460#529#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
+        <state relative-caret-position="833">
           <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -549,7 +530,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
+        <state relative-caret-position="1496">
           <caret line="107" column="40" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="40" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
@@ -559,8 +540,69 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/ChiTietUser/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="77" column="18" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+        <state relative-caret-position="1071">
+          <caret line="72" column="49" selection-start-line="72" selection-start-column="49" selection-end-line="72" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/PageDoiMatKhau.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1598">
+          <caret line="106" column="31" selection-start-line="106" selection-start-column="16" selection-end-line="106" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="101" column="98" selection-start-line="101" selection-start-column="98" selection-end-line="101" selection-end-column="98" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#138#205#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/DsKhamBenh/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="177" column="40" selection-start-line="177" selection-start-column="40" selection-end-line="177" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/activatePatientPostModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="14" lean-forward="true" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="243" column="37" selection-start-line="243" selection-start-column="34" selection-end-line="243" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="138" column="37" lean-forward="true" selection-start-line="138" selection-start-column="37" selection-end-line="138" selection-end-column="37" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
