@@ -22,6 +22,8 @@ import { createAction } from 'redux-actions';
 import * as MSG from '../../constants/Messages.js';
 import ActivatePatientPostModel from "../../models/activatePatientPostModel";
 
+import MaterialTable from 'material-table';
+
 const getUsers = createAction(GET_USER_LIST);
 const mapDispatchToProps = dispatch => ({
   getUserList: () => dispatch(execGetUserList()),
@@ -133,57 +135,40 @@ class FormDanhSachUser extends React.Component {
   render() {
     const { classes, users, currentUser } = this.props;
     const { loading } = this.state;
+    const columns = [
+      { title: 'Tên user', field: 'fullname', render: user =>  user.ho +' '+user.ten },
+      { title: 'Mã y tế', field: 'maYte' },
+      { title: 'Ngày sinh', field: 'birthday', render: user =>  user.getFormattedBirthday()},
+      { title: 'Email', field: 'email'},
+      { title: 'Số điện thoại', field: 'phone'},
+      { title: 'Trạng thái', field: 'userStatus', render: user =>  user.getStatusName()},
+      { title: 'Quyền', field: 'userRole', render: user =>  user.getRoleName()},
+      { title: 'Active User', field: 'activeUser', render: user => {
+        return user.trangThai === USER.STATUS.ACTIVE.CODE ? <TableCell align="center" className={classes.deleteIcon}>
+          <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL)} />
+          <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE)} />
+        </TableCell> :
+          <TableCell align="center">
+            {
+              currentUser.userId === user.userId ?
+                null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE)}>Duyệt</Button>
+            }
+          </TableCell>
+      }},
+      { title: 'Xóa', field: 'delete', render: user => {
+        return <TableCell align="left"> {currentUser.userId === user.userId ?
+          null : <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }} onClick={() => this.handleAction(user, USER.ACTION.DELETE)} />
+        }</TableCell>
+      }},
+    ]
     return (
       <Paper className={classes.root}>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.header}>Tên user</TableCell>
-              <TableCell className={classes.header} align="center">Mã y tế</TableCell>
-              <TableCell className={classes.header} align="center">Ngày sinh</TableCell>
-              <TableCell className={classes.header} align="center">Email</TableCell>
-              <TableCell className={classes.header} align="center">Số điện thoại</TableCell>
-              <TableCell className={classes.header} align="center">Trạng thái</TableCell>
-              <TableCell className={classes.header} align="center">Quyền</TableCell>
-              <TableCell className={classes.header} align="center">Active User</TableCell>
-              <TableCell className={classes.header} align="center">Xóa</TableCell>
-
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map(user => (
-              <TableRow key={user.userId}>
-                <TableCell component="th" scope="row">{user.ho} {user.ten}</TableCell>
-                <TableCell align="center">{user.maYte}</TableCell>
-                <TableCell align="center">{user.getFormattedBirthday()}</TableCell>
-                <TableCell align="center">{user.email}</TableCell>
-                <TableCell align="center">{user.phone}</TableCell>
-                <TableCell align="center">{user.getStatusName()}</TableCell>
-                <TableCell align="center">{user.getRoleName()}</TableCell>
-                {
-                  user.trangThai === USER.STATUS.ACTIVE.CODE ? <TableCell align="center" className={classes.deleteIcon}>
-                    <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL)} />
-                    <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE)} />
-                  </TableCell> :
-                    <TableCell align="center">
-                      {
-                        currentUser.userId === user.userId ?
-                          null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE)}>Duyệt</Button>
-                      }
-                    </TableCell>
-                }
-                <TableCell align="left">
-                  {
-                    currentUser.userId === user.userId ?
-                      null : <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }} onClick={() => this.handleAction(user, USER.ACTION.DELETE)} />
-                  }
-
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <MaterialTable
+          title="Danh sách người dùng"
+          columns={columns}
+          data={users}
+        />
       </Paper>
     );
   }

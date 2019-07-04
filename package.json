@@ -54,5 +54,8 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://115.79.197.84"
+  "proxy": "http://115.79.197.84",
+  "devDependencies": {
+    "material-table": "^1.40.1"
+  }
 }
