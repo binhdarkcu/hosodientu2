@@ -2,14 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
-import TablePagination from '@material-ui/core/TablePagination';
 import { toast } from 'react-toastify';
 import _ from 'lodash';
 import { BOUNCE } from '../../constants/Loaders';
@@ -63,6 +58,37 @@ const styles = theme => ({
     color: "#fff",
   }
 });
+
+const vietnamese = {
+  pagination: {
+    labelDisplayedRows: '{from}-{to} trong tổng số {count}',
+    labelRowsSelect: 'mục',
+    labelRowsPerPage: 'mục/trang',
+    firstAriaLabel: 'Trang đầu',
+    firstTooltip: 'Trang đầu',
+    previousAriaLabel: 'Trang trước',
+    previousTooltip: 'Trang trước',
+    nextAriaLabel: 'Trang tiếp',
+    nextTooltip: 'Trang tiếp',
+    lastAriaLabel: 'Trang cuối',
+    lastTooltip: 'Trang cuối'
+
+  },
+  toolbar: {
+    nRowsSelected: '{0} row(s) selected',
+    searchPlaceholder: 'Tìm',
+    searchTooltip: 'Tìm kiếm'
+  },
+  header: {
+    actions: 'Actions'
+  },
+  body: {
+    emptyDataSourceMessage: 'Không có kết quả',
+    filterRow: {
+        filterTooltip: 'Lọc'
+    }
+  }
+}
 
 class FormDanhSachUser extends React.Component {
 
@@ -166,7 +192,8 @@ class FormDanhSachUser extends React.Component {
       <Paper className={classes.root}>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
         <MaterialTable
-          title="Danh sách người dùng"
+          localization={vietnamese}
+          title=""
           columns={columns}
           data={users}
           rowCount={10}

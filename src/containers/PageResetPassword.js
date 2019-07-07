@@ -2,31 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { toast } from 'react-toastify';
 // custom imports
-import { execAuthenticate } from '../actions/services/api-auth.js';
-import { execGetUserInfo } from '../actions/services/api-user.js';
-import { saveUserInfo } from '../actions/services/user';
-
-
 import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import Logo from '../components/Logo';
 import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
 import { PACMAN } from '../constants/Loaders';
-import { USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED, INVALID_LOGIN } from '../constants/Messages';
+import { INVALID_EMAIL, REDIRECT_AFTER } from '../constants/Messages';
+import { emailRegex } from '../constants/Regex';
 import { redirect } from 'redux-first-router';
-import Link from 'redux-first-router-link';
 
+const initState = () => {
+  return   {
+      loading: false,
+      email_error: '',
+      email: '',
+      countDown: -1
+    }
+}
 class PageResetPassword extends Component{
-  username = null;
-  password = null;
 
-  state = {
-    username_error: false,
-    password_error: false,
-    loading: false,
-    username: process.env.NODE_ENV === 'development' ? 'admin@gmail.com' : '',
-    password: process.env.NODE_ENV === 'development' ? 'webapp' : ''
-  };
+  timer = null;
+  state = initState();
 
   componentDidMount(){
     document.body.className = "login";
@@ -35,36 +31,13 @@ class PageResetPassword extends Component{
 
   componentWillUnmount(){
     document.removeEventListener('keydown', this.handleKeyboardEvent);
+    clearInterval(this.timer);
   }
 
   handleKeyboardEvent = (e) => {
     if(e.keyCode === 13 || e.key === 'Enter'){
-      this.handleLogin(e);
+      this.handleResetPassword(e);
     }
-  };
-
-  handleLogin = (e) => {
-    e.preventDefault();
-
-    const {username, password } = this.state;
-
-    this.setState({username_error: !!!username, password_error: !!!password});
-
-    if(!username || !password) return;
-
-    // block screen and start calling api
-    this.setState({loading: true});
-    this.props.authenticate({username: username, password: password}).then(() => {
-      this.props.getUserInfo(username).then(data => {
-        this.props.saveUserInfo(data);
-        const { type, payload } = this.props.location.prev;
-        this.props.goToPage({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}});
-      }).catch(err => {
-        this.showError(GET_USER_INFO_FAILED, err)
-      });
-    }).catch(err => {
-      err.status === 404 ? this.showError(INVALID_LOGIN, err) : this.showError(LOGIN_FAILED, err);
-    });
   };
 
   showError = (msg, err) => {
@@ -72,20 +45,43 @@ class PageResetPassword extends Component{
     this.setState({loading: false});
   };
 
-  handleForgotPassword = (e) => {
+  handleResetPassword = (e) => {
     e.preventDefault();
-    alert('Chức năng đang trong giai đoạn thực hiện, vui lòng liên hệ quản trị viên để giải quyết sự cố!');
+    const { email, countDown } = this.state;
+    if(countDown > -1) return;
+    if(!emailRegex.test(email)) return this.setState({email_error: INVALID_EMAIL});
+
+    this.handleSuccess('ok ngon');
   };
 
   handleChange = name => e => {
-    let state = {...this.state};
-    state[name] = e.target.value;
-    this.setState(state);
+    this.setState({email: e.target.value.trim()});
   };
+
+  gotoDashboard = () => {
+    this.props.goToPage({type: 'RTE_DASHBOARD'});
+  }
+
+  handleSuccess = message => {
+    toast.success(message);
+    const successState = {...initState(), countDown: 5}
+    this.setState(successState);
+    this.timer = setInterval(()=>{
+      const { countDown } = this.state;
+      if(countDown > 1) return this.setState({countDown: countDown-1});
+      clearInterval(this.timer);
+      this.gotoDashboard();
+    }, 1000);
+  }
+
+  handleError = error => {
+    console.error(error.detail);
+    toast.error(error.message);
+  }
 
   render(){
 
-    const { userEmail, loading } = this.state;
+    const { userEmail, email_error, countDown, loading } = this.state;
 
     return (
       <div>
@@ -93,16 +89,18 @@ class PageResetPassword extends Component{
           <div className="animate form login_form">
             <Spinner type={PACMAN} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
             <div>
-              <Logo size={150} align="center"/>
+              <Logo size={150} onClick={this.gotoDashboard} align="center"/>
             </div>
             <section className="login_content">
               <form>
-                <h1>Reset Password</h1>
+                <h1>Quên mật khẩu</h1>
                 <div className="form-login">
-                  <input value={ userEmail} type="text" className="form-control" placeholder="Email" onChange={this.handleChange('userEmail')} required />
+                  <input value={ userEmail} type="email" className="form-control" placeholder="Email" onChange={this.handleChange('email')} required />
+                  {email_error && <InputErrorDisplayer message={email_error}/>}
+                  {countDown > -1 && <InputErrorDisplayer message={REDIRECT_AFTER.replace('{x}', 'trang chủ').replace('{y}', countDown)}/>}
                 </div>
                 <div>
-                  <a href="index.html" className="btn btn-default submit" onClick={this.handleLogin}>Reset Mật khẩu</a>
+                  <a href="index.html" className="btn btn-default submit" onClick={this.handleResetPassword}>Reset mật khẩu</a>
                 </div>
 
                 <div className="clearfix"/>
@@ -122,9 +120,6 @@ const mapStateToProps = ({ location }) => {
 
 const mapDispatchToProps = dispatch => ({
   goToPage: (destination) => dispatch(redirect(destination)),
-  saveUserInfo: data => dispatch(saveUserInfo(data)),
-  getUserInfo: username => dispatch(execGetUserInfo(username)),
-  authenticate: data => dispatch(execAuthenticate(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageResetPassword);

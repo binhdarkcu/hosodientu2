@@ -7,6 +7,9 @@ export const USERNAME_REQUIRED = 'Vui lòng nhập tài khoản!';
 export const PASSWORD_REQUIRED = 'Vui lòng nhập mật khẩu!';
 export const PASSWORD_MISMATCH = 'Mật khẩu và nhập lại mật khẩu không trùng nhau!';
 export const INVALID_LOGIN = 'Tài khoản hoặc mật khẩu không đúng!';
+export const EMAIL_REQUIRED = 'Vui lòng nhập email!';
+export const TRY_AGAIN_AFTER = 'Vui lòng thử lại sau {x} giây!';
+export const REDIRECT_AFTER = 'Bạn sẽ được chuyển về {x} sau {y} giây!';
 // actions
 export const LOGIN_FAILED = 'Đăng nhập thất bại!';
 export const GET_USER_INFO_FAILED = 'Không thể truy vấn thông tin user';
