@@ -98,7 +98,7 @@ class FormRegister extends React.Component {
 
   handleSuccess = message => {
     //TODO: reset state
-    this.setState({loading: false});
+    this.setState(this.initialState());
     toast.success(message);
   };
 
@@ -231,6 +231,17 @@ class FormRegister extends React.Component {
           </Grid>
 
           <Grid container spacing={2}>
+          
+            <Grid item xs={12} sm={4}>
+              <TextValidator
+                label="Họ tên"
+                className={classes.textField}
+                value={user.ten}
+                onChange={this.handleChange('ten')}
+                margin="normal"
+              />
+            </Grid>
+
             <Grid item xs={12} sm={4}>
               <TextValidator
                 label="Mã Y Tế"
@@ -271,16 +282,6 @@ class FormRegister extends React.Component {
                 className={classes.textField}
                 value={user.email}
                 onChange={this.handleChange('email')}
-                margin="normal"
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <TextValidator
-                label="Họ Tên"
-                className={classes.textField}
-                value={user.ten}
-                onChange={this.handleChange('ten')}
                 margin="normal"
               />
             </Grid>

@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### `Libraries Used in this project`
+Material table
+https://material-table.com/#/docs/all-props
+
 ## Available Scripts
 
 In the project directory, you can run:

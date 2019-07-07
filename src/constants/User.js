@@ -37,6 +37,19 @@ export const USER = {
       LABEL: 'Không xác định'
     }
   },
+  GENDER: {
+    MALE: {
+      CODE: 'T',
+      LABEL: 'Nam'
+    },
+    FEMALE: {
+      CODE: 'G',
+      LABEL: 'Nữ'
+    },
+    UNDEFINED: {
+      LABEL: 'Không xác định'
+    }
+  },
   ACTION: {
     DETAIL: 'DETAIL',
     UPDATE: 'UPDATE',

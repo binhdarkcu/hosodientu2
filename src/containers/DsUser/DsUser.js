@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import TableCell from '@material-ui/core/TableCell';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { toast } from 'react-toastify';
@@ -61,7 +60,7 @@ const styles = theme => ({
 
 const vietnamese = {
   pagination: {
-    labelDisplayedRows: '{from}-{to} trong tổng số {count}',
+    labelDisplayedRows: '{from}-{to} trong tổng số {count} mục',
     labelRowsSelect: 'mục',
     labelRowsPerPage: 'mục/trang',
     firstAriaLabel: 'Trang đầu',
@@ -75,12 +74,9 @@ const vietnamese = {
 
   },
   toolbar: {
-    nRowsSelected: '{0} row(s) selected',
+    nRowsSelected: '{0} mục được chọn',
     searchPlaceholder: 'Tìm',
     searchTooltip: 'Tìm kiếm'
-  },
-  header: {
-    actions: 'Actions'
   },
   body: {
     emptyDataSourceMessage: 'Không có kết quả',
@@ -171,21 +167,21 @@ class FormDanhSachUser extends React.Component {
       { title: 'Trạng thái', field: 'userStatus', render: user =>  user.getStatusName()},
       { title: 'Quyền', field: 'userRole', render: user =>  user.getRoleName()},
       { title: 'Active User', field: 'activeUser', render: user => {
-        return user.trangThai === USER.STATUS.ACTIVE.CODE ? <TableCell align="center" className={classes.deleteIcon}>
+        return user.trangThai === USER.STATUS.ACTIVE.CODE ? <div className={classes.deleteIcon}>
           <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL)} />
           <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE)} />
-        </TableCell> :
-          <TableCell align="center">
+        </div> :
+          <div>
             {
               currentUser.userId === user.userId ?
                 null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE)}>Duyệt</Button>
             }
-          </TableCell>
+          </div>
       }},
       { title: 'Xóa', field: 'delete', render: user => {
-        return <TableCell align="left"> {currentUser.userId === user.userId ?
+        return <div> {currentUser.userId === user.userId ?
           null : <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }} onClick={() => this.handleAction(user, USER.ACTION.DELETE)} />
-        }</TableCell>
+        }</div>
       }},
     ]
     return (
@@ -193,12 +189,14 @@ class FormDanhSachUser extends React.Component {
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
         <MaterialTable
           localization={vietnamese}
-          title=""
           columns={columns}
           data={users}
-          rowCount={10}
           options= {{
-            count: 10
+            pageSize: 10,
+            pageSizeOptions: [10, 20, 50, 100],
+            debounceInterval: 200,
+            showTitle: false,
+            emptyRowsWhenPaging: false,
           }}
         />
       </Paper>
