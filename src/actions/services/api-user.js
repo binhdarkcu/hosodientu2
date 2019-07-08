@@ -18,7 +18,7 @@ const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
 const adminApprove = `${baseUrl}/api/User/AdminApprove`;
 const patientByQrCodeUrl = `${'https://apidientu.goldenhealthcarevn.com:4001'}/api/PatientByQRCode`;
 const userInfoByEmailUrl = `${baseUrl}/api/UserByEmail?email=`;
-const resetPasswordUrl = `${baseUrl}/api/ResetPassword`;
+const resetPasswordUrl = `${baseUrl}/api/User/ResetPassword`;
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
 
