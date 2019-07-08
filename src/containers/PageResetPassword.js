@@ -7,9 +7,10 @@ import Spinner from '../components/Spinner';
 import Logo from '../components/Logo';
 import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
 import { PACMAN } from '../constants/Loaders';
-import { INVALID_EMAIL, REDIRECT_AFTER } from '../constants/Messages';
+import { INVALID_EMAIL, REDIRECT_AFTER, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_FAILED } from '../constants/Messages';
 import { emailRegex } from '../constants/Regex';
 import { redirect } from 'redux-first-router';
+import { execResetPassword } from "../actions/services/api-user";
 
 const initState = () => {
   return   {
@@ -18,7 +19,8 @@ const initState = () => {
       email: '',
       countDown: -1
     }
-}
+};
+
 class PageResetPassword extends Component{
 
   timer = null;
@@ -40,18 +42,19 @@ class PageResetPassword extends Component{
     }
   };
 
-  showError = (msg, err) => {
-    toast.error(msg);
-    this.setState({loading: false});
-  };
-
-  handleResetPassword = (e) => {
+  handleResetPassword = async (e) => {
     e.preventDefault();
     const { email, countDown } = this.state;
     if(countDown > -1) return;
     if(!emailRegex.test(email)) return this.setState({email_error: INVALID_EMAIL});
-
-    this.handleSuccess('ok ngon');
+    this.setState({loading: true});
+    try{
+      const result = await this.props.execResetPassword({email: email});
+      if(result.status === 200) return this.handleSuccess(RESET_PASSWORD_SUCCESS);
+      this.handleError({detail: result, message: RESET_PASSWORD_FAILED})
+    }catch (ex) {
+      this.handleError({detail: ex, message: RESET_PASSWORD_FAILED});
+    }
   };
 
   handleChange = name => e => {
@@ -60,11 +63,11 @@ class PageResetPassword extends Component{
 
   gotoDashboard = () => {
     this.props.goToPage({type: 'RTE_DASHBOARD'});
-  }
+  };
 
   handleSuccess = message => {
     toast.success(message);
-    const successState = {...initState(), countDown: 5}
+    const successState = {...initState(), countDown: 5};
     this.setState(successState);
     this.timer = setInterval(()=>{
       const { countDown } = this.state;
@@ -72,12 +75,13 @@ class PageResetPassword extends Component{
       clearInterval(this.timer);
       this.gotoDashboard();
     }, 1000);
-  }
+  };
 
   handleError = error => {
     console.error(error.detail);
     toast.error(error.message);
-  }
+    this.setState({loading: false});
+  };
 
   render(){
 
@@ -119,6 +123,7 @@ const mapStateToProps = ({ location }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
+  execResetPassword: data => dispatch(execResetPassword(data)),
   goToPage: (destination) => dispatch(redirect(destination)),
 });
 

@@ -19,10 +19,12 @@ import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
 import UserModel from '../../models/userModel';
 import Avatar from '../../components/Avatar';
 import Button from '@material-ui/core/Button';
-import { execGetUserDetail } from '../../actions/services/api-user';
+import { RESET_PASSWORD_FAILED, RESET_PASSWORD_SUCCESS } from "../../constants/Messages";
+import { execGetUserDetail, execResetPassword } from '../../actions/services/api-user';
 
 const mapDispatchToProps = dispatch => ({
-  execGetUserDetail: (id) => dispatch(execGetUserDetail(id)),
+  execGetUserDetail: id => dispatch(execGetUserDetail(id)),
+  execResetPassword: data => dispatch(execResetPassword(data))
 });
 
 const mapStateToProps = ({ services, location }) => ({
@@ -72,9 +74,23 @@ class ChiTietUser extends React.Component {
     toast.error(MSG.GET_COMPANY_DETAILS_FAILED);
   };
 
-  sendResetPwd = () => {
-    alert('Đang đợi API');
-  }
+  sendResetPwd = async () => {
+    try{
+      this.setState({loading: true});
+      const { user } = this.state;
+      if(!user.email) return;
+      const result = this.props.execResetPassword({email: user.email});
+      if(result.status === 200){
+        this.setState({loading: false});
+        toast.success(RESET_PASSWORD_SUCCESS);
+        return;
+      }
+      throw (result);
+    }catch (e) {
+      this.setState({loading: false});
+      toast.error(RESET_PASSWORD_FAILED);
+    }
+  };
 
   render() {
 

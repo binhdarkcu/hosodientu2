@@ -122,6 +122,7 @@ class KiemTraUser extends React.Component {
 
   handleSuccess = (message) => {
     toast.success(message);
+    this.setState({loading: false});
   };
 
   handleError = (err) => {
@@ -145,10 +146,11 @@ class KiemTraUser extends React.Component {
 
   handleSubmit = async () => {
     try{
+      this.setState({loading: true});
       const { id } = this.props.location.payload;
       const result = await this.props.adminApprove({ 'userId': id });
       if(result.status !== 200) throw(result);
-      result.isSuccess ? this.handleSuccess(MSG.ADMIN_APPROVE_USER_PENDING) : this.handleError({detail: result, message: result.json.errorMessage});
+      this.handleSuccess(MSG.ADMIN_APPROVE_USER_PENDING);
 
     }catch(err){
       this.handleError({detail: err, message: MSG.ERROR_OCCURED});
