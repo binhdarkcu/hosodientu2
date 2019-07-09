@@ -17,7 +17,7 @@ import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
 import { SET_COMPANY_LIST } from '../../actions/types';
 
 import { execGetCompanyList, execActivateCompany } from '../../actions/services/api-company';
-
+import { execGetListUserCompany } from "../../actions/services/api-user";
 import { createAction } from 'redux-actions';
 import * as MSG from '../../constants/Messages.js';
 
@@ -26,6 +26,7 @@ const setCompanyList = createAction(SET_COMPANY_LIST);
 const mapDispatchToProps = dispatch => ({
   getCompanyList: () => dispatch(execGetCompanyList()),
   saveToStore: data => dispatch(setCompanyList(data)),
+  getCompanyUser: () => dispatch(execGetListUserCompany()),
   gotoCompanyDetails: (id) => {
     dispatch({ type: 'RTE_CHI_TIET_CONG_TY', payload: { id } })
   },
@@ -61,10 +62,35 @@ class DsCongTy extends React.Component {
   };
 
   componentWillMount() {
-    this.props.getCompanyList().then(data => {
-      data.status === 200 ? this.handleSuccess(data.json) : this.handleError(data);
-    }).catch(err => this.handleError(err));
+    this.initScreen();
+
   }
+
+  initScreen = async () => {
+    try{
+      let users, companies = [];
+      const usersRes = await this.props.getCompanyUser();
+      const companiesRes = await this.props.getCompanyList();
+
+      if(usersRes.status === 200){
+        users = usersRes.json;
+      }
+
+      if(companiesRes.status === 200){
+        companies = companiesRes.json;
+      }else{
+        this.handleError(companiesRes);
+      }
+
+      if(users.length > 0){
+        const ids = users.map(x => x.donViCongTacId);
+        let list = companies.filter(y => ids.includes(y.donViCongTacId));
+        this.handleSuccess(list);
+      }
+    }catch(e){
+      this.handleError(e);
+    }
+  };
 
   handleSuccess = (companyList) => {
     this.props.saveToStore(companyList);
