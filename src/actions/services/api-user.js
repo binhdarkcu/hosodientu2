@@ -19,6 +19,8 @@ const adminApprove = `${baseUrl}/api/User/AdminApprove`;
 const patientByQrCodeUrl = `${'https://apidientu.goldenhealthcarevn.com:4001'}/api/PatientByQRCode`;
 const userInfoByEmailUrl = `${baseUrl}/api/UserByEmail?email=`;
 const resetPasswordUrl = `${baseUrl}/api/User/ResetPassword`;
+const listCompanyUsersUrl = `${baseUrl}/api/users?status=1&role=3`;
+
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
 
@@ -218,6 +220,19 @@ export const execResetPassword = data => dispatch => {
   return new Promise((resolve, reject) => {
     sendHttpRequest(resetPasswordUrl, parameters)
       .then(data => resolve(data))
+      .catch(err => reject(err));
+  });
+};
+
+// Get list user company
+export const execGetListUserCompany = data => dispatch => {
+  const parameters = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+  return new Promise((resolve, reject) => {
+    sendHttpRequest(listCompanyUsersUrl , parameters)
+      .then(data =>  resolve(data))
       .catch(err => reject(err));
   });
 };
