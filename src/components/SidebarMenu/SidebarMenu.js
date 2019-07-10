@@ -25,10 +25,10 @@ const SidebarMenu = ({user}) => {
 
   const pages = [
     {id: 1, path: '/lich-su-kham-benh', className: 'fa fa-table', label: 'Danh sách khám bệnh'},
-    {id: 2,path: '/danh-sach-nguoi-dung', className: 'fa fa-list-alt', label: 'Danh sách người dùng'},
-    {id: 3,path: '/danh-sach-cong-ty', className: 'fa fa-list-alt', label: 'Danh sách công ty'},
-    {id: 4,path: '/admin-dang-ky', className: 'fa fa-bar-chart-o', label: 'Đăng ký người dùng'},
-    {id: 5,path: '/dang-ky-user-cong-ty', className: 'fa fa-bar-chart-o', label: 'Tạo user công ty'},
+    {id: 2,path: '/danh-sach-nguoi-dung', className: 'fa fa-list-ul', label: 'Danh sách người dùng'},
+    {id: 3,path: '/danh-sach-cong-ty', className: 'fa fa-list-ul', label: 'Danh sách công ty'},
+    {id: 4,path: '/admin-dang-ky', className: 'fa fa-user-plus', label: 'Đăng ký người dùng'},
+    {id: 5,path: '/dang-ky-user-cong-ty', className: 'fa fa-user-plus', label: 'Tạo user công ty'},
   ];
 
   return (
@@ -37,13 +37,16 @@ const SidebarMenu = ({user}) => {
         <h3>General</h3>
         <ul className="nav side-menu">
           {pages.map((page, i) => {
-            return  accessPages.indexOf(page.id) > -1 ? <li key={i}><Link to={`${page.path}`}><i className={`${page.className}`}></i>{page.label}</Link></li> : null;
+            return  accessPages.indexOf(page.id) > -1 ? <li key={i}><Link to={`${page.path}`}><i className={`${page.className}`}/>{page.label}</Link></li> : null;
           })}
+          <li>
+            <a href="https://goldenhealthcarevn.com/dwqa-ask-question/" target="_blank" rel="noopener noreferrer"><i className="fa fa-question-circle"/>Tư vấn</a>
+          </li>
         </ul>
       </div>
 
     </div>
   );
-}
+};
 
 export default SidebarMenu;

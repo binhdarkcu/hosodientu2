@@ -97,8 +97,7 @@ class FormRegister extends React.Component {
   };
 
   handleSuccess = message => {
-    //TODO: reset state
-    this.setState(this.initialState());
+    this.setState(initialState());
     toast.success(message);
   };
 
