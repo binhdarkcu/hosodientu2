@@ -9,6 +9,7 @@ const components = {
   RTE_DANH_SACH_USER: 'Dashboard',
   RTE_DANH_SACH_CONG_TY: 'Dashboard',
   RTE_DANH_SACH_KHAM_BENH: 'Dashboard',
+  RTE_TU_VAN: 'Dashboard',
 
   RTE_CHI_TIET_USER: 'Dashboard',
   RTE_CHI_TIET_CONG_TY: 'Dashboard',

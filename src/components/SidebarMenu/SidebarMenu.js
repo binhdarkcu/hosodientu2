@@ -4,7 +4,7 @@ import { USER } from '../../constants/User';
 
 const SidebarMenu = ({user}) => {
 
-  const admin = [1,2,3,4,5];
+  const admin = [1,2,3,4,5,6];
   const patient = [1];
   const company = [1];
 
@@ -29,6 +29,7 @@ const SidebarMenu = ({user}) => {
     {id: 3,path: '/danh-sach-cong-ty', className: 'fa fa-list-ul', label: 'Danh sách công ty'},
     {id: 4,path: '/admin-dang-ky', className: 'fa fa-user-plus', label: 'Đăng ký người dùng'},
     {id: 5,path: '/dang-ky-user-cong-ty', className: 'fa fa-user-plus', label: 'Tạo user công ty'},
+    {id: 6,path: '/tu-van', className: 'fa fa-question-circle', label: 'Tư vấn'},
   ];
 
   return (
@@ -39,9 +40,6 @@ const SidebarMenu = ({user}) => {
           {pages.map((page, i) => {
             return  accessPages.indexOf(page.id) > -1 ? <li key={i}><Link to={`${page.path}`}><i className={`${page.className}`}/>{page.label}</Link></li> : null;
           })}
-          <li>
-            <a href="https://goldenhealthcarevn.com/dwqa-ask-question/" target="_blank" rel="noopener noreferrer"><i className="fa fa-question-circle"/>Tư vấn</a>
-          </li>
         </ul>
       </div>
 

@@ -25,6 +25,7 @@ import DsUser from './DsUser';
 import DsKhamBenh from './DsKhamBenh';
 import DsCongTy from './DsCongTy';
 import DangKyCongTy from './DangKyCongTy';
+import TuVan from './TuVan'
 
 import { PULSE } from '../constants/Loaders';
 import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
@@ -55,6 +56,7 @@ const pages = {
   'RTE_CHANGE_PASSWORD': FormChangePassword,
   'RTE_USER_UPDATE': AdminRegister,
   'RTE_DANG_KY_CONG_TY': DangKyCongTy,
+  'RTE_TU_VAN': TuVan,
 
   // list
   'RTE_DANH_SACH_USER': DsUser,
@@ -113,6 +115,7 @@ class Dashboard extends Component {
 
     const { pageType, userInfo } = this.props;
     const { showChangeAvatarPopup, loading } = this.state;
+    console.log(pageType)
     const CurrentView = pages[pageType];
 
     return (
