@@ -216,6 +216,9 @@ html , body{
 .MuiButton-contained-276:hover{
     background-color: #f7931d!important;
 }
+.MuiTableCell-root {
+    padding: 14px 35px 14px 16px;
+}
 @media (min-width: 480px) {
     .nav_menu {
         position: static

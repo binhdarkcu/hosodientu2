@@ -15,6 +15,7 @@ class ActivatePatientPostModel {
     this.namSinh = data.namSinh || "";
     this.trangThai = data.trangThai || "";
     this.phanQuyen = data.phanQuyen || "";
+    this.ngayDangKy = data.ngayDangKy || "";
     // If no userId means create new user, otherwise, update user
     if(data.userId){
       this.userId = data.userId;
@@ -55,6 +56,10 @@ class ActivatePatientPostModel {
 
   getFullName(){
     return this.ho.trim() + ' ' + this.ten.trim();
+  }
+
+  getFormattedRegistryDate(){
+    return this.ngayDangKy ? moment(this.ngayDangKy).format('DD/MM/YYYY') : '';
   }
 }
 

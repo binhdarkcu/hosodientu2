@@ -166,6 +166,7 @@ class FormDanhSachUser extends React.Component {
       { title: 'Số điện thoại', field: 'phone'},
       { title: 'Trạng thái', field: 'userStatus', render: user =>  user.getStatusName()},
       { title: 'Quyền', field: 'userRole', render: user =>  user.getRoleName()},
+      { title: 'Ngày đăng ký', field: 'registryDate', render: user =>  user.getFormattedRegistryDate()},
       { title: 'Active User', field: 'activeUser', render: user => {
         return user.trangThai === USER.STATUS.ACTIVE.CODE ? <div className={classes.deleteIcon}>
           <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL)} />
