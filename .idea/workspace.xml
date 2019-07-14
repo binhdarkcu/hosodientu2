@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f228f2e-56f3-4893-b785-9837e380e54f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendors/custom/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendors/custom/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/services/api-user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/services/api-user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/Messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/constants/Messages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/containers/TuVan/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SidebarMenu/SidebarMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SidebarMenu/SidebarMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/PageLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/PageLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/PageResetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/PageResetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/page/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/page/page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/node_modules/" />
@@ -24,35 +22,70 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-                <element signature="e#460#529#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="654">
-              <caret line="152" column="57" selection-start-line="152" selection-start-column="57" selection-end-line="152" selection-end-column="57" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1199">
-              <caret line="249" column="53" lean-forward="true" selection-start-line="249" selection-start-column="53" selection-end-line="249" selection-end-column="53" />
+            <state relative-caret-position="986">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="111" selection-start-line="111" selection-end-line="111" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#138#205#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/containers/TuVan/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/Dashboard.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1496">
+              <caret line="117" selection-start-line="117" selection-end-line="117" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#1311#1382#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/ChiTietKhamBenh/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="25" column="19" lean-forward="true" selection-end-line="112" />
+              <folding>
+                <element signature="e#66#108#0" expanded="true" />
+                <element signature="e#201#239#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/SidebarMenu/SidebarMenu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -63,7 +96,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/containers/PageResetPassword.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
+            <state relative-caret-position="663">
               <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -74,19 +107,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/constants/Messages.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="34" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/actions/services/api-user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3366">
-              <caret line="210" column="30" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="30" />
+            <state relative-caret-position="3723">
+              <caret line="222" column="33" selection-start-line="222" selection-start-column="33" selection-end-line="222" selection-end-column="33" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -97,41 +121,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/vendors/custom/css/custom.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="393">
+            <state relative-caret-position="2737">
               <caret line="161" column="28" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/ChiTietCongTy/ChiTietCongTy.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="65" column="4" selection-start-line="65" selection-start-column="4" selection-end-line="65" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1496">
-              <caret line="107" column="40" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/ChiTietUser/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="82" column="32" lean-forward="true" selection-start-line="82" selection-start-column="32" selection-end-line="82" selection-end-column="32" />
+            <state relative-caret-position="1054">
+              <caret line="82" column="32" selection-start-line="82" selection-start-column="32" selection-end-line="82" selection-end-column="32" />
               <folding>
                 <element signature="e#773#820#0" expanded="true" />
               </folding>
@@ -158,7 +158,6 @@
         <option value="$PROJECT_DIR$/src/assets/styles/common.scss" />
         <option value="$PROJECT_DIR$/src/containers/ChiTietKhamBenh/index.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
-        <option value="$PROJECT_DIR$/src/containers/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/components/TopNav/TopNav.js" />
         <option value="$PROJECT_DIR$/src/actions/services/base-url.js" />
         <option value="$PROJECT_DIR$/src/actions/services/api-report.js" />
@@ -169,13 +168,16 @@
         <option value="$PROJECT_DIR$/src/containers/DangKyCongTy/DangKyCongTy.js" />
         <option value="$PROJECT_DIR$/src/models/activatePatientPostModel.js" />
         <option value="$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js" />
-        <option value="$PROJECT_DIR$/src/containers/PageLogin.js" />
         <option value="$PROJECT_DIR$/src/actions/services/api-user.js" />
         <option value="$PROJECT_DIR$/src/constants/Messages.js" />
         <option value="$PROJECT_DIR$/src/containers/PageResetPassword.js" />
         <option value="$PROJECT_DIR$/src/containers/KiemTraUser/KiemTraUser.js" />
         <option value="$PROJECT_DIR$/public/vendors/custom/css/custom.css" />
         <option value="$PROJECT_DIR$/src/containers/ChiTietUser/index.js" />
+        <option value="$PROJECT_DIR$/src/containers/PageLogin.js" />
+        <option value="$PROJECT_DIR$/src/components/SidebarMenu/SidebarMenu.js" />
+        <option value="$PROJECT_DIR$/src/containers/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/containers/TuVan/index.js" />
       </list>
     </option>
   </component>
@@ -197,32 +199,6 @@
             <path>
               <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
               <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="vendors" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="vendors" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="vendors" type="462c0819:PsiDirectoryNode" />
-              <item name="custom" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
@@ -252,7 +228,8 @@
               <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
               <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="constants" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="SidebarMenu" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
@@ -265,49 +242,14 @@
               <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="AdminRegister" type="462c0819:PsiDirectoryNode" />
+              <item name="ChiTietKhamBenh" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
               <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="ChiTietCongTy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="ChiTietUser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="DangKyCongTy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="DsCongTy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="DsKhamBenh" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hoadondientu" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hoadondientu" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="KiemTraUser" type="462c0819:PsiDirectoryNode" />
+              <item name="TuVan" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -356,7 +298,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21586000" />
+    <option name="totallyTimeSpent" value="22940000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -426,17 +368,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/ChiTietKhamBenh/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="61" column="56" selection-start-line="61" selection-start-column="56" selection-end-line="61" selection-end-column="56" />
-          <folding>
-            <element signature="e#66#108#0" expanded="true" />
-            <element signature="e#201#239#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -462,16 +393,6 @@
           <caret line="70" column="2" selection-start-line="70" selection-start-column="2" selection-end-line="70" selection-end-column="2" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/Dashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -583,21 +504,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/DsCongTy/DsCongTy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="107" column="40" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="40" />
+        <state>
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="603">
-          <caret line="112" column="149" selection-start-line="112" selection-start-column="149" selection-end-line="112" selection-end-column="149" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#138#205#0" expanded="true" />
+            <element signature="e#721#776#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -614,14 +525,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/constants/Messages.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="221">
           <caret line="13" column="34" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="34" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/PageResetPassword.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
+        <state relative-caret-position="663">
           <caret line="49" column="35" selection-start-line="49" selection-start-column="35" selection-end-line="49" selection-end-column="35" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -632,8 +543,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/AdminRegister/AdminRegister.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1199">
-          <caret line="249" column="53" lean-forward="true" selection-start-line="249" selection-start-column="53" selection-end-line="249" selection-end-column="53" />
+        <state relative-caret-position="986">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -652,8 +563,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/services/api-user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3366">
-          <caret line="210" column="30" selection-start-line="210" selection-start-column="13" selection-end-line="210" selection-end-column="30" />
+        <state relative-caret-position="3723">
+          <caret line="222" column="33" selection-start-line="222" selection-start-column="33" selection-end-line="222" selection-end-column="33" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
@@ -662,18 +573,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/vendors/custom/css/custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
+        <state relative-caret-position="2737">
           <caret line="161" column="28" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/ChiTietUser/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="82" column="32" lean-forward="true" selection-start-line="82" selection-start-column="32" selection-end-line="82" selection-end-column="32" />
+        <state relative-caret-position="1054">
+          <caret line="82" column="32" selection-start-line="82" selection-start-column="32" selection-end-line="82" selection-end-column="32" />
           <folding>
             <element signature="e#773#820#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/PageLogin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#138#205#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/ChiTietKhamBenh/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="25" column="19" lean-forward="true" selection-end-line="112" />
+          <folding>
+            <element signature="e#66#108#0" expanded="true" />
+            <element signature="e#201#239#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/SidebarMenu/SidebarMenu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="30" lean-forward="true" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1496">
+          <caret line="117" selection-start-line="117" selection-end-line="117" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#1311#1382#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/TuVan/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>

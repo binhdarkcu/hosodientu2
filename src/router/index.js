@@ -104,7 +104,10 @@ const routesMap = {
       path: '/lich-su-kham-benh',
       thunk: defaultThunk
     },
-
+    RTE_TU_VAN: {
+      path: '/tu-van',
+      thunk: defaultThunk
+    },
     // DETAIL
     RTE_CHI_TIET_USER: {
       path: '/chi-tiet/:id',

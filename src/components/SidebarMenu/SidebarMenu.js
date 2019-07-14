@@ -4,9 +4,9 @@ import { USER } from '../../constants/User';
 
 const SidebarMenu = ({user}) => {
 
-  const admin = [1,2,3,4,5];
-  const patient = [1];
-  const company = [1];
+  const admin = [1,2,3,4,5,6];
+  const patient = [1,6];
+  const company = [1,6];
 
   let accessPages = [];
 
@@ -25,10 +25,11 @@ const SidebarMenu = ({user}) => {
 
   const pages = [
     {id: 1, path: '/lich-su-kham-benh', className: 'fa fa-table', label: 'Danh sách khám bệnh'},
-    {id: 2,path: '/danh-sach-nguoi-dung', className: 'fa fa-list-alt', label: 'Danh sách người dùng'},
-    {id: 3,path: '/danh-sach-cong-ty', className: 'fa fa-list-alt', label: 'Danh sách công ty'},
-    {id: 4,path: '/admin-dang-ky', className: 'fa fa-bar-chart-o', label: 'Đăng ký người dùng'},
-    {id: 5,path: '/dang-ky-user-cong-ty', className: 'fa fa-bar-chart-o', label: 'Tạo user công ty'},
+    {id: 2,path: '/danh-sach-nguoi-dung', className: 'fa fa-list-ul', label: 'Danh sách người dùng'},
+    {id: 3,path: '/danh-sach-cong-ty', className: 'fa fa-list-ul', label: 'Danh sách công ty'},
+    {id: 4,path: '/admin-dang-ky', className: 'fa fa-user-plus', label: 'Đăng ký người dùng'},
+    {id: 5,path: '/dang-ky-user-cong-ty', className: 'fa fa-user-plus', label: 'Tạo user công ty'},
+    {id: 6,path: '/tu-van', className: 'fa fa-question-circle', label: 'Tư vấn'},
   ];
 
   return (
@@ -37,13 +38,13 @@ const SidebarMenu = ({user}) => {
         <h3>General</h3>
         <ul className="nav side-menu">
           {pages.map((page, i) => {
-            return  accessPages.indexOf(page.id) > -1 ? <li key={i}><Link to={`${page.path}`}><i className={`${page.className}`}></i>{page.label}</Link></li> : null;
+            return  accessPages.indexOf(page.id) > -1 ? <li key={i}><Link to={`${page.path}`}><i className={`${page.className}`}/>{page.label}</Link></li> : null;
           })}
         </ul>
       </div>
 
     </div>
   );
-}
+};
 
 export default SidebarMenu;
