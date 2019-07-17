@@ -45,6 +45,7 @@ export const SERVER_ERROR = 'Kết nối đến máy chủ thất bại, vui lò
 export const SHOW_DETAIL = 'Xem chi tiết';
 export const NO_DETAIL_AVAILABLE = 'Không thể xem';
 export const INVALID_FILE_TYPE = 'File không hợp lệ';
+export const LOGIN_URL_DOESNOT_MATCH = 'Có vẻ tài khoản của bạn không dùng để đăng nhập website này, vui lòng kiểm tra lại tài khoản và URL đăng nhập';
 
 //TODO: Migrate to tree structure
 export const USER = {

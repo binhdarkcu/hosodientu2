@@ -34,6 +34,7 @@ const mapStateToProps = ({ services, location }) => ({
   user: services.user.userInfo,
   reports: services.report.reportList,
   location: location,
+  isAuthenticated: services.auth.authencation.authenticated
 });
 
 const styles = theme => ({
@@ -66,7 +67,12 @@ class LichSuKhamBenh extends React.Component {
   };
 
   componentDidMount() {
+    this.mounted = true;
     this.initializeScreen();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   initializeScreen = async () => {
@@ -76,6 +82,7 @@ class LichSuKhamBenh extends React.Component {
       if(result && result.status === 200){
         this.props.getReports(result.json);
         const list = this.groupDataList(result.json);
+        if(!this.mounted) return;
         this.setState({reports: [...list], loading: false});
       }
 
@@ -95,6 +102,7 @@ class LichSuKhamBenh extends React.Component {
   };
 
   handleError = err => {
+    if(!this.mounted) return;
     toast.error(err.message);
     console.error(err.detail);
     this.setState({loading: false});

@@ -23,6 +23,6 @@ const components = {
   RTE_ACTIVATE: 'ActivateUser',
   [NOT_FOUND]: 'NotFound',
   RTE_TEST: 'TestPage'
-}
+};
 
 export default (state = 'Dashboard', action = {}) => components[action.type] || state

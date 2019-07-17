@@ -61,6 +61,8 @@ class ChiTietKhamBenh extends React.Component {
           //Handle mobile issue!
           if(window.innerWidth < 512 && iframeHeight > 2000){
             this.container.style.height = iframeHeight*0.4 + 'px';
+          }else{
+            this.container.style.height = 'auto';
           }
         }
       }) : this.setState({hasError: true, loaded: true});
