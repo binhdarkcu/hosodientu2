@@ -18,12 +18,13 @@ function doDefaultRedirect(dispatch, loggedInUser, location) {
     const token = sessionStorage.getItem('authToken');
     const userInfo = sessionStorage.getItem('userInfo');
     // When URL does not match
-    if('invalid' === checkLoginUrl(userInfo)){
-        toast.info(MSG.LOGIN_URL_DOESNOT_MATCH, {autoClose: 10000});
-        sessionStorage.clear();
-        dispatch({type: UNAUTHENTICATED});
-        return dispatch(redirect({type: 'RTE_LOGIN'}));
-    }
+    // Tạm thời tắt chức năng này
+    // if('invalid' === checkLoginUrl(userInfo)){
+    //     toast.info(MSG.LOGIN_URL_DOESNOT_MATCH, {autoClose: 10000});
+    //     sessionStorage.clear();
+    //     dispatch({type: UNAUTHENTICATED});
+    //     return dispatch(redirect({type: 'RTE_LOGIN'}));
+    // }
     // When refreshing browser
     if(token && userInfo && isLoggedin === 'no'){
       dispatch({type: AUTHENTICATED});
