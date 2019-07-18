@@ -193,7 +193,7 @@ class FormDanhSachUser extends React.Component {
           columns={columns}
           data={users}
           options= {{
-            pageSize: 10,
+            pageSize: 20,
             pageSizeOptions: [10, 20, 50, 100],
             debounceInterval: 200,
             showTitle: false,

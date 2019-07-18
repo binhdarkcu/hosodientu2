@@ -72,6 +72,7 @@ const initialState = () => ({
   showQRScanner: false,
   isUpdate: false,
   isForce: false, //Force to create record for admin approval
+  dataFromQrCode: false,
   fail: 0
 });
 
@@ -98,7 +99,7 @@ class FormRegister extends React.Component {
 
   handleSuccess = message => {
     //TODO: reset state
-    this.setState(this.initialState());
+    this.setState(initialState());
     toast.success(message);
   };
 
@@ -138,13 +139,14 @@ class FormRegister extends React.Component {
     try{
       this.setState({loading: true});
       const { id } = this.props.location.payload;
-      const { user, isForce } = this.state;
-      const { type } = this.props;
+      const { user, isForce, dataFromQrCode } = this.state;
+      let { type } = this.props;
 
       if(id){
         const response = await this.props.updateUser({...user, userId: id});
         response.status === 200 ? this.handleSuccess(MSG.USER.UPDATE.SUCCESS) : this.handleError({detail: response, message: MSG.USER.UPDATE.FAILED});
       }else{
+        type = dataFromQrCode ? 'admin' : type;
         const response = await this.props.register(user, type, isForce);
         switch (response.status) {
           case 200:
@@ -192,7 +194,7 @@ class FormRegister extends React.Component {
       this.props.getUserByQrCode(code).then((data) => {
         if (data.status === 200) {
           const patient = new ActivatePatientPostModel(data.json);
-          this.setState({ user: patient });
+          this.setState({ user: patient, fail: 0, dataFromQrCode: true });
           return;
         }
         toast.error(MSG.INVALID_QR_CODE);

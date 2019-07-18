@@ -34,7 +34,7 @@ class FormFooter extends React.Component{
           <div className="Address">
             <Divider/>
             <div>Số 37 Hoàng Hoa Thám, Phường 13, Quận Tân Bình, Tp. Hồ Chí Minh</div>
-            <div>ĐT:0903478236 - Email: info@goldenhealthcarevn.com</div>
+            <div>ĐT:0369031818 - Email: info@goldenhealthcarevn.com</div>
           </div>
         </Grid>
       </Grid>

@@ -92,9 +92,9 @@ class KiemTraUser extends React.Component {
 
         const userFromId = new ActivatePatientPostModel(userFromIdResponse.json);
 
-        const userFromPatientCode = userFromPatientCodeResponse.status === 200 ? new ActivatePatientPostModel(userFromPatientCodeResponse.json) : new ActivatePatientPostModel();
+        const userFromPatientCode = userFromPatientCodeResponse.status === 200 ? new ActivatePatientPostModel(userFromPatientCodeResponse.json) : new ActivatePatientPostModel({maYte: userFromId.maYte});
 
-        // Asign benhNhanId for user when user registers
+        // Assign benhNhanId for user when user registers
         if(!userFromId.benhNhanId && userFromPatientCode.benhNhanId){
           userFromId.benhNhanId = userFromPatientCode.benhNhanId;
         }
@@ -165,7 +165,6 @@ class KiemTraUser extends React.Component {
     const { classes } = this.props;
     const { loading, userFromId, userFromPatientCode } = this.state;
 
-    console.log(userFromId);
     return (
       <FormLayoutVertical>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />

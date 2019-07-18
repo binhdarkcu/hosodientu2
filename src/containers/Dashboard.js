@@ -7,7 +7,6 @@ import { redirect } from 'redux-first-router';
 // components
 import SidebarProfile from '../components/SidebarProfile';
 import SidebarMenu from '../components/SidebarMenu';
-import SidebarFooter from '../components/SidebarFooter';
 import TopNav from '../components/TopNav';
 import Footer from '../components/Footer';
 import SiteLogo from '../components/SiteLogo';

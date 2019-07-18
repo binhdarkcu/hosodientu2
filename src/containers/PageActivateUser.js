@@ -131,7 +131,7 @@ class PageActivateUser extends React.Component {
               <Logo size={150} onClick={gotoHomepage}/>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6}>
               <Typography component="h1" variant="h4" align="center">
                 KÍCH HOẠT TÀI KHOẢN
               </Typography>
