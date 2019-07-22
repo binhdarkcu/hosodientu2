@@ -150,6 +150,9 @@ class KiemTraUser extends React.Component {
       const { id } = this.props.location.payload;
       const result = await this.props.adminApprove({ 'userId': id });
       if(result.status !== 200) throw(result);
+      if(result.json && result.json.errorMessage){
+        return this.handleError({detail: result, message: result.json.errorMessage});
+      }
       this.handleSuccess(MSG.ADMIN_APPROVE_USER_PENDING);
 
     }catch(err){
