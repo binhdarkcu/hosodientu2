@@ -168,6 +168,12 @@ class FormRegister extends React.Component {
   };
 
   handleCreateFailed = response => {
+    let { type } = this.props;
+    const { dataFromQrCode } = this.state;
+    type = dataFromQrCode ? 'admin' : type;
+    this.handleError({detail: response, message: response.json.errorMessage});
+    // Do not count for admin user
+    if(type === 'admin') return;
     this.setState((prevState) => {
       const failCount = prevState.fail + 1;
       const isForce = failCount === 3;
@@ -176,7 +182,6 @@ class FormRegister extends React.Component {
         isForce
       }
     });
-    this.handleError({detail: response, message: response.json.errorMessage});
   };
 
   goToDashboard = () => {
