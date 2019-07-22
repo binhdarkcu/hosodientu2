@@ -422,6 +422,6 @@ KiemTraUser.propTypes = {
   type: PropTypes.oneOf(['admin', 'user'])
 };
 
-KiemTraUser.defaultProps = { type: 'admin' }
+KiemTraUser.defaultProps = { type: 'admin' };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(KiemTraUser));
