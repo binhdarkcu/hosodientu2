@@ -17,6 +17,9 @@ import { GET_USER_LIST } from '../../actions/types';
 import { execGetUserList, execDeleteUser, execAdminApprove } from '../../actions/services/api-user';
 import { createAction } from 'redux-actions';
 import * as MSG from '../../constants/Messages.js';
+
+import vietnamese from '../../locales/vietnamese';
+
 import ActivatePatientPostModel from "../../models/activatePatientPostModel";
 
 const getUsers = createAction(GET_USER_LIST);
@@ -57,34 +60,6 @@ const styles = theme => ({
     color: "#fff",
   }
 });
-
-const vietnamese = {
-  pagination: {
-    labelDisplayedRows: '{from}-{to} trong tổng số {count} mục',
-    labelRowsSelect: 'mục',
-    labelRowsPerPage: 'mục/trang',
-    firstAriaLabel: 'Trang đầu',
-    firstTooltip: 'Trang đầu',
-    previousAriaLabel: 'Trang trước',
-    previousTooltip: 'Trang trước',
-    nextAriaLabel: 'Trang tiếp',
-    nextTooltip: 'Trang tiếp',
-    lastAriaLabel: 'Trang cuối',
-    lastTooltip: 'Trang cuối'
-
-  },
-  toolbar: {
-    nRowsSelected: '{0} mục được chọn',
-    searchPlaceholder: 'Tìm',
-    searchTooltip: 'Tìm kiếm'
-  },
-  body: {
-    emptyDataSourceMessage: 'Không có kết quả',
-    filterRow: {
-        filterTooltip: 'Lọc'
-    }
-  }
-}
 
 class FormDanhSachUser extends React.Component {
 

@@ -142,7 +142,7 @@ class ChiTietUser extends React.Component {
           </Grid>
 
           <Grid item xs={12}>
-            {user.userId && currentUser.userId !== user.userId && <Button variant="contained" className={classes.buttonActive} onClick={this.sendResetPwd}>Gửi mail reset password</Button>}
+            {user.userId && currentUser.userId !== user.userId && <Button variant="contained" className={classes.buttonActive} onClick={this.sendResetPwd}>Gửi email reset password</Button>}
           </Grid>
 
           <Divider />
