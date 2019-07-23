@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment'
 
 import './assets/styles/all.scss';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 // custom imports
 import * as pages from './containers';
 import { createDefaultRedirector } from './router';

@@ -16,6 +16,8 @@ class UserModel {
     this.gioiTinh = data.gioiTinh || '';
     this.ngayDangKy = data.ngayDangKy || "";
     this.ngayKichHoat = data.ngayKichHoat || "";
+    this.ngayCapNhat = data.ngayCapNhat || "";
+    this.ngayTao = data.ngayTao || "";
     this.ngaySinh = data.ngaySinh || "";
     this.namSinh = data.namSinh || "";
     this.trangThai = data.trangThai || "";

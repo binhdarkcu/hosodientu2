@@ -122,7 +122,7 @@ class FormRegister extends React.Component {
     const { type } = this.props;
     let user = { ...this.state.user };
     user[name] = event.target.value;
-    this.setState({ user: user });
+    this.setState({ user: new ActivatePatientPostModel(user) });
 
 
     if ('admin' === type && 'maYte' === name)
@@ -244,7 +244,7 @@ class FormRegister extends React.Component {
               <TextValidator
                 label="Họ tên"
                 className={classes.textField}
-                value={user.ten}
+                value={user.getFullName()}
                 onChange={this.handleChange('ten')}
                 margin="normal"
               />
@@ -338,8 +338,6 @@ class FormRegister extends React.Component {
                 </FormControl>
               </div>
             </Grid>
-
-
 
             <Grid item xs={12}>
               {

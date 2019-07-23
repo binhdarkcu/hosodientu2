@@ -137,7 +137,7 @@ class ChiTietUser extends React.Component {
             <div className={classes.item}><b>Mã y tế:</b> <i>{user.maYte}</i></div>
             <div className={classes.item}><b>Loại user:</b> <i>{user.getRoleName()}</i></div>
             <div className={classes.item}><b>Ngày tạo:</b> <i>{user.ngayTao && moment(user.ngayTao).format('DD/MM/YYYY h:mm:ss')}</i></div>
-            <div className={classes.item}><b>Ngày cập nhật:</b> <i>{user.ngayUpdate && moment(user.ngayUpdate).format('DD/MM/YYYY h:mm:ss')}</i></div>
+            <div className={classes.item}><b>Ngày cập nhật:</b> <i>{user.ngayCapNhat && moment(user.ngayCapNhat).format('DD/MM/YYYY h:mm:ss')}</i></div>
             <div className={classes.item}><b>Trạng thái kích hoạt:</b> <i><b className={classes.activated}>{user.getStatusName()}</b></i></div>
           </Grid>
 

@@ -11,6 +11,7 @@ import { USER } from '../../constants/User';
 import Spinner from '../../components/Spinner';
 import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
 import MaterialTable from 'material-table';
+import { confirmAlert } from 'react-confirm-alert';
 //custom import
 import { GET_USER_LIST } from '../../actions/types';
 import { execGetUserList, execDeleteUser, execAdminApprove } from '../../actions/services/api-user';
@@ -107,7 +108,6 @@ class FormDanhSachUser extends React.Component {
 
   handleAction = async (user, action) => {
     if(!user && !user.userId) return;
-    this.setState({loading: true});
     switch (action) {
       case USER.ACTION.DETAIL:
         this.props.gotoUserDetailsPage(user.userId);
@@ -119,15 +119,37 @@ class FormDanhSachUser extends React.Component {
         this.props.gotoReviewUserPage(user.userId);
         break;
       case USER.ACTION.DELETE:
-        this.handleDeleteUser(user.userId);
+        this.showDeleteConfirmation(user.userId);
         break;
       default:
-        this.setState({loading: false});
     }
+  };
+
+  showDeleteConfirmation = (id) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+            <div className='custom-ui'>
+              <h1>Xác nhận</h1>
+              <p>Bạn thực sự muốn xóa user này ?</p>
+              <button onClick={onClose}>Không</button>
+              <button
+                  onClick={() => {
+                    this.handleDeleteUser(id);
+                    onClose();
+                  }}
+              >
+                Đúng vậy!
+              </button>
+            </div>
+        );
+      }
+    });
   };
 
   handleDeleteUser = async (id) => {
     try{
+      this.setState({loading: true});
       const result = await this.props.deleteUser(id);
       if(result.status === 200){
         this.handleSuccess(MSG.USER.DELETE.SUCCESS);
