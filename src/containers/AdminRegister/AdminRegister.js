@@ -113,7 +113,12 @@ class FormRegister extends React.Component {
   getUserInfo = debounce((code) => {
     this.props.loadUserByPatientCode({ code: code })
       .then(data => {
-        data.status === 200 && this.setState({ user: new ActivatePatientPostModel(data.json)});
+        if(data.status === 200){
+          // TODO: remove temporary fix for this issue
+          let user =  new ActivatePatientPostModel(data.json);
+          user.ten = user.getFullName();
+          this.setState({ user });
+        }
       })
       .catch(err => toast.error(MSG.ERROR_OCCURED))
   }, 1234);
@@ -244,7 +249,7 @@ class FormRegister extends React.Component {
               <TextValidator
                 label="Họ tên"
                 className={classes.textField}
-                value={user.getFullName()}
+                value={user.ten}
                 onChange={this.handleChange('ten')}
                 margin="normal"
               />
