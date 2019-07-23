@@ -66,7 +66,7 @@ class UserModel {
   }
 
   getFullName(){
-    return this.ho.trim() + ' ' + this.ten.trim();
+    return (this.ho.trim() + ' ' + this.ten.trim()).trim();
   }
 }
 

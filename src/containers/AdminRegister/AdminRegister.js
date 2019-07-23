@@ -98,8 +98,9 @@ class FormRegister extends React.Component {
   };
 
   handleSuccess = message => {
-    //TODO: reset state
-    this.setState(initialState());
+    const { id } = this.props.location.payload;
+    //Do not resetState if in update use screen
+    id ? this.setState({loading: false}) : this.setState(initialState());
     toast.success(message);
   };
 
@@ -143,7 +144,7 @@ class FormRegister extends React.Component {
       let { type } = this.props;
 
       if(id){
-        const response = await this.props.updateUser({...user, userId: id});
+        const response = await this.props.updateUser({...user, userId: id, ho: ''});// We are no longer need 'ho' in user model
         response.status === 200 ? this.handleSuccess(MSG.USER.UPDATE.SUCCESS) : this.handleError({detail: response, message: MSG.USER.UPDATE.FAILED});
       }else{
         type = dataFromQrCode ? 'admin' : type;

@@ -110,7 +110,7 @@ class KiemTraUser extends React.Component {
       const userFromId = {...this.state.userFromId};
       const { id } = this.props.location.payload;
       //TODO: need UserUpdateModel to handle this case
-      const result = await this.props.updateUser({...userFromId, userId: id});
+      const result = await this.props.updateUser({...userFromId, userId: id, ho: ''}); // We are no longer need 'ho' in user model
       if(result.status !== 200) throw(result);
       this.handleSuccess(MSG.USER_UPDATED);
       // Reload data
@@ -355,7 +355,7 @@ class KiemTraUser extends React.Component {
               <TextValidator
                 label="Họ tên"
                 className={classes.textField}
-                value={userFromPatientCode.ten}
+                value={userFromPatientCode.getFullName()}
                 margin="normal"
                 disabled
               />

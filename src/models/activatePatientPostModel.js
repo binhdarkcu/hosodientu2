@@ -58,7 +58,7 @@ class ActivatePatientPostModel {
     return this.ho.trim() + ' ' + this.ten.trim();
   }
 
-  getFormattedRegistryDate(){
+  getFormattedRegisterDate(){
     return this.ngayDangKy ? moment(this.ngayDangKy).format('DD/MM/YYYY') : '';
   }
 }

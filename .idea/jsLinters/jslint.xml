@@ -6,5 +6,6 @@
     <option maxerr="50" />
     <option single="true" />
     <option this="true" />
+    <option white="true" />
   </component>
 </project>

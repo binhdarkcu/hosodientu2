@@ -10,14 +10,13 @@ import { BOUNCE } from '../../constants/Loaders';
 import { USER } from '../../constants/User';
 import Spinner from '../../components/Spinner';
 import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
+import MaterialTable from 'material-table';
 //custom import
 import { GET_USER_LIST } from '../../actions/types';
 import { execGetUserList, execDeleteUser, execAdminApprove } from '../../actions/services/api-user';
 import { createAction } from 'redux-actions';
 import * as MSG from '../../constants/Messages.js';
 import ActivatePatientPostModel from "../../models/activatePatientPostModel";
-
-import MaterialTable from 'material-table';
 
 const getUsers = createAction(GET_USER_LIST);
 const mapDispatchToProps = dispatch => ({
@@ -99,8 +98,7 @@ class FormDanhSachUser extends React.Component {
   fetchUserList = async () => {
     try{
       const result = await this.props.getUserList();
-      console.log(result);
-      if(result.status === 200) this.props.saveUserListToStore(_.map(result.json, user => new ActivatePatientPostModel(user)));
+      if(result.status === 200) this.props.saveUserListToStore(_.orderBy(_.map(result.json, user => new ActivatePatientPostModel(user)), function(user){return user.getFormattedRegisterDate()}, ['desc']));
       this.setState({loading: false});
     }catch (e) {
       this.handleError({detail: e, message: MSG.ERROR_OCCURED});
@@ -154,37 +152,42 @@ class FormDanhSachUser extends React.Component {
     console.error(error.detail);
   };
 
+  filterByFullName = (term, rowData) => rowData.getFullName().toLowerCase().indexOf(term.toLowerCase()) !== -1;
+
+  filterByRegisterDate = (term, rowData) => rowData.getFormattedRegisterDate().toLowerCase().indexOf(term.toLowerCase()) !== -1;
+
+  filterByUserStatus = (term, rowData) => rowData.getStatusName().toLowerCase().indexOf(term.toLowerCase()) !== -1;
 
   render() {
     const { classes, users, currentUser } = this.props;
     const { loading } = this.state;
     const columns = [
-      { title: 'Tên user', field: 'fullname', render: user =>  user.ho +' '+user.ten },
+      { title: 'Tên user', field: 'ten', render: user =>  user.getFullName(), customFilterAndSearch: this.filterByFullName },
       { title: 'Mã y tế', field: 'maYte' },
-      { title: 'Ngày sinh', field: 'birthday', render: user =>  user.getFormattedBirthday()},
-      { title: 'Email', field: 'email'},
-      { title: 'Số điện thoại', field: 'phone'},
-      { title: 'Trạng thái', field: 'userStatus', render: user =>  user.getStatusName()},
-      { title: 'Quyền', field: 'userRole', render: user =>  user.getRoleName()},
-      { title: 'Ngày đăng ký', field: 'registryDate', render: user =>  user.getFormattedRegistryDate()},
-      { title: 'Active User', field: 'activeUser', render: user => {
-        return user.trangThai === USER.STATUS.ACTIVE.CODE ? <div className={classes.deleteIcon}>
-          <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL)} />
-          <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE)} />
+      { title: 'Ngày sinh', field: 'ngaySinh', render: user =>  user.getFormattedBirthday() },
+      { title: 'Email', field: 'email', sorting: false},
+      { title: 'Số điện thoại', field: 'phone', sorting: false},
+      { title: 'Trạng thái', field: 'trangThai', render: user =>  user.getStatusName(), customFilterAndSearch: this.filterByUserStatus },
+      { title: 'Quyền', field: 'phanQuyen', render: user =>  user.getRoleName()},
+      { title: 'Ngày đăng ký', field: 'ngayDangKy', render: user =>  user.getFormattedRegisterDate(), customFilterAndSearch: this.filterByRegisterDate },
+      { title: 'Active User', field: 'activeUser', sorting: false, render: user => {
+        return user.trangThai === USER.STATUS.ACTIVE.CODE ? <div className={classes.deleteIcon }>
+          <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL) } />
+          <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE) } />
         </div> :
           <div>
             {
               currentUser.userId === user.userId ?
-                null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE)}>Duyệt</Button>
+                null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE) }>Duyệt</Button>
             }
           </div>
       }},
-      { title: 'Xóa', field: 'delete', render: user => {
-        return <div> {currentUser.userId === user.userId ?
-          null : <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }} onClick={() => this.handleAction(user, USER.ACTION.DELETE)} />
+      { title: 'Xóa', field: 'delete', sorting: false, render: user => {
+        return <div> { currentUser.userId === user.userId ?
+          null : <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }} onClick={() => this.handleAction(user, USER.ACTION.DELETE) } />
         }</div>
       }},
-    ]
+    ];
     return (
       <Paper className={classes.root}>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
@@ -198,6 +201,7 @@ class FormDanhSachUser extends React.Component {
             debounceInterval: 200,
             showTitle: false,
             emptyRowsWhenPaging: false,
+            filtering: false,
           }}
         />
       </Paper>
