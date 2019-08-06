@@ -101,7 +101,7 @@ class PageLogin extends Component{
                   {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
                 </div>
                 <div className="form-login">
-                  <input value={password} type="password" className="form-control" placeholder="Mật khẩu" onChange={this.handleChange('password')} required />
+                  <input value={password} type="password" className="form-control" placeholder="Mật khẩu" autoComplete={"true"} onChange={this.handleChange('password')} required />
                   {password_error && <InputErrorDisplayer message={PASSWORD_REQUIRED}/>}
                 </div>
                 <div>
