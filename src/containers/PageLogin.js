@@ -56,6 +56,9 @@ class PageLogin extends Component{
     this.setState({loading: true});
     this.props.authenticate({username: username, password: password}).then(() => {
       this.props.getUserInfo(username).then(data => {
+        if(data.errorMessage){
+          return this.showError(data.errorMessage, data);
+        }
         this.props.saveUserInfo(data);
         const { type, payload } = this.props.location.prev;
         this.props.goToPage({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}});
@@ -70,11 +73,6 @@ class PageLogin extends Component{
   showError = (msg, err) => {
     toast.error(msg);
     this.setState({loading: false});
-  };
-
-  handleForgotPassword = (e) => {
-    e.preventDefault();
-    alert('Chức năng đang trong giai đoạn thực hiện, vui lòng liên hệ quản trị viên để giải quyết sự cố!');
   };
 
   handleChange = name => e => {
@@ -99,7 +97,7 @@ class PageLogin extends Component{
               <form>
                 <h1>Đăng nhập</h1>
                 <div className="form-login">
-                  <input value={ username} type="text" className="form-control" placeholder="Email" onChange={this.handleChange('username')} required />
+                  <input value={ username} type="text" className="form-control" placeholder="Email" autoComplete={"true"} onChange={this.handleChange('username')} required />
                   {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
                 </div>
                 <div className="form-login">
