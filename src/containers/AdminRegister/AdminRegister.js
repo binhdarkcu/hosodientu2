@@ -73,7 +73,8 @@ const initialState = () => ({
   isUpdate: false,
   isForce: false, //Force to create record for admin approval
   dataFromQrCode: false,
-  fail: 0
+  fail: 0,
+  re_email: ""
 });
 
 class FormRegister extends React.Component {
@@ -82,6 +83,12 @@ class FormRegister extends React.Component {
 
   componentDidMount() {
     this.initializeScreen();
+    ValidatorForm.addValidationRule('isEmailMatch', (value) => {
+      if (value !== this.state.user.email) {
+        return false;
+      }
+      return true;
+    });
   }
 
   initializeScreen = async () => {
@@ -126,9 +133,15 @@ class FormRegister extends React.Component {
   handleChange = name => event => {
     const { type } = this.props;
     let user = { ...this.state.user };
-    user[name] = event.target.value;
-    this.setState({ user: new ActivatePatientPostModel(user) });
 
+    if(typeof user[name] != "undefined"){
+      user[name] = event.target.value;
+      this.setState({ user: new ActivatePatientPostModel(user) });
+    }else{
+      let state = { ...this.state };
+      state[name] = event.target.value;
+      this.setState(state);
+    }
 
     if ('admin' === type && 'maYte' === name)
       this.getUserInfo(event.target.value);
@@ -205,7 +218,7 @@ class FormRegister extends React.Component {
       this.props.getUserByQrCode(code).then((data) => {
         if (data.status === 200) {
           const patient = new ActivatePatientPostModel(data.json);
-          this.setState({ user: patient, fail: 0, dataFromQrCode: true });
+          this.setState({ user: patient, fail: 0, dataFromQrCode: true, re_email: patient.email});
           return;
         }
         toast.error(MSG.INVALID_QR_CODE);
@@ -220,7 +233,7 @@ class FormRegister extends React.Component {
 
   render() {
     const { classes, type } = this.props;
-    const { loading, user, isUpdate, showQRScanner } = this.state;
+    const { loading, user, isUpdate, showQRScanner, re_email } = this.state;
     return (
       <FormLayoutVertical>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
@@ -294,8 +307,22 @@ class FormRegister extends React.Component {
                 label="Email"
                 className={classes.textField}
                 value={user.email}
+                validators={[RULE.IS_REQUIRED, RULE.IS_EMAIL]}
+                errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_EMAIL]}
                 onChange={this.handleChange('email')}
                 margin="normal"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <TextValidator
+                  label="Nhập lại Email"
+                  className={classes.textField}
+                  value={re_email}
+                  validators={[RULE.IS_REQUIRED, "isEmailMatch", RULE.IS_EMAIL]}
+                  errorMessages={[MSG.REQUIRED_FIELD, MSG.EMAIL_DOES_NOT_MATCH, MSG.INVALID_EMAIL]}
+                  onChange={this.handleChange('re_email')}
+                  margin="normal"
               />
             </Grid>
 

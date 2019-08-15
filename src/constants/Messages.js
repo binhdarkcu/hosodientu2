@@ -38,6 +38,7 @@ export const USER_NO_PATIENT_ID = 'Không có mã bệnh nhân';
 export const USER_NO_COMPANY_ID = 'Không có mã công ty';
 export const USER_ACTIVATED = 'Đã kích hoạt thành công!';
 export const ACTIVATE_CODE_NOT_FOUND = 'Mã kích hoạt không tồn tại';
+export const EMAIL_DOES_NOT_MATCH = 'Email không khớp';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';
