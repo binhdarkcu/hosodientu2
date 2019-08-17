@@ -5,6 +5,12 @@ import { toast } from 'react-toastify';
 
 export const sendHttpRequest = (url, params) => {
 
+  const authToken = sessionStorage.getItem('authToken');
+
+  if(!!authToken){
+    params = {...params, headers: {...params.headers, Authorization: `Bearer ${authToken}`}};
+  }
+
   // const dispatchAction = action => dispatch => {
   //   dispatch(action);
   // }
