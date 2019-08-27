@@ -154,8 +154,10 @@ class FormRegister extends React.Component {
     this.setState({ user: user });
   };
 
-  handleSubmit = async () => {
+  handleSubmit = async (e) => {
     try{
+      e.preventDefault();
+      e.stopPropagation();
       this.setState({loading: true});
       const { id } = this.props.location.payload;
       const { user, isForce, dataFromQrCode } = this.state;
@@ -181,8 +183,8 @@ class FormRegister extends React.Component {
 
         isForce && this.goToDashboard();
       }
-    }catch(e){
-      this.handleError({detail: e, message: MSG.ERROR_OCCURED});
+    }catch(err){
+      this.handleError({detail: err, message: MSG.ERROR_OCCURED});
     }
   };
 
@@ -373,9 +375,9 @@ class FormRegister extends React.Component {
 
             <Grid item xs={12}>
               {
-                isUpdate ? <Button type="submit" variant="contained" className={classes.button}>
+                isUpdate ? <Button type="submit" variant="contained" className={classes.button} onTouchEnd={this.handleSubmit}>
                   Lưu thay đổi
-              </Button> : <Button type="submit" variant="contained" className={classes.button} disabled={!user.maYte}>
+              </Button> : <Button type="submit" variant="contained" className={classes.button} disabled={!user.maYte} onTouchEnd={this.handleSubmit}>
                     Đăng ký
               </Button>
               }
