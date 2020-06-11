@@ -26,7 +26,7 @@ a {
 }
 
 a:link, a:visited {
-	color: #F7931D;
+	color: #3d688a;
 }
 
 iframe {
@@ -49,4 +49,55 @@ iframe {
   main {
     // width: 100%!important;
   }
+}
+
+.page-choncoso {
+    margin-top: 50px; display: table; margin: 50px auto;
+    .rowTop {
+        z-index: 100;
+        position: relative;
+    }
+    &:before {
+        content: "";
+        background: #fff;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
+    /* Create two equal columns that floats next to each other */
+    .column {
+        text-align: center;
+        float: left;
+           width: 40%;
+           padding-top: 40px;
+           height: 300px;
+           border: 1px solid rgb(65, 107, 140);
+           border-radius: 30px;
+    }
+    .column-middle {
+        width: 5%;
+        float: left;
+        height: 300px; /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    a {
+        text-decoration: none!important;
+        font-family: Arial;
+    }
+    h3 {
+        margin-bottom: 10px;
+    }
+    h3, p {
+        margin-top: 10px;
+        color: #000;
+        font-family: Arial;
+    }
 }

@@ -16,7 +16,7 @@ html , body{
  }
 
 .left_col {
-    background: #F7931D
+    background: #fff;
 }
 .nav-sm .container.body .col-md-3.left_col {
     min-height: 100%;

@@ -6,7 +6,7 @@ import {
 import { sendHttpRequest } from './http-handler';
 import _ from 'lodash';
 import baseUrl from './base-url';
-
+console.log(baseUrl)
 // API URLs
 const authUrl = `${baseUrl}/api/User/Login`;
 

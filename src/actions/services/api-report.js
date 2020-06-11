@@ -4,7 +4,11 @@ import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
 
 const getReportListUrl = `${baseUrl}/api/Reports`;
-const getReportDetailsUrl = `https://apidientu.goldenhealthcarevn.com:444/api/Report`;
+
+const portRP = localStorage.getItem('portReport');
+let backendReportAPI = localStorage.getItem('backendAPI') + ':' + portRP;
+
+let getReportDetailsUrl = `${backendReportAPI}/api/Report`;
 
 export const execGetReportList = code => dispatch => {
   const parameters = {

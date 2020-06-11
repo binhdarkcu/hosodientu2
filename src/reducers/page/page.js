@@ -14,6 +14,7 @@ const components = {
   RTE_CHI_TIET_CONG_TY: 'Dashboard',
   RTE_CHI_TIET_KHAM_BENH: 'Dashboard',
 
+  RTE_CHON_CO_SO: 'PageChonCoSo',
   // Separate pages
   RTE_LOGIN: 'Login',
   RTE_USER_REGISTER: 'UserRegister',

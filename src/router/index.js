@@ -13,7 +13,6 @@ export const defaultThunk = (dispatch, getState) => {
 
 function doDefaultRedirect(dispatch, loggedInUser, location) {
     const isLoggedin = loggedInUser.authenticated ? 'yes': 'no';
-
     const token = sessionStorage.getItem('authToken');
     const userInfo = sessionStorage.getItem('userInfo');
 
@@ -23,8 +22,10 @@ function doDefaultRedirect(dispatch, loggedInUser, location) {
       return;
     }
 
+
+
     if(isLoggedin === 'no') {
-        dispatch(redirect({type: 'RTE_LOGIN'}));
+        dispatch(redirect({type: 'RTE_CHON_CO_SO'}));
         return;
     }else if(Date.now() >= sessionStorage.getItem('expAt')*1){
       sessionStorage.clear();
@@ -68,6 +69,10 @@ const routesMap = {
     RTE_USER_UPDATE: {
       path: '/cap-nhat-user/:id',
       thunk: defaultThunk
+    },
+    RTE_CHON_CO_SO: {
+      path: '/chon-co-so',
+      thunk: noAuthentication
     },
     RTE_LOGIN: {
       path: '/login',
