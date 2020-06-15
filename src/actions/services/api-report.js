@@ -2,11 +2,12 @@ import 'whatwg-fetch';
 // import _ from 'lodash';
 import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
-
-const getReportListUrl = `${baseUrl}/api/Reports`;
-
 const portRP = localStorage.getItem('portReport');
 let backendReportAPI = localStorage.getItem('backendAPI') + ':' + portRP;
+
+const getReportListUrl = `${backendReportAPI}/api/Reports`;
+
+
 
 let getReportDetailsUrl = `${backendReportAPI}/api/Report`;
 
@@ -16,6 +17,8 @@ export const execGetReportList = code => dispatch => {
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
   };
   //medicalCode=20000002
+  console.log(getReportListUrl)
+
   return new Promise((resolve, reject) => {
       sendHttpRequest(getReportListUrl + `?patientId=${code}`, parameters)
         .then(data =>  resolve(data))

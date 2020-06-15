@@ -92,11 +92,11 @@ class PageLogin extends Component{
               <form>
                 <h1>Đăng nhập</h1>
                 <div className="form-login">
-                  <input ref={(node)=>{this.username = node;}} value={'admin@gmail.com'} type="text" className="form-control" placeholder="Username" required />
+                  <input ref={(node)=>{this.username = node;}} type="text" className="form-control" placeholder="Username" required />
                   {username_error && <InputErrorDisplayer message={USERNAME_REQUIRED}/>}
                 </div>
                 <div className="form-login">
-                  <input ref={(node)=>{this.password = node;}} value={'webapp'} type="password" className="form-control" placeholder="Password" required />
+                  <input ref={(node)=>{this.password = node;}} type="password" className="form-control" placeholder="Password" required />
                   {password_error && <InputErrorDisplayer message={PASSWORD_REQUIRED}/>}
                 </div>
                 <div>

@@ -44,8 +44,8 @@ class PageChonCoSo extends Component{
   }
 
   handeClick(apiLink){
-      const portReport = '9001';
-      const portBackEnd = '9000';
+      const portReport = '9000';
+      const portBackEnd = '9001';
       localStorage.setItem('backendAPI', apiLink)
       localStorage.setItem('portReport', portReport)
       localStorage.setItem('portBackEnd', portBackEnd)
@@ -60,7 +60,7 @@ class PageChonCoSo extends Component{
                 <div className="column-middle">
                 </div>
               <div className="column">
-                  <a href="javascript:void(0)" onClick={() => this.handeClick("http://cs1.pkdksghosoonline.com")}>
+                  <a href="javascript:void(0)" onClick={() => this.handeClick("https://cs1.pkdksghosoonline.com")}>
                       <Logo size={130} align="center"/>
                       <h3>CƠ SỞ 1</h3>
                       <p>3A35 Trần Văn Giàu, Phạm Văn Hai, Bình Chánh - TP.HCM</p>
@@ -69,7 +69,7 @@ class PageChonCoSo extends Component{
               <div className="column-middle">
               </div>
               <div className="column" >
-                  <a href="javascript:void(0)" onClick={() => this.handeClick("http://cs2.pkdksghosoonline.com")}>
+                  <a href="javascript:void(0)" onClick={() => this.handeClick("https://cs2.pkdksghosoonline.com")}>
                       <Logo size={130} align="center"/>
                       <h3>CƠ SỞ 2</h3>
                       <p>132 - 134 Lý Thái Tổ, Phường 2, Quận 3 - TP.HCM</p>
