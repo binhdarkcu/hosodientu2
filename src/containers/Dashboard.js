@@ -7,7 +7,6 @@ import { redirect } from 'redux-first-router';
 // components
 import SidebarProfile from '../components/SidebarProfile';
 import SidebarMenu from '../components/SidebarMenu';
-import SidebarFooter from '../components/SidebarFooter';
 import TopNav from '../components/TopNav';
 import Footer from '../components/Footer';
 import SiteLogo from '../components/SiteLogo';
@@ -25,6 +24,7 @@ import DsUser from './DsUser';
 import DsKhamBenh from './DsKhamBenh';
 import DsCongTy from './DsCongTy';
 import DangKyCongTy from './DangKyCongTy';
+import TuVan from './TuVan'
 
 import { PULSE } from '../constants/Loaders';
 import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
@@ -55,6 +55,7 @@ const pages = {
   'RTE_CHANGE_PASSWORD': FormChangePassword,
   'RTE_USER_UPDATE': AdminRegister,
   'RTE_DANG_KY_CONG_TY': DangKyCongTy,
+  'RTE_TU_VAN': TuVan,
 
   // list
   'RTE_DANH_SACH_USER': DsUser,
@@ -75,7 +76,7 @@ class Dashboard extends Component {
   state = {
     showChangeAvatarPopup: false,
     loading: false
-  }
+  };
 
   componentDidMount(){
     document.body.className = "nav-md";
@@ -86,7 +87,7 @@ class Dashboard extends Component {
     this.setState((prevState) => {
       return {showChangeAvatarPopup: !prevState.showChangeAvatarPopup};
     });
-  }
+  };
 
   handleUpdateAvatar = (avatar) => {
     this.setState({loading: true});
@@ -103,11 +104,11 @@ class Dashboard extends Component {
     }).catch(err => {
       toast.error(MSG.UPDATE_AVATAR_FAILED);
     })
-  }
+  };
 
   handleLogoClick = () => {
 
-  }
+  };
 
   render() {
 
@@ -131,7 +132,7 @@ class Dashboard extends Component {
               <br />
 
               <SidebarMenu user={userInfo} />
-              <SidebarFooter />
+              {/*<SidebarFooter />*/}
             </div>
           </div>
 
@@ -152,6 +153,6 @@ class Dashboard extends Component {
 
 Dashboard.defaultProps = {
   userInfo: {}
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

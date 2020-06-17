@@ -16,8 +16,11 @@ const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
 const deleteUserUrl = `${baseUrl}/api/User?id=`;
 const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
 const adminApprove = `${baseUrl}/api/User/AdminApprove`;
-const patientByQrCodeUrl = `${'https://apidientu.goldenhealthcarevn.com:444'}/api/PatientByQRCode`;
+const patientByQrCodeUrl = `${'https://apidientu.goldenhealthcarevn.com:4001'}/api/PatientByQRCode`;
 const userInfoByEmailUrl = `${baseUrl}/api/UserByEmail?email=`;
+const resetPasswordUrl = `${baseUrl}/api/User/ResetPassword`;
+const listCompanyUsersUrl = `${baseUrl}/api/users?status=1&role=3`;
+
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
 
@@ -142,7 +145,7 @@ export const execUpdate = (data) => dispatch => {
       .then(data => resolve(data))
       .catch(err => reject(err));
   });
-}
+};
 
 
 // Delete user
@@ -172,7 +175,7 @@ export const execUpdateAvatar = (data) => dispatch => {
         .then(data => resolve(data))
         .catch( err => reject(err));
   });
-}
+};
 
 // Update users avatar
 export const execAdminApprove = (id) => dispatch => {
@@ -202,6 +205,34 @@ export const execGetPatientByQrCode = data => dispatch => {
   return new Promise((resolve, reject) => {
     sendHttpRequest(patientByQrCodeUrl, parameters)
       .then(data => resolve(data))
+      .catch(err => reject(err));
+  });
+};
+
+// Reset password
+export const execResetPassword = data => dispatch => {
+  const parameters = {
+    method: 'PUT',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  return new Promise((resolve, reject) => {
+    sendHttpRequest(resetPasswordUrl, parameters)
+      .then(data => resolve(data))
+      .catch(err => reject(err));
+  });
+};
+
+// Get list user company
+export const execGetListUserCompany = data => dispatch => {
+  const parameters = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  };
+  return new Promise((resolve, reject) => {
+    sendHttpRequest(listCompanyUsersUrl , parameters)
+      .then(data =>  resolve(data))
       .catch(err => reject(err));
   });
 };

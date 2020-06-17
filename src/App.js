@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment'
 
 import './assets/styles/all.scss';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 // custom imports
 import * as pages from './containers';
 import { createDefaultRedirector } from './router';
@@ -47,11 +48,8 @@ toast.configure({
 
 const App = ({page, location}) => {
   let CurrentPage = pages[page];
-  console.log(localStorage.getItem('backendAPI'))
-  if(localStorage.getItem('backendAPI') === null || localStorage.getItem('backendAPI') === undefined) {
-    CurrentPage = pages['PageChonCoSo'];
-  } else if(!sessionStorage.authToken && location.type !== 'RTE_LOGIN' && location.type !== 'RTE_ACTIVATE' && location.type !== 'RTE_USER_REGISTER' && location.type !== 'RTE_TEST') {
-    CurrentPage = pages['PageChonCoSo'];
+  if(!sessionStorage.authToken && location.type !== 'RTE_RESET_PASSWORD' && location.type !== 'RTE_ACTIVATE' && location.type !== 'RTE_USER_REGISTER' && location.type !== 'RTE_TEST') {
+    CurrentPage = pages['Login'];
   }
 
   return <CurrentPage />

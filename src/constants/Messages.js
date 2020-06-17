@@ -7,6 +7,11 @@ export const USERNAME_REQUIRED = 'Vui lòng nhập tài khoản!';
 export const PASSWORD_REQUIRED = 'Vui lòng nhập mật khẩu!';
 export const PASSWORD_MISMATCH = 'Mật khẩu và nhập lại mật khẩu không trùng nhau!';
 export const INVALID_LOGIN = 'Tài khoản hoặc mật khẩu không đúng!';
+export const EMAIL_REQUIRED = 'Vui lòng nhập email!';
+export const TRY_AGAIN_AFTER = 'Vui lòng thử lại sau {x} giây!';
+export const REDIRECT_AFTER = 'Bạn sẽ được chuyển về {x} sau {y} giây!';
+export const RESET_PASSWORD_SUCCESS = 'Mail reset password đã được gửi, hãy kiểm tra trong hộp thư đến!';
+export const RESET_PASSWORD_FAILED ='Hiện không thể reset password, hãy thử lại sau';
 // actions
 export const LOGIN_FAILED = 'Đăng nhập thất bại!';
 export const GET_USER_INFO_FAILED = 'Không thể truy vấn thông tin user';
@@ -29,9 +34,11 @@ export const ACTIVATE_COMPANY_FAILED = 'Không thể đăng ký công ty';
 export const ACTIVATE_COMPANY_SUCCESS = 'Đăng ký công ty thành công';
 export const ADMIN_APPROVE_USER_PENDING = 'Quản trị viên đã duyệt, chờ người dùng kích hoạt!';
 export const USER_NO_MEDICAL_CODE = 'Không có mã y tế';
-export const USER_NO_PATIENT_ID = 'Không có mã bệnh nhân'
+export const USER_NO_PATIENT_ID = 'Không có mã bệnh nhân';
 export const USER_NO_COMPANY_ID = 'Không có mã công ty';
 export const USER_ACTIVATED = 'Đã kích hoạt thành công!';
+export const ACTIVATE_CODE_NOT_FOUND = 'Mã kích hoạt không tồn tại';
+export const EMAIL_DOES_NOT_MATCH = 'Email không khớp';
 
 // general
 export const ERROR_OCCURED = 'Đã xảy ra lỗi, vui lòng thử lại sau!';
@@ -39,6 +46,7 @@ export const SERVER_ERROR = 'Kết nối đến máy chủ thất bại, vui lò
 export const SHOW_DETAIL = 'Xem chi tiết';
 export const NO_DETAIL_AVAILABLE = 'Không thể xem';
 export const INVALID_FILE_TYPE = 'File không hợp lệ';
+export const LOGIN_URL_DOESNOT_MATCH = 'Có vẻ tài khoản của bạn không dùng để đăng nhập website này, vui lòng kiểm tra lại tài khoản và URL đăng nhập';
 
 //TODO: Migrate to tree structure
 export const USER = {

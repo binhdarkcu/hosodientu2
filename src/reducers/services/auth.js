@@ -22,6 +22,6 @@ const authencation = handleActions({
       return {...state, error: action.payload}
     }
   }
-}, authDefault)
+}, authDefault);
 
 export default combineReducers({ authencation })

@@ -4,7 +4,7 @@ import moment from 'moment';
 class ActivatePatientPostModel {
   constructor(data = {}) {
     this.benhNhanId = data.benhNhanId || "";
-    this.maYte = data.maYte || data.soVaoVien || "";
+    this.maYte = data.soVaoVien || data.maYte || "";
     this.phone = data.phone || data.soDienThoai || "";
     this.diaChi = data.diaChi || "";
     this.email = data.email || "";
@@ -15,6 +15,7 @@ class ActivatePatientPostModel {
     this.namSinh = data.namSinh || "";
     this.trangThai = data.trangThai || "";
     this.phanQuyen = data.phanQuyen || "";
+    this.ngayDangKy = data.ngayDangKy || "";
     // If no userId means create new user, otherwise, update user
     if(data.userId){
       this.userId = data.userId;
@@ -51,6 +52,14 @@ class ActivatePatientPostModel {
 
   getFormattedBirthday(){
     return this.ngaySinh ? moment(this.ngaySinh).format('DD/MM/YYYY') : '';
+  }
+
+  getFullName(){
+    return (this.ho.trim() + ' ' + this.ten.trim()).trim();
+  }
+
+  getFormattedRegisterDate(){
+    return this.ngayDangKy ? moment(this.ngayDangKy).format('DD/MM/YYYY') : '';
   }
 }
 

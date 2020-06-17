@@ -4,7 +4,7 @@ const Footer = () => {
   return(
     <footer>
       <div className="pull-right">
-        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+        Trang web hiện thị tốt nhất trên trình duyệt <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Google Chrome</a>!
       </div>
       <div className="clearfix"></div>
     </footer>

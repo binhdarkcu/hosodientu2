@@ -3,30 +3,37 @@ import { AUTHENTICATED, SET_USER_INFO, UNAUTHENTICATED } from '../actions/types'
 import { connectRoutes, redirect, NOT_FOUND } from 'redux-first-router';
 import { toast } from 'react-toastify';
 import * as MSG from '../constants/Messages';
+import { HOSTNAME_COMPANY, HOSTNAME_PERSONAL} from "../constants/Host";
 // import queryString from 'query-string'
 //import sleep from 'sleep-promise'
 
 export const defaultThunk = (dispatch, getState) => {
     const state = getState();
     doDefaultRedirect(dispatch, state.services.auth.authencation, state.location);
-}
+};
 
 function doDefaultRedirect(dispatch, loggedInUser, location) {
     const isLoggedin = loggedInUser.authenticated ? 'yes': 'no';
+
     const token = sessionStorage.getItem('authToken');
     const userInfo = sessionStorage.getItem('userInfo');
-
+    // When URL does not match
+    // Tạm thời tắt chức năng này
+    // if('invalid' === checkLoginUrl(userInfo)){
+    //     toast.info(MSG.LOGIN_URL_DOESNOT_MATCH, {autoClose: 10000});
+    //     sessionStorage.clear();
+    //     dispatch({type: UNAUTHENTICATED});
+    //     return dispatch(redirect({type: 'RTE_LOGIN'}));
+    // }
+    // When refreshing browser
     if(token && userInfo && isLoggedin === 'no'){
       dispatch({type: AUTHENTICATED});
       dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
       return;
     }
 
-    console.log(isLoggedin)
-
     if(isLoggedin === 'no') {
-        dispatch(redirect({type: 'RTE_CHON_CO_SO'}));
-        return;
+        return dispatch(redirect({type: 'RTE_LOGIN'}));
     }else if(Date.now() >= sessionStorage.getItem('expAt')*1){
       sessionStorage.clear();
       toast.info(MSG.SESSION_EXPIRED, {autoClose: 8000});
@@ -45,6 +52,21 @@ function checkLoginStatus(dispatch, getState) {
     dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
     dispatch(redirect({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}}));
   }
+}
+
+function checkLoginUrl(user) {
+    if(!user || process.env.NODE_ENV === 'development') return 'do not check';
+    const hostname = (window && window.location && window.location.hostname) || '';
+    user = JSON.parse(user);
+    switch (user.phanQuyen) {
+        case 1:
+        case 2:
+            return hostname === HOSTNAME_PERSONAL ? '' : 'invalid';
+        case 3:
+            return hostname === HOSTNAME_COMPANY ? '' : 'invalid';
+        default:
+            return ''
+    }
 }
 
 function noAuthentication(dispatch, getState){
@@ -69,10 +91,6 @@ const routesMap = {
     RTE_USER_UPDATE: {
       path: '/cap-nhat-user/:id',
       thunk: defaultThunk
-    },
-    RTE_CHON_CO_SO: {
-      path: '/chon-co-so',
-      thunk: noAuthentication
     },
     RTE_LOGIN: {
       path: '/login',
@@ -109,7 +127,10 @@ const routesMap = {
       path: '/lich-su-kham-benh',
       thunk: defaultThunk
     },
-
+    RTE_TU_VAN: {
+      path: '/tu-van',
+      thunk: defaultThunk
+    },
     // DETAIL
     RTE_CHI_TIET_USER: {
       path: '/chi-tiet/:id',
@@ -134,6 +155,10 @@ const routesMap = {
     RTE_CAP_NHAT_USER_COMPANY: {
       path: '/nguoi-dung-cong-ty/:id',
       thunk: defaultThunk
+    },
+    RTE_RESET_PASSWORD: {
+      path: '/reset-password',
+      thunk: noAuthentication
     },
     RTE_TEST: {
       path: '/test',

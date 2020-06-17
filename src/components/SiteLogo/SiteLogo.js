@@ -12,7 +12,7 @@ const SiteLogo = ({onClick}) => {
       </div>
     </div>
   )
-}
+};
 
 SiteLogo.propTypes = {
   onClick: PropTypes.func.isRequired

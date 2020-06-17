@@ -34,6 +34,7 @@ const mapStateToProps = ({ services, location }) => ({
   user: services.user.userInfo,
   reports: services.report.reportList,
   location: location,
+  isAuthenticated: services.auth.authencation.authenticated
 });
 
 const styles = theme => ({
@@ -66,7 +67,12 @@ class LichSuKhamBenh extends React.Component {
   };
 
   componentDidMount() {
+    this.mounted = true;
     this.initializeScreen();
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   initializeScreen = async () => {
@@ -76,28 +82,31 @@ class LichSuKhamBenh extends React.Component {
       if(result && result.status === 200){
         this.props.getReports(result.json);
         const list = this.groupDataList(result.json);
+        if(!this.mounted) return;
         this.setState({reports: [...list], loading: false});
       }
 
     }catch(err){
       this.handleError({detail: err, message: MSG.ERROR_OCCURED});
     };
-  }
+  };
 
   getPersonalReports = async (user) => {
     if(!user.benhNhanId) return this.handleError({detail: null, message: MSG.USER_NO_PATIENT_ID});
     return this.props.execGetReportList(user.benhNhanId);
-  }
+  };
 
   getCompanyReports = async (user) => {
     if(!user.donViCongTacId) return this.handleError({detail: null, message: MSG.USER_NO_COMPANY_ID});
     return this.props.execGetCompanyReportList(user.donViCongTacId);
-  }
+  };
 
   handleError = err => {
+    if(!this.mounted) return;
     toast.error(err.message);
     console.error(err.detail);
-  }
+    this.setState({loading: false});
+  };
 
   groupDataList = (data) => {
 
@@ -126,7 +135,7 @@ class LichSuKhamBenh extends React.Component {
   handleShowInfo = (paramStr) => {
     if (paramStr)
       this.props.getReportDetails(encodeURIComponent(paramStr));
-  }
+  };
 
   toggleList = (index) => {
     this.setState((prevState)=>{
@@ -166,8 +175,6 @@ class LichSuKhamBenh extends React.Component {
                         <Table className={classes.table}>
                           <TableHead>
                             <TableRow>
-                              <TableCell className={classes.header}>ID</TableCell>
-                              <TableCell className={classes.header} align="left">Hình thức</TableCell>
                               <TableCell className={classes.header} align="left">Mã nhóm</TableCell>
                               <TableCell className={classes.header} align="left">Ngày thực hiện</TableCell>
                               <TableCell className={classes.header} align="left">Năm</TableCell>
@@ -183,8 +190,6 @@ class LichSuKhamBenh extends React.Component {
                                     onClick={() => this.handleShowInfo(report.paramStr)}
                                     className={`${!report.paramStr ? classes.disabled : classes.row}`}
                                     title={!report.paramStr ? MSG.NO_DETAIL_AVAILABLE : MSG.SHOW_DETAIL}>
-                                    <TableCell component="th" scope="row">{report.id}</TableCell>
-                                    <TableCell component="th" scope="row">{report.groupId}</TableCell>
                                     <TableCell align="left">{report.name}</TableCell>
                                     <TableCell align="left">{report.ngayThucHien}</TableCell>
                                     <TableCell align="left">{report.nam}</TableCell>

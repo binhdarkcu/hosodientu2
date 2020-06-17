@@ -9,19 +9,20 @@ const components = {
   RTE_DANH_SACH_USER: 'Dashboard',
   RTE_DANH_SACH_CONG_TY: 'Dashboard',
   RTE_DANH_SACH_KHAM_BENH: 'Dashboard',
+  RTE_TU_VAN: 'Dashboard',
 
   RTE_CHI_TIET_USER: 'Dashboard',
   RTE_CHI_TIET_CONG_TY: 'Dashboard',
   RTE_CHI_TIET_KHAM_BENH: 'Dashboard',
 
-  RTE_CHON_CO_SO: 'PageChonCoSo',
   // Separate pages
   RTE_LOGIN: 'Login',
   RTE_USER_REGISTER: 'UserRegister',
   RTE_DOI_MAT_KHAU: 'DoiMatKhau',
+  RTE_RESET_PASSWORD: 'ResetPassword',
   RTE_ACTIVATE: 'ActivateUser',
   [NOT_FOUND]: 'NotFound',
   RTE_TEST: 'TestPage'
-}
+};
 
 export default (state = 'Dashboard', action = {}) => components[action.type] || state

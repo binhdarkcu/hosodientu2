@@ -45,7 +45,7 @@ class ChiTietCongTy extends React.Component {
   state = {
     company: {},
     loading: true
-  }
+  };
 
   componentWillMount() {
     const { id } = this.props.location.payload;
@@ -57,13 +57,13 @@ class ChiTietCongTy extends React.Component {
   handleSuccess = (company) => {
     console.log(company);
     this.setState({company: {...company}, loading: false});
-  }
+  };
 
   handleError = (err) => {
     console.error(err);
     this.setState({loading: false});
     toast.error(MSG.GET_COMPANY_DETAILS_FAILED);
-  }
+  };
 
   render() {
 

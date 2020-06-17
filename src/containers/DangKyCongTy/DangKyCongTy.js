@@ -21,6 +21,7 @@ import { BOUNCE } from "../../constants/Loaders";
 import ActivateCompanyPostModel from "../../models/activateCompanyPostModel";
 import Dropdown from "../../components/DropdownList";
 import {execGetUserDetail, execUpdate} from "../../actions/services/api-user";
+import * as RULE from "../../constants/Rules";
 
 const mapDispatchToProps = dispatch => ({
   getCompanies: () => dispatch(execGetCompanyList()),
@@ -72,6 +73,12 @@ class DangKyCongTy extends React.Component {
 
   componentDidMount() {
     this.initializeScreen();
+    ValidatorForm.addValidationRule('isEmailMatch', (value) => {
+      if (value !== this.state.data.email) {
+        return false;
+      }
+      return true;
+    });
   }
 
   initializeScreen = async () => {
@@ -208,8 +215,20 @@ class DangKyCongTy extends React.Component {
                 label="Số điện thoại"
                 className={classes.textField}
                 value={data.phone}
+                validators={[RULE.IS_REQUIRED]}
+                errorMessages={[MSG.REQUIRED_FIELD]}
                 onChange={this.handleChange('phone')}
                 margin="normal"
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                  label="Địa chỉ"
+                  className={classes.textField}
+                  value={data.diaChi}
+                  onChange={this.handleChange('diaChi')}
+                  margin="normal"
               />
             </Grid>
 
@@ -218,6 +237,8 @@ class DangKyCongTy extends React.Component {
                 label="Email"
                 className={classes.textField}
                 value={data.email}
+                validators={[RULE.IS_REQUIRED, RULE.IS_EMAIL]}
+                errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_EMAIL]}
                 onChange={this.handleChange('email')}
                 margin="normal"
               />
@@ -225,11 +246,13 @@ class DangKyCongTy extends React.Component {
 
             <Grid item xs={12} sm={6}>
               <TextValidator
-                label="Địa chỉ"
-                className={classes.textField}
-                value={data.diaChi}
-                onChange={this.handleChange('diaChi')}
-                margin="normal"
+                  label="Nhập lại Email"
+                  className={classes.textField}
+                  value={data.re_email || ""}
+                  validators={[RULE.IS_REQUIRED, "isEmailMatch", RULE.IS_EMAIL]}
+                  errorMessages={[MSG.REQUIRED_FIELD, MSG.EMAIL_DOES_NOT_MATCH, MSG.INVALID_EMAIL]}
+                  onChange={this.handleChange('re_email')}
+                  margin="normal"
               />
             </Grid>
 
@@ -241,6 +264,18 @@ class DangKyCongTy extends React.Component {
                           label='Công ty'
                           placeholder='Đơn vị công tác'
                           onChange={this.handleDropdownChange}/>
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                label="Mật khẩu"
+                type="password"
+                className={classes.textField}
+                value={data.password}
+                autoComplete={"true"}
+                onChange={this.handleChange('password')}
+                margin="normal"
+              />
             </Grid>
 
             <Grid item xs={12}>

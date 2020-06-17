@@ -8,7 +8,7 @@ class UserRegister extends Component{
   handleClick = () => {
     console.log("Going to dashboard");
     this.props.onClick('Go');
-  }
+  };
 
   render(){
     return(

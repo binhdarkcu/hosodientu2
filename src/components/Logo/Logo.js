@@ -1,5 +1,5 @@
 import React from 'react';
-import mainLogo from '../../assets/images/PHONGKHAMSG-01.png';
+import mainLogo from '../../assets/images/logo.png';
 import PropTypes from 'prop-types';
 import './Logo.scss';
 const Logo = ({size, onClick, align}) => {

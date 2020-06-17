@@ -2,11 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { toast } from 'react-toastify';
@@ -15,11 +10,16 @@ import { BOUNCE } from '../../constants/Loaders';
 import { USER } from '../../constants/User';
 import Spinner from '../../components/Spinner';
 import { GOLDEN_HEALTH_ORANGE } from '../../constants/Colors';
+import MaterialTable from 'material-table';
+import { confirmAlert } from 'react-confirm-alert';
 //custom import
 import { GET_USER_LIST } from '../../actions/types';
 import { execGetUserList, execDeleteUser, execAdminApprove } from '../../actions/services/api-user';
 import { createAction } from 'redux-actions';
 import * as MSG from '../../constants/Messages.js';
+
+import vietnamese from '../../locales/vietnamese';
+
 import ActivatePatientPostModel from "../../models/activatePatientPostModel";
 
 const getUsers = createAction(GET_USER_LIST);
@@ -74,8 +74,7 @@ class FormDanhSachUser extends React.Component {
   fetchUserList = async () => {
     try{
       const result = await this.props.getUserList();
-      console.log(result);
-      if(result.status === 200) this.props.saveUserListToStore(_.map(result.json, user => new ActivatePatientPostModel(user)));
+      if(result.status === 200) this.props.saveUserListToStore(_.orderBy(_.map(result.json, user => new ActivatePatientPostModel(user)), function(user){return user.getFormattedRegisterDate()}, ['desc']));
       this.setState({loading: false});
     }catch (e) {
       this.handleError({detail: e, message: MSG.ERROR_OCCURED});
@@ -84,7 +83,6 @@ class FormDanhSachUser extends React.Component {
 
   handleAction = async (user, action) => {
     if(!user && !user.userId) return;
-    this.setState({loading: true});
     switch (action) {
       case USER.ACTION.DETAIL:
         this.props.gotoUserDetailsPage(user.userId);
@@ -96,15 +94,37 @@ class FormDanhSachUser extends React.Component {
         this.props.gotoReviewUserPage(user.userId);
         break;
       case USER.ACTION.DELETE:
-        this.handleDeleteUser(user.userId);
+        this.showDeleteConfirmation(user.userId);
         break;
       default:
-        this.setState({loading: false});
     }
+  };
+
+  showDeleteConfirmation = (id) => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+            <div className='custom-ui'>
+              <h1>Xác nhận</h1>
+              <p>Bạn thực sự muốn xóa user này ?</p>
+              <button onClick={onClose}>Không</button>
+              <button
+                  onClick={() => {
+                    this.handleDeleteUser(id);
+                    onClose();
+                  }}
+              >
+                Đúng vậy!
+              </button>
+            </div>
+        );
+      }
+    });
   };
 
   handleDeleteUser = async (id) => {
     try{
+      this.setState({loading: true});
       const result = await this.props.deleteUser(id);
       if(result.status === 200){
         this.handleSuccess(MSG.USER.DELETE.SUCCESS);
@@ -129,61 +149,58 @@ class FormDanhSachUser extends React.Component {
     console.error(error.detail);
   };
 
+  filterByFullName = (term, rowData) => rowData.getFullName().toLowerCase().indexOf(term.toLowerCase()) !== -1;
+
+  filterByRegisterDate = (term, rowData) => rowData.getFormattedRegisterDate().toLowerCase().indexOf(term.toLowerCase()) !== -1;
+
+  filterByUserStatus = (term, rowData) => rowData.getStatusName().toLowerCase().indexOf(term.toLowerCase()) !== -1;
 
   render() {
     const { classes, users, currentUser } = this.props;
     const { loading } = this.state;
+    const columns = [
+      { title: 'Tên user', field: 'ten', render: user =>  user.getFullName(), customFilterAndSearch: this.filterByFullName },
+      { title: 'Mã y tế', field: 'maYte' },
+      { title: 'Ngày sinh', field: 'ngaySinh', render: user =>  user.getFormattedBirthday() },
+      { title: 'Email', field: 'email', sorting: false},
+      { title: 'Số điện thoại', field: 'phone', sorting: false},
+      { title: 'Trạng thái', field: 'trangThai', render: user =>  user.getStatusName(), customFilterAndSearch: this.filterByUserStatus },
+      { title: 'Quyền', field: 'phanQuyen', render: user =>  user.getRoleName()},
+      { title: 'Ngày đăng ký', field: 'ngayDangKy', render: user =>  user.getFormattedRegisterDate(), customFilterAndSearch: this.filterByRegisterDate },
+      { title: 'Active User', field: 'activeUser', sorting: false, render: user => {
+        return user.trangThai === USER.STATUS.ACTIVE.CODE ? <div className={classes.deleteIcon }>
+          <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL) } />
+          <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE) } />
+        </div> :
+          <div>
+            {
+              currentUser.userId === user.userId ?
+                null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE) }>Duyệt</Button>
+            }
+          </div>
+      }},
+      { title: 'Xóa', field: 'delete', sorting: false, render: user => {
+        return <div> { currentUser.userId === user.userId ?
+          null : <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }} onClick={() => this.handleAction(user, USER.ACTION.DELETE) } />
+        }</div>
+      }},
+    ];
     return (
       <Paper className={classes.root}>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell className={classes.header}>Tên user</TableCell>
-              <TableCell className={classes.header} align="center">Mã y tế</TableCell>
-              <TableCell className={classes.header} align="center">Ngày sinh</TableCell>
-              <TableCell className={classes.header} align="center">Email</TableCell>
-              <TableCell className={classes.header} align="center">Số điện thoại</TableCell>
-              <TableCell className={classes.header} align="center">Trạng thái</TableCell>
-              <TableCell className={classes.header} align="center">Quyền</TableCell>
-              <TableCell className={classes.header} align="center">Active User</TableCell>
-              <TableCell className={classes.header} align="center">Xóa</TableCell>
-
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {users.map(user => (
-              <TableRow key={user.userId}>
-                <TableCell component="th" scope="row">{user.ho} {user.ten}</TableCell>
-                <TableCell align="center">{user.maYte}</TableCell>
-                <TableCell align="center">{user.getFormattedBirthday()}</TableCell>
-                <TableCell align="center">{user.email}</TableCell>
-                <TableCell align="center">{user.phone}</TableCell>
-                <TableCell align="center">{user.getStatusName()}</TableCell>
-                <TableCell align="center">{user.getRoleName()}</TableCell>
-                {
-                  user.trangThai === USER.STATUS.ACTIVE.CODE ? <TableCell align="center" className={classes.deleteIcon}>
-                    <i className="fa fa-info-circle" style={{ paddingRight: 10, color: '#2698D6' }} onClick={() => this.handleAction(user, USER.ACTION.DETAIL)} />
-                    <i className="fa fa-pencil-square-o" style={{ paddingRight: 10, color: 'green' }} onClick={() => this.handleAction(user, USER.ACTION.UPDATE)} />
-                  </TableCell> :
-                    <TableCell align="center">
-                      {
-                        currentUser.userId === user.userId ?
-                          null : <Button variant="contained" className={classes.buttonActive} disabled={user.trangThai !== USER.STATUS.PENDING_ADMIN.CODE} onClick={() => this.handleAction(user, USER.ACTION.ACTIVATE)}>Duyệt</Button>
-                      }
-                    </TableCell>
-                }
-                <TableCell align="left">
-                  {
-                    currentUser.userId === user.userId ?
-                      null : <i className="fa fa-times-circle" style={{ paddingRight: 10, color: 'red', fontSize: 21 }} onClick={() => this.handleAction(user, USER.ACTION.DELETE)} />
-                  }
-
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <MaterialTable
+          localization={vietnamese}
+          columns={columns}
+          data={users}
+          options= {{
+            pageSize: 20,
+            pageSizeOptions: [10, 20, 50, 100],
+            debounceInterval: 200,
+            showTitle: false,
+            emptyRowsWhenPaging: false,
+            filtering: false,
+          }}
+        />
       </Paper>
     );
   }

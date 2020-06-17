@@ -72,7 +72,9 @@ const initialState = () => ({
   showQRScanner: false,
   isUpdate: false,
   isForce: false, //Force to create record for admin approval
-  fail: 0
+  dataFromQrCode: false,
+  fail: 0,
+  re_email: ""
 });
 
 class FormRegister extends React.Component {
@@ -81,6 +83,12 @@ class FormRegister extends React.Component {
 
   componentDidMount() {
     this.initializeScreen();
+    ValidatorForm.addValidationRule('isEmailMatch', (value) => {
+      if (value !== this.state.user.email) {
+        return false;
+      }
+      return true;
+    });
   }
 
   initializeScreen = async () => {
@@ -97,7 +105,9 @@ class FormRegister extends React.Component {
   };
 
   handleSuccess = message => {
-    this.setState({loading: false});
+    const { id } = this.props.location.payload;
+    //Do not resetState if in update use screen
+    id ? this.setState({loading: false}) : this.setState(initialState());
     toast.success(message);
   };
 
@@ -110,7 +120,12 @@ class FormRegister extends React.Component {
   getUserInfo = debounce((code) => {
     this.props.loadUserByPatientCode({ code: code })
       .then(data => {
-        data.status === 200 && this.setState({ user: new ActivatePatientPostModel(data.json)});
+        if(data.status === 200){
+          // TODO: remove temporary fix for this issue
+          let user =  new ActivatePatientPostModel(data.json);
+          user.ten = user.getFullName();
+          this.setState({ user });
+        }
       })
       .catch(err => toast.error(MSG.ERROR_OCCURED))
   }, 1234);
@@ -118,9 +133,15 @@ class FormRegister extends React.Component {
   handleChange = name => event => {
     const { type } = this.props;
     let user = { ...this.state.user };
-    user[name] = event.target.value;
-    this.setState({ user: user });
 
+    if(typeof user[name] != "undefined"){
+      user[name] = event.target.value;
+      this.setState({ user: new ActivatePatientPostModel(user) });
+    }else{
+      let state = { ...this.state };
+      state[name] = event.target.value;
+      this.setState(state);
+    }
 
     if ('admin' === type && 'maYte' === name)
       this.getUserInfo(event.target.value);
@@ -133,17 +154,20 @@ class FormRegister extends React.Component {
     this.setState({ user: user });
   };
 
-  handleSubmit = async () => {
+  handleSubmit = async (e) => {
     try{
+      e.preventDefault();
+      e.stopPropagation();
       this.setState({loading: true});
       const { id } = this.props.location.payload;
-      const { user, isForce } = this.state;
-      const { type } = this.props;
+      const { user, isForce, dataFromQrCode } = this.state;
+      let { type } = this.props;
 
       if(id){
-        const response = await this.props.updateUser({...user, userId: id});
+        const response = await this.props.updateUser({...user, userId: id, ho: ''});// We are no longer need 'ho' in user model
         response.status === 200 ? this.handleSuccess(MSG.USER.UPDATE.SUCCESS) : this.handleError({detail: response, message: MSG.USER.UPDATE.FAILED});
       }else{
+        type = dataFromQrCode ? 'admin' : type;
         const response = await this.props.register(user, type, isForce);
         switch (response.status) {
           case 200:
@@ -159,12 +183,18 @@ class FormRegister extends React.Component {
 
         isForce && this.goToDashboard();
       }
-    }catch(e){
-      this.handleError({detail: e, message: MSG.ERROR_OCCURED});
+    }catch(err){
+      this.handleError({detail: err, message: MSG.ERROR_OCCURED});
     }
   };
 
   handleCreateFailed = response => {
+    let { type } = this.props;
+    const { dataFromQrCode } = this.state;
+    type = dataFromQrCode ? 'admin' : type;
+    this.handleError({detail: response, message: response.json.errorMessage});
+    // Do not count for admin user
+    if(type === 'admin') return;
     this.setState((prevState) => {
       const failCount = prevState.fail + 1;
       const isForce = failCount === 3;
@@ -173,7 +203,6 @@ class FormRegister extends React.Component {
         isForce
       }
     });
-    this.handleError({detail: response, message: response.json.errorMessage});
   };
 
   goToDashboard = () => {
@@ -191,7 +220,7 @@ class FormRegister extends React.Component {
       this.props.getUserByQrCode(code).then((data) => {
         if (data.status === 200) {
           const patient = new ActivatePatientPostModel(data.json);
-          this.setState({ user: patient });
+          this.setState({ user: patient, fail: 0, dataFromQrCode: true, re_email: patient.email});
           return;
         }
         toast.error(MSG.INVALID_QR_CODE);
@@ -206,7 +235,7 @@ class FormRegister extends React.Component {
 
   render() {
     const { classes, type } = this.props;
-    const { loading, user, isUpdate, showQRScanner } = this.state;
+    const { loading, user, isUpdate, showQRScanner, re_email } = this.state;
     return (
       <FormLayoutVertical>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
@@ -230,6 +259,17 @@ class FormRegister extends React.Component {
           </Grid>
 
           <Grid container spacing={2}>
+          
+            <Grid item xs={12} sm={4}>
+              <TextValidator
+                label="Họ tên"
+                className={classes.textField}
+                value={user.ten}
+                onChange={this.handleChange('ten')}
+                margin="normal"
+              />
+            </Grid>
+
             <Grid item xs={12} sm={4}>
               <TextValidator
                 label="Mã Y Tế"
@@ -248,6 +288,8 @@ class FormRegister extends React.Component {
                 className={classes.textField}
                 value={user.phone}
                 onChange={this.handleChange('phone')}
+                validators={[RULE.IS_REQUIRED]}
+                errorMessages={[MSG.REQUIRED_FIELD]}
                 margin="normal"
               />
             </Grid>
@@ -267,6 +309,8 @@ class FormRegister extends React.Component {
                 label="Email"
                 className={classes.textField}
                 value={user.email}
+                validators={[RULE.IS_REQUIRED, RULE.IS_EMAIL]}
+                errorMessages={[MSG.REQUIRED_FIELD, MSG.INVALID_EMAIL]}
                 onChange={this.handleChange('email')}
                 margin="normal"
               />
@@ -274,20 +318,23 @@ class FormRegister extends React.Component {
 
             <Grid item xs={12} sm={4}>
               <TextValidator
-                label="Họ"
-                className={classes.textField}
-                value={user.ho}
-                onChange={this.handleChange('ho')}
-                margin="normal"
+                  label="Nhập lại Email"
+                  className={classes.textField}
+                  value={re_email}
+                  validators={[RULE.IS_REQUIRED, "isEmailMatch", RULE.IS_EMAIL]}
+                  errorMessages={[MSG.REQUIRED_FIELD, MSG.EMAIL_DOES_NOT_MATCH, MSG.INVALID_EMAIL]}
+                  onChange={this.handleChange('re_email')}
+                  margin="normal"
               />
             </Grid>
 
             <Grid item xs={12} sm={4}>
               <TextValidator
-                label="Tên"
+                id="ar-namsinh"
+                label="Năm sinh"
                 className={classes.textField}
-                value={user.ten}
-                onChange={this.handleChange('ten')}
+                value={user.namSinh}
+                onChange={this.handleChange('namSinh')}
                 margin="normal"
               />
             </Grid>
@@ -326,22 +373,11 @@ class FormRegister extends React.Component {
               </div>
             </Grid>
 
-            <Grid item xs={12} sm={4}>
-              <TextValidator
-                id="ar-namsinh"
-                label="Năm sinh"
-                className={classes.textField}
-                value={user.namSinh}
-                onChange={this.handleChange('namSinh')}
-                margin="normal"
-              />
-            </Grid>
-
             <Grid item xs={12}>
               {
-                isUpdate ? <Button type="submit" variant="contained" className={classes.button}>
+                isUpdate ? <Button type="submit" variant="contained" className={classes.button} onTouchEnd={this.handleSubmit}>
                   Lưu thay đổi
-              </Button> : <Button type="submit" variant="contained" className={classes.button} disabled={!user.maYte}>
+              </Button> : <Button type="submit" variant="contained" className={classes.button} disabled={!user.maYte} onTouchEnd={this.handleSubmit}>
                     Đăng ký
               </Button>
               }
