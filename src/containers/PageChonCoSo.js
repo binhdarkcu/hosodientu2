@@ -4,10 +4,6 @@ import { toast } from 'react-toastify';
 // custom imports
 import 'whatwg-fetch';
 
-
-import xmlData from '../update_logo.xml';
-import XMLParser from 'react-xml-parser'
-
 import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import Logo from '../components/Logo';

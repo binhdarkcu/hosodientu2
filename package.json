@@ -55,6 +55,5 @@
     "not op_mini all"
   ],
   "proxy": "http://115.79.197.84",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

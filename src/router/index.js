@@ -22,7 +22,7 @@ function doDefaultRedirect(dispatch, loggedInUser, location) {
       return;
     }
 
-
+    console.log(isLoggedin)
 
     if(isLoggedin === 'no') {
         dispatch(redirect({type: 'RTE_CHON_CO_SO'}));

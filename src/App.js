@@ -47,9 +47,13 @@ toast.configure({
 
 const App = ({page, location}) => {
   let CurrentPage = pages[page];
-  if(!sessionStorage.authToken && location.type !== 'RTE_LOGIN' && location.type !== 'RTE_ACTIVATE' && location.type !== 'RTE_USER_REGISTER' && location.type !== 'RTE_TEST') {
+  console.log(localStorage.getItem('backendAPI'))
+  if(localStorage.getItem('backendAPI') === null || localStorage.getItem('backendAPI') === undefined) {
+    CurrentPage = pages['PageChonCoSo'];
+  } else if(!sessionStorage.authToken && location.type !== 'RTE_LOGIN' && location.type !== 'RTE_ACTIVATE' && location.type !== 'RTE_USER_REGISTER' && location.type !== 'RTE_TEST') {
     CurrentPage = pages['PageChonCoSo'];
   }
+
   return <CurrentPage />
 }
 
