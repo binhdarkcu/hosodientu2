@@ -28,6 +28,7 @@ export const execGetReportList = code => dispatch => {
 // data requires property: paramStr
 export const execGetReportDetails = data => dispatch => {
   const queryParams = Object.keys(data).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`).join('&');
+  console.log(queryParams)
   const parameters = {
       method: 'POST',
       body: queryParams,

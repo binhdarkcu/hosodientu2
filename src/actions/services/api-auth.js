@@ -5,10 +5,11 @@ import {
 // import { createAction } from 'redux-actions';
 import { sendHttpRequest } from './http-handler';
 import _ from 'lodash';
-import baseUrl from './base-url';
-
+const portBE = localStorage.getItem('portBackEnd');
+let backendAPI = localStorage.getItem('backendAPI') + ':' + portBE;
+console.log(backendAPI)
 // API URLs
-const authUrl = `${baseUrl}/api/User/Login`;
+const authUrl = `${backendAPI}/api/User/Login`;
 
 // Handlers
 export const execAuthenticate = data => dispatch => {

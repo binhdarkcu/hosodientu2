@@ -10,7 +10,7 @@ import Test from './Test';
 
 export {
   Dashboard,
-  PageChonCoSo,
+  PageChonCoSo as ChonCoSo,
   Page404 as NotFound,
   PageLogin as Login,
   PageActivateUser as ActivateUser,

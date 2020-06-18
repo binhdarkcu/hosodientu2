@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Frame from 'react-frame-component';
-import { Document } from 'react-pdf/dist/esm/entry.webpack';
+//import { Document } from 'react-pdf/dist/esm/entry.webpack';
 
 
 import { execGetReportDetails } from '../../actions/services/api-report';
@@ -40,6 +40,8 @@ const styles = theme => ({
   }
 });
 
+const BASE64_MARKER = ';base64,';
+
 class ChiTietKhamBenh extends React.Component {
 
   state = {
@@ -55,20 +57,28 @@ class ChiTietKhamBenh extends React.Component {
   }
 
 
+
+   base64ToArrayBuffer(base64) {
+      var binaryString = window.atob(base64);
+      var binaryLen = binaryString.length;
+      var bytes = new Uint8Array(binaryLen);
+      for (var i = 0; i < binaryLen; i++) {
+          var ascii = binaryString.charCodeAt(i);
+          bytes[i] = ascii;
+      }
+      return bytes;
+  }
+
   componentDidMount(){
     const { paramStr } = this.props.location.payload;
     this.props.getReportDetails({paramStr: decodeURIComponent(paramStr)})
     .then(({status, json}) => {
-      console.log(json)
+
         if(status === 200) {
-          const { pageNumber, numPages, pdfString } = this.state;
-          const pdfDoc = <Document
-            file={json}
-            onLoadSuccess={this.onDocumentLoadSuccess}
-          >
-            <Page pageNumber={pageNumber} />
-          </Document>
-          this.setState({pdfString: pdfDoc})
+          var file = new Blob([json], { type: 'application/pdf' });
+            var fileURL = URL.createObjectURL(file);
+            window.open(fileURL);
+          //this.setState({pdfString: pdfDoc})
         }
       //   if(this.iframe) {
       //     let iframe = this.iframe.node;

@@ -61,7 +61,8 @@ class PageLogin extends Component{
         }
         this.props.saveUserInfo(data);
         const { type, payload } = this.props.location.prev;
-        this.props.goToPage({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}});
+        console.log(type && (type !=='RTE_LOGIN' || type !=='RTE_CHON_CO_SO'))
+        this.props.goToPage({type: type && (type !=='RTE_CHON_CO_SO') ? type : 'RTE_DASHBOARD', payload: {...payload}});
       }).catch(err => {
         this.showError(GET_USER_INFO_FAILED, err)
       });

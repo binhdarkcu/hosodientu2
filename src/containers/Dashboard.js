@@ -114,7 +114,13 @@ class Dashboard extends Component {
 
     const { pageType, userInfo } = this.props;
     const { showChangeAvatarPopup, loading } = this.state;
-    const CurrentView = pages[pageType];
+    console.log(this.props)
+    let CurrentView = ''
+    if(pageType !== 'RTE_CHON_CO_SO') {
+
+    }
+
+    CurrentView = pages[pageType];
 
     return (
       <div className="container body">

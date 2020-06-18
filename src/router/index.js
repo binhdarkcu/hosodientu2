@@ -9,6 +9,7 @@ import { HOSTNAME_COMPANY, HOSTNAME_PERSONAL} from "../constants/Host";
 
 export const defaultThunk = (dispatch, getState) => {
     const state = getState();
+    console.log(32131)
     doDefaultRedirect(dispatch, state.services.auth.authencation, state.location);
 };
 
@@ -26,17 +27,19 @@ function doDefaultRedirect(dispatch, loggedInUser, location) {
     //     return dispatch(redirect({type: 'RTE_LOGIN'}));
     // }
     // When refreshing browser
+
     if(token && userInfo && isLoggedin === 'no'){
+      console.log(1)
       dispatch({type: AUTHENTICATED});
       dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
       return;
     }
     const backendAPI = localStorage.getItem('backendAPI');
-    if(backendAPI == null) {
-        return dispatch(redirect({type: 'RTE_CHON_CO_SO'}));
-    } else if(isLoggedin === 'no') {
+    if(isLoggedin === 'no') {
+      console.log(2)
         return dispatch(redirect({type: 'RTE_LOGIN'}));
     } else if(Date.now() >= sessionStorage.getItem('expAt')*1){
+      console.log(3)
       sessionStorage.clear();
       toast.info(MSG.SESSION_EXPIRED, {autoClose: 8000});
       dispatch({type: UNAUTHENTICATED});
@@ -52,6 +55,7 @@ function checkLoginStatus(dispatch, getState) {
   if(token && userInfo){
     dispatch({type: AUTHENTICATED});
     dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
+    console.log(123132133)
     dispatch(redirect({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}}));
   }
 }
