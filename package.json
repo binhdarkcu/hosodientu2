@@ -57,6 +57,7 @@
   ],
   "proxy": "http://115.79.197.84",
   "devDependencies": {
-    "material-table": "^1.40.1"
+    "material-table": "^1.40.1",
+    "react-pdf": "^4.1.0"
   }
 }

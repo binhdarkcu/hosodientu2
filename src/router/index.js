@@ -31,10 +31,12 @@ function doDefaultRedirect(dispatch, loggedInUser, location) {
       dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
       return;
     }
-
-    if(isLoggedin === 'no') {
+    const backendAPI = localStorage.getItem('backendAPI');
+    if(backendAPI == null) {
+        return dispatch(redirect({type: 'RTE_CHON_CO_SO'}));
+    } else if(isLoggedin === 'no') {
         return dispatch(redirect({type: 'RTE_LOGIN'}));
-    }else if(Date.now() >= sessionStorage.getItem('expAt')*1){
+    } else if(Date.now() >= sessionStorage.getItem('expAt')*1){
       sessionStorage.clear();
       toast.info(MSG.SESSION_EXPIRED, {autoClose: 8000});
       dispatch({type: UNAUTHENTICATED});
@@ -51,6 +53,13 @@ function checkLoginStatus(dispatch, getState) {
     dispatch({type: AUTHENTICATED});
     dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
     dispatch(redirect({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}}));
+  }
+}
+
+function checkChonCoSo(dispatch, getState) {
+  const backendAPI = localStorage.getItem('backendAPI');
+  if(backendAPI === null) {
+    dispatch(redirect({type: 'RTE_CHON_CO_SO'}));
   }
 }
 
@@ -130,6 +139,10 @@ const routesMap = {
     RTE_TU_VAN: {
       path: '/tu-van',
       thunk: defaultThunk
+    },
+    RTE_CHON_CO_SO: {
+      path: '/chon-co-so',
+      thunk: noAuthentication
     },
     // DETAIL
     RTE_CHI_TIET_USER: {

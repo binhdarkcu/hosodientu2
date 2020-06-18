@@ -2,9 +2,15 @@ import 'whatwg-fetch';
 // import _ from 'lodash';
 import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
+const portRP = localStorage.getItem('portReport');
+let backendReportAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+let backendReportDetailAPI = localStorage.getItem('backendAPI') + ':' + 9000;
 
-const getReportListUrl = `${baseUrl}/api/Reports`;
-const getReportDetailsUrl = `https://apidientu.goldenhealthcarevn.com:4001/api/Report`;
+const getReportListUrl = `${backendReportAPI}/api/Reports`;
+
+let getReportDetailsUrl = `${backendReportDetailAPI}/api/Report`;
+//const getReportListUrl = `${baseUrl}/api/Reports`;
+//const getReportDetailsUrl = `https://apidientu.goldenhealthcarevn.com:4001/api/Report`;
 
 export const execGetReportList = code => dispatch => {
   const parameters = {
@@ -25,7 +31,7 @@ export const execGetReportDetails = data => dispatch => {
   const parameters = {
       method: 'POST',
       body: queryParams,
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }
   };
 
   return new Promise((resolve, reject) => {

@@ -123,7 +123,6 @@ class Dashboard extends Component {
           <div className="col-md-3 left_col" style={{ position: "fixed" }}>
             <div className="left_col scroll-view">
 
-              <SiteLogo onClick={this.handleLogoClick}/>
 
               <div className="clearfix"></div>
 

@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Frame from 'react-frame-component';
-import ReactHtmlParser from 'react-html-parser';
+import { Document } from 'react-pdf/dist/esm/entry.webpack';
+
 
 import { execGetReportDetails } from '../../actions/services/api-report';
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
@@ -42,30 +43,47 @@ const styles = theme => ({
 class ChiTietKhamBenh extends React.Component {
 
   state = {
-    html: null,
+    pdfString: null,
+    numPages: null,
+    pageNumber: null,
     loaded: false,
     hasError: false
   };
+
+  onDocumentLoadSuccess = ({ numPages }) => {
+    this.setState({ numPages });
+  }
+
 
   componentDidMount(){
     const { paramStr } = this.props.location.payload;
     this.props.getReportDetails({paramStr: decodeURIComponent(paramStr)})
     .then(({status, json}) => {
-      status === 200 ? this.setState({html: json, loaded: true}, () => {
-        if(this.iframe) {
-          let iframe = this.iframe.node;
-          const iframeHeight = iframe.contentWindow.document.body.scrollHeight + 20;
-          iframe.style.height = iframeHeight + 'px';
-          iframe.contentWindow.document.body.style.visibility = 'visible';
-
-          //Handle mobile issue!
-          if(window.innerWidth < 512 && iframeHeight > 2000){
-            this.container.style.height = iframeHeight*0.4 + 'px';
-          }else{
-            this.container.style.height = 'auto';
-          }
+      console.log(json)
+        if(status === 200) {
+          const { pageNumber, numPages, pdfString } = this.state;
+          const pdfDoc = <Document
+            file={json}
+            onLoadSuccess={this.onDocumentLoadSuccess}
+          >
+            <Page pageNumber={pageNumber} />
+          </Document>
+          this.setState({pdfString: pdfDoc})
         }
-      }) : this.setState({hasError: true, loaded: true});
+      //   if(this.iframe) {
+      //     let iframe = this.iframe.node;
+      //     const iframeHeight = iframe.contentWindow.document.body.scrollHeight + 20;
+      //     iframe.style.height = iframeHeight + 'px';
+      //     iframe.contentWindow.document.body.style.visibility = 'visible';
+      //
+      //     //Handle mobile issue!
+      //     if(window.innerWidth < 512 && iframeHeight > 2000){
+      //       this.container.style.height = iframeHeight*0.4 + 'px';
+      //     }else{
+      //       this.container.style.height = 'auto';
+      //     }
+      //   }
+      // }) : this.setState({hasError: true, loaded: true});
     })
     .catch(err => {
       this.setState({hasError: true, loaded: true});
@@ -88,22 +106,13 @@ class ChiTietKhamBenh extends React.Component {
   render() {
     const { classes } = this.props;
     const { html, hasError } = this.state;
+    const { pageNumber, numPages, pdfString } = this.state;
+    console.log(pdfString)
     return (
       <FormLayoutHorizontal>
         <Grid container spacing={2}>
           <Grid ref={(ref) => this.container = ref} item xs={12} className={classes.row + ' hasLoader'}>
-            <Frame  ref={(ref) => this.iframe = ref}
-                    initialContent='<!DOCTYPE html><html><head></head><body class="iframe-body"><div></div></body></html>'
-                    head={
-                      <style type="text/css">
-                      {`.iframe-body{visibility:hidden;} .frame-content body{overflow: auto;} .frame-content body > div{margin: 0 auto;}`}
-                      </style>
-                    }
-                    className={classes.iframe}
-                    frameBorder="0"
-                    scrolling="no">
-                  { hasError ? this.renderErrorNotice() : ReactHtmlParser(html) }
-            </Frame>
+          {pdfString}
           </Grid>
         </Grid>
       </FormLayoutHorizontal>

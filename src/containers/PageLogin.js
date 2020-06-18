@@ -11,7 +11,7 @@ import InputErrorDisplayer from '../components/InputErrorDisplayer';
 import Spinner from '../components/Spinner';
 import Logo from '../components/Logo';
 import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
-import { PACMAN } from '../constants/Loaders';
+import { FADE } from '../constants/Loaders';
 import { USERNAME_REQUIRED, PASSWORD_REQUIRED, LOGIN_FAILED, GET_USER_INFO_FAILED, INVALID_LOGIN } from '../constants/Messages';
 import { redirect } from 'redux-first-router';
 import Link from 'redux-first-router-link';
@@ -81,6 +81,11 @@ class PageLogin extends Component{
     this.setState(state);
   };
 
+  goChonCoSo = () => {
+    localStorage.clear();
+    this.props.goToPage({type: 'RTE_CHON_CO_SO'})
+  }
+
   render(){
 
     const { password_error, username_error, loading, username, password } = this.state;
@@ -89,9 +94,9 @@ class PageLogin extends Component{
       <div>
         <div className="login_wrapper">
           <div className="animate form login_form">
-            <Spinner type={PACMAN} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
+            <Spinner type={FADE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading}/>
             <div>
-              <Logo size={150} align="center"/>
+              <Logo size={150} align="center" onClick={this.goChonCoSo}/>
             </div>
             <section className="login_content">
               <form>
