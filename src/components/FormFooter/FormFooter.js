@@ -21,6 +21,9 @@ class FormFooter extends React.Component{
 
   render(){
     const { showBigImage } = this.state;
+    const addressInfo = localStorage.getItem("addressInfo");
+    const email = localStorage.getItem("email");
+    const phone = localStorage.getItem("phone");
     return(
       <Grid className="FormFooter" container spacing={8}>
 
@@ -33,8 +36,8 @@ class FormFooter extends React.Component{
           </div>
           <div className="Address">
             <Divider/>
-            <div>Số 37 Hoàng Hoa Thám, Phường 13, Quận Tân Bình, Tp. Hồ Chí Minh</div>
-            <div>ĐT:0369031818 - Email: info@goldenhealthcarevn.com</div>
+            <div>{addressInfo || '3A35 Trần Văn Giàu, Phạm Văn Hai, Bình Chánh - TP.HCM'}</div>
+            <div>ĐT: {phone || '090 7272708'} - Email: {email || 'phongkhamdakhoasaigon@gmail.com'}</div>
           </div>
         </Grid>
       </Grid>

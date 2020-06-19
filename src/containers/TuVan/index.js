@@ -43,7 +43,7 @@ class TuVan extends React.Component {
     return (
       <Paper className={classes.root}>
         <Spinner type={BOUNCE} size={50} color={GOLDEN_HEALTH_ORANGE} loading={loading} />
-        <iframe title="Tư vấn" style={{width: '100%', height: '100vh'}} src={"https://goldenhealthcarevn.com/dwqa-ask-question/"} frameBorder="0" onLoad={this.handleLoadDone}/>
+        <iframe title="Tư vấn" style={{width: '100%', height: '100vh'}} src={"https://phongkhamdakhoasaigon.com/"} frameBorder="0" onLoad={this.handleLoadDone}/>
       </Paper>
     );
   }

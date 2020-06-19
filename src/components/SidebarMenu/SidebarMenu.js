@@ -35,7 +35,6 @@ const SidebarMenu = ({user}) => {
   return (
     <div id="sidebar-menu" className="main_menu_side hidden-print main_menu">
       <div className="menu_section">
-        <h3>General</h3>
         <ul className="nav side-menu">
           {pages.map((page, i) => {
             return  accessPages.indexOf(page.id) > -1 ? <li key={i}><Link to={`${page.path}`}><i className={`${page.className}`}/>{page.label}</Link></li> : null;

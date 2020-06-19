@@ -93,7 +93,7 @@ class DangKyCongTy extends React.Component {
       this.setState({companies: options, data: user, selectedItems, dropdownKey, isUpdateUser: !!id});
 
     }catch(err){
-      console.err(err);
+      //console.err(err);
     }
   };
 

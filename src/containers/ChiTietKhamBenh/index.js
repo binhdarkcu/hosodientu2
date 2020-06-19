@@ -75,10 +75,8 @@ class ChiTietKhamBenh extends React.Component {
     .then(({status, json}) => {
 
         if(status === 200) {
-          var file = new Blob([json], { type: 'application/pdf' });
-            var fileURL = URL.createObjectURL(file);
-            window.open(fileURL);
-          //this.setState({pdfString: pdfDoc})
+            var result = String(json)
+            this.setState({pdfString: result})
         }
       //   if(this.iframe) {
       //     let iframe = this.iframe.node;
@@ -117,12 +115,11 @@ class ChiTietKhamBenh extends React.Component {
     const { classes } = this.props;
     const { html, hasError } = this.state;
     const { pageNumber, numPages, pdfString } = this.state;
-    console.log(pdfString)
     return (
       <FormLayoutHorizontal>
         <Grid container spacing={2}>
           <Grid ref={(ref) => this.container = ref} item xs={12} className={classes.row + ' hasLoader'}>
-          {pdfString}
+            {pdfString && <iframe src={"data:application/pdf;base64," + pdfString} height="100%" width="100%"></iframe>}
           </Grid>
         </Grid>
       </FormLayoutHorizontal>

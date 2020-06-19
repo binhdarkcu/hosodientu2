@@ -5,6 +5,7 @@ import NoUserImage from '../../assets/images/user.png';
 const SidebarProfile = ({user}) => {
 
   const getAvatarUrl = (user) => {
+    console.log(user)
     if(user.avatar) return 'data:image/jpeg;base64,' + user.avatar;
     return NoUserImage;
   }

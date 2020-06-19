@@ -16,6 +16,7 @@ const components = {
   RTE_CHI_TIET_KHAM_BENH: 'Dashboard',
 
   // Separate pages
+  RTE_CHON_CO_SO: 'PageChonCoSo',
   RTE_LOGIN: 'Login',
   RTE_USER_REGISTER: 'UserRegister',
   RTE_DOI_MAT_KHAU: 'DoiMatKhau',
