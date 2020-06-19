@@ -29,7 +29,6 @@ const SidebarMenu = ({user}) => {
     {id: 3,path: '/danh-sach-cong-ty', className: 'fa fa-list-ul', label: 'Danh sách công ty'},
     {id: 4,path: '/admin-dang-ky', className: 'fa fa-user-plus', label: 'Đăng ký người dùng'},
     {id: 5,path: '/dang-ky-user-cong-ty', className: 'fa fa-user-plus', label: 'Tạo user công ty'},
-    {id: 6,path: '/tu-van', className: 'fa fa-question-circle', label: 'Tư vấn'},
   ];
 
   return (
