@@ -69,6 +69,26 @@ class ChiTietKhamBenh extends React.Component {
       return bytes;
   }
 
+   b64toBlob(b64Data, contentType) {
+        var byteCharacters = atob(b64Data)
+
+        var byteArrays = []
+
+        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+            var slice = byteCharacters.slice(offset, offset + 512),
+                byteNumbers = new Array(slice.length)
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i)
+            }
+            var byteArray = new Uint8Array(byteNumbers)
+
+            byteArrays.push(byteArray)
+        }
+
+        var blob = new Blob(byteArrays, { type: contentType })
+        return blob
+}
+
   componentDidMount(){
     const { paramStr } = this.props.location.payload;
     this.props.getReportDetails({paramStr: decodeURIComponent(paramStr)})
@@ -76,7 +96,8 @@ class ChiTietKhamBenh extends React.Component {
 
         if(status === 200) {
             var result = String(json)
-            this.setState({pdfString: result})
+            const urlPdf = URL.createObjectURL(this.b64toBlob(result, 'application/pdf')) + '#toolbar=0&navpanes=0&scrollbar=0'
+            this.setState({pdfString: urlPdf})
         }
       //   if(this.iframe) {
       //     let iframe = this.iframe.node;
@@ -119,7 +140,7 @@ class ChiTietKhamBenh extends React.Component {
       <FormLayoutHorizontal>
         <Grid container spacing={2}>
           <Grid ref={(ref) => this.container = ref} item xs={12} className={classes.row + ' hasLoader'}>
-            {pdfString && <iframe src={"data:application/pdf;base64," + pdfString} height="100%" width="100%"></iframe>}
+            {pdfString && <iframe src={pdfString} height="100%" width="100%"></iframe>}
           </Grid>
         </Grid>
       </FormLayoutHorizontal>
