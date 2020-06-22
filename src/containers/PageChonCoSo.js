@@ -47,9 +47,18 @@ class PageChonCoSo extends Component{
       localStorage.setItem('portReport', portReport)
       localStorage.setItem('portBackEnd', portBackEnd)
 
+      this.props.storeSteps({name: 'baseUrl', value: {
+          portReport,
+          portBackEnd,
+          backendAPI: apiLink
+      }})
+
+
       localStorage.setItem('addressInfo', addressInfo)
       localStorage.setItem('email', email)
       localStorage.setItem('phone', phone);
+
+
       this.props.goToPage({type: 'RTE_LOGIN'})
   }
 

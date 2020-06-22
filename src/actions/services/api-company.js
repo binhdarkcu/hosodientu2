@@ -3,13 +3,12 @@ import baseUrl from './base-url';
 import { sendHttpRequest } from './http-handler';
 
 // URLs
-const companyListUrl = `${baseUrl}/api/Companies`;
-const companyDetailsUrl = `${baseUrl}/api/Company?id=`;
-const companyReportsUrl = `${baseUrl}/api/companyReports`;
-const activateCompanyUrl = `${baseUrl}/api/User/AdminActiveCompany`;
+
 
 // Get company list
 export const execGetCompanyList = () => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const companyListUrl = `${backendAPI}/api/Companies`;
     const parameters = {
         method: 'GET',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -24,6 +23,8 @@ export const execGetCompanyList = () => dispatch => {
 
 // Get company details
 export const execGetCompanyDetails = (dvCongTacId) => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const companyDetailsUrl = `${backendAPI}/api/Company?id=`;
     const parameters = {
         method: 'GET',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -38,6 +39,8 @@ export const execGetCompanyDetails = (dvCongTacId) => dispatch => {
 
 // Activate company
 export const execActivateCompany = (data) => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const activateCompanyUrl = `${backendAPI}/api/User/AdminActiveCompany`;
     const parameters = {
         method: 'POST',
         body: JSON.stringify(data),
@@ -52,6 +55,8 @@ export const execActivateCompany = (data) => dispatch => {
 };
 
 export const execGetCompanyReportList = companyId => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const companyReportsUrl = `${backendAPI}/api/companyReports`;
   const parameters = {
       method: 'GET',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' }

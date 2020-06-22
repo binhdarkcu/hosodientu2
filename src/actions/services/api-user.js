@@ -5,27 +5,30 @@ import { sendHttpRequest } from './http-handler';
 // import { SET_USER_INFO } from '../../actions/types';
 
 // URLs
-const adminRegisterApiUrl = `${baseUrl}/api/User/AdminRegister`;
-const userRegisterApiUrl = `${baseUrl}/api/User/UserRegister`;
-const activateUrl = `${baseUrl}/api/User/Active`;
-const userListUrl = `${baseUrl}/api/Users`;
-const userDetailUrl = `${baseUrl}/api/User?id=`;
-const changePasswordUrl = `${baseUrl}/api/User/ChangePassword`;
-const getUserByPatientCodeUrl = `${baseUrl}/api/PatientByCode?code=`;
-const userUpdate = `${baseUrl}/api/User/AdminUpdate`;
-const deleteUserUrl = `${baseUrl}/api/User?id=`;
-const updateAvatarUrl = `${baseUrl}/api/User/Avatar`;
-const adminApprove = `${baseUrl}/api/User/AdminApprove`;
-const patientByQrCodeUrl = `${'https://apidientu.goldenhealthcarevn.com:4001'}/api/PatientByQRCode`;
-const userInfoByEmailUrl = `${baseUrl}/api/UserByEmail?email=`;
-const resetPasswordUrl = `${baseUrl}/api/User/ResetPassword`;
-const listCompanyUsersUrl = `${baseUrl}/api/users?status=1&role=3`;
+
+//const adminRegisterApiUrl = `${backendAPI}/api/User/AdminRegister`;
+//const userRegisterApiUrl = `${backendAPI}/api/User/UserRegister`;
+//const activateUrl = `${backendAPI}/api/User/Active`;
+//const userListUrl = `${backendAPI}/api/Users`;
+//const userDetailUrl = `${backendAPI}/api/User?id=`;
+//const changePasswordUrl = `${backendAPI}/api/User/ChangePassword`;
+//const getUserByPatientCodeUrl = `${backendAPI}/api/PatientByCode?code=`;
+//const userUpdate = `${backendAPI}/api/User/AdminUpdate`;
+//const deleteUserUrl = `${backendAPI}/api/User?id=`;
+//const updateAvatarUrl = `${backendAPI}/api/User/Avatar`;
+//const adminApprove = `${backendAPI}/api/User/AdminApprove`;
+//const patientByQrCodeUrl = `${backendAPI}/api/PatientByQRCode`;
+//const userInfoByEmailUrl = `${backendAPI}/api/UserByEmail?email=`;
+//const resetPasswordUrl = `${backendAPI}/api/User/ResetPassword`;
+//const listCompanyUsersUrl = `${backendAPI}/api/users?status=1&role=3`;
 
 // Actions
 // export const adminRegister = createAction(ADMIN_REGISTER);
 
 // Get user info
 export const execGetUserInfo = username => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const userInfoByEmailUrl = `${backendAPI}/api/UserByEmail?email=`;
     const parameters = {
         method: 'GET',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -44,6 +47,8 @@ export const execGetUserInfo = username => dispatch => {
 
 // Activate user
 export const execActivateUser = data => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const activateUrl = `${backendAPI}/api/User/Active`;
   const parameters = {
     method: 'PUT',
     body: JSON.stringify(data),
@@ -59,6 +64,9 @@ export const execActivateUser = data => dispatch => {
 
 // User register
 export const execRegister = (data, type, isForce) => dispatch => {
+  let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+  const adminRegisterApiUrl = `${backendAPI}/api/User/AdminRegister`;
+  const userRegisterApiUrl = `${backendAPI}/api/User/UserRegister`;
   const parameters = {
     method: 'POST',
     body: JSON.stringify(data),
@@ -75,6 +83,8 @@ export const execRegister = (data, type, isForce) => dispatch => {
 
 // Get user list
 export const execGetUserList = () => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+  const userListUrl = `${backendAPI}/api/Users`;
   const parameters = {
     method: 'GET',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -89,6 +99,8 @@ export const execGetUserList = () => dispatch => {
 
 // Get user detail
 export const execGetUserDetail = (id) => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const userDetailUrl = `${backendAPI}/api/User?id=`;
   const parameters = {
     method: 'GET',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -103,6 +115,8 @@ export const execGetUserDetail = (id) => dispatch => {
 
 //Change password
 export const execChangePassword = data => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const changePasswordUrl = `${backendAPI}/api/User/ChangePassword`;
   const parameters = {
     method: 'PUT',
     body: JSON.stringify(data),
@@ -118,6 +132,8 @@ export const execChangePassword = data => dispatch => {
 
 // Get user by patient keyCode
 export const execGetUserInfoByPatientCode = data => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const getUserByPatientCodeUrl = `${backendAPI}/api/PatientByCode?code=`;
   const parameters = {
     method: 'GET',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -132,6 +148,8 @@ export const execGetUserInfoByPatientCode = data => dispatch => {
 // User update
 
 export const execUpdate = (data) => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const userUpdate = `${backendAPI}/api/User/AdminUpdate`;
   const parameters = {
     method: 'PUT',
     body: JSON.stringify(data),
@@ -150,6 +168,8 @@ export const execUpdate = (data) => dispatch => {
 
 // Delete user
 export const execDeleteUser = (id) => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const deleteUserUrl = `${backendAPI}/api/User?id=`;
   const parameters = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -164,6 +184,8 @@ export const execDeleteUser = (id) => dispatch => {
 
 // Update users avatar
 export const execUpdateAvatar = (data) => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    let updateAvatarUrl = `${backendAPI}/api/User/Avatar`;
   const parameters = {
     method: 'PUT',
     body: JSON.stringify(data),
@@ -179,6 +201,8 @@ export const execUpdateAvatar = (data) => dispatch => {
 
 // Update users avatar
 export const execAdminApprove = (id) => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const adminApprove = `${backendAPI}/api/User/AdminApprove`;
   const parameters = {
     method: 'PUT',
     body: JSON.stringify(id),
@@ -196,6 +220,8 @@ export const execAdminApprove = (id) => dispatch => {
 
 // Get patient info by QR code
 export const execGetPatientByQrCode = data => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const patientByQrCodeUrl = `${backendAPI}/api/PatientByQRCode`;
   const parameters = {
     method: 'POST',
     body: JSON.stringify(data),
@@ -211,6 +237,8 @@ export const execGetPatientByQrCode = data => dispatch => {
 
 // Reset password
 export const execResetPassword = data => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const resetPasswordUrl = `${backendAPI}/api/User/ResetPassword`;
   const parameters = {
     method: 'PUT',
     body: JSON.stringify(data),
@@ -226,6 +254,8 @@ export const execResetPassword = data => dispatch => {
 
 // Get list user company
 export const execGetListUserCompany = data => dispatch => {
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    const listCompanyUsersUrl = `${backendAPI}/api/users?status=1&role=3`;
   const parameters = {
     method: 'GET',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
