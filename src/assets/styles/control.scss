@@ -5,3 +5,25 @@
       -ms-border-radius: $radius;
           border-radius: $radius;
 }
+
+.page-indicator {
+    position: relative;
+    top: -10px;
+    margin: 0 10px;
+}
+.prev-button, .next-button {
+    background: url("../images/back-question-icon.png") no-repeat;
+    width: 40px;
+    height: 32px;
+    border: none;
+    span {
+
+        i {
+            display: none;
+        }
+    }
+}
+
+.next-button {
+    background: url("../images/next-question-icon.png") no-repeat;
+}

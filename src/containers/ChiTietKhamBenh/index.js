@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Frame from 'react-frame-component';
 //import { Document } from 'react-pdf/dist/esm/entry.webpack';
 
-
+import PDFViewer from 'pdf-viewer-reactjs'
 import { execGetReportDetails } from '../../actions/services/api-report';
 import FormLayoutHorizontal from '../../components/FormLayoutHorizontal';
 
@@ -96,8 +96,11 @@ class ChiTietKhamBenh extends React.Component {
 
         if(status === 200) {
             var result = String(json)
-            const urlPdf = URL.createObjectURL(this.b64toBlob(result, 'application/pdf')) + '#toolbar=0&navpanes=0&scrollbar=0'
-            this.setState({pdfString: urlPdf})
+            //const urlPdf = URL.createObjectURL(this.b64toBlob(result, 'image/png'))
+            //window.open(urlPdf);
+            //const convertToB64 = this.b64toBlob(result, 'image/png')
+            //const blobUrl = URL.createObjectURL(convertToB64);
+            this.setState({pdfString: result})
         }
       //   if(this.iframe) {
       //     let iframe = this.iframe.node;
@@ -136,11 +139,31 @@ class ChiTietKhamBenh extends React.Component {
     const { classes } = this.props;
     const { html, hasError } = this.state;
     const { pageNumber, numPages, pdfString } = this.state;
+    //<iframe src={pdfString} height="100%" width="100%"></iframe>
     return (
       <FormLayoutHorizontal>
         <Grid container spacing={2}>
           <Grid ref={(ref) => this.container = ref} item xs={12} className={classes.row + ' hasLoader'}>
-            {pdfString && <iframe src={pdfString} height="100%" width="100%"></iframe>}
+            {
+                pdfString && <PDFViewer
+                    hideRotation={true}
+                    hideZoom={true}
+                    navbarOnTop={true}
+                    pages={2}
+                    scale={1.2}
+                    document={{
+                        base64: pdfString
+                    }}
+                    navigation={{
+                        css: {
+                            navbarWrapper: 'navigation-wrapper',
+                            pageIndicator: 'page-indicator',
+                            previousPageBtn: 'prev-button',
+                            nextPageBtn: 'next-button'
+                        }
+                    }}
+                />
+        }
           </Grid>
         </Grid>
       </FormLayoutHorizontal>
