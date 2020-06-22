@@ -20,6 +20,10 @@ class PageLogin extends Component{
   username = null;
   password = null;
 
+  constructor(props) {
+      super(props)
+  }
+
   state = {
     username_error: false,
     password_error: false,

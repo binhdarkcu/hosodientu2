@@ -52,12 +52,14 @@ function checkLoginStatus(dispatch, getState) {
   const { type, payload } = state.location.prev;
   const token = sessionStorage.getItem('authToken');
   const userInfo = sessionStorage.getItem('userInfo');
+  const backendAPI = localStorage.getItem('backendAPI');
+  console.log(backendAPI)
   if(token && userInfo){
     dispatch({type: AUTHENTICATED});
     dispatch({type: SET_USER_INFO, payload: JSON.parse(userInfo)});
-    console.log(123132133)
+    console.log(type)
     dispatch(redirect({type: type && type !=='RTE_LOGIN' ? type : 'RTE_DASHBOARD', payload: {...payload}}));
-  }
+    }
 }
 
 function checkChonCoSo(dispatch, getState) {
@@ -90,7 +92,7 @@ function noAuthentication(dispatch, getState){
 const routesMap = {
     // separate pages
     RTE_DASHBOARD: {
-      path: '/',
+      path: '/dashboard',
       thunk: defaultThunk
     },
     [NOT_FOUND]: {
@@ -145,7 +147,7 @@ const routesMap = {
       thunk: defaultThunk
     },
     RTE_CHON_CO_SO: {
-      path: '/chon-co-so',
+      path: '/',
       thunk: noAuthentication
     },
     // DETAIL

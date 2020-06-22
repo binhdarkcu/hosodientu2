@@ -10,8 +10,9 @@ const setUserInfo = createAction(SET_USER_INFO);
 // Logout
 export const execLogout = () => dispatch => {
   sessionStorage.clear();
+  localStorage.clear();
   dispatch({type: UNAUTHENTICATED});
-  dispatch(redirect({type: 'RTE_LOGIN'}));
+  dispatch(redirect({type: 'RTE_CHON_CO_SO'}));
 }
 
 export const saveUserInfo = (user) => dispatch =>{

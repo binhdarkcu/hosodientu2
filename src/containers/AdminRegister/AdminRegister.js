@@ -259,12 +259,12 @@ class FormRegister extends React.Component {
           </Grid>
 
           <Grid container spacing={2}>
-          
+
             <Grid item xs={12} sm={4}>
               <TextValidator
                 label="Họ tên"
                 className={classes.textField}
-                value={user.ten}
+                value={user.ten || user.tenBenhNhan}
                 onChange={this.handleChange('ten')}
                 margin="normal"
               />

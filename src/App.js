@@ -46,10 +46,13 @@ toast.configure({
   delay: 150
 });
 
+
 const App = ({page, location}) => {
+    console.log(page)
   let CurrentPage = pages[page];
-  console.log(page)
+
   const backendAPI = localStorage.getItem('backendAPI');
+  console.log(page)
   if(backendAPI === null) {
     CurrentPage = pages['ChonCoSo'];
     console.log(1)

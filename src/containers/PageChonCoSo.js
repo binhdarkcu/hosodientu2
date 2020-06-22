@@ -10,6 +10,7 @@ import Logo from '../components/Logo';
 import { GOLDEN_HEALTH_ORANGE } from '../constants/Colors';
 import { PACMAN } from '../constants/Loaders';
 import { redirect } from 'redux-first-router';
+import {setSteps} from '../actions/ui/store-steps'
 import Link from 'redux-first-router-link';
 
 class PageChonCoSo extends Component{
@@ -87,6 +88,7 @@ const mapStateToProps = ({ location }) => {
 
 const mapDispatchToProps = dispatch => ({
   goToPage: (destination) => dispatch(redirect(destination)),
+  storeSteps: (step) => dispatch(setSteps(step)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageChonCoSo);
