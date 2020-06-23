@@ -151,6 +151,7 @@ class ChiTietKhamBenh extends React.Component {
                     navbarOnTop={true}
                     pages={2}
                     scale={1.2}
+                    canvasCss={'setCanvasH'}
                     document={{
                         base64: pdfString
                     }}

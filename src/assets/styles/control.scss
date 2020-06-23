@@ -5,7 +5,9 @@
       -ms-border-radius: $radius;
           border-radius: $radius;
 }
-
+.setCanvasH {
+    overflow: auto;
+}
 .page-indicator {
     position: relative;
     top: -10px;
