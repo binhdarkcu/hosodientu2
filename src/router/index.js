@@ -126,7 +126,7 @@ const routesMap = {
       thunk: noAuthentication
     },
     RTE_ACTIVATE: {
-      path: '/kich-hoat/:code',
+      path: '/kich-hoat/:branch/:code',
       thunk: noAuthentication
     },
     //LIST
