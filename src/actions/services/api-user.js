@@ -224,7 +224,7 @@ export const execGetPatientByQrCode = data => dispatch => {
     const patientByQrCodeUrl = `${backendAPI}/api/PatientByQRCode`;
   const parameters = {
     method: 'POST',
-    body: JSON.stringify({code: '0gs6N9Cxokc='}),
+    body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' }
   };
 
