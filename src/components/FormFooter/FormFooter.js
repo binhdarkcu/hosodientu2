@@ -37,7 +37,7 @@ class FormFooter extends React.Component{
           <div className="Address">
             <Divider/>
             <div>{addressInfo || '3A35 Trần Văn Giàu, Phạm Văn Hai, Bình Chánh - TP.HCM'}</div>
-            <div>ĐT: {phone || '090 7272708'} - Email: {email || 'phongkhamdakhoasaigon@gmail.com'}</div>
+            <div>ĐT: {phone || '(028) 3768 2222'} - Email: {email || 'phongkhamdakhoasaigon@gmail.com'}</div>
           </div>
         </Grid>
       </Grid>

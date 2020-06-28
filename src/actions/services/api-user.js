@@ -220,11 +220,11 @@ export const execAdminApprove = (id) => dispatch => {
 
 // Get patient info by QR code
 export const execGetPatientByQrCode = data => dispatch => {
-    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9001;
+    let backendAPI = localStorage.getItem('backendAPI') + ':' + 9000;
     const patientByQrCodeUrl = `${backendAPI}/api/PatientByQRCode`;
   const parameters = {
     method: 'POST',
-    body: JSON.stringify(data),
+    body: JSON.stringify({code: '0gs6N9Cxokc='}),
     headers: { 'Content-Type': 'application/json' }
   };
 

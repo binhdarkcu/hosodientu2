@@ -70,7 +70,7 @@ class PageChonCoSo extends Component{
                 <div className="column-middle">
                 </div>
               <div className="column">
-                  <a href="javascript:void(0)" onClick={() => this.handeClick("https://cs1.pkdksghosoonline.com", "3A35 Trần Văn Giàu, Phạm Văn Hai, Bình Chánh - TP.HCM", "phongkhamdakhoasaigon@gmail.com", "090 7272708")}>
+                  <a href="javascript:void(0)" onClick={() => this.handeClick("https://cs1.pkdksghosoonline.com", "3A35 Trần Văn Giàu, Phạm Văn Hai, Bình Chánh - TP.HCM", "phongkhamdakhoasaigon@gmail.com", "(028) 3768 2222")}>
                       <Logo size={130} align="center"/>
                       <h3>CƠ SỞ 1</h3>
                       <p>3A35 Trần Văn Giàu, Phạm Văn Hai, Bình Chánh - TP.HCM</p>
@@ -79,7 +79,7 @@ class PageChonCoSo extends Component{
               <div className="column-middle">
               </div>
               <div className="column" >
-                  <a href="javascript:void(0)" onClick={() => this.handeClick("https://cs2.pkdksghosoonline.com", "132 - 134 Lý Thái Tổ, Phường 2, Quận 3 - TP.HCM", "phongkhamdakhoasaigon@gmail.com", "(028) 3830 6677 – 3833 5177")}>
+                  <a href="javascript:void(0)" onClick={() => this.handeClick("https://cs2.pkdksghosoonline.com", "132 - 134 Lý Thái Tổ, Phường 2, Quận 3 - TP.HCM", "phongkhamdakhoasaigon@gmail.com", "(028) 3830 6677")}>
                       <Logo size={130} align="center"/>
                       <h3>CƠ SỞ 2</h3>
                       <p>132 - 134 Lý Thái Tổ, Phường 2, Quận 3 - TP.HCM</p>
